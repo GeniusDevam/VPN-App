@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:label="@string/vpnapp_name"
+        android:theme="@style/VpnAppTheme"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/vpnapp_data_extraction"
+        android:networkSecurityConfig="@xml/vpnapp_network_security"
+        tools:replace="android:label,android:theme,android:allowBackup"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
+        <activity
+            android:name="io.github.geniusdevam.vpnapp.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/VpnAppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="io.github.geniusdevam.vpnapp.RunService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="vpn_server_selection" />
+        </service>
+
+        <service
+            android:name="io.github.geniusdevam.vpnapp.QuickTileService"
+            android:exported="true"
+            android:icon="@drawable/vpnapp_ic_tile"
+            android:label="@string/vpnapp_tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:exported="true"
+            android:name=".activities.NotImplemented"
+            tools:ignore="ExportedActivity" />
+        <activity-alias
+            android:exported="true"
+            android:name=".activities.LogWindow"
+            android:targetActivity=".activities.NotImplemented" />
+        <activity-alias
+            android:exported="true"
+            android:name=".activities.Req"
+            android:targetActivity=".activities.NotImplemented" />
+    </application>
+</manifest>
