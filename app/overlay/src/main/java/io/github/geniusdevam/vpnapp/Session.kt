@@ -1,6 +1,7 @@
 package io.github.geniusdevam.vpnapp
 
 import android.app.Application
+import android.util.Log
 import de.blinkt.openvpn.core.ConnectionStatus
 import io.github.geniusdevam.vpnapp.data.Repo
 import io.github.geniusdevam.vpnapp.data.VpnGateCatalog
@@ -251,6 +252,14 @@ object Session {
     }
 
     private fun onEvent(ev: EngineEvent) {
+        if (Log.isLoggable("VPNAPP", Log.DEBUG)) {
+            when (ev) {
+                is EngineEvent.Phase -> Log.d("VPNAPP", "phase ${ev.phase} ${ev.detail ?: ""}")
+                is EngineEvent.ProbeProgress -> Log.d("VPNAPP", "probed ${ev.done}/${ev.total} top=" + ev.top.joinToString { "${it.server.id}:${"%.0f".format(it.latency.medianMs)}ms/${it.latency.method}" })
+                is EngineEvent.Connecting -> Log.d("VPNAPP", "connecting #${ev.attempt} ${ev.server.id}")
+                is EngineEvent.Leaderboard -> Log.d("VPNAPP", "leaderboard tested=${ev.tested}/${ev.planned}")
+            }
+        }
         ui.update { s ->
             val r = s.run ?: return@update s
             s.copy(
