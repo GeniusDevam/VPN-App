@@ -27,8 +27,8 @@ fi
 if ! grep -q "VPNAPP_EXTRA_BEGIN" "$BUILD/main/build.gradle.kts"; then
   { echo; cat "$ROOT/tools/extra.gradle.kts"; } >> "$BUILD/main/build.gradle.kts"
 fi
-# Plugin declarations needed by the extra config go in the root build file.
-if ! grep -q "VPNAPP_EXTRA_PLUGINS" "$BUILD/build.gradle.kts"; then
-  cat "$ROOT/tools/extra-root.gradle.kts" >> "$BUILD/build.gradle.kts"
+# The Compose compiler plugin is applied in the :main module's plugins block.
+if ! grep -q "kotlin.plugin.compose" "$BUILD/main/build.gradle.kts"; then
+  sed -i '0,/alias(libs.plugins.android.application)/s//alias(libs.plugins.android.application)\n    id("org.jetbrains.kotlin.plugin.compose") version "2.4.10"/' "$BUILD/main/build.gradle.kts"
 fi
 echo "build tree ready: $BUILD @ $REF"

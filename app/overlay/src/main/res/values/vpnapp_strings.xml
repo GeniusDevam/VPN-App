@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="vpnapp_name">VPN App</string>
+    <string name="vpnapp_tile_label">Quick Connect</string>
+    <color name="vpnapp_icon_bg">#0F766E</color>
+</resources>

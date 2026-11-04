@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- HTTPS everywhere, except VPN Gate's list endpoint which some mirrors only serve over HTTP.
+         The list is untrusted input either way: it is parsed defensively and every config is sanitized. -->
+    <base-config cleartextTrafficPermitted="false" />
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">www.vpngate.net</domain>
+    </domain-config>
+</network-security-config>
