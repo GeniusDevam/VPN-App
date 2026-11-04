@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import android.util.Log
 import de.blinkt.openvpn.VpnProfile
 import de.blinkt.openvpn.core.ConfigParser
 import de.blinkt.openvpn.core.ConnectionStatus
@@ -89,9 +90,14 @@ class TunnelManager(
 
     override fun setConnectedVPN(uuid: String?) {}
 
+    private fun dbg(msg: String) {
+        if (Log.isLoggable(TAG, Log.DEBUG)) Log.d(TAG, msg)
+    }
+
     override fun newLog(logItem: LogItem) {
         val p = pending ?: return
         val msg = try { logItem.getString(app) } catch (_: Exception) { return } ?: return
+        dbg("engine: $msg")
         if (p.cipher == null && (msg.contains("Data Channel") || msg.contains("data channel"))) {
             CIPHER_RE.find(msg)?.let { p.cipher = it.groupValues[1] }
         }
@@ -120,6 +126,8 @@ class TunnelManager(
         } catch (e: Exception) {
             return ConnectResult(false, "Config error: ${e.message}")
         }
+        dbg("connect ${server.id} ${server.ip}:${server.port} ${server.transport} declaredCipher=${server.declaredCipher}")
+        dbg("sanitized config:\n" + sanitized.config.lines().filterNot { it.matches(Regex("^[A-Za-z0-9+/=]{20,}$")) }.joinToString("\n"))
         val check = vp.checkProfile(app)
         if (check != de.blinkt.openvpn.R.string.no_error_found) {
             return ConnectResult(false, "Profile rejected: ${app.getString(check)}")
@@ -133,6 +141,7 @@ class TunnelManager(
             ProfileManager.setTemporaryProfile(app, vp)
             VPNLaunchHelper.startOpenVpn(vp, app, "VPN App", true)
             val r = withTimeoutOrNull(timeoutMs) { p.deferred.await() }
+            dbg("connect ${server.id} -> ${r ?: "timeout after ${timeoutMs}ms"}")
             if (r == null) {
                 stopEngine()
                 return ConnectResult(false, "Timed out")
@@ -222,6 +231,7 @@ class TunnelManager(
         }
 
     companion object {
+        private const val TAG = "VPNAPP"
         private val CIPHER_RE = Regex("[Cc]ipher '([A-Za-z0-9._-]+)'")
         private const val BYTECOUNT_INTERVAL_S = 2L
     }

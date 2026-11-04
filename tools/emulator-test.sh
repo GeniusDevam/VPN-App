@@ -45,6 +45,7 @@ tap_text() {
 log "install"; adb install -r "$APK" || { log "INSTALL FAILED"; exit 1; }
 adb shell pm grant $PKG android.permission.POST_NOTIFICATIONS 2>/dev/null || true
 adb shell dumpsys package $PKG | grep -E "versionName|versionCode|targetSdk" | head -3 | tee "$OUT/package.txt"
+adb shell setprop log.tag.VPNAPP DEBUG
 adb logcat -c
 adb shell am start -n $PKG/.MainActivity >/dev/null; sleep 8
 shot 01-onboarding
@@ -102,8 +103,10 @@ for n in ET.parse(sys.argv[1]).getroot().iter('node'):
     if t: print('  |',t.replace('\n',' ')[:200])
 PY
   fi
-  echo "================ logcat (app / openvpn / crashes), last 200 lines"
-  grep -iE "vpnapp|openvpn|ovpn|VpnStatus|AndroidRuntime|FATAL|vpngate|TunnelManager" "$OUT/logcat.txt" | tail -200 | cut -c1-260
+  echo "================ VPNAPP debug log"
+  grep -E " VPNAPP *:" "$OUT/logcat.txt" | sed -E 's/^[0-9-]+ //' | cut -c1-300 | head -400
+  echo "================ crashes"
+  grep -E "FATAL EXCEPTION|AndroidRuntime: *(at|Caused|java|kotlin)" "$OUT/logcat.txt" | head -40
 }
 report
 if grep -q "FATAL EXCEPTION" "$OUT/logcat.txt"; then log "APP CRASHED"; echo "crash=yes" >> "$OUT/result.txt"; exit 1; fi
