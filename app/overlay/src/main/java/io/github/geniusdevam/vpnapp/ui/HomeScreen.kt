@@ -134,13 +134,21 @@ private fun StatusCard(ui: SessionUi, now: Long, onDisconnect: () -> Unit) {
         modifier = Modifier.fillMaxWidth(),
     ) {
         Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            val working = ui.run != null
             val headline = when {
+                working -> "⏳ Working…"
                 connected -> "🔒 Connected"
                 v.status == ConnState.CONNECTING -> "Connecting…"
                 else -> "🔓 Not connected"
             }
             Text(headline, style = MaterialTheme.typography.headlineSmall)
-            if (connected) {
+            if (working) {
+                Text(
+                    if (ui.run?.mode == RunMode.BEST) "Best Connect is testing servers. The VPN reconnects to each candidate in turn, so your traffic may briefly go outside the VPN until it finishes."
+                    else "Finding the fastest server…",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            } else if (connected) {
                 v.server?.let { Text(serverTitle(it) + " · " + Countries.name(it.countryCode, fallback = it.countryName), style = MaterialTheme.typography.titleMedium) }
                 Text(
                     "Encryption: ${v.cipher ?: "negotiated"}  ·  Session " + duration(now - (v.connectedAtMs ?: now)),
@@ -235,7 +243,7 @@ private fun BestProgress(run: RunUi, now: Long) {
         }
         if (run.phase == PhaseId.SCANNING || run.phase == PhaseId.SPEED_TESTING) LinearProgressIndicator(progress = { p }, modifier = Modifier.fillMaxWidth())
         else LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-        Text("Elapsed ${duration(now - run.startedAtMs)}. This switches servers while testing; you stay protected.", style = MaterialTheme.typography.bodySmall)
+        Text("Elapsed ${duration(now - run.startedAtMs)}. Testing the most promising servers one by one.", style = MaterialTheme.typography.bodySmall)
         run.leaderboard.take(5).forEachIndexed { i, e ->
             val t = e.throughput
             Text(
