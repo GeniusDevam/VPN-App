@@ -11,6 +11,20 @@ The owner asked for "the best VPN app available" with two connection modes:
 
 In **each** mode the user can choose a **country**: "Any country" or one specific country. The two modes remember their country choice separately.
 
+### Implementation status and deviations from this plan (read first)
+
+The app was built from this plan. Where the build differs, the code wins:
+
+| Plan | What was built |
+|---|---|
+| ics-openvpn as a git submodule / library module (§2, §4, §15) | `tools/prepare.sh` clones the pinned upstream commit and **overlays** the app onto upstream's own `:main` module (skeleton flavor, OpenVPN 2.x, arm64 only). No upstream files are patched except an appended Gradle block. |
+| Separate `:engine` / `:probe` modules | One pure-Kotlin `engine/` project with its own unit tests; the same sources are compiled into the app. |
+| Room + SQLCipher + Tink (§13.1) | Same guarantee with less code: every file is AES-256-GCM encrypted with a non-exportable Android Keystore key (`SecureVault`). |
+| Probe sockets excluded from the tunnel (§6.2) | Probe sockets are bound to the physical network (`Network.bindSocket`), so they bypass an active tunnel. |
+| Cipher shown from negotiated data channel | Parsed from the engine log; falls back to the cipher declared in the server config. |
+| Widget, app shortcuts, auto-failover, background pre-scan, mirror URLs, Always-on action, results history, Tor mode | **Not implemented.** Quick Settings tile, notification progress, split tunneling (apps that skip the VPN), DNS choice, Strong/Compatible encryption mode, favorites and "report & avoid" are implemented. |
+| On-device verification (§19) | **Not done.** Nothing has been run on a real phone or against live VPN Gate servers; the sandbox that built this app has no access to either. See README "Known risks". |
+
 ### Owner decisions (already made)
 - **Servers:** free volunteer servers from the **VPN Gate** network (University of Tsukuba academic project). There are no paid subscriptions and no owner-run servers.
 - **Encryption and privacy:** a top priority. Every link and every stored byte the app controls is encrypted, and the user is told honestly what cannot be protected (§3, §13).
