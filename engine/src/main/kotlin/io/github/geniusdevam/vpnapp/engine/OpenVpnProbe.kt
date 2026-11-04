@@ -9,8 +9,19 @@ import java.net.InetSocketAddress
 import java.net.Socket
 import java.net.SocketTimeoutException
 import java.security.SecureRandom
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+
+private val ioScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
+/**
+ * Runs blocking code so that cancelling the caller returns immediately. The blocking call finishes on its own
+ * (bounded by its own socket timeouts) and its result is dropped. Plain withContext would wait for it, which
+ * could push a Quick Connect run past its 35 s budget.
+ */
+suspend fun <T> blockingCancellable(block: () -> T): T = ioScope.async { block() }.await()
 
 /** Packet building/validation for the OpenVPN hard-reset latency probe (kept separate so it is unit-testable). */
 object OpenVpnPacket {
@@ -56,14 +67,14 @@ class NetworkProber(
     private val random: SecureRandom = SecureRandom(),
 ) : LatencyProber {
 
-    override suspend fun probe(server: Server, timeoutMs: Long): ProbeSample = withContext(Dispatchers.IO) {
+    override suspend fun probe(server: Server, timeoutMs: Long): ProbeSample = blockingCancellable {
         try {
             when {
                 server.transport == Transport.UDP && !server.tlsAuthOrCrypt -> udp(server, timeoutMs)
                 server.transport == Transport.UDP -> tcpConnect(server.ip, 443, timeoutMs, ProbeMethod.TCP_FALLBACK)
                 else -> tcpConnect(server.ip, server.port, timeoutMs, ProbeMethod.TCP_CONNECT)
             }
-        } catch (_: IOException) {
+        } catch (_: Exception) {
             ProbeSample(null, ProbeMethod.NONE)
         }
     }

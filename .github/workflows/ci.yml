@@ -2,9 +2,25 @@ name: build
 on:
   push:
     branches: ['**']
+    tags: ['v*']
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
+  engine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '21' }
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: '8.14.3' }
+      - name: Engine unit tests (includes the 35-second guarantee test)
+        working-directory: engine
+        run: gradle test --console=plain
+
   apk:
     runs-on: ubuntu-latest
     timeout-minutes: 90
@@ -13,30 +29,49 @@ jobs:
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '21' }
 
-      - name: Print Android library versions available on Google Maven
-        run: |
-          for a in androidx/compose/compose-bom androidx/activity/activity-compose androidx/lifecycle/lifecycle-viewmodel-compose androidx/lifecycle/lifecycle-runtime-compose androidx/core/core-ktx androidx/glance/glance-appwidget; do
-            echo "== $a"; curl -fsSL https://dl.google.com/dl/android/maven2/$a/maven-metadata.xml | grep -E '<(latest|release)>' | tr -d ' \n'; echo
-          done
-          echo "== kotlin compose plugin"; curl -fsSL https://plugins.gradle.org/m2/org/jetbrains/kotlin/plugin/compose/org.jetbrains.kotlin.plugin.compose.gradle.plugin/maven-metadata.xml | grep -E '<(latest|release)>' || true
-
       - name: Install SDK pieces and swig
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq swig
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;30.0.16248370" "platforms;android-37.0" "cmake;3.22.1" || true
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --list_installed | grep -E "ndk|platforms;android-37|cmake" || true
 
       - name: Prepare build tree
         run: tools/prepare.sh
 
-      - name: Build (arm64, OpenVPN 2.x, skeleton UI)
+      - name: Build signed release APK (arm64, OpenVPN 2.x)
         working-directory: build-tree
-        run: ./gradlew --no-daemon :main:assembleSkeletonOvpn2Release -PicsopenvpnDebugSign
+        run: |
+          ./gradlew --no-daemon :main:assembleSkeletonOvpn2Release \
+            -PvpnappVersionCode=$((1000 + GITHUB_RUN_NUMBER)) \
+            -PkeystoreO2File="$GITHUB_WORKSPACE/tools/release.jks" \
+            -PkeystoreO2Password=vpnapp-release \
+            -PkeystoreO2AliasPassword=vpnapp-release \
+            -PkeystoreO2Alias=vpnapp
 
       - name: Collect APK
         run: |
-          find build-tree/main/build/outputs -name '*.apk' -exec ls -la {} \;
-          mkdir -p out && find build-tree/main/build/outputs -name '*.apk' -exec cp {} out/ \;
+          mkdir -p out
+          apk=$(find build-tree/main/build/outputs/apk -name '*.apk' | head -1)
+          echo "APK: $apk"; ls -la "$apk"
+          cp "$apk" out/VPN-App.apk
       - uses: actions/upload-artifact@v4
-        with: { name: apk, path: out/*.apk, if-no-files-found: error }
+        with: { name: apk, path: out/VPN-App.apk, if-no-files-found: error }
+
+  release:
+    needs: [engine, apk]
+    if: github.ref_name == github.event.repository.default_branch || startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { name: apk, path: out }
+      - name: Publish release "latest"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat > notes.md <<NOTES
+          Install: open this page on your phone, tap **VPN-App.apk**, then tap Open/Install.
+          Build #${GITHUB_RUN_NUMBER} from commit ${GITHUB_SHA::7}.
+          NOTES
+          gh release delete latest --cleanup-tag -y --repo "$GITHUB_REPOSITORY" || true
+          gh release create latest out/VPN-App.apk --repo "$GITHUB_REPOSITORY" \
+            --title "VPN App (latest build)" --notes-file notes.md --target "$GITHUB_SHA" --latest
