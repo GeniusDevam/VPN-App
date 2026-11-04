@@ -201,7 +201,14 @@ class TunnelManager(
         vp.mDNS1 = s.dns.primary
         vp.mDNS2 = s.dns.secondary
         vp.mUseCustomConfig = true
-        vp.mCustomConfigOptions = "tls-version-min 1.2\n"
+        // VPN Gate's servers (SoftEther) cannot negotiate ciphers, so the client must be told the one cipher to use.
+        // The wrapper only forwards `cipher` in a legacy compatibility mode and otherwise falls back to BF-CBC (which
+        // would fail after the TLS handshake), so we pass it explicitly. Real OpenVPN 2.7 connects this way.
+        val cipher = vp.mCipher?.takeIf { it.isNotBlank() }
+        vp.mCustomConfigOptions = buildString {
+            append("tls-version-min 1.2\n")
+            if (cipher != null) append("cipher ").append(cipher).append("\n").append("data-ciphers-fallback ").append(cipher).append("\n")
+        }
         if (s.excludedApps.isNotEmpty()) {
             vp.mAllowedAppsVpn = HashSet(s.excludedApps)
             vp.mAllowedAppsVpnAreDisallowed = true
