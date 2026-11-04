@@ -94,6 +94,8 @@ object Session {
         app = application
         Repo.init(app)
         tunnel = TunnelManager(app) { Repo.settings.value }
+        // Warm the server list so Quick Connect rarely has to wait for the download.
+        scope.launch { runCatching { catalog.servers(30L * 60_000, 20_000) } }
         scope.launch {
             tunnel.state.collect { t ->
                 ui.update { s ->

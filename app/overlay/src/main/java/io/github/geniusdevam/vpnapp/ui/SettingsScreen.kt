@@ -50,12 +50,12 @@ fun SettingsScreen() {
         item { Text("Settings", style = MaterialTheme.typography.headlineSmall) }
         item { Section("Encryption") }
         item {
-            Choice("Compatible (recommended)", "Uses the strongest cipher each server supports (AES-GCM, ChaCha20, or AES-CBC). Never uses weak or broken ciphers.", st.encryption == EncryptionMode.COMPATIBLE) {
+            Choice("Compatible (recommended)", "Uses the strongest cipher each server supports. VPN Gate servers currently use AES-128-CBC with SHA-1 authentication, which is sound; weak or broken ciphers are always refused.", st.encryption == EncryptionMode.COMPATIBLE) {
                 Repo.update { it.copy(encryption = EncryptionMode.COMPATIBLE) }
             }
         }
         item {
-            Choice("Strong only", "Only servers that use modern authenticated encryption (AES-GCM / ChaCha20). Much safer, but far fewer servers qualify.", st.encryption == EncryptionMode.STRONG) {
+            Choice("Strong only", "Only servers that use modern authenticated encryption (AES-GCM / ChaCha20). Right now every VPN Gate server uses AES-128-CBC, so this setting finds no servers. Leave it off unless you want to refuse all of them.", st.encryption == EncryptionMode.STRONG) {
                 Repo.update { it.copy(encryption = EncryptionMode.STRONG) }
             }
         }
