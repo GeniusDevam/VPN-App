@@ -1,0 +1,8 @@
+build-tree/
+build/
+.gradle/
+*.class
+local.properties
+out/
+.idea/
+.kotlin/
