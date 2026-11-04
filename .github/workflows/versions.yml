@@ -1,0 +1,12 @@
+name: versions
+on: workflow_dispatch
+jobs:
+  v:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for a in androidx/compose/compose-bom androidx/activity/activity-compose androidx/lifecycle/lifecycle-runtime-compose androidx/core/core-ktx androidx/compose/material3/material3 androidx/glance/glance-appwidget; do
+            printf "%s => " "$a"; curl -fsSL "https://dl.google.com/dl/android/maven2/$a/maven-metadata.xml" | grep -E '<(latest|release)>' | tr -d ' \n'; echo
+          done
+          printf "compose plugin => "; curl -fsSL https://plugins.gradle.org/m2/org/jetbrains/kotlin/plugin/compose/org.jetbrains.kotlin.plugin.compose.gradle.plugin/maven-metadata.xml | grep -E '<(latest|release)>' | tr -d ' \n'; echo
+          echo "BOM 2026 versions:"; curl -fsSL "https://dl.google.com/dl/android/maven2/androidx/compose/compose-bom/maven-metadata.xml" | grep -oE '<version>2026[^<]*' | tail -5
