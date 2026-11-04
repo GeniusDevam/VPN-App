@@ -22,6 +22,8 @@ import kotlinx.coroutines.launch
 class RunService : Service() {
     private var scope: CoroutineScope? = null
     private var job: Job? = null
+    private var lastText = ""
+    private var lastAt = 0L
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -48,7 +50,13 @@ class RunService : Service() {
                     stopSelf()
                     sc.cancel()
                 } else {
-                    getSystemService(NotificationManager::class.java).notify(NOTIF_ID, build(text(r)))
+                    val t = text(r)
+                    val now = android.os.SystemClock.elapsedRealtime()
+                    if (t != lastText && now - lastAt >= 1_000) {
+                        lastText = t
+                        lastAt = now
+                        getSystemService(NotificationManager::class.java).notify(NOTIF_ID, build(t))
+                    }
                 }
             }
         }
