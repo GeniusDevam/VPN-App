@@ -1,0 +1,46 @@
+name: emulator-only
+# Re-runs just the emulator test against the x86_64 APK of an earlier build (no rebuild).
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "ID of an earlier 'build' run that has the apk-x86_64 artifact"
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  emulator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: apk-x86_64
+          path: out
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+      - name: Enable KVM and emulator runtime libraries
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq libpulse0 libnss3 libxcomposite1 libxcursor1 libxi6 libxtst6 || true
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - name: Run the app in an emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 36
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -noaudio -no-boot-anim -camera-back none -camera-front none
+          script: OUT=emu-out bash tools/emulator-test.sh out/VPN-App.apk
+      - name: Publish emulator results to the emulator-results branch
+        if: always()
+        run: |
+          cd emu-out && git init -q && git checkout -q -b emulator-results && git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "emulator-only run ${GITHUB_RUN_NUMBER}"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" emulator-results
