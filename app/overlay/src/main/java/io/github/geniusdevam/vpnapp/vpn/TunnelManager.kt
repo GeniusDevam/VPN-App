@@ -118,14 +118,14 @@ class TunnelManager(
         val vp = try {
             buildProfile((sanitized as SanitizeResult.Ok).config, s)
         } catch (e: Exception) {
-            return ConnectResult(false, "Config error: ${e.message}", hard = true)
+            return ConnectResult(false, "Config error: ${e.message}")
         }
         val check = vp.checkProfile(app)
         if (check != de.blinkt.openvpn.R.string.no_error_found) {
-            return ConnectResult(false, "Profile rejected: ${app.getString(check)}", hard = true)
+            return ConnectResult(false, "Profile rejected: ${app.getString(check)}")
         }
 
-        val p = Pending(vp.uuidString, CompletableDeferred())
+        val p = Pending(vp.getUUIDString(), CompletableDeferred())
         pending?.deferred?.cancel()
         pending = p
         clearConnected()
@@ -179,6 +179,11 @@ class TunnelManager(
         // VPN Gate's public relays use the shared credentials vpn / vpn.
         vp.mUsername = "vpn"
         vp.mPassword = "vpn"
+        // A config with neither a client certificate nor auth-user-pass would default to a (non-existent)
+        // Android keystore certificate and be rejected. VPN Gate relays accept the shared vpn/vpn login.
+        if (vp.mAuthenticationType == VpnProfile.TYPE_KEYSTORE || vp.mAuthenticationType == VpnProfile.TYPE_USERPASS_KEYSTORE) {
+            vp.mAuthenticationType = VpnProfile.TYPE_USERPASS
+        }
         vp.mPersistTun = true // keep the interface up while reconnecting, so nothing leaks
         vp.mBlockUnusedAddressFamilies = true // e.g. IPv6 is blocked if the server has none
         vp.mUseDefaultRoute = true

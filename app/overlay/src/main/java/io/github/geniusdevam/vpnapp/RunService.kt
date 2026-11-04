@@ -32,7 +32,11 @@ class RunService : Service() {
             return START_NOT_STICKY
         }
         ensureChannel()
-        startForeground(NOTIF_ID, build("Starting…"), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+        if (android.os.Build.VERSION.SDK_INT >= 29) {
+            startForeground(NOTIF_ID, build("Starting…"), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+        } else {
+            startForeground(NOTIF_ID, build("Starting…"))
+        }
         scope?.cancel()
         val sc = CoroutineScope(Dispatchers.Main)
         scope = sc

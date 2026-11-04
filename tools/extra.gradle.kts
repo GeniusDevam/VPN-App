@@ -10,9 +10,10 @@ android {
         versionCode = code
         versionName = "1.0.$code"
         // Phones running Android 16 are arm64; building one ABI keeps CI fast and the APK small.
+        // CI also builds x86_64 (-PvpnappAbi=x86_64) purely to run the app in an emulator.
         ndk {
             abiFilters.clear()
-            abiFilters.add("arm64-v8a")
+            abiFilters.add((project.findProperty("vpnappAbi") as String?) ?: "arm64-v8a")
         }
     }
 }
