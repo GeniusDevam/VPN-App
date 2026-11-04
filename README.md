@@ -25,6 +25,14 @@ Requires Android 8.0 or newer and a 64-bit phone (any phone from the last severa
 - The app has **no analytics, ads or trackers**.
 - **But** each free server is run by an anonymous volunteer who can see which sites and addresses you connect to, and who can read any non-HTTPS traffic. VPN Gate states that it keeps connection logs for at least three months. Don't log in to banking or other important accounts through a free server, and use the Settings option to make such apps bypass the VPN.
 
+## Known risks (read before relying on it)
+
+- **Built without a physical phone.** The build environment had no device, so the app has been verified by unit tests (including the 35-second guarantee) and by running it in an Android emulator in CI against live VPN Gate servers (see the `emulator` job in the Actions tab), not on real hardware.
+- **Free servers are unreliable.** VPN Gate relays are volunteers' home PCs: they come and go hourly, many are slow, and some countries have few or none at a given moment. Quick Connect fails over to the next server automatically; if a country has no working server the app says so instead of silently picking another country.
+- **Privacy is limited by the servers**, not by the app (see above).
+- **Speed tests** use Cloudflare's public speed-test endpoints and use data (about 30 MB per server tested on Wi-Fi; far less on mobile data). Their availability and terms can change.
+- **Not included yet:** home-screen widget, app shortcuts, automatic failover while connected, Always-on action, Tor mode. See `PLAN.md`.
+
 ## How it works
 
 | Piece | What it does |
