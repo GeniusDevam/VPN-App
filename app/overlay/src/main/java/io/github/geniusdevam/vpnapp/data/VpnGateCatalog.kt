@@ -32,8 +32,11 @@ class VpnGateCatalog : Catalog {
         val cached = Repo.servers.value
         val age = System.currentTimeMillis() - Repo.serversFetchedAt
         if (maxAgeMs > 0 && cached.isNotEmpty() && age in 0..maxAgeMs) return cached
-        val job = startFetch((fetchTimeoutMs / 2).toInt().coerceAtLeast(1_500))
-        val fresh = withTimeoutOrNull(fetchTimeoutMs) { job.await() }
+        // With nothing cached the list is the whole job: give the 1.3 MB download real time (Quick Connect's
+        // 35 s budget has room). With a cache we only wait briefly and fall back to the stale list.
+        val wait = if (cached.isEmpty()) maxOf(fetchTimeoutMs, 15_000L) else fetchTimeoutMs
+        val job = startFetch((wait / 2).toInt().coerceIn(3_000, 10_000))
+        val fresh = withTimeoutOrNull(wait) { job.await() }
         return if (!fresh.isNullOrEmpty()) fresh else cached
     }
 
