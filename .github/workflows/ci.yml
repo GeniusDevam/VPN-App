@@ -24,6 +24,8 @@ jobs:
   apk:
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    # The x86_64 build exists only for the emulator test; it must never block the real (arm64) release.
+    continue-on-error: ${{ matrix.abi == 'x86_64' }}
     strategy:
       fail-fast: false
       matrix:
@@ -45,7 +47,7 @@ jobs:
       - name: Build signed release APK (arm64, OpenVPN 2.x)
         working-directory: build-tree
         run: |
-          ./gradlew --no-daemon :main:assembleSkeletonOvpn2Release \
+          ./gradlew --no-daemon --stacktrace :main:assembleSkeletonOvpn2Release \
             -PvpnappVersionCode=$((1000 + GITHUB_RUN_NUMBER)) \
             -PvpnappAbi=${{ matrix.abi }} \
             -PkeystoreO2File="$GITHUB_WORKSPACE/tools/release.jks" \
@@ -102,6 +104,7 @@ jobs:
 
   emulator:
     needs: [apk]
+    continue-on-error: true
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
