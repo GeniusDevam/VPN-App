@@ -15,7 +15,7 @@ git -C "$BUILD" submodule sync -q
 git -C "$BUILD" submodule update --init --recursive --depth 1 --jobs 8 -q
 
 # 1. Overlay app files (sources, resources, manifests) onto the upstream :main module.
-cp -a "$ROOT/app/overlay/." "$BUILD/main/"
+[ -d "$ROOT/app/overlay" ] && cp -a "$ROOT/app/overlay/." "$BUILD/main/" || true
 
 # 2. Engine sources (pure Kotlin, also unit-tested standalone in ./engine) are compiled into the app.
 if [ -d "$ROOT/engine/src/main/kotlin" ]; then

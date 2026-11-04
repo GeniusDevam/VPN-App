@@ -16,7 +16,7 @@ jobs:
       - name: Print Android library versions available on Google Maven
         run: |
           for a in androidx/compose/compose-bom androidx/activity/activity-compose androidx/lifecycle/lifecycle-viewmodel-compose androidx/lifecycle/lifecycle-runtime-compose androidx/core/core-ktx androidx/glance/glance-appwidget; do
-            echo "== $a"; curl -fsSL https://dl.google.com/dl/android/maven2/$a/maven-metadata.xml | grep -E '<(latest|release)>' || echo "(none)"
+            echo "== $a"; curl -fsSL https://dl.google.com/dl/android/maven2/$a/maven-metadata.xml | grep -E '<(latest|release)>' | tr -d ' \n'; echo
           done
           echo "== kotlin compose plugin"; curl -fsSL https://plugins.gradle.org/m2/org/jetbrains/kotlin/plugin/compose/org.jetbrains.kotlin.plugin.compose.gradle.plugin/maven-metadata.xml | grep -E '<(latest|release)>' || true
 
@@ -24,8 +24,8 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq swig
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;30.0.14904198" "platforms;android-37" "cmake;3.22.1" || true
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --list_installed | head -40
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;30.0.16248370" "platforms;android-37.0" "cmake;3.22.1" || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --list_installed | grep -E "ndk|platforms;android-37|cmake" || true
 
       - name: Prepare build tree
         run: tools/prepare.sh
