@@ -31,4 +31,8 @@ fi
 if ! grep -q "kotlin.plugin.compose" "$BUILD/main/build.gradle.kts"; then
   sed -i '0,/alias(libs.plugins.android.application)/s//alias(libs.plugins.android.application)\n    id("org.jetbrains.kotlin.plugin.compose") version "2.4.10"/' "$BUILD/main/build.gradle.kts"
 fi
+# Gradle's default heap is too small once Compose is in the build (packaging ran out of memory intermittently).
+if ! grep -q "org.gradle.jvmargs" "$BUILD/gradle.properties"; then
+  printf '\norg.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g\nkotlin.daemon.jvmargs=-Xmx2g\n' >> "$BUILD/gradle.properties"
+fi
 echo "build tree ready: $BUILD @ $REF"
