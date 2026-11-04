@@ -65,10 +65,20 @@ for i in $(seq 1 24); do
   if has_text "no usable servers|No server in|Could not connect|went wrong"; then result="failed"; break; fi
   [ $((i % 3)) -eq 0 ] && shot "04-quick-progress-$i"
 done
+if [ "$result" = "failed" ]; then
+  log "first Quick Connect failed; retrying once with a warm server list"
+  tap_text "OK" || true; sleep 2
+  tap_text "Connect"; sleep 3
+  for i in $(seq 1 24); do
+    sleep 5; dump
+    if has_text "^.{0,2}\s?Connected$"; then result="connected-on-retry"; break; fi
+    if has_text "no usable servers|No server in|Could not connect|went wrong"; then result="failed-twice"; break; fi
+  done
+fi
 log "Quick Connect result: $result"; shot 05-quick-result; dump; cp "$OUT/ui.xml" "$OUT/ui-quick-result.xml"
 echo "quick=$result" > "$OUT/result.txt"
 
-if [ "$result" = "connected" ]; then
+if [ "$result" = "connected" ] || [ "$result" = "connected-on-retry" ]; then
   log "Best Connect"
   tap_text "Find the best"; sleep 3
   bres="timeout"
