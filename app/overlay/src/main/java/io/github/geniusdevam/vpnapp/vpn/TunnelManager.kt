@@ -17,6 +17,7 @@ import de.blinkt.openvpn.core.ProfileManager
 import de.blinkt.openvpn.core.VPNLaunchHelper
 import de.blinkt.openvpn.core.VpnStatus
 import io.github.geniusdevam.vpnapp.data.Settings
+import io.github.geniusdevam.vpnapp.engine.CipherPolicy
 import io.github.geniusdevam.vpnapp.engine.ConfigSanitizer
 import io.github.geniusdevam.vpnapp.engine.ConnectResult
 import io.github.geniusdevam.vpnapp.engine.SanitizeResult
@@ -205,6 +206,11 @@ class TunnelManager(
         // The wrapper only forwards `cipher` in a legacy compatibility mode and otherwise falls back to BF-CBC (which
         // would fail after the TLS handshake), so we pass it explicitly. Real OpenVPN 2.7 connects this way.
         val cipher = vp.mCipher?.takeIf { it.isNotBlank() }
+        // OpenVPN 2.7 refuses a server cipher that is not in --data-ciphers ("failed to negotiate cipher"), so list
+        // the modern AEAD ciphers first and the server's own cipher last, exactly as the upstream app does.
+        if (cipher != null && !CipherPolicy.isAead(cipher)) {
+            vp.mDataCiphers = "AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305:$cipher"
+        }
         vp.mCustomConfigOptions = buildString {
             append("tls-version-min 1.2\n")
             if (cipher != null) append("cipher ").append(cipher).append("\n").append("data-ciphers-fallback ").append(cipher).append("\n")
