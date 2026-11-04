@@ -23,7 +23,7 @@ The app was built from this plan. Where the build differs, the code wins:
 | Probe sockets excluded from the tunnel (§6.2) | Probe sockets are bound to the physical network (`Network.bindSocket`), so they bypass an active tunnel. |
 | Cipher shown from negotiated data channel | Parsed from the engine log; falls back to the cipher declared in the server config. |
 | Widget, app shortcuts, auto-failover, background pre-scan, mirror URLs, Always-on action, results history, Tor mode | **Not implemented.** Quick Settings tile, notification progress, split tunneling (apps that skip the VPN), DNS choice, Strong/Compatible encryption mode, favorites and "report & avoid" are implemented. |
-| On-device verification (§19) | **Not done.** Nothing has been run on a real phone or against live VPN Gate servers; the sandbox that built this app has no access to either. See README "Known risks". |
+| On-device verification (§19) | **Partly done.** Every push is built, signed, and run in an Android 16 (API 36) emulator in CI against live VPN Gate servers: onboarding, the VPN permission, Quick Connect (connected in 8-10 s) and Best Connect (7 speed tests, then connected). Not done: a real phone, mobile data, Always-on lockdown, long sessions, switching networks. Findings so far: VPN Gate currently lists ~100 servers (84% TCP, all `AES-128-CBC`, so "Strong only" matches none), and its list is reachable over HTTPS. |
 
 ### Owner decisions (already made)
 - **Servers:** free volunteer servers from the **VPN Gate** network (University of Tsukuba academic project). There are no paid subscriptions and no owner-run servers.
