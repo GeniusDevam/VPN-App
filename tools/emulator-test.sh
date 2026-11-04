@@ -83,6 +83,29 @@ fi
 
 adb logcat -d > "$OUT/logcat.txt"
 adb logcat -d -s AndroidRuntime:E > "$OUT/crashes.txt"
+report() {
+  echo "================ screen text after Quick Connect"
+  python3 - "$OUT/ui-quick-result.xml" <<'PY'
+import sys,xml.etree.ElementTree as ET
+try:
+    for n in ET.parse(sys.argv[1]).getroot().iter('node'):
+        t=(n.get('text') or '').strip()
+        if t: print('  |',t.replace('\n',' ')[:200])
+except Exception as e: print('  (no dump)',e)
+PY
+  if [ -f "$OUT/ui-best-result.xml" ]; then
+    echo "================ screen text after Best Connect"
+    python3 - "$OUT/ui-best-result.xml" <<'PY'
+import sys,xml.etree.ElementTree as ET
+for n in ET.parse(sys.argv[1]).getroot().iter('node'):
+    t=(n.get('text') or '').strip()
+    if t: print('  |',t.replace('\n',' ')[:200])
+PY
+  fi
+  echo "================ logcat (app / openvpn / crashes), last 200 lines"
+  grep -iE "vpnapp|openvpn|ovpn|VpnStatus|AndroidRuntime|FATAL|vpngate|TunnelManager" "$OUT/logcat.txt" | tail -200 | cut -c1-260
+}
+report
 if grep -q "FATAL EXCEPTION" "$OUT/logcat.txt"; then log "APP CRASHED"; echo "crash=yes" >> "$OUT/result.txt"; exit 1; fi
 cat "$OUT/result.txt"
 exit 0

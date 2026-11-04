@@ -133,6 +133,12 @@ jobs:
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -noaudio -no-boot-anim -camera-back none -camera-front none
           script: OUT=emu-out bash tools/emulator-test.sh out/VPN-App.apk
+      - name: Publish emulator results to the emulator-results branch
+        if: always()
+        run: |
+          cd emu-out && git init -q && git checkout -q -b emulator-results && git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "emulator run ${GITHUB_RUN_NUMBER} (${GITHUB_SHA::7})"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" emulator-results
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: emulator-results, path: emu-out, if-no-files-found: warn }
