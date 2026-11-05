@@ -5,16 +5,18 @@ verified. "Verified" means demonstrated by a test that was actually run.
 
 | # | Finding | Status | How it was checked |
 |---|---|---|---|
-| B1 | Public signing key | Mitigated in CI; **needs you** to create a new key (docs/RELEASE_SIGNING.md) | Key script run; workflow YAML parsed. The pipeline itself has not run yet |
-| B2 | No server certificate verification | **Fixed** | Real OpenVPN 2.6.19 client/server test (`tools/cert-policy-test.sh`): genuine cert connects; wrong name, non-server role, untrusted CA rejected; control accepts wrong name without the policy. Not yet run against live relays |
+| B1 | Public signing key | **Open.** Mitigated in CI; **needs you**: create a new key and delete the old public `latest` release (docs/RELEASE_SIGNING.md) | The keystore is out of the tree and CI builds with throw-away keys (it ran). The leaked key and passwords remain in git history, and the old release is still downloadable |
+| B2 | No server certificate verification | **Fixed** | Real OpenVPN 2.6.19 client/server test (`tools/cert-policy-test.sh`): genuine cert connects; wrong name, non-server role, untrusted CA rejected; control accepts wrong name without the policy. **Live relays (CI, 2026-11-05): 15/24 connected with the policy and 15/24 without; every relay that reached TLS presented `CN=opengw.net`** |
 | B3 | HTTP fallback for the directory | **Fixed** (HTTPS only; cleartext disabled app-wide) | Unit tests; network-security config |
 | B4 | Leak protection | Documented; cannot be guaranteed by the app | Analysis below; not testable without a device |
-| B5 | Disconnect vs cancel race | **Fixed** | Deterministic and 500-seed randomised tests, shown to fail on the old behaviour |
+| B5 | Disconnect vs cancel race | **Fixed** | Deterministic and 500-seed randomised tests, shown to fail on the old behaviour; the Quick timeout and exception restore paths were also closed; the emulator test confirmed an explicit disconnect stayed down for 20 s (run 22) |
 | B6 | Cipher policy gaps | **Fixed** | Unit tests of every path through one gate |
 | B7 | Compression | **Removed** | Source review of the pinned OpenVPN; real OpenVPN accepts the options |
 | B8 | Address/profile validation | **Fixed** | Address matrix, adversarial cases, 600-seed sanitizer fuzz, CSV fuzz |
 | B9 | Logging/privacy, public CI output | **Fixed** (redacted publishing); owner action: delete old branch | Redactor self-tested |
-| B10 | Dependency/licence audit | Partly done; advisory scan **not possible here** (docs/AUDIT.md) | |
+| B10 | Dependency/licence audit | Partly done; advisory scan **not possible here** (docs/AUDIT.md) | Exported components of the built APK are now listed by CI; not yet reviewed |
+| C7 | Persistence atomicity and ordering | **Fixed** | `PersistenceTest`; see below |
+| C9 | Misleading failure messages | **Fixed** | Directory-unavailable, no-server-in-country and settings-exclusion are separate outcomes (engine tests; the emulator test confirmed an honest, country-naming failure) |
 
 ## C7. Persistence
 Every stored file is replaced with fsync + atomic rename and the old file is never deleted first (`AtomicFiles`). Writes of each file go
@@ -50,8 +52,7 @@ leaf was `CN=opengw.net` (the domain VPN Gate controls).
 against on-path attackers and rogue directories. It does **not** vouch for an individual volunteer: the relay software holds the
 certificate, so any operator can present it. Volunteers can always see your traffic's destinations (README). **Compatibility risk:**
 relays that use another certificate scheme are now excluded and counted in the diagnostics as "failed relay-identity check".
-The live effect could not be measured here (vpngate.net unreachable); the `vpngate-check` workflow now runs real OpenVPN against live
-relays with and without the policy and prints the certificate names it sees, so the cost is measurable in one run.
+**Measured live** (workflow `vpngate-check`, real OpenVPN 2.7.0 against 24 of 96 listed relays, run twice): 15/24 connected without the policy and 15/24 with it; the failures were volunteers that never completed TLS or timed out, and the set of failing relays differed between the runs. Depth-0 certificate names seen: `CN=opengw.net` for every relay that reached TLS (22 and 21). So the policy cost no measurable compatibility on that sample. It is a sample of one day's partial list, not a guarantee.
 
 ## B3. Directory authenticity
 HTTPS only, no redirects followed, 20 MB streamed cap, per-line cap, no downgrade. A TLS-authenticated response still comes from a
@@ -82,7 +83,7 @@ All paths go through `ConnectionGate`: Quick, Best (including a winner already c
 restoring the previous connection. A violating tunnel is disconnected before the caller sees success. The engine is also given an
 allowlist (`data-ciphers`) that never contains a weak cipher. `TunnelManager` no longer substitutes the relay's *declared* cipher when
 the negotiated one was not observed; such a connection is shown as "not verified". Strong mode requires a verified AEAD cipher.
-Observed in all successful CI connections: `AES-128-CBC` with `SHA1` (no relay negotiated AEAD).
+Observed in all successful CI connections (emulator and live OpenVPN): `AES-128-CBC` with `SHA1` (no relay negotiated AEAD). The negotiated cipher arrives through an asynchronous log channel, so the app waits up to 1.5 s for it after "connected" before labelling a connection "not verified".
 
 ## B7. Compression
 Pinned OpenVPN (`c29ee42`, banner "2.7-icsopenvpn", `version.m4` 2.8_git; built with LZO and LZ4): `comp-lzo` sets the algorithm but the
