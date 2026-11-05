@@ -1,13 +1,18 @@
 package io.github.geniusdevam.vpnapp.data
 
 import android.content.Context
+import io.github.geniusdevam.vpnapp.engine.Codec
+import io.github.geniusdevam.vpnapp.engine.DirectoryDiagnostics
+import io.github.geniusdevam.vpnapp.engine.DirectoryPool
+import io.github.geniusdevam.vpnapp.engine.DirectoryResult
 import io.github.geniusdevam.vpnapp.engine.EncryptionMode
-import io.github.geniusdevam.vpnapp.engine.InMemoryHistory
-import io.github.geniusdevam.vpnapp.engine.InMemoryReputation
+import io.github.geniusdevam.vpnapp.engine.EndpointInfo
+import io.github.geniusdevam.vpnapp.engine.ListingStats
 import io.github.geniusdevam.vpnapp.engine.OptimizeFor
 import io.github.geniusdevam.vpnapp.engine.Scope
 import io.github.geniusdevam.vpnapp.engine.Server
-import io.github.geniusdevam.vpnapp.engine.Transport
+import io.github.geniusdevam.vpnapp.engine.ServerLedger
+import io.github.geniusdevam.vpnapp.engine.ThroughputStats
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -36,62 +41,102 @@ data class Settings(
     /** Apps that bypass the VPN entirely (e.g. banking). */
     val excludedApps: Set<String> = emptySet(),
     val acknowledged: Boolean = false,
+    /** Data the worldwide search may spend on speed tests (MB). */
+    val worldwideDataMb: Int = 150,
+    /** Worldwide search runs on mobile data / metered Wi-Fi only if this is on. */
+    val worldwideAllowMetered: Boolean = false,
 )
+
+/** A compact record of the last worldwide search, so an interrupted one can be reviewed or resumed. */
+data class SavedSearch(
+    val at: Long,
+    val finished: Boolean,
+    val poolSize: Int,
+    val probed: Int,
+    val tested: Int,
+    val bytes: Long,
+    val stop: String?,
+    val entries: List<SavedEntry>,
+)
+
+data class SavedEntry(val id: String, val cc: String, val down: Double, val up: Double, val idle: Double, val loaded: Double, val bytes: Long, val score: Double)
 
 private fun Scope.encode(): String = when (this) { Scope.Any -> "*"; is Scope.Country -> iso }
 private fun decodeScope(s: String?): Scope = if (s.isNullOrEmpty() || s == "*") Scope.Any else Scope.Country(s)
 
-/** Single source of truth for persisted state. All writes are encrypted through [SecureVault]. */
+/**
+ * Single source of truth for persisted state. All writes are encrypted through [SecureVault]:
+ *  - "state"   settings
+ *  - "ledger"  the permanent per-server history (see [ServerLedger] for the seven-day absence rule)
+ *  - "servers" the directory pool (relays seen in recent listings) and directory diagnostics
+ *  - "search"  the last worldwide search
+ * Older installs kept reputation/latency/throughput inside "state"; they are imported once, so updating loses nothing.
+ */
 object Repo {
     private lateinit var ctx: Context
     private val io = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val writeLock = Mutex()
     private var inited = false
 
-    val reputation = InMemoryReputation()
-    val history = InMemoryHistory()
+    /** Success/failure history, reputation, latency and throughput priors. Never sent anywhere. */
+    val ledger = ServerLedger()
+    val reputation: ServerLedger get() = ledger
+    val history: ServerLedger get() = ledger
+    private val pool = DirectoryPool()
 
     private val _settings = MutableStateFlow(Settings())
     val settings: StateFlow<Settings> = _settings
 
+    /** Relays selectable right now (union of recent listings). */
     private val _servers = MutableStateFlow<List<Server>>(emptyList())
     val servers: StateFlow<List<Server>> = _servers
 
+    private val _directory = MutableStateFlow(DirectoryDiagnostics(source = "vpngate.net (HTTPS)"))
+    val directory: StateFlow<DirectoryDiagnostics> = _directory
+
+    private val _lastSearch = MutableStateFlow<SavedSearch?>(null)
+    val lastSearch: StateFlow<SavedSearch?> = _lastSearch
+
     @Volatile var serversFetchedAt: Long = 0L
         private set
+
+    private const val FRESH_MS = 24L * 3_600_000
 
     @Synchronized
     fun init(context: Context) {
         if (inited) return
         ctx = context.applicationContext
         inited = true
-        SecureVault.read(ctx, "state")?.let { runCatching { loadState(JSONObject(String(it))) } }
-        SecureVault.read(ctx, "servers")?.let { runCatching { loadServers(JSONObject(String(it))) } }
+        val state = SecureVault.read(ctx, "state")?.let { runCatching { JSONObject(String(it)) }.getOrNull() }
+        state?.let { runCatching { loadSettings(it) } }
+
+        val ledgerJson = SecureVault.read(ctx, "ledger")?.let { runCatching { JSONObject(String(it)) }.getOrNull() }
+        if (ledgerJson != null) {
+            runCatching { ledger.restore(Codec.ledgerFromJson(ledgerJson)) }
+        } else if (state != null && (state.has("rep") || state.has("lat") || state.has("thr"))) {
+            // One-time import of the pre-ledger state. Written to its own file BEFORE "state" is rewritten without it.
+            runCatching {
+                ledger.restore(Codec.importLegacy(state.optJSONObject("rep"), state.optJSONObject("lat"), state.optJSONObject("thr"), System.currentTimeMillis()))
+                SecureVault.write(ctx, "ledger", Codec.ledgerToJson(ledger.snapshot()).toString().toByteArray())
+            }
+        }
+        SecureVault.read(ctx, "servers")?.let { b ->
+            runCatching {
+                val o = JSONObject(String(b))
+                val (entries, at) = Codec.poolFromJson(o)
+                pool.restore(entries)
+                serversFetchedAt = at ?: 0L
+                o.optJSONObject("diag")?.let { _directory.value = diagFromJson(it) }
+            }
+        }
+        SecureVault.read(ctx, "search")?.let { b -> runCatching { _lastSearch.value = searchFromJson(JSONObject(String(b))) } }
+        refreshServerList()
     }
+
+    // ------------------------------------------------------------------ settings
 
     fun update(f: (Settings) -> Settings) {
         _settings.update(f)
-        saveState()
-    }
-
-    fun saveServers(list: List<Server>, at: Long = System.currentTimeMillis()) {
-        _servers.value = list
-        serversFetchedAt = at
-        io.launch {
-            writeLock.withLock {
-                runCatching {
-                    val o = JSONObject().put("at", at).put("servers", JSONArray().also { a -> list.forEach { a.put(serverToJson(it)) } })
-                    SecureVault.write(ctx, "servers", o.toString().toByteArray())
-                }
-            }
-        }
-    }
-
-    /** Persist reputation/history after a run. */
-    fun saveLearning() = saveState()
-
-    fun clearHistory() {
-        history.restore(emptyMap(), emptyMap())
         saveState()
     }
 
@@ -102,22 +147,15 @@ object Repo {
 
     private fun stateJson(): JSONObject {
         val s = _settings.value
-        val rep = JSONObject()
-        reputation.export().forEach { (id, e) ->
-            rep.put(id, JSONArray().put(e.consecutiveFailures).put(e.blockedUntilMs).put(e.failures))
-        }
-        val (lat, thr) = history.export()
-        val latJ = JSONObject(); lat.forEach { (k, v) -> latJ.put(k, JSONArray().put(v.medianMs).put(v.atMs)) }
-        val thrJ = JSONObject(); thr.forEach { (k, v) -> thrJ.put(k, JSONArray().put(v.downMbps).put(v.atMs)) }
         return JSONObject()
             .put("quick", s.quickScope.encode()).put("best", s.bestScope.encode())
             .put("enc", s.encryption.name).put("opt", s.optimize.name).put("dns", s.dns.name)
             .put("maxc", s.maxCandidates).put("fav", JSONArray(s.favorites.toList()))
             .put("excl", JSONArray(s.excludedApps.toList())).put("ack", s.acknowledged)
-            .put("rep", rep).put("lat", latJ).put("thr", thrJ)
+            .put("wwmb", s.worldwideDataMb).put("wwmet", s.worldwideAllowMetered)
     }
 
-    private fun loadState(o: JSONObject) {
+    private fun loadSettings(o: JSONObject) {
         fun <T : Enum<T>> en(name: String?, all: Array<T>, def: T) = all.firstOrNull { it.name == name } ?: def
         _settings.value = Settings(
             quickScope = decodeScope(o.optString("quick")),
@@ -129,47 +167,124 @@ object Repo {
             favorites = strings(o.optJSONArray("fav")),
             excludedApps = strings(o.optJSONArray("excl")),
             acknowledged = o.optBoolean("ack", false),
+            worldwideDataMb = o.optInt("wwmb", 150).coerceIn(30, 1000),
+            worldwideAllowMetered = o.optBoolean("wwmet", false),
         )
-        val rep = HashMap<String, InMemoryReputation.Entry>()
-        o.optJSONObject("rep")?.let { r -> r.keys().forEach { k -> val a = r.getJSONArray(k); rep[k] = InMemoryReputation.Entry(a.getInt(0), a.getLong(1), a.getInt(2)) } }
-        reputation.restore(rep)
-        val lat = HashMap<String, InMemoryHistory.Lat>()
-        o.optJSONObject("lat")?.let { r -> r.keys().forEach { k -> val a = r.getJSONArray(k); lat[k] = InMemoryHistory.Lat(a.getDouble(0), a.getLong(1)) } }
-        val thr = HashMap<String, InMemoryHistory.Thr>()
-        o.optJSONObject("thr")?.let { r -> r.keys().forEach { k -> val a = r.getJSONArray(k); thr[k] = InMemoryHistory.Thr(a.getDouble(0), a.getLong(1)) } }
-        history.restore(lat, thr)
     }
 
     private fun strings(a: JSONArray?): Set<String> = buildSet { if (a != null) for (i in 0 until a.length()) add(a.getString(i)) }
 
-    private fun serverToJson(s: Server) = JSONObject()
-        .put("id", s.id).put("ip", s.ip).put("port", s.port).put("tr", s.transport.name)
-        .put("cc", s.countryCode).put("cn", s.countryName)
-        .put("spd", s.reportedSpeedBps ?: JSONObject.NULL).put("ses", s.sessions ?: JSONObject.NULL)
-        .put("up", s.uptimeMs ?: JSONObject.NULL).put("log", s.logPolicy ?: JSONObject.NULL)
-        .put("op", s.operator ?: JSONObject.NULL).put("msg", s.message ?: JSONObject.NULL)
-        .put("ciph", s.declaredCipher ?: JSONObject.NULL).put("tls", s.tlsAuthOrCrypt).put("cfg", s.config)
+    // ------------------------------------------------------------------ ledger
 
-    private fun loadServers(o: JSONObject) {
-        val a = o.getJSONArray("servers")
-        val list = ArrayList<Server>(a.length())
-        for (i in 0 until a.length()) {
-            val j = a.getJSONObject(i)
-            fun str(k: String) = if (j.isNull(k)) null else j.getString(k)
-            list.add(
-                Server(
-                    id = j.getString("id"), ip = j.getString("ip"), port = j.getInt("port"),
-                    transport = Transport.valueOf(j.getString("tr")),
-                    countryCode = j.getString("cc"), countryName = j.getString("cn"),
-                    reportedSpeedBps = if (j.isNull("spd")) null else j.getLong("spd"),
-                    sessions = if (j.isNull("ses")) null else j.getInt("ses"),
-                    uptimeMs = if (j.isNull("up")) null else j.getLong("up"),
-                    logPolicy = str("log"), operator = str("op"), message = str("msg"),
-                    declaredCipher = str("ciph"), tlsAuthOrCrypt = j.getBoolean("tls"), config = j.getString("cfg"),
-                ),
+    /** Persist the ledger after a run or any change to reputation/history. */
+    fun saveLearning() {
+        val snap = ledger.snapshot()
+        io.launch { writeLock.withLock { runCatching { SecureVault.write(ctx, "ledger", Codec.ledgerToJson(snap).toString().toByteArray()) } } }
+    }
+
+    /** Settings > Clear history: forgets measurements and counters; retention bookkeeping stays. */
+    fun clearHistory() {
+        ledger.clearMeasurements()
+        saveLearning()
+    }
+
+    // ------------------------------------------------------------------ directory
+
+    /** Relays to use: those seen in the last 24 h, or everything cached if none are that recent (offline fallback). */
+    fun pooledServers(): List<Server> {
+        val fresh = pool.servers(FRESH_MS, System.currentTimeMillis())
+        return fresh.ifEmpty { pool.servers(0, System.currentTimeMillis()) }
+    }
+
+    fun lastValidProfiles(): Int = _directory.value.listing.validProfiles
+
+    private fun refreshServerList() { _servers.value = pooledServers() }
+
+    fun directoryOk(startedAt: Long, result: DirectoryResult) {
+        val now = System.currentTimeMillis()
+        val listing = result.usable.associate { it.id to EndpointInfo(it.ip, it.port, it.transport, it.countryCode) }
+        ledger.observeDirectory(listing, usable = true, at = now)
+        val merge = pool.merge(result.usable, now)
+        serversFetchedAt = now
+        refreshServerList()
+        val pooled = pooledServers()
+        _directory.value = DirectoryDiagnostics(
+            source = "vpngate.net (HTTPS)", lastSuccessfulRefreshAt = now, lastAttemptAt = startedAt, lastError = null,
+            listing = result.stats, pooledUsable = pooled.size, pooledCountries = pooled.map { it.countryCode }.toSet().size,
+            newInLastRefresh = merge.added, servingStaleCache = false, knownPartial = true, savedServerRecords = ledger.size(),
+        )
+        savePool(); saveLearning()
+    }
+
+    fun directoryFailed(startedAt: Long, error: String, stats: ListingStats? = null) {
+        val pooled = pooledServers()
+        _directory.update {
+            it.copy(
+                lastAttemptAt = startedAt, lastError = error, servingStaleCache = pooled.isNotEmpty(),
+                pooledUsable = pooled.size, pooledCountries = pooled.map { s -> s.countryCode }.toSet().size, savedServerRecords = ledger.size(),
+                listing = stats ?: it.listing,
             )
         }
-        _servers.value = list
-        serversFetchedAt = o.optLong("at", 0L)
+        savePool() // keeps diagnostics (and the last error) across restarts; relays and ledger are untouched
+    }
+
+    private fun savePool() {
+        val diag = diagToJson(_directory.value)
+        val o = Codec.poolToJson(pool.entries(), serversFetchedAt.takeIf { it > 0 }).put("diag", diag)
+        io.launch { writeLock.withLock { runCatching { SecureVault.write(ctx, "servers", o.toString().toByteArray()) } } }
+    }
+
+    private fun diagToJson(d: DirectoryDiagnostics): JSONObject {
+        val rej = JSONObject(); d.listing.rejected.forEach { (k, v) -> rej.put(k, v) }
+        return JSONObject()
+            .put("src", d.source).put("ok", d.lastSuccessfulRefreshAt ?: JSONObject.NULL).put("att", d.lastAttemptAt ?: JSONObject.NULL)
+            .put("err", d.lastError ?: JSONObject.NULL).put("new", d.newInLastRefresh)
+            .put("rows", d.listing.rowsReceived).put("valid", d.listing.validProfiles).put("usable", d.listing.usableServers)
+            .put("cc", d.listing.countries).put("rej", rej)
+    }
+
+    private fun diagFromJson(j: JSONObject): DirectoryDiagnostics {
+        val rej = HashMap<String, Int>()
+        j.optJSONObject("rej")?.let { r -> r.keys().forEach { k -> rej[k] = r.optInt(k) } }
+        fun l(k: String) = if (j.isNull(k) || !j.has(k)) null else j.getLong(k)
+        return DirectoryDiagnostics(
+            source = j.optString("src", "vpngate.net (HTTPS)"), lastSuccessfulRefreshAt = l("ok"), lastAttemptAt = l("att"),
+            lastError = if (j.isNull("err")) null else j.optString("err"), newInLastRefresh = j.optInt("new"),
+            listing = ListingStats(j.optInt("rows"), j.optInt("valid"), j.optInt("usable"), j.optInt("cc"), rej),
+            pooledUsable = pooledServers().size, pooledCountries = pooledServers().map { it.countryCode }.toSet().size,
+            servingStaleCache = false, savedServerRecords = ledger.size(),
+        )
+    }
+
+    // ------------------------------------------------------------------ worldwide search record
+
+    fun saveSearch(s: SavedSearch) {
+        _lastSearch.value = s
+        val o = searchToJson(s)
+        io.launch { writeLock.withLock { runCatching { SecureVault.write(ctx, "search", o.toString().toByteArray()) } } }
+    }
+
+    /** Throughput results from an interrupted search that are recent enough (6 h) to reuse without re-measuring. */
+    fun searchSeeds(): Map<String, ThroughputStats> {
+        val s = _lastSearch.value ?: return emptyMap()
+        if (s.finished || System.currentTimeMillis() - s.at > 6 * 3_600_000L) return emptyMap()
+        return s.entries.associate { it.id to ThroughputStats(it.down, it.up, it.idle, it.loaded, it.bytes) }
+    }
+
+    private fun searchToJson(s: SavedSearch) = JSONObject()
+        .put("at", s.at).put("fin", s.finished).put("pool", s.poolSize).put("pr", s.probed).put("te", s.tested).put("by", s.bytes)
+        .put("stop", s.stop ?: JSONObject.NULL)
+        .put("e", JSONArray().also { a ->
+            s.entries.forEach {
+                a.put(JSONObject().put("id", it.id).put("cc", it.cc).put("d", it.down).put("u", it.up).put("i", it.idle).put("l", it.loaded).put("b", it.bytes).put("s", it.score))
+            }
+        })
+
+    private fun searchFromJson(o: JSONObject): SavedSearch {
+        val a = o.optJSONArray("e") ?: JSONArray()
+        val entries = (0 until a.length()).mapNotNull { i ->
+            a.optJSONObject(i)?.let { j -> SavedEntry(j.getString("id"), j.optString("cc"), j.optDouble("d"), j.optDouble("u"), j.optDouble("i"), j.optDouble("l"), j.optLong("b"), j.optDouble("s")) }
+        }
+        return SavedSearch(o.optLong("at"), o.optBoolean("fin"), o.optInt("pool"), o.optInt("pr"), o.optInt("te"), o.optLong("by"), if (o.isNull("stop")) null else o.optString("stop"), entries)
     }
 }

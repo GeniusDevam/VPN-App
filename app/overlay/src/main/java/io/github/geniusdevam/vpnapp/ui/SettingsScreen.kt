@@ -55,7 +55,7 @@ fun SettingsScreen() {
             }
         }
         item {
-            Choice("Strong only", "Only servers that use modern authenticated encryption (AES-GCM / ChaCha20). Right now every VPN Gate server uses AES-128-CBC, so this setting finds no servers. Leave it off unless you want to refuse all of them.", st.encryption == EncryptionMode.STRONG) {
+            Choice("Strong only", "Only servers whose connection is verified to use modern authenticated encryption (AES-GCM / ChaCha20). Every VPN Gate server we have seen uses AES-128-CBC, so this setting normally finds no servers. Leave it off unless you want to refuse all of them.", st.encryption == EncryptionMode.STRONG) {
                 Repo.update { it.copy(encryption = EncryptionMode.STRONG) }
             }
         }
@@ -70,7 +70,7 @@ fun SettingsScreen() {
                     FilterChip(selected = st.maxCandidates == n, onClick = { Repo.update { it.copy(maxCandidates = n) } }, label = { Text("$n") })
                 }
             }
-            Text("On mobile data, Best Connect automatically uses much less data (about 60 MB per run).", style = MaterialTheme.typography.bodySmall)
+            Text("On mobile data, Best Connect automatically uses much less data (about 60 MB per run at most). Data figures are estimates and include a small allowance for protocol overhead.", style = MaterialTheme.typography.bodySmall)
         }
         item { Section("Privacy") }
         DnsChoice.values().forEach { d ->
@@ -100,20 +100,37 @@ fun SettingsScreen() {
             )
         }
         item {
-            OutlinedButton(onClick = { Repo.clearHistory() }, modifier = Modifier.fillMaxWidth()) { Text("Clear learned speed history") }
+            OutlinedButton(onClick = { Repo.clearHistory() }, modifier = Modifier.fillMaxWidth()) { Text("Clear saved server history") }
         }
         item {
             OutlinedButton(onClick = { Repo.update { it.copy(acknowledged = false) } }, modifier = Modifier.fillMaxWidth()) { Text("Show privacy notice again") }
         }
-        item { Section("Kill switch") }
+        item { Section("Kill switch and leaks") }
         item {
             Text(
-                "To block all internet if the VPN drops, turn on “Always-on VPN” and “Block connections without VPN” for this app in Android's VPN settings.",
+                "What this app does by itself: while it reconnects, the VPN interface stays up, and traffic is not sent outside it. " +
+                    "What it cannot guarantee: if the VPN process is stopped or crashes, the phone is restarted, or Android switches networks at the wrong moment, " +
+                    "apps may briefly connect without the VPN. Only Android itself can prevent that.\n\n" +
+                    "To block all internet whenever the VPN is down, open Android's VPN settings, tap the gear next to “VPN App”, and turn on " +
+                    "“Always-on VPN” and “Block connections without VPN”. The app cannot detect whether you did, so it never claims a kill switch.\n\n" +
+                    "While Best Connect or the worldwide search is running, the VPN switches between test servers, so protection is not continuous. " +
+                    "Apps you chose to skip the VPN are never protected. IPv6 is blocked when a server has no IPv6; DNS goes to the resolver chosen above.",
                 style = MaterialTheme.typography.bodySmall,
             )
             OutlinedButton(onClick = { ctx.startActivity(Intent(AndroidSettings.ACTION_VPN_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }, modifier = Modifier.fillMaxWidth()) {
                 Text("Open Android VPN settings")
             }
+        }
+        item { Section("What this app keeps and sends") }
+        item {
+            Text(
+                "Stored on this phone, encrypted: your settings, the server list, and a history of how each server worked for you " +
+                    "(successes, failures, speed, stability). History for a server is deleted after it has been missing from VPN Gate's list for 7 days of successful refreshes; " +
+                    "it is never deleted just for being old. Nothing is uploaded and there is no analytics.\n\n" +
+                    "Network contacts: vpngate.net (server list, HTTPS only), the VPN servers themselves, and Cloudflare's public speed-test servers during Best Connect and the worldwide search. " +
+                    "Every server you probe or connect to sees your IP address.",
+                style = MaterialTheme.typography.bodySmall,
+            )
         }
         item { Section("About") }
         item {

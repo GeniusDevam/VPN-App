@@ -19,9 +19,22 @@ import kotlinx.coroutines.withContext
 /**
  * Measures speed through the active tunnel (the app's own traffic goes through the VPN unless excluded).
  * Uses Cloudflare's public speed-test endpoints over HTTPS. Tests are short to spare volunteers' bandwidth.
+ *
+ * Honesty notes:
+ *  - Byte counts are payload bytes plus a [OVERHEAD] allowance for TLS/HTTP framing, so the data cap is conservative;
+ *    they are still estimates, and bytes already in flight when a transfer is cut are not counted exactly.
+ *  - Before measuring, the test checks that its traffic really leaves through the VPN: the egress IP seen through the
+ *    default route must differ from the one seen through the physical network ([directIp]). If they match, the test did
+ *    not go through the tunnel and no result is returned.
+ *  - If the physical network changes during the test ([networkToken]), the result is discarded.
+ *  - These are Cloudflare's public speed-test endpoints; their availability and terms can change.
  */
 class HttpThroughputTester(
     private val base: String = "https://speed.cloudflare.com",
+    /** Egress IP seen when bypassing the VPN (bound to the physical network), or null if unavailable. */
+    private val directIp: (() -> String?)? = null,
+    /** Identifies the physical network in use; if it differs at the end of a test from the start, the result is discarded. */
+    private val networkToken: (() -> Long?)? = null,
 ) : ThroughputTester {
 
     override suspend fun run(server: io.github.geniusdevam.vpnapp.engine.Server, limits: TestLimits): ThroughputStats? =
@@ -34,14 +47,16 @@ class HttpThroughputTester(
         }
 
     private suspend fun measure(limits: TestLimits): ThroughputStats? {
-        delay(600) // let routes settle after the tunnel comes up
+        val token0 = networkToken?.invoke()
+        if (!awaitTunnelRoute()) return null // not (yet) routed through the VPN: refuse to report a number
         val idle = idleRtt() ?: return null
+        val budgetBytes = (limits.maxBytes / OVERHEAD).toLong()
 
         // ---- download ----
         val downBytes = AtomicLong(0)
         val stop = AtomicBoolean(false)
         val loaded = ArrayList<Double>()
-        val downBudget = (limits.maxBytes * 0.7).toLong()
+        val downBudget = (budgetBytes * 0.7).toLong()
         var downMbps = 0.0
         coroutineScope {
             val workers = (1..4).map {
@@ -83,19 +98,41 @@ class HttpThroughputTester(
         coroutineScope {
             (1..2).map {
                 async(Dispatchers.IO) {
-                    uploadLoop(upBytes) { (System.nanoTime() - upStart) / 1_000_000 >= upMs || upBytes.get() >= limits.maxBytes * 0.3 }
+                    uploadLoop(upBytes) { (System.nanoTime() - upStart) / 1_000_000 >= upMs || upBytes.get() >= budgetBytes * 0.3 }
                 }
             }.awaitAll()
         }
         val upSeconds = ((System.nanoTime() - upStart) / 1e9).coerceAtLeast(0.2)
         val upMbps = upBytes.get() * 8 / 1e6 / upSeconds
 
+        if (networkToken != null && networkToken.invoke() != token0) return null // Wi-Fi/cellular switched mid-test: the numbers mean nothing
         val loadedMedian = synchronized(loaded) { median(loaded) } ?: idle
         return ThroughputStats(
             downMbps = downMbps, upMbps = upMbps, idleRttMs = idle, loadedRttMs = loadedMedian,
-            bytesUsed = downBytes.get() + upBytes.get(),
+            bytesUsed = ((downBytes.get() + upBytes.get()) * OVERHEAD).toLong(),
         )
     }
+
+    /** Waits (up to ~6 s) until a request through the default route exits somewhere other than the phone's own connection. */
+    private suspend fun awaitTunnelRoute(): Boolean {
+        val direct = withContext(Dispatchers.IO) { directIp?.invoke() }
+        repeat(12) {
+            val seen = withContext(Dispatchers.IO) { egressIp() }
+            if (seen != null && (direct == null || seen != direct)) return true
+            delay(500)
+        }
+        return false
+    }
+
+    /** `ip=` from Cloudflare's trace endpoint: the address the internet sees for this request. */
+    private fun egressIp(): String? = try {
+        val c = open("$base/cdn-cgi/trace")
+        try {
+            if (c.responseCode != 200) null
+            else c.inputStream.use { it.readBytes() }.decodeToString().lineSequence()
+                .firstOrNull { it.startsWith("ip=") }?.substring(3)?.trim()?.takeIf { it.length in 3..45 }
+        } finally { c.disconnect() }
+    } catch (_: Exception) { null }
 
     private fun isStable(samples: List<Pair<Long, Long>>, nowMs: Long): Boolean {
         val window = samples.filter { it.first >= nowMs - 1_500 }
@@ -173,6 +210,8 @@ class HttpThroughputTester(
         c.setRequestProperty("User-Agent", "VPN-App/1 (Android)")
         return c
     }
+
+    private companion object { const val OVERHEAD = 1.06 }
 
     private fun median(v: List<Double>): Double? {
         if (v.isEmpty()) return null

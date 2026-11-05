@@ -81,6 +81,14 @@ class RunService : Service() {
             PhaseId.CONNECTING -> "Connecting to ${r.connectingTo?.id ?: "the best server"}…"
             else -> "Best Connect…"
         }
+        RunMode.WORLDWIDE -> r.search?.let { p ->
+            (if (p.paused) "Paused. " else "") + when (p.phase) {
+                io.github.geniusdevam.vpnapp.engine.SearchPhase.SPEED_TESTING, io.github.geniusdevam.vpnapp.engine.SearchPhase.CONFIRMING ->
+                    "Worldwide search: speed-tested ${p.speedTested}, ${p.bytesUsed shr 20} MB used"
+                io.github.geniusdevam.vpnapp.engine.SearchPhase.CONNECTING -> "Connecting to the best server found…"
+                else -> "Worldwide search: probed ${p.probed} of ${p.poolSize} servers"
+            }
+        } ?: "Worldwide search…"
         RunMode.MANUAL -> "Connecting to ${r.connectingTo?.id ?: "server"}…"
     }
 

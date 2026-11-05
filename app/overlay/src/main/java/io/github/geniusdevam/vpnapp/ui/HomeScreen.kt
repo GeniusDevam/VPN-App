@@ -75,7 +75,7 @@ fun HomeScreen(withVpnPermission: (() -> Unit) -> Unit) {
         item {
             ModeCard(
                 title = "Quick Connect",
-                subtitle = "Connects to the fastest server it can find in 35 seconds or less.",
+                subtitle = "Connects to a fast server in 35 seconds or less. It compares response times of a sample of servers, so the pick is an estimate; it does not measure speed.",
                 scopeText = settings.quickScope,
                 busy = busy,
                 running = ui.run?.mode == RunMode.QUICK,
@@ -87,7 +87,7 @@ fun HomeScreen(withVpnPermission: (() -> Unit) -> Unit) {
         item {
             ModeCard(
                 title = "Best Connect",
-                subtitle = "Takes its time: scans every server and speed-tests the best ones to find the fastest.",
+                subtitle = "Takes its time: probes every server in the chosen country, speed-tests the best ones, and connects to the fastest it measured.",
                 scopeText = settings.bestScope,
                 busy = busy,
                 running = ui.run?.mode == RunMode.BEST,
@@ -97,16 +97,11 @@ fun HomeScreen(withVpnPermission: (() -> Unit) -> Unit) {
                 onStart = { withVpnPermission { Session.startBest() } },
             ) { run -> BestProgress(run, now) }
         }
+        item { WorldwideCard(ui, now, withVpnPermission) }
         ui.lastReport?.let { r ->
             item { TextButton(onClick = { showReport = true }) { Text("View last Best Connect results") } }
         }
-        item {
-            val age = if (Repo.serversFetchedAt > 0) duration(now - Repo.serversFetchedAt) + " ago" else "not loaded yet"
-            Text(
-                "${servers.size} free servers from VPN Gate (list updated $age). Servers come and go; the list refreshes each time you connect.",
-                style = MaterialTheme.typography.bodySmall,
-            )
-        }
+        item { DirectoryCard(now) }
     }
 
     picker?.let { mode ->
@@ -144,17 +139,21 @@ private fun StatusCard(ui: SessionUi, now: Long, onDisconnect: () -> Unit) {
             Text(headline, style = MaterialTheme.typography.headlineSmall)
             if (working) {
                 Text(
-                    if (ui.run?.mode == RunMode.BEST) "Best Connect is testing servers. The VPN reconnects to each candidate in turn, so your traffic may briefly go outside the VPN until it finishes."
+                    if (ui.run?.mode == RunMode.BEST || ui.run?.mode == RunMode.WORLDWIDE) "Testing servers. The VPN reconnects to each candidate in turn, so your traffic may go outside the VPN, or through test servers, until it finishes."
                     else "Finding the fastest server…",
                     style = MaterialTheme.typography.bodyMedium,
                 )
             } else if (connected) {
                 v.server?.let { Text(serverTitle(it) + " · " + Countries.name(it.countryCode, fallback = it.countryName), style = MaterialTheme.typography.titleMedium) }
                 Text(
-                    "Encryption: ${v.cipher ?: "negotiated"}  ·  Session " + duration(now - (v.connectedAtMs ?: now)),
+                    "Encryption: ${if (v.cipherVerified && v.cipher != null) "${v.cipher} (verified)" else "not verified"}  ·  Session " + duration(now - (v.connectedAtMs ?: now)),
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 Text("↓ ${rate(v.rxRate)}   ↑ ${rate(v.txRate)}", style = MaterialTheme.typography.bodyMedium)
+                Text(
+                    "Leak protection: this app keeps the VPN interface up while it reconnects, but only Android's “Block connections without VPN” guarantees nothing leaks if the VPN drops (Settings > Kill switch).",
+                    style = MaterialTheme.typography.bodySmall,
+                )
                 Text(
                     "Run by a volunteer: avoid logging in to banking or other sensitive accounts.",
                     style = MaterialTheme.typography.bodySmall,
@@ -271,16 +270,19 @@ private fun ReportDialog(r: BestReport, onDismiss: () -> Unit) {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text("Winner: ${serverTitle(r.winner)}", style = MaterialTheme.typography.titleSmall)
                 Text(
-                    "${r.reason} Scanned ${r.scannedCount}, tested ${r.testedCount}, " +
+                    "${r.reason} Probed ${r.scannedCount} of ${r.poolSize} servers (${r.respondedCount} answered), speed-tested ${r.testedCount}, " +
                         "${megabytes(r.bytesUsed)} used, took ${duration(r.elapsedMs)}.",
                     style = MaterialTheme.typography.bodySmall,
                 )
+                r.marginOverRunnerUp?.let {
+                    Text("Margin over the runner-up: ${"%.0f".format(it * 100)}% (${r.winnerRuns} speed test${if (r.winnerRuns == 1) "" else "s"} of the winner). Speed varies from minute to minute; treat close results as ties.", style = MaterialTheme.typography.bodySmall)
+                }
                 LazyColumn {
                     items(r.entries.take(10)) { e ->
                         val t = e.throughput
                         Text(
                             "${Countries.flag(e.server.countryCode)} ${e.server.id}: " +
-                                (if (t != null) "↓ ${"%.0f".format(t.downMbps)} ↑ ${"%.0f".format(t.upMbps)} Mbps, ${"%.0f".format(t.idleRttMs)} ms, ${e.cipher ?: "?"}" else "-"),
+                                (if (t != null) "↓ ${"%.0f".format(t.downMbps)} ↑ ${"%.0f".format(t.upMbps)} Mbps, ${"%.0f".format(t.idleRttMs)} ms, ${e.cipher ?: "cipher not verified"}" else "-"),
                             style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier.padding(vertical = 2.dp),
                         )
