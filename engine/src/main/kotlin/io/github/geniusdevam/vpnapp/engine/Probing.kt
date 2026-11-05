@@ -26,6 +26,8 @@ internal class ProbeBoard(
     }
 
     @Synchronized fun markDone(server: Server) { done.add(server.id) }
+    /** Start a new pass over a subset: progress counts restart, samples are kept. */
+    @Synchronized fun resetProgress() { done.clear() }
     @Synchronized fun doneCount(): Int = done.size
     @Synchronized fun responded(): Int = samples.values.count { l -> l.any { it != null } }
 

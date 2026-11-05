@@ -9,7 +9,7 @@ data class ScoringConfig(
     val sessionPenaltyMs: Double = 30.0,
     val sessionSaturation: Double = 50.0,
     val tcpPenaltyMs: Double = 15.0,
-    val fallbackProbePenaltyMs: Double = 20.0,
+    val fallbackProbePenaltyMs: Double = 60.0,
 )
 
 object Scoring {
