@@ -2,7 +2,17 @@ package io.github.geniusdevam.vpnapp.engine
 
 enum class Transport { UDP, TCP }
 
-enum class ProbeMethod { OPENVPN_UDP_RESET, TCP_CONNECT, TCP_FALLBACK, NONE }
+enum class ProbeMethod(val confidence: ProbeConfidence) {
+    /** A real OpenVPN hard-reset round trip: the VPN service itself answered. */
+    OPENVPN_UDP_RESET(ProbeConfidence.HIGH),
+    /** TCP handshake with the VPN port: the port is open, but the OpenVPN service may still be dead. */
+    TCP_CONNECT(ProbeConfidence.MEDIUM),
+    /** UDP relay that needs tls-auth/crypt: we only reached TCP 443 on the same host. This says the HOST is up, nothing about the VPN service. */
+    TCP_FALLBACK(ProbeConfidence.LOW),
+    NONE(ProbeConfidence.NONE),
+}
+
+enum class ProbeConfidence { HIGH, MEDIUM, LOW, NONE }
 
 /** One VPN Gate relay. [config] is the raw, UNTRUSTED OpenVPN config; always pass it through [ConfigSanitizer]. */
 data class Server(
@@ -100,7 +110,9 @@ data class ConnectResult private constructor(
 
 data class ProbeSample(val rttMs: Double?, val method: ProbeMethod)
 
-data class Ranked(val server: Server, val latency: LatencyStats, val q: Double)
+data class Ranked(val server: Server, val latency: LatencyStats, val q: Double) {
+    val confidence: ProbeConfidence get() = latency.method.confidence
+}
 
 data class TestLimits(val maxBytes: Long, val maxDownMs: Long = 6_000, val maxUpMs: Long = 3_000)
 
@@ -125,6 +137,8 @@ sealed interface EngineEvent {
         val planned: Int,
         val bytesUsed: Long,
     ) : EngineEvent
+    /** Progress of the worldwide search: see [SearchProgress]. */
+    data class Search(val progress: SearchProgress) : EngineEvent
 }
 
 data class BestEntry(
@@ -137,14 +151,44 @@ data class BestEntry(
 
 enum class FailReason { NO_SERVERS_IN_SCOPE, COULD_NOT_CONNECT, TIMEOUT }
 
+/** How Quick Connect arrived at its pick. Quick Connect is always approximate: it compares latency of a subset, within a time budget. */
+data class SelectionInfo(
+    /** Relays in the chosen scope that passed policy. */
+    val poolSize: Int,
+    /** How many of them were probed. */
+    val probed: Int,
+    /** How many answered. */
+    val responded: Int,
+    /** True when the pick rests on weaker evidence than a direct VPN-service probe (see [ProbeConfidence.LOW]). */
+    val lowConfidence: Boolean,
+    val approximate: Boolean = true,
+)
+
 sealed interface QuickOutcome {
-    data class Connected(val server: Server, val cipher: String?, val cipherVerified: Boolean, val elapsedMs: Long) : QuickOutcome
+    data class Connected(
+        val server: Server, val cipher: String?, val cipherVerified: Boolean, val elapsedMs: Long,
+        val selection: SelectionInfo = SelectionInfo(0, 0, 0, false),
+    ) : QuickOutcome
     data class Failed(val reason: FailReason, val restore: Server?) : QuickOutcome
 }
 
 sealed interface BestOutcome {
     data class Connected(val report: BestReport, val cipher: String?, val cipherVerified: Boolean) : BestOutcome
     data class Failed(val reason: FailReason, val restore: Server?, val report: BestReport?) : BestOutcome
+}
+
+/** What the result of a Best/worldwide run may honestly be called. */
+enum class BestClaim {
+    /** Every relay in scope was latency-probed, the leaders were speed-tested repeatedly, and the winner's margin was decisive. */
+    BEST_OF_TESTED_CONFIRMED,
+    /** Best of the relays that were speed-tested; the margin over the runner-up was small or unconfirmed. */
+    BEST_OF_TESTED,
+    /** Only part of the relays in scope could be probed. */
+    PARTIAL_COVERAGE,
+    /** The user ended the run early. */
+    EARLY_FINISH,
+    /** No speed test could run; chosen by latency alone. */
+    LATENCY_ONLY,
 }
 
 data class BestReport(
@@ -155,4 +199,13 @@ data class BestReport(
     val bytesUsed: Long,
     val elapsedMs: Long,
     val reason: String,
+    /** Relays in scope that passed policy (the denominator for coverage). */
+    val poolSize: Int = scannedCount,
+    /** Relays that answered at least one probe. */
+    val respondedCount: Int = 0,
+    val claim: BestClaim = BestClaim.BEST_OF_TESTED,
+    /** (winner score - runner-up score) / winner score; null with fewer than two tested relays. */
+    val marginOverRunnerUp: Double? = null,
+    /** Number of speed-test runs behind the winner's numbers (more runs, steadier numbers). */
+    val winnerRuns: Int = 0,
 )

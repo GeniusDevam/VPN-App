@@ -75,6 +75,10 @@ class QuickConnectEngine(
             emit,
         )
         val ranked = board.ranked()
+        val info = SelectionInfo(
+            poolSize = pool.size, probed = candidates.size, responded = board.responded(),
+            lowConfidence = ranked.take(cfg.tryTop).any { it.confidence == ProbeConfidence.LOW },
+        )
         ranked.forEach { history.recordLatency(it.server.id, ctx.fingerprint, it.latency) }
 
         val order: List<Server> =
@@ -94,7 +98,7 @@ class QuickConnectEngine(
                 remaining - cfg.connectMarginMs,
             )
             when (val r = gate.connect(s, timeout)) {
-                is GateResult.Open -> return QuickOutcome.Connected(s, r.admitted.cipher, r.admitted.cipherVerified, clock.nowMs() - start)
+                is GateResult.Open -> return QuickOutcome.Connected(s, r.admitted.cipher, r.admitted.cipherVerified, clock.nowMs() - start, info)
                 is GateResult.Refused -> Unit // reputation and history were updated by the gate; try the next server
             }
         }
