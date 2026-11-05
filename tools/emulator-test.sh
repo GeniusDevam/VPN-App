@@ -185,15 +185,27 @@ if has_text "Quick Connect" && has_text "Best Connect"; then ok "home screen sho
 # ---- split-tunnel app picker without QUERY_ALL_PACKAGES (manifest audit, finding B10) -------------------------------------
 # The permission was removed and replaced by a narrow launcher <queries> entry. Prove the picker still lists apps.
 log "split-tunnel app picker"
-if tap_text "Settings" && sleep 2 && tap_nth "Apps that skip the VPN" 1; then
+tap_text "Settings" || true; sleep 2
+found=""
+for i in $(seq 1 10); do        # the button is below the fold on the long Settings screen: scroll like a user
+  dump; xy=$(find_nth "^Apps that skip the VPN \\(" 1)
+  if [ -n "$xy" ]; then log "tap app-picker button at $xy"; adb shell input tap $xy; found=yes; break; fi
+  adb shell input swipe 540 1900 540 700 300; sleep 1
+done
+if [ -n "$found" ]; then
   n=""
   for i in $(seq 1 10); do sleep 2; dump; n=$(text_nth "[0-9]+ apps can be excluded" 1 | grep -o '^[0-9]*'); [ -n "$n" ] && break; done
   shot 02a-app-picker
   if [ -n "$n" ] && [ "$n" -ge 3 ]; then ok "app picker lists $n apps without QUERY_ALL_PACKAGES"
   else hard "app picker lists no apps (package visibility broken by the manifest change?) [count='${n:-none}']"; fi
-  tap_text "Cancel" || adb shell input keyevent KEYCODE_BACK; sleep 1
-  tap_text "Home" || true; sleep 2
-else hard "could not open the app picker from Settings"; fi
+  tap_text "Cancel" || adb shell input keyevent KEYCODE_BACK
+  sleep 1
+else
+  shot 02a-app-picker-missing; hard "could not find the app-picker button on the Settings screen"
+fi
+# Whatever happened above, go back to Home so one failed check cannot make every later check fail too.
+tap_text "Home" || true; sleep 2; dump
+has_text "Quick Connect" || { adb shell am start -n $PKG/.MainActivity >/dev/null; sleep 5; }
 
 # ---- A2/D3: the real country picker, in the real UI ----------------------------------------------------------------
 log "country picker"
