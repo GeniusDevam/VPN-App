@@ -4,9 +4,12 @@
 **Facts established this session**
 * The app reads one endpoint, `https://www.vpngate.net/api/iphone/` (the website's "CSV" link points at the same place). It returns
   only rows that carry an embedded OpenVPN profile; the app parses and counts exactly those.
-* Earlier emulator runs (project history) saw roughly 100 profiles per download, about 84% TCP, all `AES-128-CBC`. Those numbers
-  were not re-measured here: **vpngate.net is unreachable from the sandbox this work was done in** (the proxy answers 403), so no
-  live count, no mirror probing and no comparison with the website total could be done.
+* **Measured live on 2026-11-05** (CI runner, workflow `vpngate-check`): one download held **96 OpenVPN profiles** (90 TCP, 6 UDP), all
+  `AES-128-CBC`, all with an embedded certificate, **none** with tls-auth/tls-crypt. In the emulator the app's pooled view (union of
+  recent downloads) showed **98 usable** servers; Japan 53, South Korea 31, Thailand 4, United States 4, and one each in India, Mexico,
+  Romania, Russia, Taiwan and Vietnam (the emulator also once showed Austria). Before this work the figure was about 100, so **coverage
+  did not increase**: the union added only about 2. No mirror was probed (vpngate.net is unreachable from the authoring sandbox, which
+  only has CI access to it), so no comparison with the website's advertised total (thousands, mostly SoftEther/L2TP-only) is possible.
 * VPN Gate states that the public list is deliberately partial. **No complete or documented "full API" is known, and none is used.**
   Nothing in the app bypasses a limit: one polite request at a time, at most every 10 minutes, exponential back-off up to 1 hour,
   `Retry-After` honoured, 429/503 treated as "slow down".
@@ -55,7 +58,9 @@ operator; at most 8 are kept per relay.
 
 ## A2 and A3. Selection
 * **Quick Connect** (per-mode country, never falls back to another country, 35 s budget): probes a prioritised sample, then connects.
-  The banner says how many were checked and answered, and that this is a latency estimate, not a speed test. Probes of weak
+  The banner says how many were checked and answered, and that this is a latency estimate, not a speed test. Emulator evidence: a
+  country-bound Quick Connect connected in 25 s inside the chosen country, and another attempt for a country with a single volunteer relay
+  failed honestly in 32 s with a message naming that country. Probes of weak
   quality (a UDP relay with tls-auth/crypt can only be checked with TCP 443, which shows the host is up, not the VPN service) are
   penalised 60 ms and flagged. The budget is also enforced by a watchdog on the elapsed-realtime clock, because coroutine timers
   stop while the CPU sleeps.

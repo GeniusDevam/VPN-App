@@ -26,7 +26,7 @@ Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated;
 | Item | Status | Evidence / caveat |
 |---|---|---|
 | A1 directory coverage | **Best compliant effort, no measured gain.** One official HTTPS endpoint (`/api/iphone/`), 72 h union pool, polite refresh, diagnostics, stale-cache fallback. | Live: **96 rows, 90 TCP + 6 UDP, all AES-128-CBC** in one download; pooled view in the emulator showed **98 usable** (union added 2). The "before" figure was about 100. **No increase.** The list is deliberately partial; no mirror or hidden endpoint was used or found. Total advertised relays (thousands) are mostly SoftEther/L2TP-only and not OpenVPN-usable through this API. |
-| A2 fastest in a chosen country | **Built; picker verified in the real UI.** | Emulator run 21: picker opened, showed real counts (Japan 53, South Korea 31, ...), country applied to Quick only (Best stayed on Any), persisted across process death. Scope is enforced in `PoolSelection`; tests prove no other country is ever probed or connected. A country-bound live *connection* is not yet demonstrated (India had 1 server; its attempt failed honestly in 32 s). |
+| A2 fastest in a chosen country | **Built; verified in the real UI and with a live connection.** | Emulator runs 21-22: picker opened with real counts (Japan 53, South Korea 31, ...), the choice applied to Quick only (Best stayed on Any) and persisted across process death. **Run 22: Quick Connect inside the chosen country (Austria) connected in 25 s and the status card showed that country.** Run 21: India (1 server) failed honestly in 32 s with a message naming India. Scope is enforced in `PoolSelection`; tests prove no other country is ever probed or connected. Note "fastest" here is a latency estimate for Quick and a measured throughput for Best; most countries have 1 server, so there is nothing to rank. |
 | A3 optional global search | **Built and engine-tested; not exercised live.** | `GlobalSearchEngine` tests (batching, budgets, pause/finish/cancel, resume). Consent dialog, foreground service, metered/battery guards exist. No emulator or device run of the worldwide search; background survival under Doze/process kill is **NOT TESTED**. |
 | A4 history + 7-day absence | **Fixed.** | `LedgerAndDirectoryTest` (absence counted only on usable listings, 36 h cap per listing, failed fetch never advances it, old measurements never deleted). New per-server history lines (`RecordSummary`, 7 tests). Encrypted at rest; clear-history in Settings. |
 
@@ -37,7 +37,7 @@ Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated;
 | B2 server identity | **Fixed, live-checked** | Real OpenVPN: genuine cert connects; wrong name / wrong EKU / untrusted CA rejected; control without policy accepts the wrong name (CI, 7/7, OpenVPN 2.7.0). **Live relays: 15/24 connected with the policy and 15/24 without; every relay that reached TLS presented `CN=opengw.net`.** Residual: authenticates VPN Gate's software, not an individual volunteer. |
 | B3 HTTP fallback | **Fixed** | HTTPS only; cleartext disabled app-wide. |
 | B4 leak protection | **Not guaranteed by an app; documented.** | `persist-tun`, IPv6 blocking, forced DNS. Always-on + "Block connections without VPN" were **not tested** (no device). Probe sockets bypass the tunnel by design. |
-| B5 disconnect vs restore | **Fixed** | `RunCoordinator` + epoch guard; deterministic and 500-seed tests. This session closed two remaining paths (Quick watchdog timeout, generic exception). The emulator test asserts a disconnect stays down for 20 s (not yet reached in a run that connected). |
+| B5 disconnect vs restore | **Fixed** | `RunCoordinator` + epoch guard; deterministic and 500-seed tests. This session closed two remaining paths (Quick watchdog timeout, generic exception). **Run 22 (emulator): after an explicit Disconnect the VPN stayed down for 20 s.** |
 | B6 cipher policy | **Fixed** | One gate for every path; declared cipher never reported as verified. Added a bounded wait for the negotiated-cipher log line so a good tunnel is not shown as unverified. Live: every connection negotiated AES-128-CBC/SHA1. |
 | B7 compression | **Fixed** (removed) | Source reading plus real-OpenVPN acceptance. |
 | B8 validation | **Fixed** | Address matrix, 600-seed sanitizer fuzz, CSV fuzz. |
@@ -51,7 +51,7 @@ Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated;
 | C2 false "scan every server" | **Fixed** | No silent 400 cap; coverage and confidence claims carried in reports. |
 | C3 probe comparability | **Improved** | tls-auth relays get an HMAC-signed reset with verified reply (real OpenVPN: answered; wrong key not). tls-crypt still weak TCP fallback (penalised, labelled). |
 | C4 speed-test cost | **Mitigated** | Tunnel-egress check, overhead allowance, caps. Real device cost not measured. |
-| C5 honest 35 s | **Partly verified** | Engine proof in virtual time; watchdog on elapsed-realtime. Emulator: a country-bound attempt ended with an honest failure at 32 s. Success timing on a good run was 8-10 s in earlier emulator runs. |
+| C5 honest 35 s | **Partly verified** | Engine proof in virtual time; watchdog on elapsed-realtime. Emulator: a country-bound success took 25 s from the tap (run 22, includes the VPN consent dialog and a cold list), and a country-bound failure ended honestly at 32 s (run 21). Earlier any-country runs connected in 8-10 s. Wall-clock on a real phone and network: not measured. |
 | C6 reputation | **Fixed** (unit-tested) | |
 | C7 atomicity / ordering | **Fixed** | `PersistenceTest`: crash between temp write and commit keeps old file; 30 rounds x 400 racing saves always end on the newest. The old design reordered writes in 30/30 rounds. Keystore failure / power loss **NOT TESTED**. |
 | C8 lifecycle | **Partly** | Tile and service logic reviewed. **Open:** after the app process is killed while the VPN stays up, the UI may show "Connected" without the server/cipher (not reconstructed). Not tested on a device. |
@@ -61,7 +61,7 @@ Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated;
 ### D. CI and release
 | Item | Status |
 |---|---|
-| D1 tests fail when behaviour fails | **Fixed (new)**: emulator exit 0/1/3 = PASS/FAIL/INCONCLUSIVE; the job is no longer `continue-on-error`; the release needs it and prints the verdict in its notes. INCONCLUSIVE is a warning, never success. |
+| D1 tests fail when behaviour fails | **Fixed (new)**: emulator exit 0/1/3 = PASS/FAIL/INCONCLUSIVE; the job is no longer `continue-on-error`; the release needs it and prints the verdict in its notes. INCONCLUSIVE is a warning, never success. Both PASS and INCONCLUSIVE have now been produced by real runs; a FAIL verdict path has not been exercised on the live job (the script's hard-failure branches were exercised only by the onboarding bug in an earlier run). |
 | D2 supply chain | **Mitigated**: least-privilege permissions, secret-only signing, versioned releases with checksum and attestation. **Open:** action SHA pinning; branch protection / protected environment (owner). |
 | D3 tests | See section 5. |
 | D4 physical device | **NOT TESTED.** |
@@ -78,14 +78,18 @@ Widget, shortcuts, auto-failover, easier Always-on setup, optional Tor, backgrou
 | Run | Verdict | Notes |
 |---|---|---|
 | 19 (`d06b27a`) | reported green by the old script | Could not find the onboarding button; no connection was tested. |
-| 21 (`af4d543`) | **INCONCLUSIVE**, 6 assertions passed, 0 failed | Passed: both modes shown, picker opens, list loaded, per-mode scope, persistence across process death, honest failure names the country. Inconclusive: no relay in India (1 server) accepted the connection in 32 s. |
-| 23 (`28193da`) | *see the repository's `emulator-results` branch / Actions summary* | Uses the largest country and retries with Any country. |
+| 21 (`af4d543`) | **INCONCLUSIVE**, 6 assertions passed, 0 failed | Both modes shown, picker opens, list loaded, per-mode scope, persistence across process death, honest failure naming the country. Inconclusive: the single relay in India did not answer within 32 s. |
+| 22 (`9334d79`) | **PASS** (9 assertions, 0 failed, 0 inconclusive) | The above, plus: Quick Connect connected in 25 s, the connected server was in the chosen country (Austria), an explicit disconnect stayed down for 20 s, and Best Connect finished with a named winner. (This run's overall CI status was still red because of the probe-test harness bug fixed in `28193da`; the emulator job itself passed.) |
+| 23 (`28193da`) / 24 (`a8ed64d`) | *pending when this was written* | First runs with the fixed probe step and the "largest country, then Any country" emulator script. Check the Actions tab and the `emulator-results` branch. |
+
+One PASS and one INCONCLUSIVE out of two runs with real assertions is **not** a reliability figure; live volunteers vary from run to run.
 
 ## 5. Test matrix
 * Engine unit tests (JVM): **129**, all passing locally and in CI. New this session: persistence 7, pool/failure reasons 8+5, record summary 7, tls-auth probe 6.
-* Real OpenVPN in CI: relay-identity 7/7 (OpenVPN 2.7.0); tls-auth probe 4/4 locally on 2.6.19 (CI run pending after a harness fix: the step ran Gradle as a different user than the previous root-owned step).
+* Real OpenVPN in CI: relay-identity 7/7 (OpenVPN 2.7.0, runs 19-22). tls-auth probe: 4/4 locally on 2.6.19; its first CI run failed for a harness reason (the step ran Gradle as a different user than the previous root-owned step, and hid the error); fixed in `28193da`, CI result pending.
 * Live OpenVPN against VPN Gate (workflow `vpngate-check`): see section 3.
 * Emulator UI assertions: section 4.
+* Documentation: README, PLAN.md (status table and dated notes on every superseded passage), SECURITY, DIRECTORY, AUDIT and RELEASE_SIGNING were updated to match; the plan's original text is kept and annotated.
 * Not covered: country picker with zero or stale directory in the UI (engine state logic is unit-tested, the screens are not), worldwide search, Quick Settings tile, notification actions, process recreation with the VPN up, network switching, screen-off, Doze, Always-on / lockdown, split tunnelling, IPv6/DNS leaks, updates, TalkBack.
 
 ## 6. Physical-device checklist (all NOT TESTED)

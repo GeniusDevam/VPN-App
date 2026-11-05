@@ -2,12 +2,12 @@
 
 > **Audience:** the agent that will implement this app.
 > **Owner's device:** Android 16 smartphone. The app is sideloaded first; Google Play later is optional.
-> **Status:** plan only. No code exists yet. Work through the milestones in §17 in order.
+> **Status:** the plan has been implemented; this file is the original design plus dated notes where the build differs. **The code and `docs/HANDOFF_STATUS.md` win over any statement here.** Last updated 2026-11-05.
 
 The owner asked for "the best VPN app available" with two connection modes:
 
 1. **Quick Connect.** Connects to the fastest server it can find, and is connected within **35 seconds** of the tap.
-2. **Best Connect.** Takes as long as it needs to find the truly fastest server, then connects.
+2. **Best Connect.** Takes as long as it needs to find the fastest server *it can measure* (it reports how much it covered and how confident it is; it never claims a proven global winner), then connects.
 
 In **each** mode the user can choose a **country**: "Any country" or one specific country. The two modes remember their country choice separately.
 
@@ -23,8 +23,13 @@ The app was built from this plan. Where the build differs, the code wins:
 | Probe sockets excluded from the tunnel (§6.2) | Probe sockets are bound to the physical network (`Network.bindSocket`), so they bypass an active tunnel. |
 | Cipher shown from negotiated data channel | Parsed from the engine log; falls back to the cipher declared in the server config. |
 | Widget, app shortcuts, auto-failover, background pre-scan, mirror URLs, Always-on action, results history, Tor mode | **Not implemented.** Quick Settings tile, notification progress, split tunneling (apps that skip the VPN), DNS choice, Strong/Compatible encryption mode, favorites and "report & avoid" are implemented. |
-| Hardening pass (review findings A1-C5) | See `docs/`: ledger with 7-day observed-absence retention, HTTPS-only directory pool with diagnostics, relay-identity policy (system-trusted roots + `remote-cert-tls server` + `verify-x509-name opengw.net`), no compression, one encryption gate for every connection path, `RunCoordinator` (disconnect/cancel races), honest Quick/Best claims, optional worldwide search, secret-based signing with provenance, redacted CI publishing. Implemented in the engine with tests; the Android layer is CI-compiled only. |
-| On-device verification (§19) | **Partly done.** Every push is built, signed, and run in an Android 16 (API 36) emulator in CI against live VPN Gate servers: onboarding, the VPN permission, Quick Connect (connected in 8-10 s) and Best Connect (7 speed tests, then connected). Not done: a real phone, mobile data, Always-on lockdown, long sessions, switching networks. Findings so far: VPN Gate currently lists ~100 servers (84% TCP, all `AES-128-CBC`, so "Strong only" matches none), and its list is reachable over HTTPS. |
+| Hardening pass (review findings A1-C5) | See `docs/`: ledger with 7-day observed-absence retention, HTTPS-only directory pool with diagnostics, relay-identity policy (system-trusted roots + `remote-cert-tls server` + `verify-x509-name opengw.net`), no compression, one encryption gate for every connection path, `RunCoordinator` (disconnect/cancel races), honest Quick/Best claims, optional worldwide search, secret-based signing with provenance, redacted CI publishing. Engine behaviour is unit-tested; the Android layer is verified by CI builds and the emulator test below. |
+| Persistence (§13.1) | `AtomicFiles` (fsync + atomic rename, the old file is never deleted first) and `LatestWinsWriter` (one ordered, coalescing writer per file, so an older snapshot can never overwrite a newer one). The earlier Mutex-per-save design reordered writes in 30 of 30 rounds of the race test. |
+| Why a run can fail (§8, §10, §11) | Three distinct outcomes, never merged: *server list could not be loaded*, *no server in the chosen country*, *servers exist but your settings exclude them* (`PoolSelection`). The country picker shows loading / unavailable / stale / empty states and keeps a chosen-but-empty country visible. The scope is never widened. |
+| Latency probes (§7.1) | UDP relays with an inline `tls-auth` key are now probed with an HMAC-signed hard reset whose reply HMAC is verified (checked against real OpenVPN). `tls-crypt` relays still use the weak TCP-443 fallback, penalised and labelled. No ICMP fallback was built. |
+| History (§5.4, §7.4, §13.1) | One permanent encrypted ledger per server (counts, last success, connect time, cipher, per-network latency/throughput, last seen). The **only** deletion rule is the seven-day observed-absence rule (see `docs/DIRECTORY.md`); old measurements are down-weighted (3-day half-life), never deleted for age. Shown per server on the Servers screen. |
+| Release engineering (§15.2) | No committed keystore. Real releases are signed only with encrypted secrets; everything else with a throw-away key. Versioned releases with checksum and attestation. The emulator job now decides **PASS / FAIL / INCONCLUSIVE** (exit 0 / 1 / 3); FAIL blocks the release, INCONCLUSIVE is a warning and is written into the release notes. |
+| On-device verification (§19) | **Partly done; no physical device was used.** Every push is built and run in an Android 16 (API 36, x86_64) emulator against live VPN Gate servers. Best run so far (run 22): the country picker, a country-bound Quick Connect (connected in 25 s, inside the chosen country), a disconnect that stayed down for 20 s, and a Best Connect with a named winner. Other runs ended INCONCLUSIVE when the chosen country's single volunteer did not answer. **Not done:** a real phone, mobile data, Always-on lockdown, long sessions, switching networks, the worldwide search, process kill while connected. Live directory (2026-11-05): 96 OpenVPN profiles in one download (90 TCP, 6 UDP), all `AES-128-CBC` ("Strong only" matches none), none using tls-auth/tls-crypt; 15/24 sampled relays connected with and without the identity policy. |
 
 ### Owner decisions (already made)
 - **Servers:** free volunteer servers from the **VPN Gate** network (University of Tsukuba academic project). There are no paid subscriptions and no owner-run servers.
@@ -190,6 +195,7 @@ Rules:
 - **Endpoint:** `https://www.vpngate.net/api/iphone/`.
   - Community clients use plain `http://`. **Try HTTPS first.** Fall back to HTTP only if HTTPS does not work, and record which one works in `docs/verification.md`.
   - When on HTTP, treat the list as untrusted input. The sanitizer (§5.3) and the reputation system (§5.4) still apply. If the user is already connected, fetch the list **through the current tunnel** so a local attacker cannot tamper with it.
+  - > **Superseded:** HTTPS works (confirmed live, 96 rows), so the HTTP fallback was **removed** and cleartext is disabled app-wide. If HTTPS fails the app serves its cached pool and says so. Nothing is fetched through the tunnel specially. The list is still treated as untrusted (sanitizer + relay-identity policy).
 - **Format:** CSV.
   - The first line is `*vpn_servers`, the header line starts with `#HostName,…`, and the last line is `*`.
   - Columns: `HostName, IP, Score, Ping, Speed, CountryLong, CountryShort, NumVpnSessions, Uptime, TotalUsers, TotalTraffic, LogType, Operator, Message, OpenVPN_ConfigData_Base64`.
@@ -202,6 +208,7 @@ Rules:
   - Send a descriptive `User-Agent` (`VPN-App/<version> (Android)`) with no personal data.
   - Read and respect VPN Gate's terms and anti-abuse policy.
 - **Mirrors (Should):** VPN Gate publishes mirror sites for regions where the main site is blocked. Allow a configurable list of mirror base URLs in Advanced settings.
+  - > **Not implemented.** No verified HTTPS mirror address was available, and a mirror may simply serve the same partial list. The pipeline is source-agnostic (`DirectoryProcessor`), so adding one is small. The list VPN Gate serves is deliberately partial: the app merges recent downloads (72 h) and reports how many usable servers it really has, not how many exist.
 - **Volatility:** the list changes constantly. Servers are often home PCs and come and go hourly, and country coverage is uneven, with many servers in Japan and Korea. The UI must say "available now" and failover must be robust.
 
 ### 5.2 Mapping to `Server`
@@ -308,12 +315,13 @@ Choose the method by the server's transport.
   ```
 - **Valid reply:** the first byte `>> 3 == 8` (`P_CONTROL_HARD_RESET_SERVER_V2`), and the echoed remote session id in the ACK section equals ours. The RTT is from send to receive (`System.nanoTime()`).
 - **Configs with `tls-auth` or `tls-crypt`:** the server will not answer an unauthenticated reset. Use the fallback for those servers.
+  - > **Update:** for an inline `tls-auth` key the reset is now HMAC-signed with the profile's key (key-direction and `auth` digest honoured) and the reply's HMAC is verified (`TlsAuthKey`, `tools/probe-test.sh` against real OpenVPN). `tls-crypt` still uses the fallback. In the live list, 0 of 96 relays use either today.
 - This is the same well-known probe used by network scanners. The server discards the half-open session after its handshake window.
 
 **Fallbacks:**
-- ICMP via `/system/bin/ping -c 2 -W 1 <ip>`. Many home PCs drop ICMP.
+- ICMP via `/system/bin/ping -c 2 -W 1 <ip>`. Many home PCs drop ICMP. *(Not built.)*
 - For UDP servers, a TCP connect to 443 if the server also listens there (SoftEther often does).
-- Record the method used. Rank servers measured with a primary method above fallback-only results.
+- Record the method used. Rank servers measured with a primary method above fallback-only results. *(Built: TCP-443 fallback results are labelled low confidence and take a 60 ms penalty; a refusal there proves only that the host is up.)*
 
 **Scheduling rules:**
 - ≥ 250 ms between probes to the same server.
@@ -364,6 +372,7 @@ Choose the method by the server's transport.
   - `sessions`
   - Sessions are local only and can be cleared, and a setting disables session history.
 - **Priors:** an exponentially weighted average per (server, fp) with a 24 h half-life. VPN Gate servers change often, so history must expire gracefully.
+  - > **Superseded:** measurements are down-weighted with a 3-day half-life (floor 5%) but **never deleted for age**. A server's saved record is deleted only after it has been absent from successfully obtained, usable directory listings for seven days of observed time (failed fetches never count). Network fingerprints are salted hashes; at most 8 per server.
 - **User country**, used for prioritization only:
   - `TelephonyManager.networkCountryIso`, else the time zone region, else the locale region.
   - Map it to a centroid from the bundled table. No location permission.
@@ -424,6 +433,7 @@ quickConnect(scope, budget = 35.s):
 1. **Refresh the list.** Force a refresh (15 s timeout, falling back to the cache), filter by scope, remove blocked servers, apply the encryption policy.
 2. **Full latency scan.**
    - Probe **every** server in scope: 5 rounds, 400 ms apart per server, 1.5 s timeout, concurrency 48.
+     *(Built as a two-pass probe with no silent cap; a 3,000-server safety cap reports partial coverage if it ever applies. The result carries a claim such as "confirmed best of those tested" or "partial coverage", never "fastest overall".)*
    - Show "Scanned 87 / 143 servers" and the top 5 live.
    - Drop servers with loss > 40%.
 3. **Throughput tests (adaptive).**
@@ -678,14 +688,15 @@ docs/verification.md             # on-device findings
   1. `./gradlew :engine:test :probe:test :app:testDebugUnitTest :app:lintDebug :app:assembleRelease`
   2. The 16 KB alignment check.
   3. Upload the APK artifact.
-- **Job `probe-integration`** (ubuntu runner):
+- **Job `probe-integration`** (ubuntu runner; built as the `cert-policy` job, which runs `tools/cert-policy-test.sh` and `tools/probe-test.sh` against real OpenVPN):
   1. `sudo apt-get install -y openvpn easy-rsa`.
   2. Generate a throwaway PKI, and start OpenVPN servers on UDP 1194 and TCP 1195 (no tls-auth).
   3. Run `:probe:integrationTest`, asserting a valid hard-reset reply over UDP and TCP and a correct TCP-connect RTT.
-- **On tag `v*`:** create a GitHub Release with the signed APK.
+- **On tag `v*`:** create a GitHub Release with the signed APK. *(Built: on the default branch or a `v*` tag, only with the release key, only after the engine tests, the real-OpenVPN tests and the emulator verdict, as an immutable versioned release with checksum and attestation.)*
 - **Signing:**
   - Read the release keystore from secrets: `SIGNING_KEYSTORE_BASE64`, `SIGNING_STORE_PASSWORD`, `SIGNING_KEY_ALIAS`, `SIGNING_KEY_PASSWORD`.
   - If the secrets are missing, use a committed, clearly labelled **dev** keystore so updates install over each other. Switch to real secrets before sharing.
+  - > **Superseded (security finding B1):** a committed keystore with its passwords in the workflow made the signing identity public and compromised. It was removed. Now: real releases only with the encrypted secrets `RELEASE_KEYSTORE_B64`, `RELEASE_KEYSTORE_PASSWORD`, `RELEASE_KEY_ALIAS`, `RELEASE_KEY_PASSWORD`; every other build uses a throw-away key; with no secrets nothing is published. The owner must still create the key (`tools/generate-release-key.sh`) and delete the old public release. See `docs/RELEASE_SIGNING.md`.
 - **Cloud environment note:** the implementing agent's container may lack the Android SDK and NDK. Try installing them. If the network blocks it, rely on GitHub Actions, and read the job logs through the GitHub MCP actions tools. A milestone is not done until CI is green.
 
 ### 15.3 Installing on the owner's Android 16 phone
@@ -717,6 +728,8 @@ docs/verification.md             # on-device findings
   - Encrypted storage round-trips; the DB is unreadable without the Keystore key.
   - Room migrations, ViewModel state, Compose UI tests for the home cards and the country picker.
 - **Optional emulator tests in CI.** Pre-grant VPN consent with `adb shell appops set <pkg> ACTIVATE_VPN allow`.
+  - > **Built** (`tools/emulator-test.sh`, live VPN Gate, UI driven through uiautomator; the consent dialog is tapped rather than pre-granted). Asserts: both modes shown; the country picker opens and reports a loaded list; choosing a country changes Quick only; the choice survives process death; Quick Connect connects inside the chosen country (or fails with a message that names it); an explicit disconnect stays disconnected for 20 s; Best Connect names a winner; no crash. Exit 0 = PASS, 1 = FAIL (the app misbehaved), 3 = INCONCLUSIVE (live servers unreachable). Not covered: the worldwide search, the Quick Settings tile, notification actions, network switching, process kill while connected.
+  - Engine test count: 129 (including persistence ordering, pool/failure reasons, tls-auth probe, history text, disconnect races, 600-seed sanitizer fuzz).
 
 ### 16.2 Manual QA on the owner's phone (each release)
 - Onboarding, including the privacy disclosure.
@@ -742,6 +755,8 @@ docs/verification.md             # on-device findings
 ---
 
 ## 17. Milestones (implement in order)
+
+> **Milestone status (2026-11-05):** M0-M4 are built and CI-verified as described in `docs/HANDOFF_STATUS.md`; M2/M3/M4 acceptance on a *physical device* is **not done**. From M5: the Quick Settings tile, split tunneling, onboarding and kill-switch guidance exist; auto-failover, widget, shortcuts and an Always-on action do **not**. The `docs/verification.md` this plan asks for was never created; `docs/HANDOFF_STATUS.md`, `docs/DIRECTORY.md` and `docs/SECURITY.md` hold those findings.
 
 **M0: Scaffold and delivery pipeline**
 - Gradle multi-module skeleton, theme, navigation shell.
@@ -801,6 +816,7 @@ For each milestone:
   - Mitigation: disclose it, show per-server `LogType`, and offer the "prefer short retention" filter.
 - **The API is only available over HTTP, or is blocked in some countries.**
   - Mitigation: try HTTPS first, fetch through the tunnel when connected, sanitize configs, and support mirror URLs.
+  - *Outcome:* HTTPS works, so HTTP was removed. Blocked-country access and mirrors are not handled (no verified mirror).
 - **Many servers are slow home connections.**
   - Mitigation: reported-speed penalties and Best Connect's real throughput tests.
 - **OpenVPN connects more slowly than WireGuard.**
@@ -819,6 +835,8 @@ For each milestone:
 ---
 
 ## 19. Verify at implementation time (not confirmed while planning)
+
+> **Answers so far (2026-11-05, live CI against VPN Gate):** (1) HTTPS works; the CSV parses (96 rows in one download). (2) 90 TCP / 6 UDP; **0 of 96** use tls-auth/tls-crypt; the UDP hard-reset probe against SoftEther relays was not measured separately (UDP connects succeeded). (3) **0 of 96** negotiate AEAD (all `AES-128-CBC`); `remote-cert-tls server` plus `verify-x509-name opengw.net` is compatible: every relay that reached TLS presented `CN=opengw.net`, and 15/24 connected both with and without it. (4) The `vpn`/`vpn` login is supplied by the app and works (the configs carry no `auth-user-pass`). (5) ics-openvpn pinned by commit in `tools/ICS_OPENVPN_REF`. **Still unanswered:** 6 (switch gap, lockdown self-exclusion: needs a device), 7, 8 (speed-test endpoint terms), 9, and the version question in 10 beyond what `docs/AUDIT.md` records.
 
 1. Whether `https://www.vpngate.net/api/iphone/` works; the current CSV columns and format.
 2. The share of VPN Gate servers using UDP vs TCP, and using tls-auth/tls-crypt (which affects the UDP probe); whether SoftEther servers answer the UDP hard-reset probe.
