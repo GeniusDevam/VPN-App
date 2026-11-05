@@ -72,7 +72,7 @@ fun CountryPickerSheet(
             )
             LazyColumn(Modifier.weightedFill()) {
                 item {
-                    PickerRow("🌐  Any country — fastest overall", "${options.sumOf { it.serverCount }} servers", current == Scope.Any) {
+                    PickerRow("🌐  Any country (sample of all countries)", "${options.sumOf { it.serverCount }} servers", current == Scope.Any) {
                         onSelect(Scope.Any)
                     }
                     HorizontalDivider()

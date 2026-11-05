@@ -30,6 +30,7 @@ object VpnGateParser {
     const val MAX_INPUT_CHARS = 20_000_000
     private const val MAX_CONFIG_BYTES = 64 * 1024
     private const val MAX_ROWS = 200_000
+    private const val MAX_LINE_CHARS = 200_000
 
     private val isoCountries: Set<String> = Locale.getISOCountries().toSet()
     private val countryAlias = mapOf("UK" to "GB")
@@ -45,11 +46,17 @@ object VpnGateParser {
 
     fun parseDetailed(csv: String): ParseReport {
         if (csv.length > MAX_INPUT_CHARS) return ParseReport(emptyList(), 0, emptyMap(), oversize = true)
+        return parseDetailed(csv.lineSequence())
+    }
+
+    /** Streaming form: lines are consumed one at a time, so a large directory never has to exist as one String. */
+    fun parseDetailed(lines: Sequence<String>): ParseReport {
         val out = LinkedHashMap<String, Server>()
         val endpoints = HashSet<String>()
         val rejected = EnumMap()
         var rows = 0
-        for (raw in csv.lineSequence()) {
+        for (raw in lines) {
+            if (raw.length > MAX_LINE_CHARS) { rejected.inc(RowReject.OVERSIZE); rows++; continue }
             val line = raw.trim()
             if (line.isEmpty() || line.startsWith("*") || line.startsWith("#")) continue
             if (++rows > MAX_ROWS) break

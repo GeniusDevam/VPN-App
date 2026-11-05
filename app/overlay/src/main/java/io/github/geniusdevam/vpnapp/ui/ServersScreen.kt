@@ -61,7 +61,7 @@ fun ServersScreen(withVpnPermission: (() -> Unit) -> Unit) {
         }
         if (servers.isEmpty()) {
             Text(
-                "No servers yet. Tap Quick Connect or Best Connect on the Home tab and the list will load.",
+                "No servers yet. Open the Home tab and tap Refresh list, or just tap Quick Connect: the list loads over HTTPS from vpngate.net.",
                 modifier = Modifier.padding(top = 24.dp),
             )
         }
@@ -99,6 +99,16 @@ private fun ServerRow(
         Column(Modifier.weight(1f)) {
             Text((if (favorite) "★ " else "") + s.id + if (blocked) "  (avoided)" else "", style = MaterialTheme.typography.bodyLarge)
             Text(serverDetail(s), style = MaterialTheme.typography.bodySmall)
+            Repo.ledger.record(s.id)?.let { r ->
+                if (r.successCount + r.failureCount > 0) {
+                    Text(
+                        "✓ ${r.successCount} · ✗ ${r.failureCount}" +
+                            (r.dropRate?.let { " · dropped ${"%.0f".format(it * 100)}% of sessions" } ?: "") +
+                            (r.lastFailure?.let { " · last problem: ${it.name.lowercase().replace('_', ' ')}" } ?: ""),
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                }
+            }
         }
         Box {
             TextButton(onClick = { menu = true }) { Text("⋮") }
@@ -111,9 +121,9 @@ private fun ServerRow(
                     },
                 )
                 if (blocked) {
-                    DropdownMenuItem(text = { Text("Stop avoiding this server") }, onClick = { menu = false; Repo.reputation.unblock(s.id); Repo.saveLearning() })
+                    DropdownMenuItem(text = { Text("Stop avoiding this server") }, onClick = { menu = false; Repo.ledger.unblock(s.id); Repo.saveLearning() })
                 } else {
-                    DropdownMenuItem(text = { Text("Report & avoid this server") }, onClick = { menu = false; Repo.reputation.blockLong(s.id); Repo.saveLearning() })
+                    DropdownMenuItem(text = { Text("Report & avoid this server") }, onClick = { menu = false; Repo.ledger.blockLong(s.id); Repo.saveLearning() })
                 }
             }
         }

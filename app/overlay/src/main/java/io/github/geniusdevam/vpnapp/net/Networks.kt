@@ -28,13 +28,49 @@ object Networks {
             ?: all.firstOrNull()
     }
 
+    /** Stable identifier of the current physical network (changes when Wi-Fi/cellular switch). */
+    fun networkToken(ctx: Context): Long? = physicalNetwork(ctx)?.networkHandle
+
+    /** The address the internet sees for a request bound to the physical network (bypassing any VPN). Null if it cannot be determined. */
+    fun directEgressIp(ctx: Context, base: String = "https://speed.cloudflare.com"): String? = try {
+        val n = physicalNetwork(ctx) ?: throw IllegalStateException()
+        val c = n.openConnection(java.net.URL("$base/cdn-cgi/trace")) as java.net.HttpURLConnection
+        c.connectTimeout = 4_000; c.readTimeout = 4_000
+        try {
+            if (c.responseCode != 200) null
+            else c.inputStream.use { it.readBytes() }.decodeToString().lineSequence()
+                .firstOrNull { it.startsWith("ip=") }?.substring(3)?.trim()?.takeIf { it.length in 3..45 }
+        } finally { c.disconnect() }
+    } catch (_: Exception) { null }
+
     fun isMetered(ctx: Context): Boolean {
         val cm = cm(ctx)
         val n = physicalNetwork(ctx) ?: return cm.isActiveNetworkMetered
         return cm.getNetworkCapabilities(n)?.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED) != true
     }
 
-    /** Privacy-preserving id of the current network: no SSID, no location permission. */
+    @Volatile private var salt: ByteArray? = null
+
+    /**
+     * Random per-install secret mixed into the network fingerprint, so the stored hashes cannot be matched against
+     * hashes computed elsewhere (another device, a leaked file) and reveal where the phone has been.
+     * Stored in the encrypted vault; backups are disabled.
+     */
+    private fun salt(ctx: Context): ByteArray {
+        salt?.let { return it }
+        synchronized(this) {
+            salt?.let { return it }
+            val existing = io.github.geniusdevam.vpnapp.data.SecureVault.read(ctx, "netsalt")
+            val s = existing ?: ByteArray(16).also {
+                java.security.SecureRandom().nextBytes(it)
+                runCatching { io.github.geniusdevam.vpnapp.data.SecureVault.write(ctx, "netsalt", it) }
+            }
+            salt = s
+            return s
+        }
+    }
+
+    /** Privacy-preserving id of the current network: no SSID, no location permission, salted per install. */
     fun fingerprint(ctx: Context): String {
         val cm = cm(ctx)
         val n = physicalNetwork(ctx) ?: return "none"
@@ -55,7 +91,9 @@ object Networks {
                 append('|').append(tm?.networkOperator ?: "")
             }
         }
-        val h = MessageDigest.getInstance("SHA-256").digest(raw.toByteArray())
+        val md = MessageDigest.getInstance("SHA-256")
+        md.update(salt(ctx))
+        val h = md.digest(raw.toByteArray())
         return h.take(8).joinToString("") { "%02x".format(it) }
     }
 

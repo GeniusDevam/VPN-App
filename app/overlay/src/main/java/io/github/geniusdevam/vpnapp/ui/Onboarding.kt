@@ -29,15 +29,15 @@ fun Onboarding(onContinue: () -> Unit) {
             Text("🛡️", style = MaterialTheme.typography.displayMedium)
             Text("Welcome to VPN App", style = MaterialTheme.typography.headlineMedium)
             Text(
-                "Quick Connect finds a fast server in seconds. Best Connect takes its time and speed-tests " +
-                    "servers to find the very fastest. In both, you can choose the country.",
+                "Quick Connect finds a fast server in seconds (an estimate based on response times). Best Connect takes its time and speed-tests " +
+                    "servers in the country you choose. An optional worldwide search can look across all countries. Your phone is not protected by a kill switch unless you turn on Android's “Block connections without VPN” (see Settings).",
                 style = MaterialTheme.typography.bodyLarge,
             )
             Card(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text("Before you start: how private is this?", style = MaterialTheme.typography.titleMedium)
                     Text("✅ Your connection to the server is encrypted. Your Wi-Fi owner, mobile carrier and anyone on the same network cannot read your traffic.")
-                    Text("✅ Everything this app stores on your phone is encrypted too.")
+                    Text("✅ Everything this app stores on your phone is encrypted too. There is no analytics or tracking. The app only contacts vpngate.net for the server list, the servers you use, and Cloudflare's speed-test servers when you run Best Connect.")
                     Text(
                         "⚠️ The servers are free and run by volunteers through the VPN Gate project (University of Tsukuba, Japan). " +
                             "The volunteer running the server can see which websites and addresses you connect to. " +
