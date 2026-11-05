@@ -54,7 +54,7 @@ class QuickConnectEngineTest {
     }
 
     @Test fun skipsBlockedServers() = runTest {
-        val rep = InMemoryReputation(WallClock { testScheduler.currentTime })
+        val rep = ServerLedger(WallClock { testScheduler.currentTime })
         rep.recordFailure("a", hard = true)
         val servers = listOf(srv("a"), srv("b"))
         val e = QuickConnectEngine(FakeCatalog(servers), FakeProber { 10.0 }, FakeTunnel(), reputation = rep, clock = clock())

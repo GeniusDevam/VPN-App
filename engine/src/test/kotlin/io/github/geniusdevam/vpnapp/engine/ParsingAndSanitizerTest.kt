@@ -120,11 +120,11 @@ class ParsingAndSanitizerTest {
 
     @Test fun reputationBlocksAfterRepeatedFailuresAndLongBlockOnHardFailure() {
         var now = 0L
-        val r = InMemoryReputation(WallClock { now })
+        val r = ServerLedger(WallClock { now })
         r.recordFailure("a", false); assertFalse(r.isBlocked("a"))
         r.recordFailure("a", false); assertTrue(r.isBlocked("a"))
-        now += InMemoryReputation.SOFT_BLOCK_MS + 1; assertFalse(r.isBlocked("a"))
-        r.recordFailure("b", true); now += InMemoryReputation.SOFT_BLOCK_MS * 10; assertTrue(r.isBlocked("b"))
+        now += ServerLedger.SOFT_BLOCK_MS + 1; assertFalse(r.isBlocked("a"))
+        r.recordFailure("b", true); now += ServerLedger.SOFT_BLOCK_MS * 10; assertTrue(r.isBlocked("b"))
     }
 
     @Test fun countryOptionsListOnlyCountriesWithServers() {

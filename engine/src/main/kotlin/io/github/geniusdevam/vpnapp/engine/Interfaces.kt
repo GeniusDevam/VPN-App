@@ -30,12 +30,16 @@ interface ThroughputTester {
 }
 
 interface History {
-    /** Expected median RTT for this server on this network, if recently measured. */
+    /** Last known median RTT for this server on this network, however old. Combine with [priorWeight]. */
     fun latencyPrior(serverId: String, fingerprint: String): Double?
+    /** 0..1: how much to trust [latencyPrior] (1 = fresh, decays with age but is never deleted for being old). */
+    fun priorWeight(serverId: String, fingerprint: String): Double = if (latencyPrior(serverId, fingerprint) != null) 1.0 else 0.0
     /** Score bonus in ms (0..15) for servers that recently performed well. */
     fun throughputBonusMs(serverId: String, fingerprint: String): Double
-    fun recordLatency(serverId: String, fingerprint: String, medianMs: Double)
-    fun recordThroughput(serverId: String, fingerprint: String, downMbps: Double)
+    /** Score bonus in ms (0..10) for servers with a good connection and stability record. */
+    fun reliabilityBonusMs(serverId: String): Double = 0.0
+    fun recordLatency(serverId: String, fingerprint: String, stats: LatencyStats)
+    fun recordThroughput(serverId: String, fingerprint: String, stats: ThroughputStats)
 }
 
 interface Reputation {
@@ -48,8 +52,8 @@ interface Reputation {
 object NoHistory : History {
     override fun latencyPrior(serverId: String, fingerprint: String): Double? = null
     override fun throughputBonusMs(serverId: String, fingerprint: String): Double = 0.0
-    override fun recordLatency(serverId: String, fingerprint: String, medianMs: Double) {}
-    override fun recordThroughput(serverId: String, fingerprint: String, downMbps: Double) {}
+    override fun recordLatency(serverId: String, fingerprint: String, stats: LatencyStats) {}
+    override fun recordThroughput(serverId: String, fingerprint: String, stats: ThroughputStats) {}
 }
 
 object NoReputation : Reputation {
@@ -66,9 +70,12 @@ object NoReputation : Reputation {
 interface AttemptRecorder {
     fun connectSucceeded(serverId: String, fingerprint: String, connectMs: Long, cipher: String?, cipherVerified: Boolean)
     fun connectFailed(serverId: String, fingerprint: String, kind: FailureKind, connectMs: Long)
+    /** A connected session ended. [unexpected] is true when the user did not ask for it (network loss, relay dropped us). */
+    fun sessionEnded(serverId: String, fingerprint: String, durationMs: Long, unexpected: Boolean)
 }
 
 object NoRecorder : AttemptRecorder {
     override fun connectSucceeded(serverId: String, fingerprint: String, connectMs: Long, cipher: String?, cipherVerified: Boolean) {}
     override fun connectFailed(serverId: String, fingerprint: String, kind: FailureKind, connectMs: Long) {}
+    override fun sessionEnded(serverId: String, fingerprint: String, durationMs: Long, unexpected: Boolean) {}
 }

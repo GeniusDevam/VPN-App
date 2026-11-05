@@ -197,7 +197,7 @@ class SecurityPolicyTest {
     // ---------- gate ----------
 
     @Test fun gateDisconnectsAPolicyViolatorAndRecordsIt() = runTest {
-        val rep = InMemoryReputation(WallClock { testScheduler.currentTime })
+        val rep = ServerLedger(WallClock { testScheduler.currentTime })
         val t = FakeTunnel { Behavior(cipher = "AES-128-CBC") }
         val gate = ConnectionGate(t, EncryptionMode.STRONG, rep, clock = Clock { testScheduler.currentTime })
         val r = gate.connect(srv("a", cipher = "AES-256-GCM"), 10_000)
