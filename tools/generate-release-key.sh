@@ -23,11 +23,13 @@ Back them up somewhere private and offline: if you lose the key you cannot ship 
 Signing certificate SHA-256 (public, publish it in the README and release notes):
   $FP
 
-Install as repository secrets (GitHub CLI; values are read from files, not typed on the command line):
-  base64 -w0 "$DIR/release.p12" | gh secret set RELEASE_KEYSTORE_B64 --repo GeniusDevam/VPN-App
-  gh secret set RELEASE_KEYSTORE_PASSWORD --repo GeniusDevam/VPN-App < "$DIR/password.txt"
-  gh secret set RELEASE_KEY_PASSWORD      --repo GeniusDevam/VPN-App < "$DIR/password.txt"
-  printf '%s' "$ALIAS" | gh secret set RELEASE_KEY_ALIAS --repo GeniusDevam/VPN-App
-Pin the expected certificate so a wrong key fails the build (repository VARIABLE, not secret):
-  gh variable set RELEASE_CERT_SHA256 --repo GeniusDevam/VPN-App --body "$FP"
+Install as secrets of the PROTECTED ENVIRONMENT "release" (not repository-wide secrets; docs/RELEASE_SIGNING.md explains the one-time
+GitHub setup of that environment first: required reviewer, tag-only deployments). Values are read from files, never typed on a command line:
+  base64 -w0 "$DIR/release.p12" | gh secret set RELEASE_KEYSTORE_B64 --env release --repo GeniusDevam/VPN-App
+  gh secret set RELEASE_KEYSTORE_PASSWORD --env release --repo GeniusDevam/VPN-App < "$DIR/password.txt"
+  gh secret set RELEASE_KEY_PASSWORD      --env release --repo GeniusDevam/VPN-App < "$DIR/password.txt"
+  printf '%s' "$ALIAS" | gh secret set RELEASE_KEY_ALIAS --env release --repo GeniusDevam/VPN-App
+Pin the expected certificate (an environment VARIABLE, public; the release job refuses to run without it and refuses any other key):
+  gh variable set RELEASE_CERT_SHA256 --env release --repo GeniusDevam/VPN-App --body "$FP"
+Do NOT create repository-level secrets with these names: CI will not read them, and they would only widen who can see them.
 MSG

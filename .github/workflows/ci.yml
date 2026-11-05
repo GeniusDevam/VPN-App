@@ -9,14 +9,37 @@ on:
 permissions:
   contents: read
 
+# SIGNING KEY HANDLING (finding B1; enforced by tools/check-workflow-security.py in the `workflow-security` job):
+#  * Every ordinary build (any branch, any fork, workflow_dispatch) is signed with a throw-away key generated inside the job.
+#    No job except `sign` references a secret or a RELEASE_* variable, so branch builds cannot read the release key at all.
+#  * The real key lives only as secrets of the protected GitHub environment `release` (required reviewer, tags `v*` only).
+#    The `sign` job re-signs the already-built, already-tested APK; it never builds or runs repository code with the key.
+#  * Releases are created only from `vMAJOR.MINOR.PATCH` tags that point at a commit already on the default branch.
+
 jobs:
+  workflow-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - run: python3 -c 'import yaml' 2>/dev/null || sudo apt-get install -y -qq python3-yaml
+      - name: The signing key is reachable only from the protected release job
+        run: python3 -I tools/check-workflow-security.py .github/workflows
+      - name: The checker itself still rejects every way the key could leak (mutation tests)
+        run: python3 -I tools/test-check-workflow-security.py
+      - name: The manifest audit tool still understands real aapt2 output
+        run: |
+          python3 -I tools/manifest-exports.py --policy tools/testdata/manifest-policy-test.json < tools/testdata/manifest-sample.txt && exit 1 || test $? -eq 1
+
   engine:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
         with: { distribution: temurin, java-version: '21' }
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
         with: { gradle-version: '8.14.3' }
       - name: Engine unit tests (35-second guarantee, disconnect races, sanitizer fuzz, retention rules)
         working-directory: engine
@@ -27,10 +50,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
         with: { distribution: temurin, java-version: '21' }
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
         with: { gradle-version: '8.14.3' }
       - name: Install OpenVPN
         run: sudo apt-get update -qq && sudo apt-get install -y -qq openvpn && openvpn --version | head -1
@@ -41,20 +65,7 @@ jobs:
         run: sudo -E env "PATH=$PATH" "JAVA_HOME=$JAVA_HOME" bash tools/probe-test.sh
 
   # Secrets are not available to forks. This job only reports whether a release signing key is configured.
-  config:
-    runs-on: ubuntu-latest
-    outputs:
-      signed: ${{ steps.chk.outputs.signed }}
-    steps:
-      - id: chk
-        env:
-          HAS_KEY: ${{ secrets.RELEASE_KEYSTORE_B64 }}
-        run: |
-          if [ -n "$HAS_KEY" ]; then echo "signed=true" >> "$GITHUB_OUTPUT"; else echo "signed=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::No RELEASE_KEYSTORE_B64 secret: building with an ephemeral CI key. No release will be published. See docs/RELEASE_SIGNING.md."; fi
-
   apk:
-    needs: [config]
     runs-on: ubuntu-latest
     timeout-minutes: 90
     # The x86_64 build exists only for the emulator test; it must never block the real (arm64) release.
@@ -64,8 +75,9 @@ jobs:
       matrix:
         abi: [arm64-v8a, x86_64]   # arm64 is the real app; x86_64 only exists for the emulator test
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
         with: { distribution: temurin, java-version: '21' }
 
       - name: Install SDK pieces and swig
@@ -74,36 +86,22 @@ jobs:
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;30.0.16248370" "platforms;android-37.0" "cmake;3.22.1" || true
 
-      # Only the real arm64 build on a trusted ref ever sees the release key. Everything else (the emulator build, forks)
-      # is signed with a throw-away key generated here, which proves nothing about origin and is never published.
-      - name: Prepare signing key
-        env:
-          RELEASE_KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
-          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
-          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
-          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
-          USE_RELEASE_KEY: ${{ needs.config.outputs.signed == 'true' && matrix.abi == 'arm64-v8a' }}
+      # Every build here is signed with a throw-away key generated inside this job. It proves nothing about origin and is never
+      # published. The real release key is not available to this job at all (see the `sign` job).
+      - name: Create a throw-away signing key
         run: |
           set -eu
           KS="$RUNNER_TEMP/signing.p12"
-          if [ "$USE_RELEASE_KEY" = "true" ]; then
-            echo "::add-mask::$RELEASE_KEYSTORE_PASSWORD"; echo "::add-mask::$RELEASE_KEY_PASSWORD"
-            printf '%s' "$RELEASE_KEYSTORE_B64" | base64 -d > "$KS"
-            ALIAS="$RELEASE_KEY_ALIAS"; SPW="$RELEASE_KEYSTORE_PASSWORD"; KPW="$RELEASE_KEY_PASSWORD"
-            echo "SIGNING=release" >> "$GITHUB_ENV"
-          else
-            SPW="$(openssl rand -hex 24)"; KPW="$SPW"; ALIAS="ci"
-            echo "::add-mask::$SPW"
-            keytool -genkeypair -keystore "$KS" -storetype PKCS12 -storepass "$SPW" -keypass "$KPW" -alias "$ALIAS" \
-              -keyalg RSA -keysize 3072 -validity 3 -dname "CN=VPN App CI ephemeral key, O=not a release" >/dev/null
-            echo "SIGNING=ephemeral" >> "$GITHUB_ENV"
-          fi
+          SPW="$(openssl rand -hex 24)"; ALIAS="ci"
+          echo "::add-mask::$SPW"
+          keytool -genkeypair -keystore "$KS" -storetype PKCS12 -storepass "$SPW" -keypass "$SPW" -alias "$ALIAS" \
+            -keyalg RSA -keysize 3072 -validity 3 -dname "CN=VPN App CI ephemeral key, O=not a release" >/dev/null
           chmod 600 "$KS"
           # Passed to Gradle through the environment, never on a command line.
           {
             echo "ORG_GRADLE_PROJECT_keystoreO2File=$KS"
             echo "ORG_GRADLE_PROJECT_keystoreO2Password=$SPW"
-            echo "ORG_GRADLE_PROJECT_keystoreO2AliasPassword=$KPW"
+            echo "ORG_GRADLE_PROJECT_keystoreO2AliasPassword=$SPW"
             echo "ORG_GRADLE_PROJECT_keystoreO2Alias=$ALIAS"
           } >> "$GITHUB_ENV"
 
@@ -124,18 +122,13 @@ jobs:
           echo "APK: $apk"; ls -la "$apk"
           cp "$apk" out/VPN-App.apk
 
-      - name: Verify signature and pin the signing certificate
-        env:
-          EXPECTED_CERT_SHA256: ${{ vars.RELEASE_CERT_SHA256 }}
+      - name: Verify the build signature (throw-away key)
         run: |
           set -eu
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
           "$BT/apksigner" verify --verbose --print-certs out/VPN-App.apk > sig.txt
           FP=$(grep -m1 "certificate SHA-256 digest" sig.txt | awk '{print $NF}')
-          echo "Signing: $SIGNING  ·  certificate SHA-256: $FP" | tee -a "$GITHUB_STEP_SUMMARY"
-          if [ "$SIGNING" = release ] && [ -n "${EXPECTED_CERT_SHA256:-}" ] && [ "$FP" != "$(echo "$EXPECTED_CERT_SHA256" | tr -d ': ' | tr A-F a-f)" ]; then
-            echo "::error::Signing certificate does not match the RELEASE_CERT_SHA256 repository variable"; exit 1
-          fi
+          echo "Throw-away key, certificate SHA-256: $FP (not a release identity)" | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Remove signing material
         if: always()
@@ -161,52 +154,167 @@ jobs:
                   al=[struct.unpack_from('<Q',d,phoff+i*phentsize+48)[0] for i in range(phnum) if struct.unpack_from('<I',d,phoff+i*phentsize)[0]==1]
                   print(n, 'LOAD align', sorted(set(al)), 'OK(16K)' if min(al)>=16384 else 'NOT 16K')
           PY
-      - uses: actions/upload-artifact@v4
+      # The manifest of the FINAL apk must match tools/manifest-policy.json: only the listed components are reachable by other apps,
+      # only the listed permissions are requested, and debuggable/backup/cleartext flags are off.
+      - name: Manifest policy (reachable components, permissions, application flags)
+        continue-on-error: true   # becomes a hard gate once the unused upstream components are removed
+        run: |
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          "$BT/aapt2" dump xmltree out/VPN-App.apk --file AndroidManifest.xml | python3 -I tools/manifest-exports.py --policy tools/manifest-policy.json
+
+      # Proves, on every build and with a SECOND throw-away key, the exact script the release job uses: the APK is re-signed without
+      # rebuilding, nothing from the first signer survives, and every code entry is byte-identical.
+      - name: Dry run of the release re-signing script (throw-away key)
+        if: matrix.abi == 'arm64-v8a'
+        run: |
+          set -euo pipefail
+          K="$RUNNER_TEMP/dryrun.p12"; PW="$(openssl rand -hex 24)"; echo "::add-mask::$PW"
+          keytool -genkeypair -keystore "$K" -storetype PKCS12 -storepass "$PW" -keypass "$PW" -alias dry -keyalg RSA -keysize 3072 -validity 3 \
+            -dname "CN=dry run, O=not a release" >/dev/null
+          FIRST=$(grep -m1 "certificate SHA-256 digest" sig.txt | awk '{print $NF}' | tr -d ': ' | tr A-F a-f)
+          KS_FILE="$K" KS_PASS="$PW" KEY_ALIAS=dry KEY_PASS="$PW" tools/resign-apk.sh out/VPN-App.apk "$RUNNER_TEMP/resigned.apk" | tee dry.log
+          SECOND=$(sed -n 's/^CERT_SHA256=//p' dry.log)
+          [ -n "$SECOND" ] && [ "$SECOND" != "$FIRST" ] || { echo "re-signing did not change the signer"; exit 1; }
+          rm -f "$K" "$RUNNER_TEMP/resigned.apk"
+          echo "re-signing dry run OK (signer changed, contents identical)" | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with: { name: "apk-${{ matrix.abi }}", path: out/VPN-App.apk, if-no-files-found: error, retention-days: 14 }
 
-  # Publishes only APKs signed with the real release key, as immutable versioned releases with a checksum and a
-  # build-provenance attestation. Without the secrets nothing is published (see docs/RELEASE_SIGNING.md).
-  release:
-    needs: [engine, cert-policy, config, apk, emulator]
-    if: needs.config.outputs.signed == 'true' && (github.ref_name == github.event.repository.default_branch || startsWith(github.ref, 'refs/tags/v'))
+  # ---------------------------------------------------------------------------------------------------------------------------
+  # RELEASE: version tags only, three jobs with three trust levels.
+  #   release-gate  no secrets, read-only: is this a proper tag, on a commit that is already on the default branch?
+  #   sign          the ONLY job that can read the release key (environment `release`: required reviewer, tags `v*` only).
+  #                 Read-only token. Re-signs the APK that was just built and tested; never builds or runs repository code with the key.
+  #   publish       write token, but NO secrets: verifies the signed file, attests provenance, creates the release.
+  # Setup instructions for the GitHub side: docs/RELEASE_SIGNING.md.
+  # ---------------------------------------------------------------------------------------------------------------------------
+  release-gate:
+    needs: [workflow-security, engine, cert-policy, apk, emulator]
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { fetch-depth: 0, persist-credentials: false }
+      - name: The tag must be vMAJOR.MINOR.PATCH on a commit that is already on the default branch
+        env:
+          TAG: ${{ github.ref_name }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -eu
+          [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::tag '$TAG' is not vMAJOR.MINOR.PATCH"; exit 1; }
+          git fetch --no-tags origin "+refs/heads/$DEFAULT_BRANCH:refs/remotes/origin/$DEFAULT_BRANCH"
+          git merge-base --is-ancestor "$GITHUB_SHA" "refs/remotes/origin/$DEFAULT_BRANCH" \
+            || { echo "::error::tag $TAG points at a commit that is not on $DEFAULT_BRANCH; releases are cut only from reviewed history"; exit 1; }
+          echo "release gate OK: $TAG at $GITHUB_SHA"
+
+  sign:
+    needs: [release-gate]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: release
+    permissions:
+      contents: read
+    outputs:
+      cert: ${{ steps.sign.outputs.cert }}
+      version: ${{ steps.sign.outputs.version }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with: { name: apk-arm64-v8a, path: in }
+      - name: Re-sign the tested APK with the release key
+        id: sign
+        env:
+          RELEASE_KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+          EXPECTED_CERT_SHA256: ${{ vars.RELEASE_CERT_SHA256 }}
+        run: |
+          set -euo pipefail
+          umask 077
+          for v in RELEASE_KEYSTORE_B64 RELEASE_KEYSTORE_PASSWORD RELEASE_KEY_ALIAS RELEASE_KEY_PASSWORD EXPECTED_CERT_SHA256; do
+            [ -n "${!v:-}" ] || { echo "::error::$v is not set in the 'release' environment (see docs/RELEASE_SIGNING.md)"; exit 1; }
+          done
+          echo "::add-mask::$RELEASE_KEYSTORE_PASSWORD"; echo "::add-mask::$RELEASE_KEY_PASSWORD"
+          KS="$RUNNER_TEMP/release.p12"
+          trap 'rm -f "$KS"' EXIT
+          printf '%s' "$RELEASE_KEYSTORE_B64" | base64 -d > "$KS"
+          mkdir -p out
+          KS_FILE="$KS" KS_PASS="$RELEASE_KEYSTORE_PASSWORD" KEY_ALIAS="$RELEASE_KEY_ALIAS" KEY_PASS="$RELEASE_KEY_PASSWORD" \
+            tools/resign-apk.sh in/VPN-App.apk out/VPN-App.apk | tee sign.log
+          CERT=$(sed -n 's/^CERT_SHA256=//p' sign.log)
+          EXPECT=$(echo "$EXPECTED_CERT_SHA256" | tr -d ': ' | tr A-F a-f)
+          # The certificate of the key that was published in this repository's history. It must never sign a release again.
+          LEAKED=e73acd75265ca67ef3fb295538c49a8a81be0b122bacf72006f46691fe0efae4
+          [ "$CERT" != "$LEAKED" ] || { echo "::error::the release key is the compromised one that was published in this repository"; exit 1; }
+          [ "$CERT" = "$EXPECT" ] || { echo "::error::signing certificate $CERT does not match RELEASE_CERT_SHA256"; exit 1; }
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          VERSION=$("$BT/aapt2" dump badging out/VPN-App.apk | sed -n "s/^package:.* versionName='\([^']*\)'.*/\1/p")
+          (cd out && sha256sum VPN-App.apk > VPN-App.apk.sha256)
+          { echo "cert=$CERT"; echo "version=$VERSION"; } >> "$GITHUB_OUTPUT"
+          echo "signed by certificate $CERT (matches the pinned RELEASE_CERT_SHA256), version $VERSION" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Make sure no key material is left on the runner
+        if: always()
+        run: rm -f "$RUNNER_TEMP/release.p12" sign.log
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with: { name: signed-apk, path: out, if-no-files-found: error, retention-days: 14 }
+
+  publish:
+    needs: [sign, release-gate, emulator]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: write
       id-token: write
       attestations: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-        with: { name: apk-arm64-v8a, path: out }
-      - name: Checksum and provenance
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with: { name: signed-apk, path: out }
+      - name: Verify the file that is about to be published
+        env:
+          EXPECTED_CERT: ${{ needs.sign.outputs.cert }}
         run: |
-          (cd out && sha256sum VPN-App.apk > VPN-App.apk.sha256 && cat VPN-App.apk.sha256)
+          set -euo pipefail
+          (cd out && sha256sum -c VPN-App.apk.sha256)
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          CERT=$("$BT/apksigner" verify --min-sdk-version 26 --print-certs out/VPN-App.apk | grep -m1 "certificate SHA-256 digest" | awk '{print $NF}' | tr -d ': ' | tr A-F a-f)
+          [ "$CERT" = "$EXPECTED_CERT" ] || { echo "::error::signed APK certificate differs from the one the sign job reported"; exit 1; }
+      # Not pinned by SHA (see tools/check-workflow-security.py): GitHub-owned, and this job holds no signing secrets.
       - uses: actions/attest-build-provenance@v2
         with: { subject-path: out/VPN-App.apk }
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+          COMMIT: ${{ github.sha }}
+          CERT: ${{ needs.sign.outputs.cert }}
+          VERSION: ${{ needs.sign.outputs.version }}
           EMULATOR_VERDICT: ${{ needs.emulator.outputs.verdict }}
         run: |
           set -eu
-          VERSION="1.0.$((1000 + GITHUB_RUN_NUMBER))"; TAG="v$VERSION"
-          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
-          CERT=$("$BT/apksigner" verify --print-certs out/VPN-App.apk | grep -m1 "certificate SHA-256 digest" | awk '{print $NF}')
           SHA=$(cut -d' ' -f1 out/VPN-App.apk.sha256)
           cat > notes.md <<NOTES
           Install: open this page on your phone, tap **VPN-App.apk**, then tap Open/Install.
 
           - Live emulator check on x86_64 Android 16: **${EMULATOR_VERDICT}** (PASS = Quick Connect really connected inside the chosen country and every assertion held; INCONCLUSIVE = live volunteer servers or the server list were unreachable in that run, so connection success is NOT shown for this build; a FAIL would have blocked this release). The emulator is not a phone: real-device behaviour is untested.
-          - Version $VERSION, built from commit \`${GITHUB_SHA}\` with OpenVPN for Android at \`$(tr -d '[:space:]' < tools/ICS_OPENVPN_REF)\`.
+          - App version $VERSION, built from commit \`${COMMIT}\` with OpenVPN for Android at \`$(tr -d '[:space:]' < tools/ICS_OPENVPN_REF)\`. The released APK is the one that was built and tested in this run, re-signed (code unchanged).
           - APK SHA-256: \`$SHA\`
           - Signing certificate SHA-256: \`$CERT\` (must match the value published in the README; a different value means do not install)
-          - Verify the build origin: \`gh attestation verify VPN-App.apk -R $GITHUB_REPOSITORY\`
+          - Verify the build origin: \`gh attestation verify VPN-App.apk -R $REPO\`
           NOTES
-          gh release create "$TAG" out/VPN-App.apk out/VPN-App.apk.sha256 --repo "$GITHUB_REPOSITORY" \
-            --title "VPN App $VERSION" --notes-file notes.md --target "$GITHUB_SHA" --latest
+          gh release create "$TAG" out/VPN-App.apk out/VPN-App.apk.sha256 --repo "$REPO" \
+            --title "VPN App $TAG" --notes-file notes.md --verify-tag --latest
           # The old mutable "latest" release carried an APK signed with the key that was published in this repository.
           # Remove it only now that a replacement exists.
-          gh release delete latest --cleanup-tag -y --repo "$GITHUB_REPOSITORY" || true
+          gh release delete latest --cleanup-tag -y --repo "$REPO" || true
 
   # A FAIL (the app misbehaved) fails this job and so blocks the release. INCONCLUSIVE (live volunteer servers or the server
   # list unreachable) is reported as a warning and recorded in the release notes; it is never presented as success.
@@ -219,8 +327,9 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with: { name: apk-x86_64, path: out }
       - name: Enable KVM and emulator runtime libraries
         run: |
@@ -228,7 +337,7 @@ jobs:
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
       - name: Run the app in an emulator
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2
         with:
           api-level: 36
           target: google_apis
@@ -257,8 +366,11 @@ jobs:
       # The branch is public. Raw logcat and UI dumps are NEVER published: only a redacted summary (tools/redact-results.py).
       - name: Publish redacted results to the emulator-results branch
         if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
         run: |
           python3 -I tools/redact-results.py emu-out emu-public
           cd emu-public && git init -q && git checkout -q -b emulator-results && git add -A
           git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "emulator run ${GITHUB_RUN_NUMBER} (${GITHUB_SHA::7}), redacted"
-          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" emulator-results
+          git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" emulator-results
