@@ -42,12 +42,14 @@ class Behavior(
     /** True models a stuck engine that ignores the timeout we pass in. */
     val ignoresTimeout: Boolean = false,
     val cipher: String? = "AES-256-GCM",
+    val failKind: FailureKind = FailureKind.NETWORK,
 )
 
 class FakeTunnel(private val behavior: (Server) -> Behavior = { Behavior() }) : TunnelController {
     override var currentServerId: String? = null
     val connectLog = ArrayList<String>()
     var aborted = 0
+    var disconnects = 0
     override suspend fun connect(server: Server, timeoutMs: Long): ConnectResult {
         connectLog.add(server.id)
         val b = behavior(server)
@@ -55,17 +57,17 @@ class FakeTunnel(private val behavior: (Server) -> Behavior = { Behavior() }) : 
             delay(b.takesMs)
         } else if (b.takesMs > timeoutMs) {
             delay(timeoutMs)
-            return ConnectResult(false, error = "timeout")
+            return ConnectResult.failed(FailureKind.TIMEOUT, "timeout")
         } else {
             delay(b.takesMs)
         }
         return if (b.success) {
             currentServerId = server.id
-            ConnectResult(true, cipher = b.cipher)
-        } else ConnectResult(false, error = "failed")
+            ConnectResult.connected(b.cipher)
+        } else ConnectResult.failed(b.failKind, "failed")
     }
     override suspend fun abort() { aborted++ }
-    override suspend fun disconnect() { currentServerId = null }
+    override suspend fun disconnect() { disconnects++; currentServerId = null }
 }
 
 class FakeTester(private val stats: (Server) -> ThroughputStats?) : ThroughputTester {

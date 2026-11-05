@@ -40,6 +40,7 @@ class QuickConnectEngine(
     private val clock: Clock = MonotonicClock,
     private val cfg: QuickConfig = QuickConfig(),
     private val random: Random = Random.Default,
+    private val recorder: AttemptRecorder = NoRecorder,
 ) {
     private val runner = ProbeRunner(prober, clock)
 
@@ -81,6 +82,7 @@ class QuickConnectEngine(
             else candidates.sortedBy { Prioritizer.estimate(it, ctx, history) }.take(3)
 
         emit(EngineEvent.Phase(PhaseId.CONNECTING))
+        val gate = ConnectionGate(tunnel, cfg.mode, reputation, recorder, ctx.fingerprint, clock)
         var n = 0
         for (s in order) {
             val remaining = start + cfg.budgetMs - clock.nowMs()
@@ -91,17 +93,10 @@ class QuickConnectEngine(
                 if (n == 1) cfg.firstConnectTimeoutMs else cfg.laterConnectTimeoutMs,
                 remaining - cfg.connectMarginMs,
             )
-            val r = tunnel.connect(s, timeout)
-            if (r.success) {
-                if (!CipherPolicy.acceptsNegotiated(r.cipher, cfg.mode)) {
-                    tunnel.disconnect()
-                    reputation.recordFailure(s.id, hard = true)
-                    continue
-                }
-                reputation.recordSuccess(s.id)
-                return QuickOutcome.Connected(s, r.cipher, clock.nowMs() - start)
+            when (val r = gate.connect(s, timeout)) {
+                is GateResult.Open -> return QuickOutcome.Connected(s, r.admitted.cipher, r.admitted.cipherVerified, clock.nowMs() - start)
+                is GateResult.Refused -> Unit // reputation and history were updated by the gate; try the next server
             }
-            reputation.recordFailure(s.id, r.hard)
         }
         return QuickOutcome.Failed(FailReason.COULD_NOT_CONNECT, ctx.previous)
     }

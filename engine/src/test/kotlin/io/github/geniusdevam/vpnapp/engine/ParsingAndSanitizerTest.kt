@@ -23,11 +23,12 @@ class ParsingAndSanitizerTest {
         verb 3
         auth-user-pass
         <ca>
-        -----BEGIN CERTIFICATE-----
-        MIIDrzCCApegAwIBAgIBADANBgkqhkiG9w0BAQsFADBg
-        -----END CERTIFICATE-----
-        </ca>
-    """.trimIndent()
+    """.trimIndent() + "\n" + Pki.ROOT + "\n</ca>"
+
+    private val ip = "219.100.37.63"
+    private val auth = ServerAuthPolicy.of(setOf(Pki.ROOT_FP))
+    private fun sanitize(raw: String, mode: EncryptionMode = EncryptionMode.COMPATIBLE, expectedIp: String = ip) =
+        ConfigSanitizer.sanitize(raw, mode, expectedIp, auth)
 
     private fun row(name: String, iso: String, cfg: String, ip: String = "219.100.37.63") =
         "$name,$ip,1013,5,53433904,Japan,$iso,45,2864360957,2564,3345,2weeks,Some Operator,Hello,${Base64.getEncoder().encodeToString(cfg.toByteArray())}"
@@ -59,7 +60,7 @@ class ParsingAndSanitizerTest {
         val evil = goodConfig + "\nscript-security 2\nup /system/bin/sh -c 'reboot'\nplugin /data/x.so\n" +
             "route 0.0.0.0 0.0.0.0\ndhcp-option DNS 6.6.6.6\nmanagement 0.0.0.0 7505\nsocks-proxy 1.2.3.4 1080\n" +
             "setenv FOO bar\nlog /sdcard/x\nhttp-proxy 5.5.5.5 80\n<extra-certs>\nzzz\n</extra-certs>\n"
-        val r = ConfigSanitizer.sanitize(evil)
+        val r = sanitize(evil)
         assertIs<SanitizeResult.Ok>(r)
         val c = r.config
         for (bad in listOf("script-security", "up ", "plugin", "route", "dhcp-option", "management", "proxy", "setenv", "log ", "extra-certs", "zzz")) {
@@ -72,23 +73,23 @@ class ParsingAndSanitizerTest {
 
     @Test fun rejectsWeakCiphersNoAuthAndMissingCa() {
         for (cipher in listOf("BF-CBC", "DES-EDE3-CBC", "none", "RC2-40-CBC")) {
-            assertIs<SanitizeResult.Rejected>(ConfigSanitizer.sanitize(goodConfig.replace("AES-128-CBC", cipher)), cipher)
+            assertIs<SanitizeResult.Rejected>(sanitize(goodConfig.replace("AES-128-CBC", cipher)), cipher)
         }
-        assertIs<SanitizeResult.Rejected>(ConfigSanitizer.sanitize(goodConfig.replace("auth SHA1", "auth none")))
-        assertIs<SanitizeResult.Rejected>(ConfigSanitizer.sanitize(goodConfig.substringBefore("<ca>")))
+        assertIs<SanitizeResult.Rejected>(sanitize(goodConfig.replace("auth SHA1", "auth none")))
+        assertIs<SanitizeResult.Rejected>(sanitize(goodConfig.substringBefore("<ca>")))
     }
 
     @Test fun rejectsSuspiciousCertificateBlockContent() {
-        val bad = goodConfig.replace("MIIDrz", "<script>alert(1)</script>")
-        assertIs<SanitizeResult.Rejected>(ConfigSanitizer.sanitize(bad))
+        val bad = goodConfig.replace("-----BEGIN CERTIFICATE-----\n", "-----BEGIN CERTIFICATE-----\n<script>alert(1)</script>\n")
+        assertIs<SanitizeResult.Rejected>(sanitize(bad))
     }
 
     @Test fun strongModeOnlyAcceptsAead() {
-        assertIs<SanitizeResult.Rejected>(ConfigSanitizer.sanitize(goodConfig, EncryptionMode.STRONG))
-        assertIs<SanitizeResult.Ok>(ConfigSanitizer.sanitize(goodConfig.replace("AES-128-CBC", "AES-256-GCM"), EncryptionMode.STRONG))
-        assertTrue(CipherPolicy.acceptsNegotiated("AES-256-GCM", EncryptionMode.STRONG))
-        assertFalse(CipherPolicy.acceptsNegotiated("AES-128-CBC", EncryptionMode.STRONG))
-        assertFalse(CipherPolicy.acceptsNegotiated("BF-CBC", EncryptionMode.COMPATIBLE))
+        assertIs<SanitizeResult.Rejected>(sanitize(goodConfig, EncryptionMode.STRONG))
+        assertIs<SanitizeResult.Ok>(sanitize(goodConfig.replace("AES-128-CBC", "AES-256-GCM"), EncryptionMode.STRONG))
+        assertIs<CipherVerdict.Accept>(CipherPolicy.evaluate("AES-256-GCM", "AES-256-GCM", EncryptionMode.STRONG))
+        assertIs<CipherVerdict.Reject>(CipherPolicy.evaluate("AES-128-CBC", "AES-128-CBC", EncryptionMode.STRONG))
+        assertIs<CipherVerdict.Reject>(CipherPolicy.evaluate("BF-CBC", null, EncryptionMode.COMPATIBLE))
     }
 
     @Test fun hardResetPacketLayoutAndReplyValidation() {
