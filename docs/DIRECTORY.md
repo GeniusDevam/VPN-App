@@ -71,13 +71,21 @@ operator; at most 8 are kept per relay.
   Android may still pause it in Doze, in which case it resumes when it can. It cannot survive the process being killed beyond that
   saved summary.
 
+## Why a run can end without a connection (C9)
+The three reasons are reported separately and never merged (`PoolSelection`): *the server list could not be loaded* (says nothing about
+any country), *the latest list has no server in the chosen country*, and *servers exist there but your settings exclude them*
+(Strong-only encryption, or servers set aside after failures). The country picker shows the same states (loading / unavailable /
+stale / empty) and keeps a previously chosen country visible even when it has no server right now. The scope is never widened.
+
 ## Measurement notes (C3, C4, C5)
 * **Probe quality (C3).** `OPENVPN_UDP_RESET` = the VPN service answered (high confidence). `TCP_CONNECT` = the VPN port accepts a
   TCP handshake (medium). `TCP_FALLBACK` = for a UDP relay that requires tls-auth/crypt the only unauthenticated check is TCP 443 on
   the same host, and even a *refused* connection counts as a round trip: this shows the host is alive, nothing about the VPN
-  service (low). Low-confidence results take a 60 ms penalty and are flagged in the Quick Connect message. A protocol-aware probe for
-  tls-auth/crypt (HMAC-wrapped hard reset using the profile's static key) is feasible but was not built, because it cannot be
-  tested without live relays here.
+  service (low). Low-confidence results take a 60 ms penalty and are flagged in the Quick Connect message. **Update:** relays with an
+  inline `tls-auth` key are now probed with a real HMAC-signed hard reset whose reply HMAC is verified (`TlsAuthKey`), which counts
+  as a high-confidence `OPENVPN_UDP_RESET`. This was checked against real OpenVPN 2.6.19 servers (`tools/probe-test.sh`, also a CI
+  step): key-direction 1/0 and bidirectional keys are answered; a probe holding the wrong key gets no answer. `tls-crypt` relays
+  (whole-packet encryption) still use the weak TCP fallback; not built.
 * **Speed test (C4).** Uses Cloudflare's public speed-test endpoints; their availability and terms can change and they are not a
   contract with this project (consider self-hosting if usage grows). Fixed in this pass: results are discarded unless the test's
   egress IP differs from the phone's own IP captured while no tunnel was up (skipped, not failed, when that IP is unknown);
