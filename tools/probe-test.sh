@@ -30,7 +30,10 @@ profile() { # file keyfile direction(or -) tag(tls-auth|tls-crypt)
     [ "$3" != "-" ] && printf 'key-direction %s\n' "$3"
     printf '<%s>\n' "$4"; cat "$2"; printf '</%s>\n' "$4"; } > "$1"
 }
-probe() { ( cd "$ROOT/engine" && gradle -q --console=plain probeCli --args="$1 127.0.0.1 $2 udp" 2>/dev/null ) | grep '^method='; }
+probe() {
+  local out; out=$( cd "$ROOT/engine" && gradle -q --console=plain probeCli --args="$1 127.0.0.1 $2 udp" 2>"$W/probe.err" )
+  echo "$out" | grep '^method=' || { echo "(no result; gradle said:)" >&2; tail -5 "$W/probe.err" >&2; }
+}
 
 start_server 21941 --tls-auth ta.key 0
 start_server 21942 --tls-auth ta.key

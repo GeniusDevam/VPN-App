@@ -89,6 +89,22 @@ for n in root.iter('node'):
         if k==want: print(t); break
 PY
 }
+# "x y" of the country row with the MOST servers (skips the first match, the 'Any country' row): live volunteers are flaky,
+# so test with the country that has the best chance of a working relay.
+find_biggest_country() {
+  python3 - "$OUT/ui.xml" <<'PY'
+import sys,re,xml.etree.ElementTree as ET
+try: root=ET.parse(sys.argv[1]).getroot()
+except Exception: sys.exit(0)
+rows=[]
+for n in root.iter('node'):
+    t=(n.get('text') or n.get('content-desc') or '').strip()
+    m=re.fullmatch(r'(\d+) servers?',t)
+    b=re.findall(r'\d+',n.get('bounds') or '')
+    if m and len(b)==4: rows.append((int(m.group(1)),(int(b[0])+int(b[2]))//2,(int(b[1])+int(b[3]))//2))
+for cnt,x,y in sorted(rows[1:],key=lambda r:-r[0])[:1]: print(x,y)
+PY
+}
 count_text() {
   python3 - "$1" "$OUT/ui.xml" <<'PY'
 import sys,re,xml.etree.ElementTree as ET
@@ -183,7 +199,8 @@ if tap_nth "$CHIP" 1; then
   case "$state" in
     loaded)
       ok "picker reports a loaded server list"
-      if tap_nth "[0-9]+ servers?$" 2; then   # #1 is the 'Any country' row; #2 is the first real country
+      dump; big=$(find_biggest_country)
+      if [ -n "$big" ] && { adb shell input tap $big; true; }; then
         sleep 2; dump; shot 02c-picked
         if has_text "Choose a country"; then hard "picker did not close after choosing a country"; fi
         n=$(count_text "Any country.*$CHIP")
@@ -227,6 +244,26 @@ case "$result" in
       name=$(echo "$CHOSEN" | sed -E 's/^[^ ]+ //'); has_text "$name" && ok "failure message names the chosen country" || hard "failure message does not name the chosen country '$name'"
     fi ;;
 esac
+
+# A flaky country says nothing about the app. Try once with Any country so a live connection can still be demonstrated.
+if [ "$result" = "failed-infra" ] && [ -n "$CHOSEN" ]; then
+  log "retry Quick Connect with Any country"
+  tap_text "OK" || true; sleep 1
+  if tap_nth "$CHIP" 1; then
+    sleep 2; dump
+    xy=$(find_nth "Any country \(sample" 1); [ -n "$xy" ] && adb shell input tap $xy; sleep 2
+    t0=$(date +%s); tap_text "Connect"; sleep 3; dump
+    if has_text "Connection request|wants to set up a VPN"; then tap_text "OK"; fi
+    result=$(quick_outcome 150); secs=$(( $(date +%s) - t0 ))
+    log "Quick Connect (Any country): $result after ${secs}s"; shot 05b-quick-any-result; dump; cp "$OUT/ui.xml" "$OUT/ui-quick-result.xml"
+    echo "quick_any=$result" >> "$OUT/result.txt"; echo "quick_any_seconds=$secs" >> "$OUT/result.txt"
+    case "$result" in
+      connected) ok "Quick Connect connected with Any country in ${secs}s (the chosen country had no working relay)" ;;
+      failed-app) hard "Quick Connect (Any) ended in an unhandled-exception banner" ;;
+      hung) hard "Quick Connect (Any) never reached a terminal state within 150 s" ;;
+    esac
+  fi
+fi
 
 # ---- explicit disconnect must stay disconnected (B5, live) ----------------------------------------------------------
 if [ "$result" = "connected" ]; then
