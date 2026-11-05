@@ -21,6 +21,11 @@ data class Server(
     val declaredCipher: String?,
     val tlsAuthOrCrypt: Boolean,
     val config: String,
+    /** VPN Gate's own quality score, ping (measured from Japan, NOT from this phone), user count and traffic. Display/prior only. */
+    val vpnGateScore: Long? = null,
+    val vpnGatePingMs: Int? = null,
+    val totalUsers: Long? = null,
+    val totalTrafficBytes: Long? = null,
 )
 
 sealed interface Scope {
@@ -50,13 +55,48 @@ data class ThroughputStats(
     val noisy: Boolean = false,
 )
 
-data class ConnectResult(
+/** Why a connection attempt failed. Drives reputation (hard kinds earn a long block) and the history log. */
+enum class FailureKind(val hard: Boolean) {
+    /** The relay refused our credentials. */
+    AUTH(true),
+    /** TLS/certificate verification failed: possible impersonation or a misconfigured relay. */
+    CERTIFICATE(true),
+    /** The connection worked but violated the encryption policy. */
+    POLICY(true),
+    /** The profile was rejected before it reached the network. */
+    CONFIG_REJECTED(true),
+    TIMEOUT(false),
+    /** We stopped it (user cancel, newer command). Never counted against the server. */
+    CANCELLED(false),
+    NETWORK(false),
+    OTHER(false),
+}
+
+/**
+ * Outcome of one connection attempt.
+ *
+ * Built only through [connected] / [failed], so the failure text can never land in the cipher field again
+ * (the old positional constructor did exactly that for authentication errors).
+ *
+ * [cipher] is the data-channel cipher that was actually OBSERVED in the engine's log; it is null when the
+ * engine did not report one. A cipher merely declared by the relay's profile is never put here.
+ */
+@ConsistentCopyVisibility
+data class ConnectResult private constructor(
     val success: Boolean,
-    val cipher: String? = null,
-    val error: String? = null,
-    /** True for security-relevant failures (TLS/certificate/auth): the server gets a long block. */
-    val hard: Boolean = false,
-)
+    val cipher: String?,
+    val error: String?,
+    val kind: FailureKind?,
+) {
+    /** True for security-relevant failures (TLS/certificate/auth/policy): the server gets a long block. */
+    val hard: Boolean get() = kind?.hard == true
+    val cipherVerified: Boolean get() = success && cipher != null
+
+    companion object {
+        fun connected(observedCipher: String?): ConnectResult = ConnectResult(true, observedCipher, null, null)
+        fun failed(kind: FailureKind, error: String): ConnectResult = ConnectResult(false, null, error, kind)
+    }
+}
 
 data class ProbeSample(val rttMs: Double?, val method: ProbeMethod)
 
@@ -98,12 +138,12 @@ data class BestEntry(
 enum class FailReason { NO_SERVERS_IN_SCOPE, COULD_NOT_CONNECT, TIMEOUT }
 
 sealed interface QuickOutcome {
-    data class Connected(val server: Server, val cipher: String?, val elapsedMs: Long) : QuickOutcome
+    data class Connected(val server: Server, val cipher: String?, val cipherVerified: Boolean, val elapsedMs: Long) : QuickOutcome
     data class Failed(val reason: FailReason, val restore: Server?) : QuickOutcome
 }
 
 sealed interface BestOutcome {
-    data class Connected(val report: BestReport, val cipher: String?) : BestOutcome
+    data class Connected(val report: BestReport, val cipher: String?, val cipherVerified: Boolean) : BestOutcome
     data class Failed(val reason: FailReason, val restore: Server?, val report: BestReport?) : BestOutcome
 }
 

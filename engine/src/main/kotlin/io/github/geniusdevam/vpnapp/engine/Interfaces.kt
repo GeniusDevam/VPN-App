@@ -58,3 +58,17 @@ object NoReputation : Reputation {
     override fun recordFailure(serverId: String, hard: Boolean) {}
     override fun recordSuccess(serverId: String) {}
 }
+
+/**
+ * Receives one record per connection attempt, for the permanent local history. Implementations must be cheap
+ * and thread-safe; they run on the connecting coroutine.
+ */
+interface AttemptRecorder {
+    fun connectSucceeded(serverId: String, fingerprint: String, connectMs: Long, cipher: String?, cipherVerified: Boolean)
+    fun connectFailed(serverId: String, fingerprint: String, kind: FailureKind, connectMs: Long)
+}
+
+object NoRecorder : AttemptRecorder {
+    override fun connectSucceeded(serverId: String, fingerprint: String, connectMs: Long, cipher: String?, cipherVerified: Boolean) {}
+    override fun connectFailed(serverId: String, fingerprint: String, kind: FailureKind, connectMs: Long) {}
+}
