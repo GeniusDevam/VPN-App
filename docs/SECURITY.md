@@ -5,7 +5,7 @@ verified. "Verified" means demonstrated by a test that was actually run.
 
 | # | Finding | Status | How it was checked |
 |---|---|---|---|
-| B1 | Public signing key | **Open.** Mitigated in CI; **needs you**: create a new key and delete the old public `latest` release (docs/RELEASE_SIGNING.md) | The keystore is out of the tree and CI builds with throw-away keys (it ran). The leaked key and passwords remain in git history, and the old release is still downloadable |
+| B1 | Public signing key | **Open until the owner acts**, repository side **done and verified**. The key can now be read only by one job in a protected environment, tag releases only | `tools/check-workflow-security.py` + 13 mutation tests in CI (each re-creates a leak and must be rejected); the re-signing script is exercised on every build with a throw-away key (signer changes, 116/116 code entries identical, v2/v3 verify, alignment intact); `release-gate`/`sign`/`publish` were skipped on branch pushes. **Not yet run with a real key.** Old key still in git history; the old public release must be deleted by the owner |
 | B2 | No server certificate verification | **Fixed** | Real OpenVPN 2.6.19 client/server test (`tools/cert-policy-test.sh`): genuine cert connects; wrong name, non-server role, untrusted CA rejected; control accepts wrong name without the policy. **Live relays (CI, 2026-11-05): 15/24 connected with the policy and 15/24 without; every relay that reached TLS presented `CN=opengw.net`** |
 | B3 | HTTP fallback for the directory | **Fixed** (HTTPS only; cleartext disabled app-wide) | Unit tests; network-security config |
 | B4 | Leak protection | Documented; cannot be guaranteed by the app | Analysis below; not testable without a device |
@@ -14,7 +14,7 @@ verified. "Verified" means demonstrated by a test that was actually run.
 | B7 | Compression | **Removed** | Source review of the pinned OpenVPN; real OpenVPN accepts the options |
 | B8 | Address/profile validation | **Fixed** | Address matrix, adversarial cases, 600-seed sanitizer fuzz, CSV fuzz |
 | B9 | Logging/privacy, public CI output | **Fixed** (redacted publishing); owner action: delete old branch | Redactor self-tested |
-| B10 | Dependency/licence audit | Partly done; advisory scan **not possible here** (docs/AUDIT.md) | Exported components of the built APK are now listed by CI; not yet reviewed |
+| B10 | Dependency/licence audit | **Attack surface reduced and gated**; advisory scan **not possible here** (docs/AUDIT.md) | The built APK had 18/23 components reachable by other apps (upstream's external-control API, boot receiver, aliases). Now 5/23, each needed or system-guarded, enforced by `tools/manifest-policy.json` as a hard CI gate; unused permissions removed; split-tunnel picker verified live without `QUERY_ALL_PACKAGES` (18 apps listed). A removed permission that turned out to be needed (`RECEIVE_BOOT_COMPLETED`) crashed the VPN and was caught by the emulator test |
 | C7 | Persistence atomicity and ordering | **Fixed** | `PersistenceTest`; see below |
 | C9 | Misleading failure messages | **Fixed** | Directory-unavailable, no-server-in-country and settings-exclusion are separate outcomes (engine tests; the emulator test confirmed an honest, country-naming failure) |
 
