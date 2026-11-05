@@ -27,10 +27,12 @@ import io.github.geniusdevam.vpnapp.engine.ServerAuthPolicy
 import io.github.geniusdevam.vpnapp.engine.TunnelController
 import io.github.geniusdevam.vpnapp.net.AndroidRoots
 import java.io.StringReader
+import android.os.SystemClock
 import kotlin.coroutines.resume
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -192,7 +194,14 @@ class TunnelManager(
             }
             // Only what the engine reported counts as the negotiated cipher. If it reported nothing, the connection is
             // marked unverified; the relay's own claim is never substituted.
-            val cipher = r.cipher
+            // The cipher line travels through a separate asynchronous log channel and can trail the CONNECTED state by a moment.
+            // Give it a short, bounded grace period; if it never shows, the tunnel is reported as unverified (never guessed).
+            var cipher = r.cipher ?: p.cipher
+            if (cipher == null) {
+                val until = SystemClock.elapsedRealtime() + CIPHER_GRACE_MS
+                while (p.cipher == null && SystemClock.elapsedRealtime() < until) delay(50)
+                cipher = p.cipher
+            }
             currentServerId = server.id
             sessionServer = server
             sessionStartedAt = System.currentTimeMillis()
@@ -315,5 +324,6 @@ class TunnelManager(
         private const val NO_VERIFY_WARNING = "No server certificate verification method has been enabled"
         private const val BYTECOUNT_INTERVAL_S = 2L
         private const val SERVICE_BIND_TIMEOUT_MS = 3_000L
+        private const val CIPHER_GRACE_MS = 1_500L
     }
 }
