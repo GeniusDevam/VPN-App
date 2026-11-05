@@ -2,6 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permissions that upstream's manifest or its libraries add but this app never uses (audit finding B10).
+         Each one is enforced absent by tools/manifest-policy.json in CI.
+         - READ_EXTERNAL_STORAGE: only for importing .ovpn files from storage, which this app does not do.
+         - RECEIVE_BOOT_COMPLETED: only for upstream's start-on-boot receiver, removed below.
+         - QUERY_ALL_PACKAGES: lets an app inventory everything installed. The split-tunnel picker only lists launchable apps,
+           which the narrow <queries> entry below already makes visible.
+         - ACCESS_LOCAL_NETWORK: LAN access; relays are public addresses and nothing here talks to the local network.
+           (Android 17 enforces it; not testable on the Android 16 emulator, so a regression there would show only as LAN failures.) -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" tools:node="remove" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" tools:node="remove" />
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
     <application
         android:label="@string/vpnapp_name"
         android:theme="@style/VpnAppTheme"
@@ -42,16 +61,17 @@
             </intent-filter>
         </service>
 
+        <!-- Upstream's skeleton flavour needs these stub names to exist for its own explicit intents; no other app has a reason to
+             start them, so they are not exported. -->
         <activity
-            android:exported="true"
-            android:name=".activities.NotImplemented"
-            tools:ignore="ExportedActivity" />
+            android:exported="false"
+            android:name=".activities.NotImplemented" />
         <activity-alias
-            android:exported="true"
+            android:exported="false"
             android:name=".activities.LogWindow"
             android:targetActivity=".activities.NotImplemented" />
         <activity-alias
-            android:exported="true"
+            android:exported="false"
             android:name=".activities.Req"
             android:targetActivity=".activities.NotImplemented" />
     </application>

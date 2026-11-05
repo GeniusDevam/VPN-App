@@ -1,0 +1,28 @@
+{
+  "_comment": "Everything other apps can reach in the FINAL merged manifest, and every permission, must be listed here. A reachable component is acceptable only if the app needs it from outside AND (where a guard is named) the system-only permission that restricts it to the OS is present. Enforced by tools/manifest-exports.py in CI.",
+  "reachable_components": [
+    {"name": "io.github.geniusdevam.vpnapp.MainActivity", "why": "launcher entry"},
+    {"name": "io.github.geniusdevam.vpnapp.QuickTileService", "guard": "android.permission.BIND_QUICK_SETTINGS_TILE", "why": "Quick Settings tile; only the system can bind it"},
+    {"name": "de.blinkt.openvpn.core.OpenVPNService", "guard": "android.permission.BIND_VPN_SERVICE", "why": "the VPN service; only the system can bind it"},
+    {"name": "de.blinkt.openvpn.core.keepVPNAlive", "guard": "android.permission.BIND_JOB_SERVICE", "why": "JobScheduler callback; only the system can bind it"},
+    {"name": "androidx.profileinstaller.ProfileInstallReceiver", "guard": "android.permission.DUMP", "why": "AndroidX baseline-profile hook; DUMP is held only by adb/system"}
+  ],
+  "permissions": [
+    "android.permission.INTERNET",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.FOREGROUND_SERVICE",
+    "android.permission.FOREGROUND_SERVICE_SPECIAL_USE",
+    "android.permission.POST_NOTIFICATIONS",
+    "io.github.geniusdevam.vpnapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+  ],
+  "required_permissions": [
+    "android.permission.INTERNET",
+    "android.permission.FOREGROUND_SERVICE"
+  ],
+  "application": {
+    "debuggable": null,
+    "testOnly": null,
+    "allowBackup": "false",
+    "usesCleartextTraffic": null
+  }
+}
