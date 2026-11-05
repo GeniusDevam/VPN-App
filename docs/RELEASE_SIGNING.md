@@ -21,6 +21,7 @@ in every clone. Anyone can build an APK that Android treats as a legitimate upda
 * If the repository variable `RELEASE_CERT_SHA256` is set, a build whose certificate differs **fails**.
 
 ## To do (needs you; I cannot and should not create or hold your key)
+0. **Delete the public `latest` release (build #17) now.** It is still downloadable, it carries an APK signed with the leaked key, and the README's install link points at it. The pipeline only removes it after a new signed release exists, and nothing available to the authoring work can delete a release. Do it by hand (GitHub > Releases > `latest` > Delete) rather than waiting.
 1. On your own machine run `tools/generate-release-key.sh`. It creates a 4096-bit RSA key outside the repo, keeps the password in a
    0600 file, and prints the **public** certificate fingerprint plus the exact `gh secret set` commands.
 2. Back the key up offline. Losing it means you can never ship an update Android will accept for installs signed with it.

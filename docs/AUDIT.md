@@ -24,6 +24,10 @@ osv-scanner scan --lockfile build-tree/gradle.lockfile   # or: gradle dependency
 | Compose BOM / Activity Compose | 2026.09.00 / 1.13.0 | `tools/extra.gradle.kts` |
 | OkHttp, AppCompat, Material, Core | 5.5.0, 1.8.0, 1.14.0, 1.19.0 | ics `libs.versions.toml` (upstream's choice) |
 | Android Gradle plugin / NDK | upstream's; CI installs NDK 30.0.16248370 | ics build files, `tools/extra.gradle.kts` |
+**CI toolchain observed on 2026-11-05:** Ubuntu 26.04 runners; the distro's OpenVPN 2.7.0 with OpenSSL 3.5.5 is used for the real-OpenVPN tests (the embedded engine is a different build, see above). GitHub Actions are pinned by version tag (`@v4`), **not by commit SHA**: a moved tag would change what runs. SHAs were not pinned because they could not be resolved and checked from the authoring environment; do it before public distribution (Dependabot can keep them current).
+
+**Exported components.** Upstream's manifest is merged into the app, so the attack surface cannot be read from this repository. The CI step "Inspect APK" now prints every component of the final merged manifest that other apps can reach, with its guarding permission (`tools/manifest-exports.py`). Its first output has not been reviewed yet; any component the app does not need should be removed or guarded.
+
 Observation: the engine is built from the **current upstream tip at the pin time** (two days old), which is the support policy
 upstream states ("only the latest version is supported"). The pin is by commit, so it does not drift silently; updating it is a
 deliberate edit of `tools/ICS_OPENVPN_REF`. There is no Gradle dependency locking in this repository's own overlay; adding
