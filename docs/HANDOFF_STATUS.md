@@ -18,6 +18,8 @@ Branch `ccr-49f3cc12-faye7c`. Audit baseline `fcfba9e`. This file separates **co
 | "Android layer CI-compiled" at `e46cac1` | **False.** CI run 18 on that commit failed to compile on both ABIs (`Session.kt:131`: a trailing lambda bound to the new `authPolicy` parameter). Fixed in `d06b27a`; run 19 built. |
 | "Emulator job green" | The emulator script ended in `exit 0` after any Quick/Best failure and the job was `continue-on-error`, so run 19's emulator (which could not get past the onboarding screen because the longer privacy text pushed the button off-screen) was reported green. Now assertions decide the status (section 4). |
 | "tls-auth probe feasible but not built" | Built and verified (C3), but see section 3: **0 of 96 live relays currently use tls-auth/crypt**, so it helps nothing today. |
+| "Unused permission: safe to remove" (my own, this session) | `RECEIVE_BOOT_COMPLETED` looked unused, but upstream's persisted keep-alive job needs it. Removing it crashed the VPN process on every connect (emulator run 27 FAIL, `IllegalArgumentException: Requested job cannot be persisted without holding RECEIVE_BOOT_COMPLETED`). Restored; the emulator test is what caught it. |
+| "Emulator FAIL means the app broke" | Two FAILs were my own test steps: the onboarding button below the fold (run 19), and the app-picker button below the fold, which left the test stranded on Settings (run 30). Both now scroll like a user and return Home. A FAIL must be read, not assumed. |
 
 ## 2. Findings matrix
 Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated; **Open**; **Unverified** = no evidence either way.
@@ -33,7 +35,7 @@ Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated;
 ### B. Security
 | Item | Status | Evidence / caveat |
 |---|---|---|
-| B1 signing key | **Open** (owner action) | Key removed from tree, CI uses secrets or ephemeral keys. Key and passwords remain in git history; the public `latest` release still exists. |
+| B1 signing key | **Open for the owner; repository side done and verified in CI** | The release key is readable only by the `sign` job (protected environment `release`, tag releases only, read-only token); every other build uses a throw-away key and no other job references a secret (checked on every build; 13 mutation tests re-create the leaks and require rejection). Releases re-sign the already-tested APK (`tools/resign-apk.sh`, exercised on every build with a throw-away key). The certificate is pinned and the leaked key is refused by fingerprint. **Not run with a real key yet.** Owner: GitHub environment setup, delete the old public `latest` release, create the key (docs/RELEASE_SIGNING.md). Old key remains in git history. |
 | B2 server identity | **Fixed, live-checked** | Real OpenVPN: genuine cert connects; wrong name / wrong EKU / untrusted CA rejected; control without policy accepts the wrong name (CI, 7/7, OpenVPN 2.7.0). **Live relays: 15/24 connected with the policy and 15/24 without; every relay that reached TLS presented `CN=opengw.net`.** Residual: authenticates VPN Gate's software, not an individual volunteer. |
 | B3 HTTP fallback | **Fixed** | HTTPS only; cleartext disabled app-wide. |
 | B4 leak protection | **Not guaranteed by an app; documented.** | `persist-tun`, IPv6 blocking, forced DNS. Always-on + "Block connections without VPN" were **not tested** (no device). Probe sockets bypass the tunnel by design. |
@@ -42,7 +44,7 @@ Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated;
 | B7 compression | **Fixed** (removed) | Source reading plus real-OpenVPN acceptance. |
 | B8 validation | **Fixed** | Address matrix, 600-seed sanitizer fuzz, CSV fuzz. |
 | B9 logs and CI output | **Fixed** (owner: delete old branch) | Redacted publishing; debug-gated logging. |
-| B10 dependencies / licences | **Partly done** | Pins and licences documented (`docs/AUDIT.md`); **no vulnerability scan was possible** (databases unreachable). Exported-component listing of the final manifest was added to CI (`tools/manifest-exports.py`) but its output has not been reviewed yet. Actions are pinned by tag, not by SHA (SHAs could not be resolved safely from here). |
+| B10 dependencies / licences | **Attack surface reduced and gated; vulnerability scan still not done** | Components reachable by other apps: **18/23 -> 5/23** (the 5 are the launcher activity and four that need a system-only permission), enforced as a hard CI gate by `tools/manifest-policy.json`; unused permissions removed; unused upstream external-control API and boot receiver removed. Verified live (run 31): Quick/Best/disconnect work and the split-tunnel picker lists 18 apps without `QUERY_ALL_PACKAGES`. `ACCESS_LOCAL_NETWORK` removal cannot be tested before Android 17. **No advisory database was reachable, so "no known vulnerabilities" is not claimed.** |
 
 ### C. Functional
 | Item | Status | Evidence / caveat |
@@ -62,7 +64,7 @@ Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated;
 | Item | Status |
 |---|---|
 | D1 tests fail when behaviour fails | **Fixed (new)**: emulator exit 0/1/3 = PASS/FAIL/INCONCLUSIVE; the job is no longer `continue-on-error`; the release needs it and prints the verdict in its notes. INCONCLUSIVE is a warning, never success. Both PASS and INCONCLUSIVE have now been produced by real runs; a FAIL verdict path has not been exercised on the live job (the script's hard-failure branches were exercised only by the onboarding bug in an earlier run). |
-| D2 supply chain | **Mitigated**: least-privilege permissions, secret-only signing, versioned releases with checksum and attestation. **Open:** action SHA pinning; branch protection / protected environment (owner). |
+| D2 supply chain | **Mitigated and verified in CI**: read-only workflow token; secrets only in the protected `release` environment and only in the `sign` job (checked every build, with 13 mutation tests); tag-only releases gated on default-branch history; actions pinned by commit SHA (one documented exception, `actions/attest-build-provenance@v2`, in the secret-free `publish` job); versioned releases with checksum and attestation; script-injection rule (no `github.*` context in `run:`). **Open (GitHub settings, owner):** required reviewer, tag-only deployment rule, tag and branch rulesets (docs/RELEASE_SIGNING.md). |
 | D3 tests | See section 5. |
 | D4 physical device | **NOT TESTED.** |
 
@@ -82,6 +84,11 @@ Widget, shortcuts, auto-failover, easier Always-on setup, optional Tor, backgrou
 | 22 (`9334d79`) | **PASS** (9 assertions, 0 failed, 0 inconclusive) | The above, plus: Quick Connect connected in 25 s, the connected server was in the chosen country (Austria), an explicit disconnect stayed down for 20 s, and Best Connect finished with a named winner. (This run's overall CI status was still red because of the probe-test harness bug fixed in `28193da`; the emulator job itself passed.) |
 | 23 (`28193da`) | **PASS** (9 assertions, 0 failed, 0 inconclusive); the whole CI run was green | First run with the fixed probe step and the "largest country" script. Quick Connect inside **Japan** (53 servers) connected in 26 s and the status card showed Japan; disconnect stayed down for 20 s; Best Connect named a winner. |
 | 24, 25 (docs-only commits) | not read | Same code as run 23; their emulator results were not inspected. |
+| 27 (`a06079d`, label "run 27") | **FAIL** (genuine app bug) | VPN process crashed on connect after I removed `RECEIVE_BOOT_COMPLETED` (see corrections). |
+| 30 (`c40531a`) | **FAIL** (harness bug, no crash) | The new app-picker step did not scroll and stranded the test on Settings. |
+| 31 (`0f15fca`) | **PASS** (10 assertions, 0 failed); the whole CI run was green | Includes: app picker lists 18 apps without `QUERY_ALL_PACKAGES`; Quick Connect inside **Japan** in 22 s; disconnect stayed down 20 s; Best Connect named a winner; no crash. First PASS on the cleaned manifest (5 reachable components). |
+
+(Run numbers in the `emulator-results` branch are GitHub's run numbers, so they differ from the labels I used in conversation.)
 
 Two PASS and one INCONCLUSIVE out of three runs with real assertions is **not** a reliability figure; live volunteers vary from run to run, and the one INCONCLUSIVE used a country with a single relay.
 
