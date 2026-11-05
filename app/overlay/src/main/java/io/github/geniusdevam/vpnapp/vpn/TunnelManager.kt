@@ -113,7 +113,9 @@ class TunnelManager(
     override fun newLog(logItem: LogItem) {
         val p = pending ?: return
         val msg = try { logItem.getString(app) } catch (_: Exception) { return } ?: return
-        // Engine lines can contain addresses and certificate names: only the verdicts we act on are ever logged, and only in debug.
+        // Only a short allowlist of engine verdicts is ever logged, only when the debug tag is switched on (never in normal use),
+        // and with addresses masked. No configs, no credentials, no traffic details.
+        if (Log.isLoggable(TAG, Log.DEBUG) && ENGINE_LOG_ALLOW.containsMatchIn(msg)) Log.d(TAG, "engine: " + IPV4.replace(msg, "$1.$2.x.x"))
         if (p.cipher == null) {
             (DATA_CHANNEL_RE.find(msg) ?: OUTGOING_RE.find(msg))?.let { p.cipher = it.groupValues[1].uppercase() }
         }
@@ -308,6 +310,8 @@ class TunnelManager(
         private val DATA_CHANNEL_RE = Regex("""Data Channel: cipher '([A-Za-z0-9._-]+)'""")
         private val OUTGOING_RE = Regex("""Outgoing Data Channel: Cipher '([A-Za-z0-9._-]+)' initialized""")
         private val VERIFY_FAIL_RE = Regex("""VERIFY (X509NAME )?ERROR|certificate verify failed|VERIFY KU ERROR|VERIFY EKU ERROR""")
+        private val ENGINE_LOG_ALLOW = Regex("""^(VERIFY |Data Channel: cipher|Outgoing Data Channel: Cipher|Control Channel: TLS|Initialization Sequence Completed|AUTH_FAILED|WARNING: No server certificate|TLS Error|OpenVPN 2|library versions)""")
+        private val IPV4 = Regex("""\b(\d{1,3})\.(\d{1,3})\.\d{1,3}\.\d{1,3}\b""")
         private const val NO_VERIFY_WARNING = "No server certificate verification method has been enabled"
         private const val BYTECOUNT_INTERVAL_S = 2L
         private const val SERVICE_BIND_TIMEOUT_MS = 3_000L

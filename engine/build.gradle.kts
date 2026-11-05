@@ -18,3 +18,9 @@ tasks.test {
     useJUnit()
     testLogging { events("passed", "failed", "skipped"); showStandardStreams = false }
 }
+
+// Used by tools/cert-policy-test.sh: runs the real ConfigSanitizer over profile files (see SanitizeCli.kt).
+tasks.register<JavaExec>("sanitizeCli") {
+    classpath = sourceSets["test"].runtimeClasspath
+    mainClass.set("io.github.geniusdevam.vpnapp.engine.SanitizeCliKt")
+}

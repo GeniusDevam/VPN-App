@@ -5,6 +5,8 @@ reports per server whether the tunnel came up, or the first error. Run in CI; ne
 import base64, csv, concurrent.futures as cf, os, re, subprocess, sys, tempfile, urllib.request
 
 N = int(os.environ.get("N", "16"))
+# POLICY=1 adds the relay-identity policy the app enforces, so the run measures how many genuine relays it admits.
+POLICY = os.environ.get("POLICY") == "1"
 raw = urllib.request.urlopen("https://www.vpngate.net/api/iphone/", timeout=60).read().decode("utf-8", "replace")
 rows = [r for r in csv.reader(l for l in raw.splitlines() if l and l[0] not in "*#") if len(r) >= 15]
 print(f"servers in list: {len(rows)}")
@@ -36,6 +38,8 @@ def test(i_s):
     cmd = ["sudo", "timeout", "40", "openvpn", "--config", f.name, "--dev", f"tun{40+i}", "--verb", "3", "--auth-user-pass", creds.name,
            "--route-noexec", "--ifconfig-noexec", "--script-security", "0", "--connect-retry-max", "1", "--connect-timeout", "15",
            "--pull-filter", "ignore", "redirect-gateway", "--pull-filter", "ignore", "dhcp-option", "--nobind"]
+    if POLICY:
+        cmd += ["--remote-cert-tls", "server", "--verify-x509-name", "opengw.net", "name", "--allow-compression", "no"]
     p = subprocess.run(cmd, capture_output=True, text=True)
     out = p.stdout + p.stderr
     ok = "Initialization Sequence Completed" in out
@@ -44,12 +48,15 @@ def test(i_s):
         errs = [l for l in out.splitlines() if re.search(r"error|fail|VERIFY|AUTH|denied|refused|cannot|Options|unsupported|TLS", l, re.I)]
         why = (errs[0] if errs else (out.strip().splitlines()[-1] if out.strip() else "no output"))[:200]
     cipher = re.search(r"Data Channel: cipher '([^']+)'|Cipher '([^']+)' initialized", out)
-    return s, ok, why, (cipher.group(1) or cipher.group(2)) if cipher else None
+    cn = re.search(r"VERIFY OK: depth=0, (.+)", out)
+    return s, ok, why, (cipher.group(1) or cipher.group(2)) if cipher else None, (cn.group(1)[:60] if cn else "-")
 
 with cf.ThreadPoolExecutor(6) as ex:
     res = list(ex.map(test, enumerate(pick)))
 good = 0
-for s, ok, why, cipher in res:
+from collections import Counter as C2
+print("depth-0 certificate names seen:", dict(C2(r[4] for r in res)))
+for s, ok, why, cipher, cn in res:
     good += ok
-    print(f"{'OK  ' if ok else 'FAIL'} {s['cc']} {s['id']:<28} {s['proto']:<11} cfg-cipher={s['cipher']:<12} negotiated={cipher} {'' if ok else '| ' + why}")
-print(f"RESULT: {good}/{len(res)} connected")
+    print(f"{'OK  ' if ok else 'FAIL'} {s['cc']} {s['id']:<28} {s['proto']:<11} cfg-cipher={s['cipher']:<12} negotiated={cipher} cert={cn} {'' if ok else '| ' + why}")
+print(f"RESULT (policy={'on' if POLICY else 'off'}): {good}/{len(res)} connected")

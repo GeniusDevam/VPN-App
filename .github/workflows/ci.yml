@@ -5,8 +5,9 @@ on:
     tags: ['v*']
   workflow_dispatch:
 
+# Least privilege by default; jobs that need more say so.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   engine:
@@ -17,11 +18,40 @@ jobs:
         with: { distribution: temurin, java-version: '21' }
       - uses: gradle/actions/setup-gradle@v4
         with: { gradle-version: '8.14.3' }
-      - name: Engine unit tests (includes the 35-second guarantee test)
+      - name: Engine unit tests (35-second guarantee, disconnect races, sanitizer fuzz, retention rules)
         working-directory: engine
         run: gradle test --console=plain
 
+  # A real OpenVPN client against real OpenVPN servers presenting good and impersonating certificates (finding B2).
+  cert-policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '21' }
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: '8.14.3' }
+      - name: Install OpenVPN
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq openvpn && openvpn --version | head -1
+      - name: Relay-identity policy against real OpenVPN
+        run: sudo -E env "PATH=$PATH" "JAVA_HOME=$JAVA_HOME" bash tools/cert-policy-test.sh
+
+  # Secrets are not available to forks. This job only reports whether a release signing key is configured.
+  config:
+    runs-on: ubuntu-latest
+    outputs:
+      signed: ${{ steps.chk.outputs.signed }}
+    steps:
+      - id: chk
+        env:
+          HAS_KEY: ${{ secrets.RELEASE_KEYSTORE_B64 }}
+        run: |
+          if [ -n "$HAS_KEY" ]; then echo "signed=true" >> "$GITHUB_OUTPUT"; else echo "signed=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No RELEASE_KEYSTORE_B64 secret: building with an ephemeral CI key. No release will be published. See docs/RELEASE_SIGNING.md."; fi
+
   apk:
+    needs: [config]
     runs-on: ubuntu-latest
     timeout-minutes: 90
     # The x86_64 build exists only for the emulator test; it must never block the real (arm64) release.
@@ -41,19 +71,48 @@ jobs:
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;30.0.16248370" "platforms;android-37.0" "cmake;3.22.1" || true
 
+      # Only the real arm64 build on a trusted ref ever sees the release key. Everything else (the emulator build, forks)
+      # is signed with a throw-away key generated here, which proves nothing about origin and is never published.
+      - name: Prepare signing key
+        env:
+          RELEASE_KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+          USE_RELEASE_KEY: ${{ needs.config.outputs.signed == 'true' && matrix.abi == 'arm64-v8a' }}
+        run: |
+          set -eu
+          KS="$RUNNER_TEMP/signing.p12"
+          if [ "$USE_RELEASE_KEY" = "true" ]; then
+            echo "::add-mask::$RELEASE_KEYSTORE_PASSWORD"; echo "::add-mask::$RELEASE_KEY_PASSWORD"
+            printf '%s' "$RELEASE_KEYSTORE_B64" | base64 -d > "$KS"
+            ALIAS="$RELEASE_KEY_ALIAS"; SPW="$RELEASE_KEYSTORE_PASSWORD"; KPW="$RELEASE_KEY_PASSWORD"
+            echo "SIGNING=release" >> "$GITHUB_ENV"
+          else
+            SPW="$(openssl rand -hex 24)"; KPW="$SPW"; ALIAS="ci"
+            echo "::add-mask::$SPW"
+            keytool -genkeypair -keystore "$KS" -storetype PKCS12 -storepass "$SPW" -keypass "$KPW" -alias "$ALIAS" \
+              -keyalg RSA -keysize 3072 -validity 3 -dname "CN=VPN App CI ephemeral key, O=not a release" >/dev/null
+            echo "SIGNING=ephemeral" >> "$GITHUB_ENV"
+          fi
+          chmod 600 "$KS"
+          # Passed to Gradle through the environment, never on a command line.
+          {
+            echo "ORG_GRADLE_PROJECT_keystoreO2File=$KS"
+            echo "ORG_GRADLE_PROJECT_keystoreO2Password=$SPW"
+            echo "ORG_GRADLE_PROJECT_keystoreO2AliasPassword=$KPW"
+            echo "ORG_GRADLE_PROJECT_keystoreO2Alias=$ALIAS"
+          } >> "$GITHUB_ENV"
+
       - name: Prepare build tree
         run: tools/prepare.sh
 
-      - name: Build signed release APK (arm64, OpenVPN 2.x)
+      - name: Build signed APK (OpenVPN 2.x)
         working-directory: build-tree
         run: |
           ./gradlew --no-daemon --stacktrace :main:assembleSkeletonOvpn2Release \
             -PvpnappVersionCode=$((1000 + GITHUB_RUN_NUMBER)) \
-            -PvpnappAbi=${{ matrix.abi }} \
-            -PkeystoreO2File="$GITHUB_WORKSPACE/tools/release.jks" \
-            -PkeystoreO2Password=vpnapp-release \
-            -PkeystoreO2AliasPassword=vpnapp-release \
-            -PkeystoreO2Alias=vpnapp
+            -PvpnappAbi=${{ matrix.abi }}
 
       - name: Collect APK
         run: |
@@ -61,6 +120,23 @@ jobs:
           apk=$(find build-tree/main/build/outputs/apk -name '*.apk' | head -1)
           echo "APK: $apk"; ls -la "$apk"
           cp "$apk" out/VPN-App.apk
+
+      - name: Verify signature and pin the signing certificate
+        env:
+          EXPECTED_CERT_SHA256: ${{ vars.RELEASE_CERT_SHA256 }}
+        run: |
+          set -eu
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          "$BT/apksigner" verify --verbose --print-certs out/VPN-App.apk > sig.txt
+          FP=$(grep -m1 "certificate SHA-256 digest" sig.txt | awk '{print $NF}')
+          echo "Signing: $SIGNING  ·  certificate SHA-256: $FP" | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ "$SIGNING" = release ] && [ -n "${EXPECTED_CERT_SHA256:-}" ] && [ "$FP" != "$(echo "$EXPECTED_CERT_SHA256" | tr -d ': ' | tr A-F a-f)" ]; then
+            echo "::error::Signing certificate does not match the RELEASE_CERT_SHA256 repository variable"; exit 1
+          fi
+
+      - name: Remove signing material
+        if: always()
+        run: rm -f "$RUNNER_TEMP/signing.p12"
 
       - name: Inspect APK (permissions, entry points, 16 KB alignment)
         continue-on-error: true
@@ -81,43 +157,61 @@ jobs:
                   print(n, 'LOAD align', sorted(set(al)), 'OK(16K)' if min(al)>=16384 else 'NOT 16K')
           PY
       - uses: actions/upload-artifact@v4
-        with: { name: "apk-${{ matrix.abi }}", path: out/VPN-App.apk, if-no-files-found: error }
+        with: { name: "apk-${{ matrix.abi }}", path: out/VPN-App.apk, if-no-files-found: error, retention-days: 14 }
 
+  # Publishes only APKs signed with the real release key, as immutable versioned releases with a checksum and a
+  # build-provenance attestation. Without the secrets nothing is published (see docs/RELEASE_SIGNING.md).
   release:
-    needs: [engine, apk]
-    if: github.ref_name == github.event.repository.default_branch || startsWith(github.ref, 'refs/tags/v')
+    needs: [engine, cert-policy, config, apk]
+    if: needs.config.outputs.signed == 'true' && (github.ref_name == github.event.repository.default_branch || startsWith(github.ref, 'refs/tags/v'))
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with: { name: apk-arm64-v8a, path: out }
-      - name: Publish release "latest"
+      - name: Checksum and provenance
+        run: |
+          (cd out && sha256sum VPN-App.apk > VPN-App.apk.sha256 && cat VPN-App.apk.sha256)
+      - uses: actions/attest-build-provenance@v2
+        with: { subject-path: out/VPN-App.apk }
+      - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -eu
+          VERSION="1.0.$((1000 + GITHUB_RUN_NUMBER))"; TAG="v$VERSION"
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          CERT=$("$BT/apksigner" verify --print-certs out/VPN-App.apk | grep -m1 "certificate SHA-256 digest" | awk '{print $NF}')
+          SHA=$(cut -d' ' -f1 out/VPN-App.apk.sha256)
           cat > notes.md <<NOTES
           Install: open this page on your phone, tap **VPN-App.apk**, then tap Open/Install.
-          Build #${GITHUB_RUN_NUMBER} from commit ${GITHUB_SHA::7}.
+
+          - Version $VERSION, built from commit \`${GITHUB_SHA}\` with OpenVPN for Android at \`$(tr -d '[:space:]' < tools/ICS_OPENVPN_REF)\`.
+          - APK SHA-256: \`$SHA\`
+          - Signing certificate SHA-256: \`$CERT\` (must match the value published in the README; a different value means do not install)
+          - Verify the build origin: \`gh attestation verify VPN-App.apk -R $GITHUB_REPOSITORY\`
           NOTES
+          gh release create "$TAG" out/VPN-App.apk out/VPN-App.apk.sha256 --repo "$GITHUB_REPOSITORY" \
+            --title "VPN App $VERSION" --notes-file notes.md --target "$GITHUB_SHA" --latest
+          # The old mutable "latest" release carried an APK signed with the key that was published in this repository.
+          # Remove it only now that a replacement exists.
           gh release delete latest --cleanup-tag -y --repo "$GITHUB_REPOSITORY" || true
-          gh release create latest out/VPN-App.apk --repo "$GITHUB_REPOSITORY" \
-            --title "VPN App (latest build)" --notes-file notes.md --target "$GITHUB_SHA" --latest
 
   emulator:
     needs: [apk]
     continue-on-error: true
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with: { name: apk-x86_64, path: out }
-      - name: Is the VPN Gate list reachable from here?
-        continue-on-error: true
-        run: |
-          for u in https://www.vpngate.net/api/iphone/ http://www.vpngate.net/api/iphone/; do
-            echo "== $u"; curl -sS -m 30 -o /tmp/list.csv -w "HTTP %{http_code}, %{size_download} bytes, %{time_total}s\n" "$u" || true
-            head -c 400 /tmp/list.csv | cut -c1-200; echo; grep -c ',' /tmp/list.csv || true
-          done
       - name: Enable KVM and emulator runtime libraries
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq libpulse0 libnss3 libxcomposite1 libxcursor1 libxi6 libxtst6 || true
@@ -133,12 +227,11 @@ jobs:
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -noaudio -no-boot-anim -camera-back none -camera-front none
           script: OUT=emu-out bash tools/emulator-test.sh out/VPN-App.apk
-      - name: Publish emulator results to the emulator-results branch
+      # The branch is public. Raw logcat and UI dumps are NEVER published: only a redacted summary (tools/redact-results.py).
+      - name: Publish redacted results to the emulator-results branch
         if: always()
         run: |
-          cd emu-out && git init -q && git checkout -q -b emulator-results && git add -A
-          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "emulator run ${GITHUB_RUN_NUMBER} (${GITHUB_SHA::7})"
+          python3 -I tools/redact-results.py emu-out emu-public
+          cd emu-public && git init -q && git checkout -q -b emulator-results && git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "emulator run ${GITHUB_RUN_NUMBER} (${GITHUB_SHA::7}), redacted"
           git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" emulator-results
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with: { name: emulator-results, path: emu-out, if-no-files-found: warn }

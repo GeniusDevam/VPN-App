@@ -38,9 +38,11 @@ jobs:
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -noaudio -no-boot-anim -camera-back none -camera-front none
           script: OUT=emu-out bash tools/emulator-test.sh out/VPN-App.apk
-      - name: Publish emulator results to the emulator-results branch
+      # The branch is public. Raw logcat and UI dumps are NEVER published: only a redacted summary.
+      - name: Publish redacted results to the emulator-results branch
         if: always()
         run: |
-          cd emu-out && git init -q && git checkout -q -b emulator-results && git add -A
-          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "emulator-only run ${GITHUB_RUN_NUMBER}"
+          python3 -I tools/redact-results.py emu-out emu-public
+          cd emu-public && git init -q && git checkout -q -b emulator-results && git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "emulator-only run ${GITHUB_RUN_NUMBER}, redacted"
           git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" emulator-results
