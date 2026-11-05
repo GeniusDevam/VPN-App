@@ -5,13 +5,14 @@
     <!-- Permissions that upstream's manifest or its libraries add but this app never uses (audit finding B10).
          Each one is enforced absent by tools/manifest-policy.json in CI.
          - READ_EXTERNAL_STORAGE: only for importing .ovpn files from storage, which this app does not do.
-         - RECEIVE_BOOT_COMPLETED: only for upstream's start-on-boot receiver, removed below.
+         - NOT removed: RECEIVE_BOOT_COMPLETED. An earlier attempt to remove it crashed the VPN process on every connect (emulator
+           run 27): upstream's keep-alive job (keepVPNAlive) is a *persisted* JobScheduler job, which Android only allows with this
+           permission. The start-on-boot receiver, a separate component, is removed below; this permission alone starts nothing.
          - QUERY_ALL_PACKAGES: lets an app inventory everything installed. The split-tunnel picker only lists launchable apps,
            which the narrow <queries> entry below already makes visible.
          - ACCESS_LOCAL_NETWORK: LAN access; relays are public addresses and nothing here talks to the local network.
            (Android 17 enforces it; not testable on the Android 16 emulator, so a regression there would show only as LAN failures.) -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" tools:node="remove" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:node="remove" />
     <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" tools:node="remove" />
     <queries>

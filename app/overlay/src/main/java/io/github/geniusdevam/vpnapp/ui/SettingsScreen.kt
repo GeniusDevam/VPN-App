@@ -172,6 +172,7 @@ private data class AppEntry(val label: String, val pkg: String)
 private fun AppPickerDialog(selected: Set<String>, onDone: (Set<String>) -> Unit, onDismiss: () -> Unit) {
     val ctx = LocalContext.current
     var apps by remember { mutableStateOf<List<AppEntry>>(emptyList()) }
+    var loaded by remember { mutableStateOf(false) }
     var sel by remember { mutableStateOf(selected) }
     LaunchedEffect(Unit) {
         apps = withContext(Dispatchers.IO) {
@@ -183,11 +184,20 @@ private fun AppPickerDialog(selected: Set<String>, onDone: (Set<String>) -> Unit
                 .distinctBy { it.pkg }
                 .sortedBy { it.label.lowercase() }
         }
+        loaded = true
     }
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("Apps that skip the VPN") },
         text = {
+          Column {
+            // States the real count (and an empty result) instead of showing a blank list; the emulator test reads this line to
+            // prove the list still works without the QUERY_ALL_PACKAGES permission.
+            Text(
+                if (!loaded) "Loading apps…" else if (apps.isEmpty()) "No launchable apps were found." else "${apps.size} apps can be excluded",
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(bottom = 6.dp),
+            )
             LazyColumn {
                 items(apps, key = { it.pkg }) { a ->
                     Row(
@@ -199,6 +209,7 @@ private fun AppPickerDialog(selected: Set<String>, onDone: (Set<String>) -> Unit
                     }
                 }
             }
+          }
         },
         confirmButton = { TextButton(onClick = { onDone(sel) }) { Text("Save") } },
         dismissButton = { TextButton(onClick = onDismiss) { Text("Cancel") } },
