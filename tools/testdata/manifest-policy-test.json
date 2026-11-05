@@ -1,0 +1,3 @@
+{"reachable_components":[{"name":"a.Main"},{"name":"a.Vpn","guard":"android.permission.BIND_VPN_SERVICE"}],
+ "permissions":["android.permission.INTERNET"],"required_permissions":["android.permission.INTERNET"],
+ "application":{"allowBackup":"false","debuggable":null}}
