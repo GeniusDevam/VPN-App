@@ -37,7 +37,8 @@ jobs:
       - name: Relay-identity policy against real OpenVPN
         run: sudo -E env "PATH=$PATH" "JAVA_HOME=$JAVA_HOME" bash tools/cert-policy-test.sh
       - name: Latency probe for tls-auth relays against real OpenVPN
-        run: bash tools/probe-test.sh
+        # Same invocation as the step above: that step runs Gradle as root, so engine/build is root-owned from here on.
+        run: sudo -E env "PATH=$PATH" "JAVA_HOME=$JAVA_HOME" bash tools/probe-test.sh
 
   # Secrets are not available to forks. This job only reports whether a release signing key is configured.
   config:
