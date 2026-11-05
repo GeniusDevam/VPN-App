@@ -61,6 +61,24 @@
             </intent-filter>
         </service>
 
+        <!-- Upstream components that other apps could reach (found in the built APK by tools/manifest-exports.py, finding B10).
+             Removed: this app never uses upstream's external-control API (another app could ask it to connect, pause or disconnect),
+             and does not start on boot. Enforced by tools/manifest-policy.json. -->
+        <service android:name="de.blinkt.openvpn.api.ExternalOpenVPNService" tools:node="remove" />
+        <activity android:name="de.blinkt.openvpn.api.GrantPermissionsActivity" tools:node="remove" />
+        <activity android:name="de.blinkt.openvpn.api.ConfirmDialog" tools:node="remove" />
+        <activity-alias android:name="de.blinkt.openvpn.api.SetDefaultVPN" tools:node="remove" />
+        <activity-alias android:name="de.blinkt.openvpn.api.ResumeVPN" tools:node="remove" />
+        <activity-alias android:name="de.blinkt.openvpn.api.PauseVPN" tools:node="remove" />
+        <activity-alias android:name="de.blinkt.openvpn.api.DisconnectVPN" tools:node="remove" />
+        <activity-alias android:name="de.blinkt.openvpn.api.ConnectVPN" tools:node="remove" />
+        <receiver android:name="de.blinkt.openvpn.OnBootReceiver" tools:node="remove" />
+        <!-- Kept (upstream may start it with an explicit in-app intent) but no longer startable by other apps. -->
+        <activity
+            android:name="de.blinkt.openvpn.LaunchVPN"
+            android:exported="false"
+            tools:replace="android:exported" />
+
         <!-- Upstream's skeleton flavour needs these stub names to exist for its own explicit intents; no other app has a reason to
              start them, so they are not exported. -->
         <activity
