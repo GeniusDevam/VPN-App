@@ -193,7 +193,7 @@ object Session {
                     withContext(Dispatchers.IO) { Networks.directEgressIp(app) }
                 } else null
                 when (mode) {
-                    RunMode.QUICK -> runQuick(previous)
+                    RunMode.QUICK -> runQuick(previous, h)
                     RunMode.BEST -> runBest(previous)
                     RunMode.WORLDWIDE -> runWorldwide(previous, resumeSearch)
                     RunMode.MANUAL -> runManual(manual!!, previous)
@@ -208,7 +208,7 @@ object Session {
                 }
                 throw e
             } catch (e: Exception) {
-                restore(previous)
+                if (h.mayRestore()) restore(previous)
                 ui.update { it.copy(banner = Banner("Something went wrong: ${e.javaClass.simpleName}", true)) }
             } finally {
                 bestControl = null
@@ -253,7 +253,7 @@ object Session {
 
     private fun gate(fp: String) = ConnectionGate(tunnel, Repo.settings.value.encryption, Repo.ledger, Repo.ledger, fp, wallClock)
 
-    private suspend fun runQuick(previous: Server?) {
+    private suspend fun runQuick(previous: Server?, h: RunCoordinator.Handle) {
         val st = Repo.settings.value
         val ctx = runContext(previous)
         val engine = QuickConnectEngine(
@@ -277,11 +277,11 @@ object Session {
             }
         } catch (e: CancellationException) {
             if (!timedOut) throw e
-            withContext(NonCancellable) {
-                tunnel.abort()
-                ui.update { it.copy(banner = Banner(failText(FailReason.TIMEOUT, st.quickScope), true)) }
-                restore(previous)
-            }
+            // Only the teardown is non-cancellable (it can only make the device less connected). Bringing the previous
+            // connection back stays cancellable and epoch-guarded, so an explicit disconnect can never be undone by a timeout.
+            withContext(NonCancellable) { tunnel.abort() }
+            ui.update { it.copy(banner = Banner(failText(FailReason.TIMEOUT, st.quickScope), true)) }
+            if (h.mayRestore()) restore(previous)
             return
         }
         when (outcome) {
@@ -395,7 +395,13 @@ object Session {
         val r = out.report
         when {
             r == null -> {
-                ui.update { it.copy(banner = Banner(if (out.stop == StopReason.NO_SERVERS) "No usable servers were available for a worldwide search." else "The worldwide search found nothing.", true)) }
+                ui.update { it.copy(banner = Banner(
+                    when (out.stop) {
+                        StopReason.DIRECTORY_UNAVAILABLE -> "The server list could not be loaded, so nothing was searched. Check your connection and try again."
+                        StopReason.NO_SERVERS -> "No servers fit your settings, so nothing was searched."
+                        else -> "The worldwide search found nothing."
+                    }, true,
+                )) }
                 restore(out.restore)
             }
             out.connected == null -> {
@@ -444,8 +450,14 @@ object Session {
     private fun failText(reason: FailReason, scope: Scope): String {
         val where = if (scope is Scope.Country) Countries.name(scope.iso) else "any country"
         return when (reason) {
+            FailReason.DIRECTORY_UNAVAILABLE ->
+                "The server list could not be loaded${Repo.directory.value.lastError?.let { " ($it)" } ?: ""}. " +
+                    "That says nothing about $where. Check your connection and try again."
             FailReason.NO_SERVERS_IN_SCOPE ->
-                "VPN Gate has no usable servers in $where right now. Try again later or choose Any country."
+                "The latest server list has no usable servers in $where. Try again later or choose another country."
+            FailReason.NO_SERVERS_MATCH_SETTINGS ->
+                "There are servers in $where, but none fit your settings (Strong encryption only, or servers recently set aside after failing). " +
+                    "Switch encryption to Compatible in Settings, or choose another country."
             FailReason.COULD_NOT_CONNECT ->
                 "No server in $where accepted the connection. Try again, pick another country, or run Best Connect."
             FailReason.TIMEOUT -> "Could not connect within 35 seconds. Try again or pick another country."

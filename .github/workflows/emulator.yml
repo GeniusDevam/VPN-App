@@ -37,7 +37,14 @@ jobs:
           profile: pixel_6
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -noaudio -no-boot-anim -camera-back none -camera-front none
-          script: OUT=emu-out bash tools/emulator-test.sh out/VPN-App.apk
+          script: OUT=emu-out bash tools/emulator-test.sh out/VPN-App.apk || echo $? > emu-exit
+      - name: Interpret the emulator verdict
+        run: |
+          code=$(cat emu-exit 2>/dev/null || echo 0); [ -f emu-out/result.txt ] || code=1
+          case "$code" in 0) v=PASS ;; 3) v=INCONCLUSIVE ;; *) v=FAIL ;; esac
+          { echo "### Emulator verdict: $v"; sed -n '/^status=/,$p' emu-out/result.txt 2>/dev/null | sed 's/^/    /'; } >> "$GITHUB_STEP_SUMMARY"
+          [ "$v" = INCONCLUSIVE ] && echo "::warning::Live servers were unreachable; connection success is NOT demonstrated."
+          [ "$v" != FAIL ]
       # The branch is public. Raw logcat and UI dumps are NEVER published: only a redacted summary.
       - name: Publish redacted results to the emulator-results branch
         if: always()

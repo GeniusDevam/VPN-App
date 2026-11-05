@@ -3,6 +3,7 @@ package io.github.geniusdevam.vpnapp.data
 import android.content.Context
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
+import io.github.geniusdevam.vpnapp.engine.AtomicFiles
 import java.io.File
 import java.security.KeyStore
 import javax.crypto.Cipher
@@ -49,13 +50,8 @@ object SecureVault {
         out[0] = iv.size.toByte()
         System.arraycopy(iv, 0, out, 1, iv.size)
         System.arraycopy(ct, 0, out, 1 + iv.size, ct.size)
-        val f = file(ctx, name)
-        val tmp = File(f.path + ".tmp")
-        tmp.writeBytes(out)
-        if (!tmp.renameTo(f)) {
-            f.delete()
-            tmp.renameTo(f)
-        }
+        // fsync'd temp file + atomic rename: the previous file is never deleted first (finding C7).
+        AtomicFiles.replace(file(ctx, name), out)
     }
 
     /** Null if the file is missing, corrupt, or the key is gone (e.g. after a device reset). */

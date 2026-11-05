@@ -7,6 +7,7 @@ import io.github.geniusdevam.vpnapp.engine.DirectoryPool
 import io.github.geniusdevam.vpnapp.engine.DirectoryResult
 import io.github.geniusdevam.vpnapp.engine.EncryptionMode
 import io.github.geniusdevam.vpnapp.engine.EndpointInfo
+import io.github.geniusdevam.vpnapp.engine.LatestWinsWriter
 import io.github.geniusdevam.vpnapp.engine.ListingStats
 import io.github.geniusdevam.vpnapp.engine.OptimizeFor
 import io.github.geniusdevam.vpnapp.engine.Scope
@@ -19,9 +20,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -75,7 +73,12 @@ private fun decodeScope(s: String?): Scope = if (s.isNullOrEmpty() || s == "*") 
 object Repo {
     private lateinit var ctx: Context
     private val io = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-    private val writeLock = Mutex()
+    /** One ordered, coalescing writer per file: an older snapshot can never overwrite a newer one (finding C7). */
+    private fun writer(name: String) = LatestWinsWriter(io) { SecureVault.write(ctx, name, it) }
+    private val stateWriter by lazy { writer("state") }
+    private val ledgerWriter by lazy { writer("ledger") }
+    private val poolWriter by lazy { writer("servers") }
+    private val searchWriter by lazy { writer("search") }
     private var inited = false
 
     /** Success/failure history, reputation, latency and throughput priors. Never sent anywhere. */
@@ -142,7 +145,7 @@ object Repo {
 
     private fun saveState() {
         val snapshot = stateJson()
-        io.launch { writeLock.withLock { runCatching { SecureVault.write(ctx, "state", snapshot.toString().toByteArray()) } } }
+        stateWriter.submit { snapshot.toString().toByteArray() }
     }
 
     private fun stateJson(): JSONObject {
@@ -179,7 +182,7 @@ object Repo {
     /** Persist the ledger after a run or any change to reputation/history. */
     fun saveLearning() {
         val snap = ledger.snapshot()
-        io.launch { writeLock.withLock { runCatching { SecureVault.write(ctx, "ledger", Codec.ledgerToJson(snap).toString().toByteArray()) } } }
+        ledgerWriter.submit { Codec.ledgerToJson(snap).toString().toByteArray() }
     }
 
     /** Settings > Clear history: forgets measurements and counters; retention bookkeeping stays. */
@@ -229,9 +232,11 @@ object Repo {
     }
 
     private fun savePool() {
-        val diag = diagToJson(_directory.value)
-        val o = Codec.poolToJson(pool.entries(), serversFetchedAt.takeIf { it > 0 }).put("diag", diag)
-        io.launch { writeLock.withLock { runCatching { SecureVault.write(ctx, "servers", o.toString().toByteArray()) } } }
+        // Snapshot cheaply here; the (potentially multi-thousand-record) JSON is built on the writer thread, not the caller's.
+        val diag = _directory.value
+        val entries = pool.entries()
+        val at = serversFetchedAt.takeIf { it > 0 }
+        poolWriter.submit { Codec.poolToJson(entries, at).put("diag", diagToJson(diag)).toString().toByteArray() }
     }
 
     private fun diagToJson(d: DirectoryDiagnostics): JSONObject {
@@ -261,7 +266,7 @@ object Repo {
     fun saveSearch(s: SavedSearch) {
         _lastSearch.value = s
         val o = searchToJson(s)
-        io.launch { writeLock.withLock { runCatching { SecureVault.write(ctx, "search", o.toString().toByteArray()) } } }
+        searchWriter.submit { o.toString().toByteArray() }
     }
 
     /** Throughput results from an interrupted search that are recent enough (6 h) to reuse without re-measuring. */

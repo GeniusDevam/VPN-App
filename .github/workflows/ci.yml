@@ -162,7 +162,7 @@ jobs:
   # Publishes only APKs signed with the real release key, as immutable versioned releases with a checksum and a
   # build-provenance attestation. Without the secrets nothing is published (see docs/RELEASE_SIGNING.md).
   release:
-    needs: [engine, cert-policy, config, apk]
+    needs: [engine, cert-policy, config, apk, emulator]
     if: needs.config.outputs.signed == 'true' && (github.ref_name == github.event.repository.default_branch || startsWith(github.ref, 'refs/tags/v'))
     runs-on: ubuntu-latest
     permissions:
@@ -181,6 +181,7 @@ jobs:
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
+          EMULATOR_VERDICT: ${{ needs.emulator.outputs.verdict }}
         run: |
           set -eu
           VERSION="1.0.$((1000 + GITHUB_RUN_NUMBER))"; TAG="v$VERSION"
@@ -190,6 +191,7 @@ jobs:
           cat > notes.md <<NOTES
           Install: open this page on your phone, tap **VPN-App.apk**, then tap Open/Install.
 
+          - Live emulator check on x86_64 Android 16: **${EMULATOR_VERDICT}** (PASS = Quick Connect really connected inside the chosen country and every assertion held; INCONCLUSIVE = live volunteer servers or the server list were unreachable in that run, so connection success is NOT shown for this build; a FAIL would have blocked this release). The emulator is not a phone: real-device behaviour is untested.
           - Version $VERSION, built from commit \`${GITHUB_SHA}\` with OpenVPN for Android at \`$(tr -d '[:space:]' < tools/ICS_OPENVPN_REF)\`.
           - APK SHA-256: \`$SHA\`
           - Signing certificate SHA-256: \`$CERT\` (must match the value published in the README; a different value means do not install)
@@ -201,11 +203,14 @@ jobs:
           # Remove it only now that a replacement exists.
           gh release delete latest --cleanup-tag -y --repo "$GITHUB_REPOSITORY" || true
 
+  # A FAIL (the app misbehaved) fails this job and so blocks the release. INCONCLUSIVE (live volunteer servers or the server
+  # list unreachable) is reported as a warning and recorded in the release notes; it is never presented as success.
   emulator:
     needs: [apk]
-    continue-on-error: true
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    outputs:
+      verdict: ${{ steps.verdict.outputs.verdict }}
     permissions:
       contents: write
     steps:
@@ -226,7 +231,24 @@ jobs:
           profile: pixel_6
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -noaudio -no-boot-anim -camera-back none -camera-front none
-          script: OUT=emu-out bash tools/emulator-test.sh out/VPN-App.apk
+          script: OUT=emu-out bash tools/emulator-test.sh out/VPN-App.apk || echo $? > emu-exit
+      - name: Interpret the emulator verdict
+        id: verdict
+        run: |
+          code=$(cat emu-exit 2>/dev/null || echo 0)
+          [ -f emu-out/result.txt ] || code=1   # no result file at all: the harness itself broke
+          case "$code" in
+            0) v=PASS ;;
+            3) v=INCONCLUSIVE ;;
+            *) v=FAIL ;;
+          esac
+          echo "verdict=$v" >> "$GITHUB_OUTPUT"
+          { echo "### Emulator verdict: $v"; echo; sed -n '/^status=/,$p' emu-out/result.txt 2>/dev/null | sed 's/^/    /'; } >> "$GITHUB_STEP_SUMMARY"
+          case "$v" in
+            INCONCLUSIVE) echo "::warning title=Emulator INCONCLUSIVE::Live VPN Gate servers or the server list were unreachable. Connection success is NOT demonstrated by this run." ;;
+            FAIL) echo "::error title=Emulator FAIL::The app failed an asserted behaviour. See the summary." ;;
+          esac
+          [ "$v" != FAIL ]
       # The branch is public. Raw logcat and UI dumps are NEVER published: only a redacted summary (tools/redact-results.py).
       - name: Publish redacted results to the emulator-results branch
         if: always()

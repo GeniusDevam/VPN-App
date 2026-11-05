@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 
 enum class SearchPhase { LOADING, PROBING, REFINING, SPEED_TESTING, CONFIRMING, CONNECTING, DONE }
 
-enum class StopReason { COMPLETED, DIMINISHING_RETURNS, USER_FINISHED, DATA_BUDGET, TIME_BUDGET, NO_SERVERS }
+enum class StopReason { COMPLETED, DIMINISHING_RETURNS, USER_FINISHED, DATA_BUDGET, TIME_BUDGET, NO_SERVERS, DIRECTORY_UNAVAILABLE }
 
 /** Everything the UI needs for an honest progress screen and "best so far" leaderboard. */
 data class SearchProgress(
@@ -158,9 +158,12 @@ class GlobalSearchEngine(
         fun timeUp() = elapsed() >= cfg.maxDurationMs
 
         progress(SearchPhase.LOADING)
-        pool = catalog.servers(0, 15_000)
-            .filter { !reputation.isBlocked(it.id) && CipherPolicy.acceptsServer(it, cfg.mode) }
-        if (pool.isEmpty()) return SearchOutcome.Finished(null, null, StopReason.NO_SERVERS, ctx.previous)
+        pool = when (val sel = PoolSelection.select(catalog.servers(0, 15_000), Scope.Any, cfg.mode, reputation)) {
+            is PoolResult.Ready -> sel.pool
+            is PoolResult.Empty -> return SearchOutcome.Finished(
+                null, null, if (sel.reason == FailReason.DIRECTORY_UNAVAILABLE) StopReason.DIRECTORY_UNAVAILABLE else StopReason.NO_SERVERS, ctx.previous,
+            )
+        }
 
         // ---- 1. stratified, batched probing ----
         val b = ProbeBoard(reputation, history, ctx.fingerprint, cfg.scoring)
