@@ -85,9 +85,10 @@ class BestConnectEngine(
     private suspend fun attempt(scope: Scope, ctx: RunContext, control: BestControl, emit: (EngineEvent) -> Unit): BestOutcome {
         val start = clock.nowMs()
         emit(EngineEvent.Phase(PhaseId.LOADING_SERVERS))
-        val pool = catalog.servers(0, cfg.catalogFetchTimeoutMs)
-            .filter { scope.matches(it) && !reputation.isBlocked(it.id) && CipherPolicy.acceptsServer(it, cfg.mode) }
-        if (pool.isEmpty()) return BestOutcome.Failed(FailReason.NO_SERVERS_IN_SCOPE, ctx.previous, null)
+        val pool = when (val sel = PoolSelection.select(catalog.servers(0, cfg.catalogFetchTimeoutMs), scope, cfg.mode, reputation)) {
+            is PoolResult.Ready -> sel.pool
+            is PoolResult.Empty -> return BestOutcome.Failed(sel.reason, ctx.previous, null)
+        }
 
         // Stage 2: full latency scan.
         emit(EngineEvent.Phase(PhaseId.SCANNING, "${pool.size}"))

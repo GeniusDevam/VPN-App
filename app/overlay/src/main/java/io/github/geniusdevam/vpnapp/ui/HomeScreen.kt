@@ -40,6 +40,7 @@ import io.github.geniusdevam.vpnapp.engine.BestReport
 import io.github.geniusdevam.vpnapp.engine.Countries
 import io.github.geniusdevam.vpnapp.engine.PhaseId
 import io.github.geniusdevam.vpnapp.engine.countryOptions
+import io.github.geniusdevam.vpnapp.engine.state
 
 @Composable
 fun HomeScreen(withVpnPermission: (() -> Unit) -> Unit) {
@@ -50,6 +51,8 @@ fun HomeScreen(withVpnPermission: (() -> Unit) -> Unit) {
     var picker by remember { mutableStateOf<RunMode?>(null) }
     var showReport by remember { mutableStateOf(false) }
     val options = remember(servers) { servers.filter { !Repo.reputation.isBlocked(it.id) }.countryOptions() }
+    val directoryDiag by Repo.directory.collectAsState()
+    val directoryState = directoryDiag.state(servers.size)
     val busy = ui.run != null
 
     LazyColumn(
@@ -108,6 +111,8 @@ fun HomeScreen(withVpnPermission: (() -> Unit) -> Unit) {
         CountryPickerSheet(
             options = options,
             current = if (mode == RunMode.QUICK) settings.quickScope else settings.bestScope,
+            directory = directoryState,
+            directoryError = directoryDiag.lastError,
             onSelect = { sel ->
                 Repo.update { if (mode == RunMode.QUICK) it.copy(quickScope = sel) else it.copy(bestScope = sel) }
                 picker = null

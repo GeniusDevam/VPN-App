@@ -150,8 +150,14 @@ class GlobalSearchEngineTest {
         assertTrue(out.report!!.winner.id in seeds.keys, "seeded winner should still be able to win")
     }
 
-    @Test fun emptyOrBlockedPoolFailsHonestly() = runTest {
+    @Test fun emptyDirectoryIsReportedAsUnavailableNotAsNoServers() = runTest {
         val out = mkEngine(this, emptyList()).run(RunContext(previous = srv("prev"))) as SearchOutcome.Finished
+        assertEquals(StopReason.DIRECTORY_UNAVAILABLE, out.stop); assertNull(out.report); assertEquals("prev", out.restore?.id)
+    }
+
+    @Test fun loadedDirectoryWhereEverythingIsExcludedFailsAsNoServers() = runTest {
+        val strongOnly = GlobalSearchConfig(mode = EncryptionMode.STRONG)
+        val out = mkEngine(this, listOf(srv("a", cipher = "AES-128-CBC")), cfg = strongOnly).run(RunContext(previous = srv("prev"))) as SearchOutcome.Finished
         assertEquals(StopReason.NO_SERVERS, out.stop); assertNull(out.report); assertEquals("prev", out.restore?.id)
     }
 
