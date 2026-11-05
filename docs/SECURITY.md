@@ -16,6 +16,18 @@ verified. "Verified" means demonstrated by a test that was actually run.
 | B9 | Logging/privacy, public CI output | **Fixed** (redacted publishing); owner action: delete old branch | Redactor self-tested |
 | B10 | Dependency/licence audit | Partly done; advisory scan **not possible here** (docs/AUDIT.md) | |
 
+## C7. Persistence
+Every stored file is replaced with fsync + atomic rename and the old file is never deleted first (`AtomicFiles`). Writes of each file go
+through one ordered, coalescing writer (`LatestWinsWriter`), so an older snapshot can never overwrite a newer one. The previous
+design (one coroutine per save behind a Mutex) reordered writes in 30 of 30 rounds of the new race test; the new one in none. Tested in
+`PersistenceTest` (crash between temp write and commit keeps the old content; 30 rounds x 400 racing submissions end on the newest).
+Not tested: Android Keystore failures and power loss on a real device (the JVM tests cannot exercise `SecureVault`'s key handling).
+
+## B5 follow-up
+The Quick Connect watchdog-timeout path and the generic-exception path used to restore the previous connection without asking the
+coordinator whether an explicit disconnect had happened since. Both are now epoch-guarded, and the post-timeout restore is
+cancellable, so a disconnect always wins. The emulator test additionally asserts that an explicit disconnect stays disconnected for 20 s.
+
 ## B2. Relay identity
 `ConfigParser.convertProfile()` in the pinned ics-openvpn clears `mCheckRemoteCN` and `mExpectTLSCert`, so a profile without those
 lines produced OpenVPN's *"No server certificate verification method has been enabled"* in all 16 connection attempts of the CI

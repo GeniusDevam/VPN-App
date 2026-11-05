@@ -39,7 +39,7 @@ Requires Android 8.0 or newer and a 64-bit phone (any phone from the last severa
 - **Privacy is limited by the servers**, not by the app (see above).
 - **Speed tests** use Cloudflare's public speed-test endpoints and use data (about 30 MB per server tested on Wi-Fi; far less on mobile data; figures are estimates). Their availability and terms can change.
 - **Not included yet:** home-screen widget, app shortcuts, automatic failover while connected, Always-on action, Tor mode. See `PLAN.md`.
-- **Android layer not compiled locally for the latest changes.** The engine (95+ unit tests, plus a real-OpenVPN certificate test) is verified; the Compose/Android code was validated by CI only. Check the Actions tab before relying on a build.
+- **Android layer is verified by CI only** (the Android SDK is not available in the authoring sandbox). The engine has 129 unit tests plus real-OpenVPN tests for certificate policy and the tls-auth probe. A build is only meaningful if its Actions run is green; the emulator step reports PASS, FAIL or INCONCLUSIVE (see docs/HANDOFF_STATUS.md).
 
 ## How it works
 
