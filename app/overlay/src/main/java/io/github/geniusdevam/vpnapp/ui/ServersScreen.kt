@@ -30,6 +30,8 @@ import androidx.compose.ui.unit.dp
 import io.github.geniusdevam.vpnapp.Session
 import io.github.geniusdevam.vpnapp.data.Repo
 import io.github.geniusdevam.vpnapp.engine.Countries
+import io.github.geniusdevam.vpnapp.engine.RecordSummary
+import io.github.geniusdevam.vpnapp.net.Networks
 import io.github.geniusdevam.vpnapp.engine.Server
 
 @Composable
@@ -37,6 +39,8 @@ fun ServersScreen(withVpnPermission: (() -> Unit) -> Unit) {
     val servers by Repo.servers.collectAsState()
     val settings by Repo.settings.collectAsState()
     val ui by Session.ui.collectAsState()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val fingerprint = remember { runCatching { Networks.fingerprint(context.applicationContext) }.getOrNull() }
     var query by remember { mutableStateOf("") }
     var favoritesOnly by remember { mutableStateOf(false) }
 
@@ -75,7 +79,7 @@ fun ServersScreen(withVpnPermission: (() -> Unit) -> Unit) {
                     )
                 }
                 items(list, key = { it.id }) { s ->
-                    ServerRow(s, s.id in settings.favorites, Repo.reputation.isBlocked(s.id), ui.run == null, withVpnPermission)
+                    ServerRow(s, s.id in settings.favorites, Repo.reputation.isBlocked(s.id), fingerprint, ui.run == null, withVpnPermission)
                     HorizontalDivider()
                 }
             }
@@ -88,6 +92,7 @@ private fun ServerRow(
     s: Server,
     favorite: Boolean,
     blocked: Boolean,
+    fingerprint: String?,
     canConnect: Boolean,
     withVpnPermission: (() -> Unit) -> Unit,
 ) {
@@ -100,14 +105,7 @@ private fun ServerRow(
             Text((if (favorite) "★ " else "") + s.id + if (blocked) "  (avoided)" else "", style = MaterialTheme.typography.bodyLarge)
             Text(serverDetail(s), style = MaterialTheme.typography.bodySmall)
             Repo.ledger.record(s.id)?.let { r ->
-                if (r.successCount + r.failureCount > 0) {
-                    Text(
-                        "✓ ${r.successCount} · ✗ ${r.failureCount}" +
-                            (r.dropRate?.let { " · dropped ${"%.0f".format(it * 100)}% of sessions" } ?: "") +
-                            (r.lastFailure?.let { " · last problem: ${it.name.lowercase().replace('_', ' ')}" } ?: ""),
-                        style = MaterialTheme.typography.bodySmall,
-                    )
-                }
+                RecordSummary.lines(r, fingerprint, System.currentTimeMillis()).forEach { Text(it, style = MaterialTheme.typography.bodySmall) }
             }
         }
         Box {
