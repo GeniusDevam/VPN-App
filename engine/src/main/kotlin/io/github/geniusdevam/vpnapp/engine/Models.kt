@@ -149,7 +149,10 @@ data class BestEntry(
     val score: Double,
 )
 
-enum class FailReason { NO_SERVERS_IN_SCOPE, COULD_NOT_CONNECT, TIMEOUT }
+/**
+ * Why a run ended without a connection. The first three describe the server pool, and are deliberately distinct (see [PoolSelection]).
+ */
+enum class FailReason { DIRECTORY_UNAVAILABLE, NO_SERVERS_IN_SCOPE, NO_SERVERS_MATCH_SETTINGS, COULD_NOT_CONNECT, TIMEOUT }
 
 /** How Quick Connect arrived at its pick. Quick Connect is always approximate: it compares latency of a subset, within a time budget. */
 data class SelectionInfo(

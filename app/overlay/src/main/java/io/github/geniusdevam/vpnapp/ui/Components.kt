@@ -1,6 +1,6 @@
 package io.github.geniusdevam.vpnapp.ui
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,9 +25,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import io.github.geniusdevam.vpnapp.engine.Countries
 import io.github.geniusdevam.vpnapp.engine.CountryOption
+import io.github.geniusdevam.vpnapp.engine.DirectoryState
 import io.github.geniusdevam.vpnapp.engine.Scope
 import kotlinx.coroutines.delay
 
@@ -49,6 +52,8 @@ fun CountryChip(scope: Scope, enabled: Boolean, onClick: () -> Unit) {
 fun CountryPickerSheet(
     options: List<CountryOption>,
     current: Scope,
+    directory: DirectoryState,
+    directoryError: String?,
     onSelect: (Scope) -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -58,11 +63,19 @@ fun CountryPickerSheet(
         val q = query.trim().lowercase()
         if (q.isEmpty()) options else options.filter { it.name.lowercase().contains(q) || it.iso.lowercase() == q }
     }
+    // A country chosen earlier may have no server in the current list. Show it (selected) instead of hiding the user's own choice.
+    val missingCurrent = (current as? Scope.Country)?.takeIf { c -> options.none { it.iso == c.iso } }
     ModalBottomSheet(onDismissRequest = onDismiss, sheetState = state) {
         Column(Modifier.navigationBarsPadding().padding(horizontal = 16.dp)) {
             Text("Choose a country", style = MaterialTheme.typography.titleLarge)
             Text(
-                "Only countries with servers available right now are listed.",
+                when (directory) {
+                    DirectoryState.LOADING -> "Loading the server list…"
+                    DirectoryState.UNAVAILABLE -> "The server list could not be loaded${directoryError?.let { " ($it)" } ?: ""}, so no country is known to have servers. This does not mean there are none."
+                    DirectoryState.EMPTY -> "The latest server list has no usable servers."
+                    DirectoryState.STALE -> "Showing saved servers: the latest refresh failed${directoryError?.let { " ($it)" } ?: ""}. Counts may be out of date."
+                    DirectoryState.FRESH -> "Only countries with servers in the current list are shown."
+                },
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 2.dp, bottom = 8.dp),
             )
@@ -72,10 +85,15 @@ fun CountryPickerSheet(
             )
             LazyColumn(Modifier.weightedFill()) {
                 item {
-                    PickerRow("🌐  Any country (sample of all countries)", "${options.sumOf { it.serverCount }} servers", current == Scope.Any) {
-                        onSelect(Scope.Any)
-                    }
+                    PickerRow(
+                        "\uD83C\uDF10  Any country (sample of all countries)",
+                        if (options.isEmpty()) "no servers loaded" else "${options.sumOf { it.serverCount }} servers",
+                        current == Scope.Any,
+                    ) { onSelect(Scope.Any) }
                     HorizontalDivider()
+                }
+                if (missingCurrent != null && query.isBlank()) item {
+                    PickerRow("${Countries.flag(missingCurrent.iso)}  ${Countries.name(missingCurrent.iso)}", "none in the current list", true) { onSelect(missingCurrent) }
                 }
                 items(filtered, key = { it.iso }) { c ->
                     PickerRow(
@@ -83,7 +101,7 @@ fun CountryPickerSheet(
                         current == Scope.Country(c.iso),
                     ) { onSelect(Scope.Country(c.iso)) }
                 }
-                if (filtered.isEmpty()) item { Text("No matching country.", Modifier.padding(16.dp)) }
+                if (filtered.isEmpty() && options.isNotEmpty()) item { Text("No matching country.", Modifier.padding(16.dp)) }
             }
         }
     }
@@ -94,11 +112,14 @@ private fun Modifier.weightedFill(): Modifier = this.fillMaxWidth()
 @Composable
 private fun PickerRow(title: String, sub: String, selected: Boolean, onClick: () -> Unit) {
     Row(
-        Modifier.fillMaxWidth().clickable(onClick = onClick).padding(vertical = 14.dp),
+        Modifier.fillMaxWidth()
+            .selectable(selected = selected, onClick = onClick, role = Role.RadioButton)
+            .semantics(mergeDescendants = true) {}
+            .padding(vertical = 14.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(title + if (selected) "  ✓" else "", style = MaterialTheme.typography.bodyLarge)
+        Text(title + if (selected) "  \u2713" else "", style = MaterialTheme.typography.bodyLarge)
         Text(sub, style = MaterialTheme.typography.bodySmall)
     }
 }

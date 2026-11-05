@@ -163,3 +163,24 @@ data class DirectoryDiagnostics(
     val knownPartial: Boolean = true,
     val savedServerRecords: Int = 0,
 )
+
+/** What the user may truthfully be told about the server list (finding C9). */
+enum class DirectoryState {
+    /** Nothing has been attempted or completed yet: "still loading" is the only honest statement. */
+    LOADING,
+    /** No list was ever obtained and the last attempt failed: nothing is known about any country. */
+    UNAVAILABLE,
+    /** A list was obtained and contains no usable relay at all. */
+    EMPTY,
+    /** Servers shown come from the cache because the latest refresh failed. */
+    STALE,
+    FRESH,
+}
+
+fun DirectoryDiagnostics.state(serversShown: Int): DirectoryState = when {
+    serversShown == 0 && lastSuccessfulRefreshAt == null && lastError == null -> DirectoryState.LOADING
+    serversShown == 0 && lastSuccessfulRefreshAt == null -> DirectoryState.UNAVAILABLE
+    serversShown == 0 -> DirectoryState.EMPTY
+    servingStaleCache -> DirectoryState.STALE
+    else -> DirectoryState.FRESH
+}

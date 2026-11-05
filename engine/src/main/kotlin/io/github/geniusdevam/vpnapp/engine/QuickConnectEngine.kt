@@ -59,9 +59,10 @@ class QuickConnectEngine(
 
     private suspend fun attempt(scope: Scope, ctx: RunContext, start: Long, emit: (EngineEvent) -> Unit): QuickOutcome {
         emit(EngineEvent.Phase(PhaseId.LOADING_SERVERS))
-        val pool = catalog.servers(cfg.cacheMaxAgeMs, cfg.fetchTimeoutMs)
-            .filter { scope.matches(it) && !reputation.isBlocked(it.id) && CipherPolicy.acceptsServer(it, cfg.mode) }
-        if (pool.isEmpty()) return QuickOutcome.Failed(FailReason.NO_SERVERS_IN_SCOPE, ctx.previous)
+        val pool = when (val sel = PoolSelection.select(catalog.servers(cfg.cacheMaxAgeMs, cfg.fetchTimeoutMs), scope, cfg.mode, reputation)) {
+            is PoolResult.Ready -> sel.pool
+            is PoolResult.Empty -> return QuickOutcome.Failed(sel.reason, ctx.previous)
+        }
 
         val candidates = Prioritizer.pick(pool, ctx, history, cfg.maxCandidates, cfg.exploreCount, random)
         emit(EngineEvent.Phase(PhaseId.SCANNING, "${candidates.size}"))
