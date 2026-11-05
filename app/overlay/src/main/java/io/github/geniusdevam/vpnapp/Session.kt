@@ -128,7 +128,7 @@ object Session {
         inited = true
         app = application
         Repo.init(app)
-        tunnel = TunnelManager(app) { Repo.settings.value }
+        tunnel = TunnelManager(app, settings = { Repo.settings.value })
         tunnel.onSessionEnded = { server, durationMs, unexpected ->
             Repo.ledger.sessionEnded(server.id, Networks.fingerprint(app), durationMs, unexpected)
             Repo.saveLearning()
