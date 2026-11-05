@@ -157,7 +157,6 @@ jobs:
       # The manifest of the FINAL apk must match tools/manifest-policy.json: only the listed components are reachable by other apps,
       # only the listed permissions are requested, and debuggable/backup/cleartext flags are off.
       - name: Manifest policy (reachable components, permissions, application flags)
-        continue-on-error: true   # becomes a hard gate once the unused upstream components are removed
         run: |
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
           "$BT/aapt2" dump xmltree out/VPN-App.apk --file AndroidManifest.xml | python3 -I tools/manifest-exports.py --policy tools/manifest-policy.json
