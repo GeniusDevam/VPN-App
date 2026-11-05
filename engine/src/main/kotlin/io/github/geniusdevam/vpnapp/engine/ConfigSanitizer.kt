@@ -88,7 +88,7 @@ object ConfigSanitizer {
     private val blockContent = Regex("^[A-Za-z0-9+/=\\-# ]*$")
     private val hostRe = Regex("^[A-Za-z0-9.\\-:]{1,253}$")
     private val simpleKeep = setOf(
-        "client", "resolv-retry", "nobind", "persist-key", "persist-tun", "tls-client", "auth-nocache",
+        "client", "nobind", "persist-key", "persist-tun", "tls-client", "auth-nocache",
     )
 
     /**
@@ -172,6 +172,8 @@ object ConfigSanitizer {
             val t = line.split(Regex("\\s+"))
             when {
                 t[0] in simpleKeep -> simple.add(t[0])
+                // OpenVPN requires an argument here ("infinite" or seconds); a bare `resolv-retry` is an options error.
+                t[0] == "resolv-retry" -> simple.add("resolv-retry infinite")
                 t[0] == "auth-user-pass" -> sawAuthUserPass = true
                 t[0] == "key-direction" && t.size >= 2 && (t[1] == "0" || t[1] == "1") -> keyDirection = t[1]
                 // Compression is never forwarded. OpenVPN 2.7 never compresses outbound traffic anyway ("We never
