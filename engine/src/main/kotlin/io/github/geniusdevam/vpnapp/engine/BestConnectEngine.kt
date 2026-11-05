@@ -52,10 +52,12 @@ class BestConnectEngine(
     private val clock: Clock = MonotonicClock,
     private val cfg: BestConfig = BestConfig(),
     private val random: Random = Random.Default,
+    private val recorder: AttemptRecorder = NoRecorder,
 ) {
     private val runner = ProbeRunner(prober, clock)
 
-    private class Acc(val server: Server, val latency: LatencyStats, var cipher: String?) {
+    private class Acc(val server: Server, val latency: LatencyStats, var admitted: Admitted) {
+        val cipher: String? get() = admitted.cipher
         val runs = ArrayList<ThroughputStats>()
     }
 
@@ -112,24 +114,23 @@ class BestConnectEngine(
             (fast + slow).take(cfg.maxCandidates)
         }
 
+        val gate = ConnectionGate(tunnel, cfg.mode, reputation, recorder, ctx.fingerprint, clock)
         val accs = LinkedHashMap<String, Acc>()
         var bytes = 0L
         fun entries(): List<BestEntry> =
             Composite.score(accs.values.filter { it.runs.isNotEmpty() }.map { Composite.Sample(it.server, it.latency, it.runs, it.cipher) }, cfg.optimize)
 
         suspend fun test(c: Ranked): ThroughputStats? {
-            val r = tunnel.connect(c.server, cfg.connectTimeoutMs)
-            if (!r.success) { reputation.recordFailure(c.server.id, r.hard); return null }
-            if (!CipherPolicy.acceptsNegotiated(r.cipher, cfg.mode)) {
-                reputation.recordFailure(c.server.id, true); return null
+            val adm = when (val g = gate.connect(c.server, cfg.connectTimeoutMs)) {
+                is GateResult.Open -> g.admitted
+                is GateResult.Refused -> return null // gate already disconnected a policy violator and recorded the failure
             }
-            reputation.recordSuccess(c.server.id)
             val budget = minOf(cfg.perCandidateBytes, cfg.runCapBytes - bytes)
             if (budget <= 0) return null
             val t = tester.run(c.server, TestLimits(budget)) ?: return null
             bytes += t.bytesUsed
-            val acc = accs.getOrPut(c.server.id) { Acc(c.server, c.latency, r.cipher) }
-            acc.cipher = r.cipher ?: acc.cipher
+            val acc = accs.getOrPut(c.server.id) { Acc(c.server, c.latency, adm) }
+            acc.admitted = adm
             acc.runs.add(t)
             history.recordThroughput(c.server.id, ctx.fingerprint, t.downMbps)
             return t
@@ -180,17 +181,18 @@ class BestConnectEngine(
                 .distinctBy { it.id }.take(4)
         var report: BestReport? = null
         for ((i, s) in order.withIndex()) {
-            val cipher: String?
-            if (tunnel.currentServerId == s.id) {
-                cipher = accs[s.id]?.cipher
+            val admitted: Admitted
+            val standing = accs[s.id]
+            if (tunnel.currentServerId == s.id && standing != null) {
+                // Already connected from its speed test: still re-check it against the CURRENT policy.
+                if (!gate.recheck(standing.admitted)) { reputation.recordFailure(s.id, true); continue }
+                admitted = standing.admitted
             } else {
                 emit(EngineEvent.Connecting(s, i + 1))
-                val r = tunnel.connect(s, cfg.finalConnectTimeoutMs)
-                if (!r.success) { reputation.recordFailure(s.id, r.hard); continue }
-                if (!CipherPolicy.acceptsNegotiated(r.cipher, cfg.mode)) {
-                    tunnel.disconnect(); reputation.recordFailure(s.id, true); continue
+                admitted = when (val g = gate.connect(s, cfg.finalConnectTimeoutMs)) {
+                    is GateResult.Open -> g.admitted
+                    is GateResult.Refused -> continue
                 }
-                cipher = r.cipher
             }
             val why = when {
                 control.finishNow -> "Connected to the leader when you asked to finish early."
@@ -198,7 +200,7 @@ class BestConnectEngine(
                 else -> "Highest overall score after ${accs.size} speed tests."
             }
             report = BestReport(finalEntries, s, scanned, accs.size, bytes, clock.nowMs() - start, why)
-            return BestOutcome.Connected(report, cipher)
+            return BestOutcome.Connected(report, admitted.cipher, admitted.cipherVerified)
         }
         return BestOutcome.Failed(
             FailReason.COULD_NOT_CONNECT, ctx.previous,
