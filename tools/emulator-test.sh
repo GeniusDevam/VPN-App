@@ -155,7 +155,14 @@ adb shell am start -n $PKG/.MainActivity >/dev/null; sleep 8
 shot 01-onboarding
 echo "started=$(date -u +%FT%TZ)" > "$OUT/result.txt"
 
-tap_text "I understand, continue" || { shot 02-fail; hard "onboarding screen never offered 'I understand, continue'"; finish; }
+# The privacy copy is longer than one screen: scroll until the button is on screen, like a real user.
+onboard_done=""
+for i in $(seq 1 8); do
+  dump; xy=$(find_xy "I understand, continue")
+  if [ -n "$xy" ]; then log "tap 'I understand, continue' at $xy"; adb shell input tap $xy; onboard_done=yes; break; fi
+  adb shell input swipe 540 1900 540 700 300; sleep 1
+done
+[ -n "$onboard_done" ] || { shot 02-fail; hard "onboarding screen never offered 'I understand, continue', even after scrolling"; finish; }
 sleep 4; shot 02-home; dump
 if has_text "Quick Connect" && has_text "Best Connect"; then ok "home screen shows both modes"; else hard "home screen missing Quick/Best Connect"; finish; fi
 

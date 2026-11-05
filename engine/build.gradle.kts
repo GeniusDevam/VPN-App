@@ -24,3 +24,9 @@ tasks.register<JavaExec>("sanitizeCli") {
     classpath = sourceSets["test"].runtimeClasspath
     mainClass.set("io.github.geniusdevam.vpnapp.engine.SanitizeCliKt")
 }
+
+// Used by tools/probe-test.sh: runs the real NetworkProber against a real OpenVPN server (see ProbeCli.kt).
+tasks.register<JavaExec>("probeCli") {
+    classpath = sourceSets["test"].runtimeClasspath
+    mainClass.set("io.github.geniusdevam.vpnapp.engine.ProbeCliKt")
+}
