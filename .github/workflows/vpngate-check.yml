@@ -1,12 +1,16 @@
 name: vpngate-check
 on: workflow_dispatch
+permissions:
+  contents: read
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - name: Install OpenVPN
         run: sudo apt-get update -qq && sudo apt-get install -y -qq openvpn && openvpn --version | head -2
-      - name: Try real OpenVPN against live VPN Gate servers
-        run: python3 tools/vpngate-check.py
+      - name: Live relays, stock OpenVPN (baseline)
+        run: N=24 POLICY=0 python3 -I tools/vpngate-check.py
+      - name: Live relays WITH the app's relay-identity policy (remote-cert-tls server + verify-x509-name opengw.net)
+        run: N=24 POLICY=1 python3 -I tools/vpngate-check.py

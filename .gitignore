@@ -6,3 +6,11 @@ local.properties
 out/
 .idea/
 .kotlin/
+
+# Signing material must never be committed (see docs/RELEASE_SIGNING.md)
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+!engine/src/test/**
