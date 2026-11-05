@@ -146,6 +146,8 @@ jobs:
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1); echo "build-tools: $BT"
           "$BT/aapt2" dump badging out/VPN-App.apk | grep -E "^package:|^sdkVersion|^targetSdkVersion|^application-label:|launchable-activity|^native-code|uses-permission: name" || true
           echo "--- zipalign 16 KB check"; "$BT/zipalign" -c -P 16 -v 4 out/VPN-App.apk | tail -3 || true
+          echo "--- components reachable by other apps (merged manifest)"
+          "$BT/aapt2" dump xmltree out/VPN-App.apk --file AndroidManifest.xml | python3 -I tools/manifest-exports.py
           echo "--- ELF segment alignment"
           python3 -I - <<'PY'
           import zipfile,struct
