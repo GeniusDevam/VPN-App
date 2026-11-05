@@ -97,7 +97,7 @@ class BestConnectEngine(
             emit,
         ) { control.finishNow }
         val ranked = board.ranked(maxLoss = cfg.dropLoss)
-        ranked.forEach { history.recordLatency(it.server.id, ctx.fingerprint, it.latency.medianMs) }
+        ranked.forEach { history.recordLatency(it.server.id, ctx.fingerprint, it.latency) }
         val scanned = toScan.size
 
         // Candidate pool for speed testing.
@@ -132,7 +132,7 @@ class BestConnectEngine(
             val acc = accs.getOrPut(c.server.id) { Acc(c.server, c.latency, adm) }
             acc.admitted = adm
             acc.runs.add(t)
-            history.recordThroughput(c.server.id, ctx.fingerprint, t.downMbps)
+            history.recordThroughput(c.server.id, ctx.fingerprint, t)
             return t
         }
 
