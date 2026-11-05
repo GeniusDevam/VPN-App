@@ -75,7 +75,7 @@ class QuickConnectEngine(
             emit,
         )
         val ranked = board.ranked()
-        ranked.forEach { history.recordLatency(it.server.id, ctx.fingerprint, it.latency.medianMs) }
+        ranked.forEach { history.recordLatency(it.server.id, ctx.fingerprint, it.latency) }
 
         val order: List<Server> =
             if (ranked.isNotEmpty()) ranked.take(cfg.tryTop).map { it.server }

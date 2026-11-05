@@ -35,7 +35,7 @@ internal class ProbeBoard(
             val stats = Scoring.latencyStats(list, methods[id] ?: ProbeMethod.NONE) ?: return@mapNotNull null
             if (stats.loss > maxLoss) return@mapNotNull null
             val q = Scoring.quickScore(
-                server, stats, rep.penaltyMs(id), history.throughputBonusMs(id, fingerprint), scoring,
+                server, stats, rep.penaltyMs(id), history.throughputBonusMs(id, fingerprint) + history.reliabilityBonusMs(id), scoring,
             )
             Ranked(server, stats, q)
         }.sortedBy { it.q }
@@ -115,11 +115,7 @@ object Prioritizer {
         random: Random,
     ): List<Server> {
         if (pool.size <= max) return pool
-        fun est(s: Server): Double =
-            history.latencyPrior(s.id, ctx.fingerprint)
-                ?: Countries.distanceKm(ctx.userCountry, s.countryCode)?.let { 10 + it / 70.0 }
-                ?: 120.0
-        val scored = pool.map { it to est(it) + Scoring.slowLinePenaltyMs(it) + random.nextDouble() * 5 }
+        val scored = pool.map { it to estimate(it, ctx, history) + Scoring.slowLinePenaltyMs(it) + random.nextDouble() * 5 }
             .sortedBy { it.second }
         val favs = pool.filter { it.id in ctx.favorites }.take(4)
         val topCount = (max - explore - favs.size).coerceAtLeast(1)
@@ -128,9 +124,14 @@ object Prioritizer {
         return (favs + top + rest).distinctBy { it.id }.take(max)
     }
 
-    /** Estimated RTT used when no probe answered (blind connect ordering). */
-    fun estimate(s: Server, ctx: RunContext, history: History): Double =
-        history.latencyPrior(s.id, ctx.fingerprint)
-            ?: Countries.distanceKm(ctx.userCountry, s.countryCode)?.let { 10 + it / 70.0 }
-            ?: 120.0
+    /**
+     * Estimated RTT before any probe: the remembered measurement blended with a geographic guess according to how
+     * fresh the measurement is, so an old measurement still helps a little but never dominates a stale guess.
+     */
+    fun estimate(s: Server, ctx: RunContext, history: History): Double {
+        val geo = Countries.distanceKm(ctx.userCountry, s.countryCode)?.let { 10 + it / 70.0 } ?: 120.0
+        val prior = history.latencyPrior(s.id, ctx.fingerprint) ?: return geo
+        val w = history.priorWeight(s.id, ctx.fingerprint).coerceIn(0.0, 1.0)
+        return w * prior + (1 - w) * geo
+    }
 }
