@@ -7,11 +7,16 @@ import kotlinx.coroutines.withContext
 data class BestConfig(
     val optimize: OptimizeFor = OptimizeFor.BALANCED,
     val catalogFetchTimeoutMs: Long = 15_000,
-    val scanAttempts: Int = 5,
-    val scanSpacingMs: Long = 400,
+    /** First pass: every relay in scope gets this many cheap probes. */
+    val scanAttempts: Int = 2,
+    val scanSpacingMs: Long = 300,
     val scanTimeoutMs: Long = 1_500,
     val scanConcurrency: Int = 48,
-    val scanMax: Int = 400,
+    /** Safety valve only (memory/time on a pathological list); the report says so when it bites. */
+    val scanMax: Int = 3_000,
+    /** Second pass: the leaders of the first pass get [refineAttempts] more probes for steadier medians. */
+    val refineTop: Int = 48,
+    val refineAttempts: Int = 3,
     val dropLoss: Double = 0.4,
     val maxCandidates: Int = 10,
     val minCandidates: Int = 8,
@@ -96,6 +101,21 @@ class BestConnectEngine(
             ),
             emit,
         ) { control.finishNow }
+        if (!control.finishNow) {
+            val leaders = board.ranked().take(cfg.refineTop).map { it.server }
+            if (leaders.isNotEmpty()) {
+                board.resetProgress()
+                emit(EngineEvent.Phase(PhaseId.SCANNING, "refine ${leaders.size}"))
+                runner.run(
+                    leaders, board,
+                    ProbeParams(
+                        attempts = cfg.refineAttempts, spacingMs = cfg.scanSpacingMs, timeoutMs = cfg.scanTimeoutMs,
+                        concurrency = cfg.scanConcurrency, earlyStop = false,
+                    ),
+                    emit,
+                ) { control.finishNow }
+            }
+        }
         val ranked = board.ranked(maxLoss = cfg.dropLoss)
         ranked.forEach { history.recordLatency(it.server.id, ctx.fingerprint, it.latency) }
         val scanned = toScan.size
@@ -194,17 +214,33 @@ class BestConnectEngine(
                     is GateResult.Refused -> continue
                 }
             }
-            val why = when {
-                control.finishNow -> "Connected to the leader when you asked to finish early."
-                finalEntries.isEmpty() -> "No speed test could run; chose the lowest-latency server."
-                else -> "Highest overall score after ${accs.size} speed tests."
+            val margin = if (finalEntries.size >= 2 && finalEntries[0].score > 0) (finalEntries[0].score - finalEntries[1].score) / finalEntries[0].score else null
+            val winnerRuns = accs[s.id]?.runs?.size ?: 0
+            val coverageFull = scanned >= pool.size
+            val claim = when {
+                control.finishNow -> BestClaim.EARLY_FINISH
+                finalEntries.isEmpty() -> BestClaim.LATENCY_ONLY
+                !coverageFull -> BestClaim.PARTIAL_COVERAGE
+                margin != null && margin >= cfg.improvement && winnerRuns >= 2 -> BestClaim.BEST_OF_TESTED_CONFIRMED
+                else -> BestClaim.BEST_OF_TESTED
             }
-            report = BestReport(finalEntries, s, scanned, accs.size, bytes, clock.nowMs() - start, why)
+            val why = when (claim) {
+                BestClaim.EARLY_FINISH -> "Connected to the leader when you asked to finish early."
+                BestClaim.LATENCY_ONLY -> "No speed test could run; chose the lowest-latency server."
+                BestClaim.PARTIAL_COVERAGE -> "Best of ${accs.size} speed-tested; only $scanned of ${pool.size} servers were probed."
+                BestClaim.BEST_OF_TESTED_CONFIRMED -> "Fastest of the ${accs.size} servers speed-tested, out of ${board.responded()} that answered."
+                BestClaim.BEST_OF_TESTED -> "Best of ${accs.size} speed tests; the margin over the runner-up is small."
+            }
+            report = BestReport(
+                finalEntries, s, scanned, accs.size, bytes, clock.nowMs() - start, why,
+                poolSize = pool.size, respondedCount = board.responded(), claim = claim,
+                marginOverRunnerUp = margin, winnerRuns = winnerRuns,
+            )
             return BestOutcome.Connected(report, admitted.cipher, admitted.cipherVerified)
         }
         return BestOutcome.Failed(
             FailReason.COULD_NOT_CONNECT, ctx.previous,
-            BestReport(finalEntries, order.firstOrNull() ?: pool.first(), scanned, accs.size, bytes, clock.nowMs() - start, "Could not connect"),
+            BestReport(finalEntries, order.firstOrNull() ?: pool.first(), scanned, accs.size, bytes, clock.nowMs() - start, "Could not connect", poolSize = pool.size, respondedCount = board.responded(), claim = BestClaim.LATENCY_ONLY),
         )
     }
 }
