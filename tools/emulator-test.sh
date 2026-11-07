@@ -257,9 +257,10 @@ echo "device=Android $REL (API $SDK), $ABI, ${W}x${H} px = $((W*160/DENS))x$((H*
 
 # The privacy copy is longer than one screen: scroll until the button is on screen, like a real user.
 onboard_done=""
-for i in $(seq 1 10); do
-  dump; xy=$(find_xy "I understand, continue")
-  if [ -n "$xy" ]; then log "tap 'I understand, continue' at $xy"; adb shell input tap $xy; onboard_done=yes; break; fi
+# At 200% font on a 320 dp phone the text is more than ten screens long, so allow many swipes and look again after the last one.
+for i in $(seq 1 30); do
+  dump; xy=$(find_id onboarding_continue); [ -n "$xy" ] || xy=$(find_xy "I understand, continue")
+  if [ -n "$xy" ]; then log "tap 'I understand, continue' at $xy (after $((i-1)) swipes)"; adb shell input tap $xy; onboard_done=yes; break; fi
   swipe_up
 done
 [ -n "$onboard_done" ] || { shot 02-fail; hard "onboarding screen never offered 'I understand, continue', even after scrolling"; finish; }
