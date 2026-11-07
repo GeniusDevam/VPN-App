@@ -117,7 +117,7 @@ fun SettingsScreen() {
                     "Apps you chose to skip the VPN are never protected. IPv6 is blocked when a server has no IPv6; DNS goes to the resolver chosen above.",
                 style = MaterialTheme.typography.bodySmall,
             )
-            OutlinedButton(onClick = { ctx.startActivity(Intent(AndroidSettings.ACTION_VPN_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }, modifier = Modifier.fillMaxWidth()) {
+            OutlinedButton(onClick = { openVpnSettings(ctx) }, modifier = Modifier.fillMaxWidth()) {
                 Text("Open Android VPN settings")
             }
         }
@@ -214,4 +214,19 @@ private fun AppPickerDialog(selected: Set<String>, onDone: (Set<String>) -> Unit
         confirmButton = { TextButton(onClick = { onDone(sel) }) { Text("Save") } },
         dismissButton = { TextButton(onClick = onDismiss) { Text("Cancel") } },
     )
+}
+
+
+/**
+ * Android's VPN settings page has a public action only from Android 7.0, and some Android TV builds have no such page at all.
+ * Try it, then the network settings (where older versions list VPN), then the main settings; never crash on a missing screen.
+ */
+private fun openVpnSettings(ctx: android.content.Context) {
+    for (action in listOf("android.settings.VPN_SETTINGS", AndroidSettings.ACTION_WIRELESS_SETTINGS, AndroidSettings.ACTION_SETTINGS)) {
+        try {
+            ctx.startActivity(Intent(action).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            return
+        } catch (_: android.content.ActivityNotFoundException) {
+        }
+    }
 }
