@@ -187,14 +187,19 @@ jobs:
             KS_FILE="$K" KS_PASS="$PW" KEY_ALIAS=dry KEY_PASS="$PW" tools/resign-apk.sh "$f" "$RUNNER_TEMP/resigned.apk" | tee dry.log
             SECOND=$(sed -n 's/^CERT_SHA256=//p' dry.log)
             [ -n "$SECOND" ] && [ "$SECOND" != "$FIRST" ] || { echo "re-signing $(basename "$f") did not change the signer"; exit 1; }
+            # Keep the re-signed universal APK: the Android 6.0 device installs exactly what the release path produces.
+            if [ "$(basename "$f")" = VPN-App.apk ]; then mkdir -p resigned && mv "$RUNNER_TEMP/resigned.apk" resigned/VPN-App.apk; fi
             rm -f "$RUNNER_TEMP/resigned.apk"
           done
           rm -f "$K"
-          echo "re-signing dry run OK (signer changed, contents identical)" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "re-signing dry run OK (signer changed, v1+v2+v3 verify for Android 6.0+, contents identical)" | tee -a "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with: { name: apk-universal, path: out/VPN-App.apk, if-no-files-found: error, retention-days: 14 }
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with: { name: apk-splits, path: "out/VPN-App-*.apk", if-no-files-found: error, retention-days: 14 }
+      # Signed with the throw-away dry-run key (not a release). Installed by the Android 6.0 compat device.
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with: { name: apk-universal-resigned-dryrun, path: resigned/VPN-App.apk, if-no-files-found: error, retention-days: 3 }
 
   # Android Lint's NewApi check over the whole app: calling an API newer than the minimum supported Android version (6.0) without a
   # version check would crash on older phones at runtime. Runs beside the APK build.
@@ -453,7 +458,8 @@ jobs:
       matrix:
         include:
           # The Google APIs image of Android 6.0 never brings up its input/accessibility services on CI runners, so use plain AOSP.
-          - { name: "Android 6.0 phone", slug: api23-phone, api: 23, target: default, arch: x86_64, profile: pixel_2, font: "1.0" }
+          # It installs the APK as re-signed by the release script (dry-run key): Android 6.0 accepts only v1 signatures.
+          - { name: "Android 6.0 phone", slug: api23-phone, api: 23, target: default, arch: x86_64, profile: pixel_2, font: "1.0", apk: apk-universal-resigned-dryrun }
           - { name: "Android 7.0 phone", slug: api24-phone, api: 24, target: google_apis, arch: x86_64, profile: pixel_2, font: "1.0" }
           - { name: "Android 8.0 phone", slug: api26-phone, api: 26, target: google_apis, arch: x86_64, profile: pixel_2, font: "1.0" }
           - { name: "Android 10 small phone (320 dp), 200% font", slug: api29-small-bigfont, api: 29, target: google_apis, arch: x86_64, profile: "Nexus S", font: "2.0" }
@@ -465,7 +471,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with: { persist-credentials: false }
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
-        with: { name: apk-universal, path: out }
+        with: { name: "${{ matrix.apk || 'apk-universal' }}", path: out }
       - name: Enable KVM and emulator runtime libraries
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq libpulse0 libnss3 libxcomposite1 libxcursor1 libxi6 libxtst6 || true
