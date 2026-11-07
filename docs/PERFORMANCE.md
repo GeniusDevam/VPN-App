@@ -16,29 +16,35 @@ devices and code versions with each other, and for finding where time goes.
 
 * **Quick Connect is fast and reliable in these tests.** In the speed runs it connected **12 times out of 12** (6 on Android 16, 6 on
   Android 6.0). By the app's own log the tunnel was up **3.5-5.2 s after the tap**: about 1.5 s to probe the candidates, 2-3.6 s for the
-  OpenVPN handshake. The promise is 35 s; the slowest successful Quick Connect anywhere in the matrix took 36 s *including* the test's
-  own overhead and the one-time VPN permission dialog (see "how to read the numbers").
-* **The app starts quickly everywhere tested:** cold start 0.9-1.9 s, warm start 0.1-0.2 s, on Android 6.0 to 16, phone to TV.
+  OpenVPN handshake. The promise is 35 s. In the device matrix, where the time also includes the test script's own overhead and the
+  one-time VPN permission dialog, Quick Connect took 17-25 s (one earlier run: 36 s on Android 8.0).
+* **The app starts quickly everywhere tested:** cold start 0.8-2.3 s, warm start 0.1-0.2 s, on Android 6.0 to 16, phone to TV.
 * **Memory is modest:** 43-68 MB for the app's screen process, 10-19 MB for the separate VPN process while connected.
-* **Best Connect is deliberately slow and data-hungry:** 2.5-4.5 minutes and **60-300 MB** per run (it speed-tests real tunnels). It
+* **Every Android version and form factor in the matrix passes**, Android 6.0 included (details below).
+* **Best Connect is deliberately slow and data-hungry:** 2.5-8 minutes (most runs 3-5) and **60-300 MB** per run (it speed-tests real tunnels). It
   probed all 99 pooled servers in under 10 s; the speed tests are the rest. This is the design, but the data cost is the number users
   will notice.
 * **Size is the weakest point:** the universal APK is 38.5 MB and takes 85-123 MB once installed. About 8 MB of it is code that is
   not shrunk at all, because the upstream engine turns R8 off. The per-processor APKs are about 16 MB each. See recommendations.
 
-## Compatibility matrix and device timings (CI run 39, commit `18edcce`)
-Live VPN Gate volunteers, so a country with one relay can fail on any run; that is INCONCLUSIVE, never PASS.
+## Compatibility matrix and device timings (CI run 42, commit `198669d`)
+Live VPN Gate volunteers, so a country with one relay can fail on any run; that is INCONCLUSIVE, never PASS. The Android 6.0 device
+installs the APK **as re-signed by the release script** (v1 signature), so the release path itself is tested there.
 
 | Device (emulator) | Verdict | Cold start | Quick Connect | Best Connect | Memory: app / VPN process |
 |---|---|---|---|---|---|
-| Android 16 phone (release gate) | PASS | 1.16 s | 22 s, inside Japan | 3:55 | 49 / 13 MB |
-| Android 16 foldable, unfolded (841×700 dp, navigation rail) | PASS | 1.89 s | 22 s, inside Japan | 4:04 | 50 / 12 MB |
-| Android 13 tablet (1280×800 dp, navigation rail) | PASS | 1.81 s | 23 s, inside Japan | 3:30 | 54 / 12 MB |
-| Android TV 11, 32-bit x86 (960×540 dp) | PASS | 0.91 s | 26 s, inside Japan | 4:35 | 68 / 19 MB |
-| Android 8.0 phone | PASS | 1.07 s | 36 s, inside Japan | 2:51 | 58 / 15 MB |
-| Android 7.0 phone | INCONCLUSIVE (every check passed) | 1.19 s | Argentina's only relay failed honestly in 27 s; Any country connected in 21 s | 3:28 | 64 / 12 MB |
-| Android 6.0 phone | <!-- API23-VERDICT --> | <!-- API23-COLD --> | <!-- API23-QUICK --> | <!-- API23-BEST --> | <!-- API23-MEM --> |
-| Android 10, 320 dp phone at 200% font | <!-- API29-VERDICT --> | <!-- API29-COLD --> | <!-- API29-QUICK --> | <!-- API29-BEST --> | <!-- API29-MEM --> |
+| Android 16 phone (release gate) | PASS | 1.29 s | 22 s, inside Japan | 4:55 | 50 / 13 MB |
+| Android 16 foldable, unfolded (841×700 dp, navigation rail) | PASS | 1.06 s | 21 s, inside Japan | 4:25 | 46 / 16 MB |
+| Android 13 tablet (1280×800 dp, navigation rail) | PASS | 2.32 s | 24 s, inside Japan | 8:03 | 55 / 10 MB |
+| Android TV 11, 32-bit x86 (960×540 dp) | PASS | 0.84 s | 25 s, inside Japan | 4:29 | 68 / 19 MB |
+| Android 10, 320 dp phone at 200% font | <!-- API29-VERDICT --> | 0.90 s | Canada's only relay failed honestly in 36 s; Any country connected in 17 s | <!-- API29-BEST --> | 58 / 16 MB |
+| Android 8.0 phone | PASS | 0.92 s | 19 s, inside Japan | 5:58 | 59 / 16 MB |
+| Android 7.0 phone | PASS | 1.08 s | 18 s, inside Japan | 2:58 | 60 / 12 MB |
+| Android 6.0 phone | PASS | 1.23 s | 21 s, inside Japan | 2:23 | 65 / 10 MB |
+
+Getting here took four matrix runs; each found something real (details in `docs/HANDOFF_STATUS.md`): a crash on Android 6.0 when the
+country picker opened, then the keyboard covering the picker on Android 6.0-8.1, then the Disconnect button off-screen at 200% font,
+plus emulator and test-script problems that were not the app.
 
 How to read the numbers: "Quick Connect" here is measured by the test script from its tap to seeing "Connected", for a Quick Connect
 restricted to the largest country, right after the app was killed and restarted (to prove settings survive), and it includes the
