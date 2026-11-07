@@ -226,8 +226,7 @@ jobs:
           rc=0; ./gradlew --no-daemon :main:lintSkeletonOvpn2Release -PvpnappAbi=x86_64 || rc=$?
           for r in main/build/reports/lint-results*.txt; do [ -f "$r" ] && { echo "--- $r"; head -150 "$r"; }; done
           # For findings in upstream ics-openvpn code, print the surrounding source so the runtime version guard can be checked by hand.
-          grep -hE "^/[^:]*de/blinkt/[^:]*:[0-9]+: Error" main/build/reports/lint-results*.txt 2>/dev/null | sed -E 's/^([^:]+):([0-9]+):.*/\1 \2/' | sort -u |
-            while read -r f l; do echo "=== upstream context $f:$l"; sed -n "$((l>25?l-25:1)),$((l+3))p" "$f" | cat -n; done
+          for r in main/build/reports/lint-results*.txt; do [ -f "$r" ] && python3 -I ../tools/lint-upstream-context.py "$r"; done
           exit $rc
 
   # ---------------------------------------------------------------------------------------------------------------------------
@@ -451,7 +450,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { name: "Android 6.0 phone", slug: api23-phone, api: 23, target: google_apis, arch: x86_64, profile: pixel_2, font: "1.0" }
+          # The Google APIs image of Android 6.0 never brings up its input/accessibility services on CI runners, so use plain AOSP.
+          - { name: "Android 6.0 phone", slug: api23-phone, api: 23, target: default, arch: x86_64, profile: pixel_2, font: "1.0" }
+          - { name: "Android 7.0 phone", slug: api24-phone, api: 24, target: google_apis, arch: x86_64, profile: pixel_2, font: "1.0" }
           - { name: "Android 8.0 phone", slug: api26-phone, api: 26, target: google_apis, arch: x86_64, profile: pixel_2, font: "1.0" }
           - { name: "Android 10 small phone (320 dp), 200% font", slug: api29-small-bigfont, api: 29, target: google_apis, arch: x86_64, profile: "Nexus S", font: "2.0" }
           - { name: "Android 13 tablet", slug: api33-tablet, api: 33, target: google_apis, arch: x86_64, profile: pixel_tablet, font: "1.0" }
