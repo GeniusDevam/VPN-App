@@ -73,7 +73,9 @@ for run in $(seq 1 "$QUICK_RUNS"); do
   done
   dt=$(( $(ms) - t0 ))
   where=$(text_nth "· " 1); enc=$(text_nth "^Encryption: " 1 | cut -d'·' -f1)
-  kv "quick_${run}" "$res ${dt}ms | ${where:-?} | ${enc:-?}"
+  # The app's own tap-to-connected time from its banner (this script's ${dt} also includes its scrolling and screen polling).
+  app_s=$(text_nth "^Connected to .* in [0-9]+ s" 1 | sed -nE 's/.* in ([0-9]+) s.*/\1/p')
+  kv "quick_${run}" "$res ${dt}ms | ${where:-?} | ${enc:-?} | app ${app_s:-?} s"
   adb logcat -d -v threadtime -s VPNAPP:D | tr -d '\r' >> "$OUT/runs.log"
   if [ "$res" = connected ]; then
     ok_n=$((ok_n+1)); times="$times $dt"
