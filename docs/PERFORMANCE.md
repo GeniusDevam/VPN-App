@@ -12,7 +12,88 @@ sources, named in each table:
 Emulators run on x86_64 CI machines with software graphics. They say nothing exact about a given phone; they are good for comparing
 devices and code versions with each other, and for finding where time goes.
 
-<!-- DEVICE-RESULTS -->
+## Verdict
+
+* **Quick Connect is fast and reliable in these tests.** In the speed runs it connected **12 times out of 12** (6 on Android 16, 6 on
+  Android 6.0). By the app's own log the tunnel was up **3.5-5.2 s after the tap**: about 1.5 s to probe the candidates, 2-3.6 s for the
+  OpenVPN handshake. The promise is 35 s; the slowest successful Quick Connect anywhere in the matrix took 36 s *including* the test's
+  own overhead and the one-time VPN permission dialog (see "how to read the numbers").
+* **The app starts quickly everywhere tested:** cold start 0.9-1.9 s, warm start 0.1-0.2 s, on Android 6.0 to 16, phone to TV.
+* **Memory is modest:** 43-68 MB for the app's screen process, 10-19 MB for the separate VPN process while connected.
+* **Best Connect is deliberately slow and data-hungry:** 2.5-4.5 minutes and **60-300 MB** per run (it speed-tests real tunnels). It
+  probed all 99 pooled servers in under 10 s; the speed tests are the rest. This is the design, but the data cost is the number users
+  will notice.
+* **Size is the weakest point:** the universal APK is 38.5 MB and takes 85-123 MB once installed. About 8 MB of it is code that is
+  not shrunk at all, because the upstream engine turns R8 off. The per-processor APKs are about 16 MB each. See recommendations.
+
+## Compatibility matrix and device timings (CI run 39, commit `18edcce`)
+Live VPN Gate volunteers, so a country with one relay can fail on any run; that is INCONCLUSIVE, never PASS.
+
+| Device (emulator) | Verdict | Cold start | Quick Connect | Best Connect | Memory: app / VPN process |
+|---|---|---|---|---|---|
+| Android 16 phone (release gate) | PASS | 1.16 s | 22 s, inside Japan | 3:55 | 49 / 13 MB |
+| Android 16 foldable, unfolded (841×700 dp, navigation rail) | PASS | 1.89 s | 22 s, inside Japan | 4:04 | 50 / 12 MB |
+| Android 13 tablet (1280×800 dp, navigation rail) | PASS | 1.81 s | 23 s, inside Japan | 3:30 | 54 / 12 MB |
+| Android TV 11, 32-bit x86 (960×540 dp) | PASS | 0.91 s | 26 s, inside Japan | 4:35 | 68 / 19 MB |
+| Android 8.0 phone | PASS | 1.07 s | 36 s, inside Japan | 2:51 | 58 / 15 MB |
+| Android 7.0 phone | INCONCLUSIVE (every check passed) | 1.19 s | Argentina's only relay failed honestly in 27 s; Any country connected in 21 s | 3:28 | 64 / 12 MB |
+| Android 6.0 phone | <!-- API23-VERDICT --> | <!-- API23-COLD --> | <!-- API23-QUICK --> | <!-- API23-BEST --> | <!-- API23-MEM --> |
+| Android 10, 320 dp phone at 200% font | <!-- API29-VERDICT --> | <!-- API29-COLD --> | <!-- API29-QUICK --> | <!-- API29-BEST --> | <!-- API29-MEM --> |
+
+How to read the numbers: "Quick Connect" here is measured by the test script from its tap to seeing "Connected", for a Quick Connect
+restricted to the largest country, right after the app was killed and restarted (to prove settings survive), and it includes the
+one-time Android VPN permission dialog. The speed runs below remove those effects.
+
+## Speed runs (workflow `speedrun`, run 1, APK of CI run 39)
+
+| | Android 16 phone (1080×2400) | Android 6.0 phone (1080×1920) |
+|---|---|---|
+| First launch after install | 1.70 s | 1.05 s |
+| Cold start, median of 5 | 1.86 s (1.09-2.60) | 1.26 s (1.25-1.29) |
+| Warm start, median of 3 | 0.20 s | 0.12 s |
+| Memory idle / connected, app process | 43 / 57 MB | 66 / 66 MB |
+| Memory connected, VPN process | 16 MB | 10 MB |
+| Installed size (APK + extracted native code + compiled code) | 85 MB | 123 MB |
+| **Quick Connect ×6 (Any country)** | **6/6 connected** | **6/6 connected** |
+| Tap to tunnel up, app's own log (each run) | 5.2, 4.8, 4.4, 5.1, 5.1, 4.5 s | 4.6, 5.0, 3.5, 4.6, 3.6, 4.4 s |
+| of which: probing until the first attempt | 1.5-1.9 s | 1.5-1.6 s |
+| of which: OpenVPN handshake (always the first server tried) | 2.9-3.6 s | 2.0-3.4 s |
+| Tap to "Connected" on screen, test script, median | 12.1 s | 10.6 s |
+| **Best Connect ×1 (Any country)** | 4:17, 99 probed (85 answered) in 6 s, 9 speed-tested, **300 MB** | 2:35, 99 probed (81 answered), 7 speed-tested, **60 MB** |
+| Best Connect winner | 88 ↓ / 28 ↑ Mbit/s, 180 ms, margin 5% | 17 ↓ / 13 ↑ Mbit/s, 147 ms, margin 4% |
+
+Notes. The server list was already cached, so "list ready" was instant; a first-ever start also waits for one download of about
+1.1 MB. The 6-7 s between "tunnel up" and the script seeing "Connected" is mostly the script: before tapping it scrolls to the top
+and reads the screen (several seconds on an emulator), and it reads the screen again every 1-2 s. Every connection negotiated
+AES-128-CBC/SHA1 (all current VPN Gate relays declare it) and the app reported it as verified. Best Connect's data use follows the
+servers' speed: fast relays move more bytes in the same test time, hence 300 MB against 60 MB. Android 6.0 compiles the whole app
+ahead of time at install, which is why it uses more storage than Android 16.
+
+## APK size
+
+| File | Size | Contents (compressed) |
+|---|---|---|
+| `VPN-App.apk` (universal) | 38.5 MB | code (dex) 8.1 MB, native code 7.4 (arm64) + 6.5 (armv7) + 8.0 (x86_64) + 7.5 (x86) MB, resources 0.8 MB |
+| `VPN-App-arm64-v8a.apk` and the other three | about 15-17 MB each | the same code and resources, one processor's native code |
+
+The native code is OpenVPN, OpenSSL and the upstream helpers, and must stay. It is stored compressed and extracted at install
+because upstream starts the OpenVPN binary from the library folder.
+
+## Recommendations, by expected gain
+
+1. **Enable R8 for this app's code, Compose and AndroidX** (upstream ships with `optimization { enable = false }`, so the 8.1 MB of
+   code is not shrunk at all). Expected: a markedly smaller download and code footprint, and a faster cold start, which is where
+   unshrunk Compose costs most. Not done in this pass on purpose: upstream relies on Java serialization of its profile classes and on
+   native callbacks, so its packages (`de.blinkt.openvpn.**`, `net.openvpn.**`) must be kept whole, and the change must go through the
+   full device matrix before a release. A one-file change in `tools/extra.gradle.kts` plus a keep-rules file.
+2. **Point most people to `VPN-App-arm64-v8a.apk`** (about 16 MB instead of 38.5 MB); the release already publishes it and the README
+   explains which to choose.
+3. **Best Connect's data use** (up to 300 MB on fast relays). It is reported in the results; consider stopping a server's test as soon
+   as its speed is clear, or a smaller default on metered networks.
+4. **The 20 MB listing cap** (engine section): keep what was read instead of refusing the whole list. Not urgent.
+5. **Measure on a real low-end phone.** Emulators on CI hardware hide slow storage and slow CPUs; cold start and the first list
+   download are the two numbers most likely to be worse on a cheap phone.
+
 
 ## Engine (JVM micro-benchmarks)
 4-core Xeon 2.1 GHz, JDK 21, median of 5 runs after a warm-up. The synthetic listing has the shape of a real VPN Gate one (CA chain,

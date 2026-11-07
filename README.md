@@ -54,7 +54,7 @@ to download: it contains all four processor types. Each release also lists four 
 | Android versions | 6.0 (API 23) to 16 (API 36); the app targets the newest. Lint fails the build if code calls an API newer than 6.0 without a version check. On 6.0 and 7.0, which predate the Let's Encrypt roots, the app adds the two roots itself (pinned by fingerprint) for its own HTTPS requests. |
 | Processors | arm64-v8a, armeabi-v7a, x86_64, x86. One build produces the universal APK and one APK per processor type; all are re-signed and published together. |
 | Screens | Bottom navigation on phones; a side navigation rail and centred, width-limited content at 600 dp and wider (tablets, unfolded foldables, Chromebook windows, TV). Rotating, folding and resizing keep the current tab and open dialogs. Text up to 200% is supported on 320 dp phones. |
-| TV | Appears in the TV launcher (leanback banner); touchscreen not required; works with a D-pad. |
+| TV | Appears in the TV launcher (leanback banner); touchscreen not required. Buttons, chips and list rows are standard focusable controls, but D-pad navigation itself has not been tested (the TV test taps the screen). |
 
 Tested in CI emulators against live VPN Gate servers, on every build: Android 6.0, 7.0, 8.0 phones, a 320 dp Android 10 phone at 200%
 font, an Android 13 tablet, an Android 16 foldable, Android TV 11 (32-bit x86) and the Android 16 phone that gates releases.
