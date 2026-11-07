@@ -2,7 +2,7 @@
 
 > **Audience:** the agent that will implement this app.
 > **Owner's device:** Android 16 smartphone. The app is sideloaded first; Google Play later is optional.
-> **Status:** the plan has been implemented; this file is the original design plus dated notes where the build differs. **The code and `docs/HANDOFF_STATUS.md` win over any statement here.** Last updated 2026-11-05.
+> **Status:** the plan has been implemented; this file is the original design plus dated notes where the build differs. **The code and `docs/HANDOFF_STATUS.md` win over any statement here.** Last updated 2026-11-07.
 
 The owner asked for "the best VPN app available" with two connection modes:
 
@@ -30,6 +30,7 @@ The app was built from this plan. Where the build differs, the code wins:
 | History (§5.4, §7.4, §13.1) | One permanent encrypted ledger per server (counts, last success, connect time, cipher, per-network latency/throughput, last seen). The **only** deletion rule is the seven-day observed-absence rule (see `docs/DIRECTORY.md`); old measurements are down-weighted (3-day half-life), never deleted for age. Shown per server on the Servers screen. |
 | Release engineering (§15.2) | No committed keystore. Ordinary builds (every branch) use a throw-away key and no job except `sign` can reference a secret (checked in CI, with mutation tests). Releases are tag-only: `release-gate` (tag on default-branch history) > `sign` (protected environment `release`, read-only token, re-signs the already built and tested APK with `tools/resign-apk.sh`, pins the certificate, refuses the leaked key) > `publish` (write token, no secrets; checksum + attestation). Actions are pinned by commit SHA (one documented exception). The emulator job decides **PASS / FAIL / INCONCLUSIVE** (exit 0 / 1 / 3); FAIL blocks the release. The final APK's manifest is held to `tools/manifest-policy.json` (5 reachable components, each needed or system-guarded; 6 permissions; backup off) as a hard gate. |
 | On-device verification (§19) | **Partly done; no physical device was used.** Every push is built and run in an Android 16 (API 36, x86_64) emulator against live VPN Gate servers. Runs 22 and 23 passed every assertion: the country picker, a country-bound Quick Connect (25 s in Austria, 26 s in Japan, each inside the chosen country), a disconnect that stayed down for 20 s, and a Best Connect with a named winner. Run 21 was INCONCLUSIVE because the chosen country (India) had a single volunteer relay that did not answer. **Not done:** a real phone, mobile data, Always-on lockdown, long sessions, switching networks, the worldwide search, process kill while connected. Live directory (2026-11-05): 96 OpenVPN profiles in one download (90 TCP, 6 UDP), all `AES-128-CBC` ("Strong only" matches none), none using tls-auth/tls-crypt; 15/24 sampled relays connected with and without the identity policy. |
+| `minSdk 26`, 64-bit phones (§1, §14) | **`minSdk 23` (Android 6.0)**, every processor type (arm64-v8a, armeabi-v7a, x86_64, x86; universal APK plus one APK per type), adaptive layout for tablets/foldables/Chromebooks/TV, TV launcher entry. Lint NewApi is a build gate; Android 6.0/7.0 get the Let's Encrypt roots in code; release APKs carry a v1 signature for Android 6.0. Tested on an emulator matrix (README, *Device support*). Measurements: `docs/PERFORMANCE.md`. (2026-11-07) |
 
 ### Owner decisions (already made)
 - **Servers:** free volunteer servers from the **VPN Gate** network (University of Tsukuba academic project). There are no paid subscriptions and no owner-run servers.
@@ -71,7 +72,7 @@ The app was built from this plan. Where the build differs, the code wins:
 | VPN engine | **ics-openvpn** ("OpenVPN for Android", GPL) embedded from source as a library module. It is pinned to a release tag as a git submodule and built with NDK **r28 or newer**, which defaults to 16 KB page alignment. |
 | Licence consequence | The app is distributed under the **GPL**: keep the repo's source public and add a `LICENSE` file. Review dependency licence compatibility before any public distribution. |
 | Language / UI | Kotlin, Jetpack Compose, Material 3 (Expressive components where stable), dynamic colour |
-| SDK levels | `compileSdk 36`, `targetSdk 36` (Android 16), `minSdk 26` |
+| SDK levels | `compileSdk 36`, `targetSdk 36` (Android 16), `minSdk 26` *(2026-11-07: built with `minSdk 23`, Android 6.0; upstream now compiles and targets 37. See the status table.)* |
 | Architecture | MVVM + unidirectional data flow, Coroutines/Flow, Hilt (KSP) |
 | Local storage | Room on **SQLCipher** (encrypted DB) and DataStore encrypted with **Tink** AEAD. All keys are wrapped by the Android Keystore (§13). |
 | Networking | OkHttp, kotlinx.serialization |
@@ -647,7 +648,7 @@ Profiles (setting "Optimize for"):
 
 ## 14. Android 16 (API 36) platform checklist
 
-- `compileSdk = 36`, `targetSdk = 36`, `minSdk = 26`.
+- `compileSdk = 36`, `targetSdk = 36`, `minSdk = 26`. *(2026-11-07: `minSdk = 23`; see the status table.)*
 - **Edge-to-edge is mandatory** on target 36: call `enableEdgeToEdge()` and handle insets everywhere.
 - **Predictive back:** use `BackHandler` or Navigation and never override `onBackPressed`.
 - Foreground service type `specialUse`, subtype `vpn`, with `FOREGROUND_SERVICE_SPECIAL_USE` (§6.3).
