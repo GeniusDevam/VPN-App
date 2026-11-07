@@ -7,7 +7,7 @@ Rules (each violation is printed; exit status 1 if there is any):
   R1  Workflow-level permissions are exactly {contents: read}.
   R2  Any secret other than GITHUB_TOKEN, and any `vars.RELEASE_*`, appears ONLY in the job named `sign`.
   R3  The `sign` job runs in the protected environment `release`, only for version tags, and needs `release-gate`.
-  R4  Only `emulator` (contents: write, publishes redacted results) and `publish` (contents/attestations/id-token: write, holds
+  R4  Only `emulator` and `compat-report` (contents: write, publish redacted results) and `publish` (contents/attestations/id-token: write, holds
       no secrets) may request write permissions; no other job may.
   R5  Every `uses:` is pinned to a full 40-hex commit SHA, except the explicit, justified allow-list below.
   R6  No `pull_request_target` / `workflow_run` triggers (they run with secrets and write tokens on untrusted code).
@@ -26,7 +26,7 @@ except ImportError:
 # Not pinned by SHA: its commit could not be resolved and checked from the environment this was written in. GitHub-owned; used only in
 # the `publish` job, which holds no signing secrets. Resolve and pin it, then delete this entry.
 UNPINNED_ALLOWED = {"actions/attest-build-provenance@v2"}
-WRITERS = {"emulator": {"contents"}, "publish": {"contents", "attestations", "id-token"}}
+WRITERS = {"emulator": {"contents"}, "compat-report": {"contents"}, "publish": {"contents", "attestations", "id-token"}}
 SHA = re.compile(r"^[^@\s]+@[0-9a-f]{40}$")
 
 
