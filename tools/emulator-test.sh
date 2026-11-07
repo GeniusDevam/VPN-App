@@ -398,8 +398,7 @@ fi
 # ---- explicit disconnect must stay disconnected (B5, live) ----------------------------------------------------------
 if [ "$result" = "connected" ]; then
   log "explicit disconnect"
-  scroll_top
-  tap_text "Disconnect" || hard "no Disconnect button while connected"
+  tap_scrolling id disconnect || hard "no Disconnect button while connected"
   sleep 3; scroll_top; dump
   if has_text "Not connected"; then
     sleep 20; scroll_top; dump
@@ -417,6 +416,8 @@ if [ "$result" = "connected" ]; then
   for i in $(seq 1 60); do
     sleep 10; scroll_top; dump
     if has_text "Best server:"; then bres="done"; break; fi
+    # The home screen is a lazy list: on a small screen at a large font the result banner is below the fold and not on screen.
+    if [ $((i % 3)) -eq 0 ] && seen_scrolling "Best server:"; then bres="done"; break; fi
     if has_text "went wrong"; then bres="failed-app"; break; fi
     if has_text "could not be loaded|no usable servers|No server in|none fit your settings"; then bres="failed-infra"; break; fi
     [ $((i % 3)) -eq 0 ] && shot "06-best-progress-$i"
