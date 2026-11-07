@@ -1,0 +1,7 @@
+started=2026-11-07T09:41:54Z
+device=Android 13 (API 33), x86_64, 2560x1600 px = 1280x800 dp, font scale 1.0
+status=FAIL
+passed:
+inconclusive:
+failed:
+onboarding screen never offered 'I understand, continue', even after scrolling

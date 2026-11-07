@@ -1,0 +1,2 @@
+11-07 09:44:32.696  4853  4853 E AndroidRuntime: Process: io.github.geniusdevam.vpnapp:openvpn, PID: 4853
+11-07 09:44:32.696  4853  4853 E AndroidRuntime: android.app.RemoteServiceException: Context.startForegroundService() did not then call Service.startForeground(): ServiceRecord{40c0def u0 io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNService}

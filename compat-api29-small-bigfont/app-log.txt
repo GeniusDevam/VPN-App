@@ -1,0 +1,624 @@
+11-07 09:41:17.912  1750  1750 V installd: DexInv: --- END '/data/app/io.github.geniusdevam.vpnapp-x1aLaN9dVCtpdY2zHzrBlQ==/base.apk' (success) ---
+11-07 09:41:19.120  1917  2806 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=io.github.geniusdevam.vpnapp/.MainActivity} from uid 2000
+11-07 09:41:19.235  1917  1944 I ActivityManager: Start proc 6319:io.github.geniusdevam.vpnapp/u0a146 for activity {io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}
+11-07 09:41:19.736  1917  1944 I ActivityManager: Start proc 6343:io.github.geniusdevam.vpnapp:openvpn/u0a146 for service {io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService}
+11-07 09:41:19.890  6319  6319 W RenderThread: type=1400 audit(0.0:32): avc: denied { write } for name="property_service" dev="tmpfs" ino=6844 scontext=u:r:untrusted_app:s0:c146,c256,c512,c768 tcontext=u:object_r:property_socket:s0 tclass=sock_file permissive=0 app=io.github.geniusdevam.vpnapp
+11-07 09:41:22.764  2063  6155 W GCM     : Unexpected forwarded intent: Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) }
+11-07 09:41:22.767  2063  6155 W GCM     : Unexpected forwarded intent: Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) }
+11-07 09:41:22.822  2253  6175 I ChromeSync: [Sync,SyncIntentOperation] Handling the intent: Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }.
+11-07 09:41:23.174  2253  6175 I ChromeSync: [Persistence,AffiliationManager] One of affiliation or grouping data for android:[data]@io.github.geniusdevam.vpnapp/ was not found. Marking affiliation data as stale...
+11-07 09:41:25.083  1917  1942 I ActivityTaskManager: Displayed io.github.geniusdevam.vpnapp/.MainActivity: +2s159ms
+11-07 09:41:25.653  1917  2811 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.google.android.packageinstaller/com.android.packageinstaller.PackageInstalledReceiver
+11-07 09:41:25.654  1917  1943 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.android.musicfx/.Compatibility$Receiver
+11-07 09:41:25.654  1917  1943 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.google.android.gms/.games.chimera.GamesSystemBroadcastReceiverProxy
+11-07 09:41:25.654  1917  1943 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.google.android.gms/.gass.chimera.PackageChangeBroadcastReceiver
+11-07 09:41:25.654  1917  1943 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver
+11-07 09:41:25.654  1917  1943 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.google.android.googlequicksearchbox/com.google.android.apps.gsa.googlequicksearchbox.GelStubAppWatcher
+11-07 09:41:25.654  1917  1943 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.google.android.ims/.receivers.RcsAutoStartReceiver
+11-07 09:41:26.132  6319  6604 D ProfileInstaller: Installing profile for io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:42:32.825  1917  2718 E InputDispatcher: Window handle Window{735a312 u0 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity} has no registered input channel
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:42:57.259  1917  2714 E InputDispatcher: Window handle Window{fbeb0da u0 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity} has no registered input channel
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:43:17.834  1917  3156 I ActivityManager: Force stopping io.github.geniusdevam.vpnapp appid=10146 user=0: from pid 8072
+11-07 09:43:17.834  1917  3156 I ActivityManager: Killing 6343:io.github.geniusdevam.vpnapp:openvpn/u0a146 (adj 100): stop io.github.geniusdevam.vpnapp
+11-07 09:43:17.837  1917  3156 W ActivityManager: Scheduling restart of crashed service io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService in 1000ms
+11-07 09:43:17.838  1917  3156 I ActivityManager: Killing 6319:io.github.geniusdevam.vpnapp/u0a146 (adj 0): stop io.github.geniusdevam.vpnapp
+11-07 09:43:17.839  1917  3156 W ActivityTaskManager: Force removing ActivityRecord{4790c3 u0 io.github.geniusdevam.vpnapp/.MainActivity t6 f}: app died, no saved state
+11-07 09:43:19.875  1917  3940 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=io.github.geniusdevam.vpnapp/.MainActivity} from uid 2000
+11-07 09:43:19.898  1917  1944 I ActivityManager: Start proc 8098:io.github.geniusdevam.vpnapp/u0a146 for activity {io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}
+11-07 09:43:19.966  1917  1944 I ActivityManager: Start proc 8117:io.github.geniusdevam.vpnapp:openvpn/u0a146 for service {io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService}
+11-07 09:43:19.970  8098  8098 W RenderThread: type=1400 audit(0.0:299): avc: denied { write } for name="property_service" dev="tmpfs" ino=6844 scontext=u:r:untrusted_app:s0:c146,c256,c512,c768 tcontext=u:object_r:property_socket:s0 tclass=sock_file permissive=0 app=io.github.geniusdevam.vpnapp
+11-07 09:43:20.666  1917  1942 I ActivityTaskManager: Displayed io.github.geniusdevam.vpnapp/.MainActivity: +782ms
+11-07 09:43:25.438  8098  8175 D ProfileInstaller: Skipping profile installation for io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:43:41.153  1917  3942 W AppOps  : Bad call: specified package io.github.geniusdevam.vpnapp under uid 10060 but it is really 10146
+11-07 09:43:46.844  1917  3942 I Vpn     : Switched from [Legacy VPN] to io.github.geniusdevam.vpnapp
+11-07 09:43:47.157  8098  8169 D VPNAPP  : phase LOADING_SERVERS 
+11-07 09:43:47.158  8098  8169 D VPNAPP  : phase SCANNING 1
+11-07 09:43:47.263  8098  8169 D VPNAPP  : probed 0/1
+11-07 09:43:47.766  8098  8449 D VPNAPP  : probed 0/1
+11-07 09:43:47.866  8098  8170 D VPNAPP  : probed 1/1
+11-07 09:43:47.867  8098  8170 D VPNAPP  : phase CONNECTING 
+11-07 09:43:47.867  8098  8170 D VPNAPP  : connecting #1
+11-07 09:43:48.020  8098  8170 D VPNAPP  : connect vpn421416087 TCP
+11-07 09:43:48.041  1917  3156 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut baa1e1fc-1b29-4b46-bfab-ad0a5a660949
+11-07 09:43:48.052  8461  8461 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:43:48.150  8098  8155 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:43:48.150  8098  8155 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:43:49.349  8098  8466 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:43:49.349  8098  8466 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:43:49.350  8098  8114 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:43:49.350  8098  8114 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:43:49.351  8098  8114 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:43:49.351  8098  8114 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:43:49.351  8098  8114 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:43:49.414  8098  8466 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:43:50.853  1917  3156 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:43:50.856  8098  8155 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:43:50.856  8098  8155 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:43:50.856  8098  8155 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:43:50.871  8098  8170 D VPNAPP  : connect vpn421416087 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:46.948  8098  8169 D VPNAPP  : phase LOADING_SERVERS 
+11-07 09:44:54.150  8098  8169 D VPNAPP  : phase SCANNING 96
+11-07 09:44:54.281  8098  9075 D VPNAPP  : probed 0/96
+11-07 09:44:54.787  8098  9076 D VPNAPP  : probed 13/96
+11-07 09:44:55.291  8098  9014 D VPNAPP  : probed 49/96
+11-07 09:44:55.798  8098  9029 D VPNAPP  : probed 81/96
+11-07 09:44:56.303  8098  9029 D VPNAPP  : probed 82/96
+11-07 09:44:56.808  8098  9066 D VPNAPP  : probed 82/96
+11-07 09:44:57.311  8098  9066 I chatty  : uid=10146(io.github.geniusdevam.vpnapp) identical 1 line
+11-07 09:44:57.815  8098  9066 D VPNAPP  : probed 82/96
+11-07 09:44:58.219  8098  9066 D VPNAPP  : probed 96/96
+11-07 09:44:58.221  8098  9066 D VPNAPP  : phase SCANNING refine 48
+11-07 09:44:58.370  8098  9066 D VPNAPP  : probed 0/48
+11-07 09:44:58.877  8098  9041 D VPNAPP  : probed 0/48
+11-07 09:44:59.384  8098  9069 D VPNAPP  : probed 47/48
+11-07 09:44:59.888  8098  8170 D VPNAPP  : probed 47/48
+11-07 09:45:00.395  8098  9040 D VPNAPP  : probed 48/48
+11-07 09:45:00.396  8098  9040 D VPNAPP  : probed 48/48
+11-07 09:45:00.419  8098  9040 D VPNAPP  : phase SPEED_TESTING 
+11-07 09:45:00.442  8098  9040 D VPNAPP  : connect vpn100383739 UDP
+11-07 09:45:00.574  1917  3470 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut f7f088a2-635a-49d8-9b99-20d5af6c9ed9
+11-07 09:45:00.598  9109  9109 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:45:00.754  8098  8155 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:45:00.755  8098  8155 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:45:01.742  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:45:01.743  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:45:01.744  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:45:01.744  8098  8155 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:45:01.744  8098  8155 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:45:01.744  8098  8155 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:45:01.744  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:45:01.760  8098  8465 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:03.713  8098  9040 D VPNAPP  : connect vpn100383739 -> AUTH
+11-07 09:45:03.740  8098  9040 D VPNAPP  : connect vpn196825283 UDP
+11-07 09:45:03.805  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+11-07 09:45:03.865  1917  3470 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut ec518945-840b-472d-ba34-d7a853587202
+11-07 09:45:03.869  9152  9152 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:45:03.939  8098  8113 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:45:03.939  8098  8113 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:45:05.100  8098  8113 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:45:05.101  8098  8113 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:45:05.102  8098  8113 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:45:05.102  8098  8113 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:45:05.102  8098  8113 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:45:05.102  8098  8113 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:45:05.103  8098  8113 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:45:05.185  8098  8113 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:45:03.853  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+11-07 09:45:07.205  1917  3470 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:45:07.207  8098  8113 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:45:07.209  8098  8113 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:45:07.209  8098  8113 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:45:07.216  8098  8170 D VPNAPP  : connect vpn196825283 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:22.906  8098  9069 D VPNAPP  : leaderboard tested=1/10
+11-07 09:45:22.931  8098  9069 D VPNAPP  : connect vpn421416087 TCP
+11-07 09:45:23.060  1917  3470 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 674705b0-b3d3-4c74-9241-68ad7514a0d0
+11-07 09:45:23.077  9263  9263 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:45:23.160  8098  9265 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:45:23.160  8098  9265 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:45:24.334  8098  8113 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:45:24.334  8098  8113 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:45:24.334  8098  8113 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:45:24.334  8098  8113 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:45:24.334  8098  8113 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:45:24.334  8098  8113 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:45:24.335  8098  8113 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:45:24.395  8098  9266 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:45:25.855  1917  1933 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun1
+11-07 09:45:25.861  8098  8465 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:45:25.862  8098  8465 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:45:25.862  8098  8465 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:45:25.866  8098  9040 D VPNAPP  : connect vpn421416087 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:39.068  8098  9056 D VPNAPP  : leaderboard tested=2/10
+11-07 09:45:39.080  8098  9056 D VPNAPP  : connect vpn461797036 UDP
+11-07 09:45:39.216  1917  1933 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 8160ad0e-78ef-406a-a986-84353b7c8311
+11-07 09:45:40.283  9494  9494 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:45:40.360  8098  8113 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:45:40.360  8098  8113 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:41.652  8098  8113 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:45:41.653  8098  8113 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:45:41.654  8098  9266 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:45:41.654  8098  9266 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:45:41.654  8098  9266 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:45:41.655  8098  9266 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:45:41.655  8098  9266 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:45:41.814  8098  8113 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:43.804  1917  3327 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:45:43.807  8098  8466 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:45:43.813  8098  8466 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:45:43.813  8098  8466 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:45:43.818  8098  9056 D VPNAPP  : connect vpn461797036 -> up
+11-07 09:45:44.130  1917  3754 E NotificationService: Package enqueue rate is 5.500845. Shedding 0|io.github.geniusdevam.vpnapp|1346787898|null|10146. package=io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:46.548  8098  9040 D VPNAPP  : leaderboard tested=3/10
+11-07 09:46:46.578  8098  9040 D VPNAPP  : connect public-vpn-53 TCP
+11-07 09:46:46.720  1917  3156 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 4f47ef97-0a15-4199-893f-4c62fc3946ec
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:47.789 10067 10067 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:46:47.949  8098  8487 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:46:47.949  8098  8487 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:46:49.350  8098  9266 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:46:49.350  8098  9266 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:46:49.350  8098  9266 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:46:49.350  8098  9266 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:46:49.350  8098  9266 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:46:49.350  8098  9266 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:46:49.350  8098  9266 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:46:49.485  8098  9111 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:53.665  1917  3368 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:46:53.668  8098  8143 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:46:53.668  8098  8143 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:46:53.668  8098  8143 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:46:53.669  8098  9040 D VPNAPP  : connect public-vpn-53 -> up
+11-07 09:46:53.723  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+11-07 09:46:53.723  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:51:03.110  8098  8169 D VPNAPP  : connect vpn177063414 TCP
+11-07 09:51:03.233  1917  2326 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 67164336-4ea1-4a8b-8446-090e04c6d546
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:51:04.249 12052 12052 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:51:04.368  8098 10069 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:51:04.369  8098 10069 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:51:05.790  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:51:05.790  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:51:05.790  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:51:05.790  8098  8155 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:51:05.791  8098  8155 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:51:05.795  8098  8155 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:51:05.795  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:51:05.937  8098 10069 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:51:07.367  1917  4151 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:51:07.370  8098  8155 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:51:07.370  8098  8155 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:51:07.370  8098  8155 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:51:07.371  8098  8169 D VPNAPP  : connect vpn177063414 -> up
+11-07 09:51:07.421  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+11-07 09:51:07.421  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:51:19.888  8098 12142 D VPNAPP  : leaderboard tested=4/10
+11-07 09:51:19.902  8098 12142 D VPNAPP  : connect vpn767161620 UDP
+11-07 09:51:20.030  1917  1987 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut d5280490-c0d3-4dd7-b9e7-e06c6a482a00
+11-07 09:51:21.119 12188 12188 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:51:21.188  8098 10069 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:51:21.188  8098 10069 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:51:22.485  8098 12053 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:51:22.486  8098 12053 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:51:22.486  8098 12053 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:51:22.486  8098 12053 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:51:22.486  8098 12053 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:51:22.486  8098 12053 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:51:22.486  8098 12053 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:51:22.643  8098  9266 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:51:24.739  1917  3940 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:51:24.742  8098  9110 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:51:24.745  8098  9110 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:51:24.745  8098  9111 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:51:24.751  8098  9071 D VPNAPP  : connect vpn767161620 -> up
+11-07 09:51:25.015  1917  3940 E NotificationService: Package enqueue rate is 5.1772738. Shedding 0|io.github.geniusdevam.vpnapp|1346787898|null|10146. package=io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:51:43.368  8098 12140 D VPNAPP  : leaderboard tested=5/10
+11-07 09:51:43.383  8098 12140 D VPNAPP  : connect vpn350908335 TCP
+11-07 09:51:43.517  1917  2718 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 00730527-d75b-4cd8-9a6f-b3a5549451e7
+11-07 09:51:44.581 12366 12366 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:51:44.649  8098 12367 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:51:44.649  8098 12367 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:51:46.072  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:51:46.073  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:51:46.073  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:51:46.073  8098  8155 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:51:46.074  8098  8155 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:51:46.074  8098  8155 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:51:46.074  8098  8155 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:51:46.218  8098  8464 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:51:47.566  1917  2202 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:51:47.569  8098  9071 D VPNAPP  : connect vpn350908335 -> up
+11-07 09:51:47.586  8098  8466 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:51:47.586  8098  8466 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:51:47.586  8098  8466 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:51:47.597  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+11-07 09:51:47.618  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:52:01.102  8098  9040 D VPNAPP  : leaderboard tested=6/10
+11-07 09:52:01.114  8098  9040 D VPNAPP  : connect vpn617491321 TCP
+11-07 09:52:01.246  1917  3940 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut dc1d29ff-155b-4d57-8dff-9ee926a78120
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:52:02.316 12580 12580 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:52:02.396  8098  8487 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:52:02.396  8098  8487 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:52:03.807  8098  8114 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:52:03.809  8098  8114 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:52:03.809  8098  8114 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:52:03.809  8098  8114 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:52:03.815  8098  8487 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:52:03.815  8098  8487 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:52:03.816  8098  8487 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:52:03.958  8098  8114 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:52:05.710  1917  4266 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:52:05.716  8098  8487 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:52:05.716  8098  8487 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:52:05.716  8098  8487 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:52:05.717  8098 12141 D VPNAPP  : connect vpn617491321 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:52:22.123  8098  9040 D VPNAPP  : leaderboard tested=7/10
+11-07 09:52:22.134  8098  9040 D VPNAPP  : connect vpn525554372 UDP
+11-07 09:52:22.256  1917  3040 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 7501b1c8-0b5c-484b-b934-5ceed0213c87
+11-07 09:52:23.311 12793 12793 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:52:23.385  8098  8114 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:52:23.385  8098  8114 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:52:24.652  8098  8465 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:52:24.652  8098  8465 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:52:24.652  8098  8465 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:52:24.652  8098  8465 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:52:24.653  8098  8464 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:52:24.653  8098  8464 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:52:24.653  8098  8464 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:52:24.800  8098  8114 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:52:26.754  1917  3062 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:52:26.758  8098  8114 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:52:26.758  8098  8114 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:52:26.758  8098  8114 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:52:26.765  8098  9040 D VPNAPP  : connect vpn525554372 -> up
+11-07 09:52:26.786  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+11-07 09:52:26.817  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:52:38.988  8098 12142 D VPNAPP  : leaderboard tested=8/10
+11-07 09:52:38.988  8098 12142 D VPNAPP  : phase CONFIRMING 
+11-07 09:52:38.996  8098 12142 D VPNAPP  : connect vpn177063414 TCP
+11-07 09:52:39.152  1917  3941 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 240babee-2f1a-4ae9-87f1-32d3341d36ed
+11-07 09:52:40.200 12900 12900 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:52:40.278  8098  8155 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:52:40.278  8098  8155 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:52:41.719  8098  8487 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:52:41.719  8098  8487 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:52:41.719  8098  8487 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:52:41.719  8098  8487 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:52:41.720  8098  9110 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:52:41.720  8098  9110 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:52:41.720  8098  9110 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:52:41.868  8098  8487 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:52:43.219  1917  2811 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:52:43.222  8098  8155 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:52:43.223  8098  8155 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:52:43.223  8098  8155 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:52:43.239  8098  9071 D VPNAPP  : connect vpn177063414 -> up
+11-07 09:52:43.272  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+11-07 09:52:43.272  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:52:55.573  8098  9071 D VPNAPP  : connect vpn525554372 UDP
+11-07 09:52:55.703  1917  4151 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut bb78cc15-3305-4407-b98a-ea60cc8a751e
+11-07 09:52:56.771 13025 13025 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:52:56.890  8098  8487 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:52:56.898  8098  8487 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:52:58.191  8098  8466 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:52:58.191  8098 12053 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:52:58.191  8098 12053 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:52:58.191  8098 12053 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:52:58.197  8098 12053 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:52:58.197  8098 12053 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:52:58.197  8098 12053 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:52:58.333  8098  8466 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:53:00.031  1917  4266 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:53:00.035  8098  8465 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:53:00.035  8098  8465 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:53:00.035  8098  8465 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:53:00.045  8098 12392 D VPNAPP  : connect vpn525554372 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:53:10.555  8098 12140 D VPNAPP  : connect vpn421416087 TCP
+11-07 09:53:10.675  1917  1987 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 685609bd-098c-461c-9c84-12d473aa98a9
+11-07 09:53:11.736 13257 13257 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:53:11.815  8098  9265 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:53:11.815  8098  9265 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:53:12.968  8098  8466 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:53:12.969  8098  8466 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:53:12.969  8098  8466 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:53:12.969  8098  8466 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:53:12.970  8098  8466 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:53:12.970  8098  8466 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:53:12.970  8098  8466 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:53:13.031  8098  9110 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:53:14.355  8098  9071 D VPNAPP  : connect vpn421416087 -> AUTH
+11-07 09:53:14.355  8098  9071 D VPNAPP  : leaderboard tested=8/10
+11-07 09:53:14.355  8098  9071 D VPNAPP  : phase CONNECTING 
+11-07 09:53:14.356  8098  9071 D VPNAPP  : connecting #1
+11-07 09:53:14.363  8098  9071 D VPNAPP  : connect vpn177063414 TCP
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:53:14.469  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+11-07 09:53:14.498  1917  1917 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10146
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:53:29.378  8098  9071 D VPNAPP  : connect vpn177063414 -> timeout after 15000ms
+11-07 09:53:29.379  8098  9071 D VPNAPP  : connecting #2
+11-07 09:53:29.385  8098  9071 D VPNAPP  : connect vpn421416087 TCP
+11-07 09:53:29.490  1917  1987 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut c34b5011-b14b-4144-81b1-4d1617d5b47a
+11-07 09:53:29.498 13391 13391 W linker  : Warning: "/data/app/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:53:29.591  8098  8114 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:53:29.591  8098  8114 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:53:30.753  8098  9110 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:53:30.757  8098  9110 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:53:30.757  8098  9110 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:53:30.758  8098  9110 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:53:30.758  8098  8114 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:53:30.758  8098  8114 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:53:30.758  8098  8114 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:53:30.817  8098  9110 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:53:32.203  1917  4763 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:53:32.206  8098  9265 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:53:32.206  8098  9265 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:53:32.206  8098  9265 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:53:32.214  8098  9071 D VPNAPP  : connect vpn421416087 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]

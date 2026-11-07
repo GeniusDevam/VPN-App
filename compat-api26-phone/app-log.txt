@@ -1,0 +1,641 @@
+11-07 09:41:29.862  1651  1962 I ActivityManager: START u0 {flg=0x10000000 cmp=io.github.geniusdevam.vpnapp/.MainActivity} from uid 2000
+11-07 09:41:29.880  1651  3721 I ActivityManager: Start proc 4643:io.github.geniusdevam.vpnapp/u0a77 for activity io.github.geniusdevam.vpnapp/.MainActivity
+11-07 09:41:29.923  4643  4643 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:41:29.925  4643  4643 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:41:29.926  4643  4643 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:41:29.948  1651  3721 I ActivityManager: Start proc 4659:io.github.geniusdevam.vpnapp:openvpn/u0a77 for service io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService
+11-07 09:41:30.007  4659  4659 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:41:30.008  4659  4659 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:41:30.009  4659  4659 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:41:30.725  1651  1686 I ActivityManager: Displayed io.github.geniusdevam.vpnapp/.MainActivity: +855ms
+11-07 09:41:35.251  4643  4699 D ProfileInstaller: Installing profile for io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:42:00.232  4643  4688 I chatty  : uid=10077(u0_a77) io.github.geniusdevam.vpnapp identical 1 line
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:42:33.909  1651  4317 I ActivityManager: Force stopping io.github.geniusdevam.vpnapp appid=10077 user=0: from pid 5352
+11-07 09:42:33.909  1651  4317 I ActivityManager: Killing 4659:io.github.geniusdevam.vpnapp:openvpn/u0a77 (adj 100): stop io.github.geniusdevam.vpnapp
+11-07 09:42:33.910  1651  4317 W ActivityManager: Scheduling restart of crashed service io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService in 1000ms
+11-07 09:42:33.913  1651  4317 I ActivityManager: Killing 4643:io.github.geniusdevam.vpnapp/u0a77 (adj 0): stop io.github.geniusdevam.vpnapp
+11-07 09:42:33.914  1651  4317 W ActivityManager: Force removing ActivityRecord{9ddebf4 u0 io.github.geniusdevam.vpnapp/.MainActivity t6}: app died, no saved state
+11-07 09:42:33.926  1651  4317 I WindowManager: Failed to capture screenshot of Token{[masked] ActivityRecord{9ddebf4 u0 io.github.geniusdevam.vpnapp/.MainActivity t6 f}} appWin=Window{4f290dd u0 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity} drawState=4
+11-07 09:42:35.963  1651  2435 I ActivityManager: START u0 {flg=0x10000000 cmp=io.github.geniusdevam.vpnapp/.MainActivity} from uid 2000
+11-07 09:42:35.978  1651  4306 I ActivityManager: Start proc 5372:io.github.geniusdevam.vpnapp/u0a77 for activity io.github.geniusdevam.vpnapp/.MainActivity
+11-07 09:42:35.996  5372  5372 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:42:36.000  5372  5372 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:42:36.001  5372  5372 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:42:36.047  1651  4510 I ActivityManager: Start proc 5388:io.github.geniusdevam.vpnapp:openvpn/u0a77 for service io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService
+11-07 09:42:36.089  5388  5388 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:42:36.090  5388  5388 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:42:36.121  5388  5388 I zygote64: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.os.StrictMode$OnThreadViolationListener" on path: DexPathList[[zip file "/data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.geniusdevam.[data], /data/app/io.github.geniusdevam.vpnapp-PNKrXvU6fEBRhqIQiPADmw==/base.apk!/lib/x86_64, /system/lib64, /vendor/lib64]]
+11-07 09:42:37.104  1651  1686 I ActivityManager: Displayed io.github.geniusdevam.vpnapp/.MainActivity: +1s136ms
+11-07 09:42:41.207  5372  5424 D ProfileInstaller: Skipping profile installation for io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:42:53.503  1651  4485 W AppOps  : Bad call: specified package io.github.geniusdevam.vpnapp under uid 10029 but it is really 10077
+11-07 09:42:59.429  1651  1962 I Vpn     : Switched from [Legacy VPN] to io.github.geniusdevam.vpnapp
+11-07 09:42:59.640  5372  5411 D VPNAPP  : phase LOADING_SERVERS 
+11-07 09:42:59.658  5372  5411 D VPNAPP  : phase SCANNING 51
+11-07 09:42:59.694  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:42:59.783  5372  5408 D VPNAPP  : probed 0/51
+11-07 09:43:00.308  5372  5422 D VPNAPP  : probed 0/51
+11-07 09:43:00.816  5372  5645 D VPNAPP  : probed 43/51
+11-07 09:43:01.224  5372  5621 D VPNAPP  : probed 43/51
+11-07 09:43:01.228  5372  5621 D VPNAPP  : phase CONNECTING 
+11-07 09:43:01.230  5372  5621 D VPNAPP  : connecting #1
+11-07 09:43:01.287  5372  5621 D VPNAPP  : connect vpn105725304 UDP
+11-07 09:43:01.320  1651  4485 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 60ae23f3-073f-4daa-ba51-141f9b05bd43
+11-07 09:43:01.434  5372  5423 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:43:01.434  5372  5423 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:43:02.429  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:43:02.436  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:43:02.662  5372  5681 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:43:02.664  5372  5681 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:43:02.665  5372  5681 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:43:02.666  5372  5681 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:43:02.667  5372  5681 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:43:02.668  5372  5681 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:43:02.668  5372  5681 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:43:02.791  5372  5680 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:43:02.546  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:43:03.927  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:43:04.769  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:43:04.954  1651  2984 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:43:04.968  5372  5680 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:43:04.969  5372  5680 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:43:04.969  5372  5680 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:43:04.972  5372  5657 D VPNAPP  : connect vpn105725304 -> up
+11-07 09:43:05.094  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:43:05.132  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:43:06.096  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:43:06.102  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:43:08.828  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:43:08.831  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:43:10.705  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:43:14.839  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:43:16.714  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:43:18.842  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:43:19.744  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:43:19.827  1809  1809 W StatusBar: removeNotification for unknown key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:43:19.745  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:43:54.931  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:43:55.009  5372  5664 D VPNAPP  : phase LOADING_SERVERS 
+11-07 09:43:56.614  5372  5659 D VPNAPP  : phase SCANNING 96
+11-07 09:43:56.801  5372  5622 D VPNAPP  : probed 0/96
+11-07 09:43:57.309  5372  5639 D VPNAPP  : probed 42/96
+11-07 09:43:57.511  5372  5667 I zygote64: Deoptimizing double io.github.geniusdevam.vpnapp.engine.ServerLedger.throughputBonusMs(java.lang.String, java.lang.String) due to JIT inline cache
+11-07 09:43:57.815  5372  5622 D VPNAPP  : probed 65/96
+11-07 09:43:58.326  5372  5411 D VPNAPP  : probed 77/96
+11-07 09:43:58.830  5372  5657 D VPNAPP  : probed 78/96
+11-07 09:43:59.336  5372  5656 D VPNAPP  : probed 79/96
+11-07 09:43:59.840  5372  5658 D VPNAPP  : probed 79/96
+11-07 09:44:00.345  5372  5658 D VPNAPP  : probed 84/96
+11-07 09:44:00.849  5372  5658 D VPNAPP  : probed 95/96
+11-07 09:44:01.053  5372  5658 D VPNAPP  : probed 96/96
+11-07 09:44:01.056  5372  5658 D VPNAPP  : phase SCANNING refine 48
+11-07 09:44:01.203  5372  5639 D VPNAPP  : probed 0/48
+11-07 09:44:01.206  5372  5639 I zygote64: Deoptimizing java.lang.Object io.github.geniusdevam.vpnapp.engine.ProbeRunner$run$3.invokeSuspend(java.lang.Object) due to JIT inline cache
+11-07 09:44:01.710  5372  5657 D VPNAPP  : probed 0/48
+11-07 09:44:02.218  5372  5649 D VPNAPP  : probed 48/48
+11-07 09:44:02.221  5372  5649 D VPNAPP  : probed 48/48
+11-07 09:44:02.228  5372  5649 D VPNAPP  : phase SPEED_TESTING 
+11-07 09:44:02.261  5372  5377 I zygote64: Compiler allocated 7MB to compile java.lang.Object io.github.geniusdevam.vpnapp.engine.BestConnectEngine.attempt(io.github.geniusdevam.vpnapp.engine.Scope, io.github.geniusdevam.vpnapp.engine.RunContext, io.github.geniusdevam.vpnapp.engine.BestControl, kotlin.jvm.functions.Function1, kotlin.coroutines.Continuation)
+11-07 09:44:02.261  5372  5649 D VPNAPP  : connect vpn638699615 TCP
+11-07 09:44:02.378  1651  4180 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 91f7b35d-a25a-435c-baf4-f0aa660ea282
+11-07 09:44:02.427  5372  6115 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:02.427  5372  6115 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:44:01.713  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:44:03.432  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:03.437  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:03.443  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:44:03.537  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:03.679  5372  5678 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:03.681  5372  5678 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:03.682  5372  5678 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:03.683  5372  5678 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:03.685  5372  5678 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:03.685  5372  5678 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:03.686  5372  5678 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:03.764  5372  5678 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:44:05.440  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:05.592  1651  4485 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:44:05.595  5372  6114 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:44:05.595  5372  6114 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:44:05.597  5372  5678 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:44:05.603  5372  5649 D VPNAPP  : connect vpn638699615 -> up
+11-07 09:44:05.607  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:05.628  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:06.115  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:12.036  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:14.004  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:14.019  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:16.004  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:19.269  5372  5621 D VPNAPP  : leaderboard tested=1/10
+11-07 09:44:18.011  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:19.272  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:44:19.288  5372  5372 I zygote64: Deoptimizing void io.github.geniusdevam.vpnapp.ui.HomeScreenKt.BestProgress(io.github.geniusdevam.vpnapp.RunUi, long, androidx.compose.runtime.Composer, int) due to JIT inline cache
+11-07 09:44:19.322  5372  5621 D VPNAPP  : connect vpn934831294 UDP
+11-07 09:44:19.360  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:19.514  1651  2482 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 4ddfb2d4-b2e9-4bb0-8e16-db370c538ee5
+11-07 09:44:19.388  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:19.558  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:19.602  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:20.625  5372  5680 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:20.625  5372  5680 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:44:21.873  5372  5479 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:21.875  5372  5479 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:21.878  5372  5479 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:21.878  5372  5479 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:21.879  5372  5479 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:21.879  5372  5479 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:21.879  5372  5479 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:22.001  5372  6114 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:44:23.854  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:24.007  1651  2482 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:44:24.019  5372  5679 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:44:24.022  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:24.022  5372  5679 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:44:24.022  5372  5679 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:44:24.023  5372  5648 D VPNAPP  : connect vpn934831294 -> up
+11-07 09:44:24.120  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:24.183  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:26.075  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:26.079  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:28.004  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:34.018  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:35.652  5372  5649 D VPNAPP  : leaderboard tested=2/10
+11-07 09:44:35.655  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:44:35.704  5372  5649 D VPNAPP  : connect vpn105725304 UDP
+11-07 09:44:35.748  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:35.882  1651  4327 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut d41e8548-fc13-4f2c-bd3a-3a0742ae8c4b
+11-07 09:44:35.760  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:35.970  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:37.028  5372  6114 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:37.028  5372  6114 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:44:38.286  5372  5679 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:38.286  5372  5679 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:38.286  5372  5679 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:38.286  5372  5679 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:38.286  5372  5679 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:38.286  5372  5679 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:38.287  5372  5679 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:38.412  5372  5479 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:44:39.829  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:39.974  1651  1662 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:44:39.983  5372  5678 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:44:39.985  5372  5678 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:44:39.985  5372  5678 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:44:39.990  5372  5617 D VPNAPP  : connect vpn105725304 -> up
+11-07 09:44:39.993  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:40.003  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:41.032  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:41.038  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:43.016  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:45.009  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:47.012  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:47.031  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:49.031  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:49.043  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:51.003  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:51.010  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:51.258  5372  5652 D VPNAPP  : leaderboard tested=3/10
+11-07 09:44:51.262  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:44:51.287  5372  5652 D VPNAPP  : connect public-vpn-53 TCP
+11-07 09:44:51.308  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:51.437  1651  4032 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut bb4f597c-3b40-43f3-9825-9ad773783b6d
+11-07 09:44:51.316  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:51.545  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:51.572  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:52.625  5372  5616 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:52.625  5372  5616 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:44:53.590  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:53.932  5372  5680 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:53.933  5372  5680 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:53.933  5372  5680 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:53.933  5372  5680 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:53.933  5372  5680 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:53.933  5372  5680 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:53.933  5372  5680 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:54.040  5372  6114 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:53.831  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:55.084  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:55.780  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:44:55.918  1651  3233 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:44:55.921  5372  6673 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:44:55.922  5372  6673 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:44:55.922  5372  6673 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:44:55.930  5372  5411 D VPNAPP  : connect public-vpn-53 -> up
+11-07 09:44:55.936  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:55.960  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:56.478  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:56.481  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:44:58.513  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:58.517  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:45:00.146  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:02.789  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:45:04.134  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:04.148  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:45:06.120  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:45:10.769  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:45:12.408  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:20.189  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:45:22.189  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:34.783  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:45:36.208  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:47.862  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:45:49.795  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:51.737  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:45:53.732  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:55.795  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:45:57.249  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:57.259  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:45:59.252  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:01.244  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:03.359  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:03.366  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:05.931  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:07.081  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:09.063  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:09.072  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:11.752  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:11.756  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:13.090  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:15.997  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:17.261  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:27.773  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:29.915  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:29.920  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:31.832  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:41.282  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:43.177  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:55.877  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:57.947  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:59.295  5372  5649 D VPNAPP  : connect vpn696208175 TCP
+11-07 09:46:59.426  1651  2595 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 08d90146-391c-484f-a506-c98804c282e6
+11-07 09:46:59.321  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:46:59.504  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:00.547  5372  6115 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:47:00.547  5372  6672 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:59.505  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:01.549  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:01.940  5372  5679 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:47:01.940  5372  5679 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:47:01.941  5372  5679 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:47:01.942  5372  5679 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:47:01.942  5372  5679 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:47:01.942  5372  7540 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:47:01.942  5372  7540 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:47:02.068  5372  5679 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:47:03.314  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:03.483  1651  2986 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:47:03.485  5372  6672 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:47:03.485  5372  6672 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:47:03.485  5372  6672 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:47:03.495  5372  5649 D VPNAPP  : connect vpn696208175 -> up
+11-07 09:47:03.499  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:47:03.509  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:04.007  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:47:06.025  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:08.004  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:47:08.011  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:10.002  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:47:12.010  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:14.008  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:14.020  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:47:15.625  5372  5411 D VPNAPP  : leaderboard tested=4/10
+11-07 09:47:15.627  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:47:15.635  5372  5411 D VPNAPP  : connect vpn190458215 UDP
+11-07 09:47:15.667  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:15.774  1651  2433 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 1c68ed42-9aaf-485a-8aa8-fdbb17d1bf23
+11-07 09:47:15.668  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:15.855  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:15.893  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:17.029  5372  5385 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:47:17.029  5372  5385 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:47:17.958  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:18.199  5372  5680 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:47:18.200  5372  5680 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:47:18.201  5372  5680 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:47:18.201  5372  5680 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:47:18.202  5372  5385 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:47:18.202  5372  5385 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:47:18.202  5372  5385 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:47:18.325  5372  5385 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:47:18.081  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:19.572  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:20.368  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:20.461  1651  4180 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:47:20.463  5372  5678 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:47:20.463  5372  5678 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:47:20.466  5372  5678 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:47:20.476  5372  5411 D VPNAPP  : connect vpn190458215 -> up
+11-07 09:47:20.488  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:20.504  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:47:22.074  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:30.016  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:32.003  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:33.155  5372  5652 D VPNAPP  : leaderboard tested=5/10
+11-07 09:47:32.010  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:33.157  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:47:33.183  5372  5652 D VPNAPP  : connect vpn240054995 TCP
+11-07 09:47:33.204  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:33.334  1651  2435 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 66e43f8b-ae45-4d4f-a293-fec66e499da6
+11-07 09:47:33.216  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:33.432  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:33.466  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:34.551  5372  5680 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:47:34.551  5372  5680 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:47:35.896  5372  5385 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:47:35.897  5372  5385 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:47:35.898  5372  5385 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:47:35.898  5372  5385 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:47:35.900  5372  5385 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:47:35.901  5372  5385 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:47:35.901  5372  5385 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:47:36.019  5372  5385 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:47:35.789  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:37.261  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:47:37.264  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:37.383  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:37.432  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:37.590  1651  2984 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:47:37.596  5372  5385 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:47:37.599  5372  5678 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:47:37.600  5372  6114 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:47:37.603  5372  5652 D VPNAPP  : connect vpn240054995 -> up
+11-07 09:47:37.608  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:37.627  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:38.115  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:46.665  5372  7627 D VPNAPP  : leaderboard tested=6/10
+11-07 09:47:46.014  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:46.671  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:47:46.681  5372  7627 D VPNAPP  : phase CONFIRMING 
+11-07 09:47:46.716  5372  7627 D VPNAPP  : connect vpn638699615 TCP
+11-07 09:47:46.746  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:46.855  1651  2433 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 4df09723-5e1b-4937-b4b0-7ff5432ad164
+11-07 09:47:46.756  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:46.932  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:48.098  5372  6670 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:47:48.098  5372  6670 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:47:49.098  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:49.151  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:47:49.211  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:49.369  5372  6115 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:47:49.373  5372  6115 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:47:49.374  5372  6115 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:47:49.374  5372  6115 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:47:49.374  5372  6115 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:47:49.374  5372  6115 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:47:49.374  5372  6115 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:47:49.453  5372  5479 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:47:50.728  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:47:50.828  1651  2595 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:47:50.833  5372  5479 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:47:50.834  5372  5479 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:47:50.834  5372  5479 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:47:50.843  5372  7625 D VPNAPP  : connect vpn638699615 -> up
+11-07 09:47:50.855  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:47:50.872  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:47:52.029  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:00.013  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:02.008  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:02.408  5372  5649 D VPNAPP  : connect vpn240054995 TCP
+11-07 09:48:02.548  1651  1806 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 95853eae-6e36-47ce-b10f-6e7cb221f3fb
+11-07 09:48:02.447  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:02.617  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:02.661  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:03.846  5372  7540 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:48:03.846  5372  7540 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:48:05.094  5372  7540 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:48:05.095  5372  7540 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:48:05.095  5372  7540 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:48:05.096  5372  7540 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:48:05.097  5372  6670 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:48:05.097  5372  6670 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:48:05.097  5372  7540 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:48:05.216  5372  5423 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:48:04.979  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:06.463  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:06.635  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:06.777  1651  2595 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:48:06.781  5372  5384 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:48:06.782  5372  5384 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:48:06.782  5372  5384 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:48:06.790  5372  5649 D VPNAPP  : connect vpn240054995 -> up
+11-07 09:48:06.796  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:06.837  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:07.355  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:48:09.018  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:11.014  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:11.043  5372  5372 I chatty  : uid=10077(u0_a77) io.github.geniusdevam.vpnapp identical 1 line
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:48:13.013  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:15.006  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:48:15.021  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:17.004  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:18.896  5372  5649 D VPNAPP  : connect vpn934831294 UDP
+11-07 09:48:19.024  1651  4317 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut c2cd0ecf-3d66-4df8-be01-c296098846c7
+11-07 09:48:19.036  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:19.121  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:19.153  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:48:20.237  5372  5678 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:48:20.237  5372  5678 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:48:21.256  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:21.497  5372  5423 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:48:21.497  5372  5423 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:48:21.498  5372  5423 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:48:21.499  5372  5423 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:48:21.501  5372  6115 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:48:21.501  5372  6115 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:48:21.501  5372  6115 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:48:21.622  5372  5423 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:48:22.925  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:23.121  1651  4317 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:48:23.123  5372  5479 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:48:23.124  5372  5479 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:48:23.124  5372  5479 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:48:23.132  5372  5652 D VPNAPP  : connect vpn934831294 -> up
+11-07 09:48:23.140  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:23.159  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:24.083  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:48:24.087  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:26.003  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:48:28.012  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:30.012  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:48:30.044  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:32.054  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:32.060  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:34.019  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:35.004  5372  7627 D VPNAPP  : leaderboard tested=6/10
+11-07 09:48:35.005  5372  7627 D VPNAPP  : phase CONNECTING 
+11-07 09:48:35.007  5372  7627 D VPNAPP  : connecting #1
+11-07 09:48:34.025  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:35.008  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:48:35.032  5372  7627 D VPNAPP  : connect vpn638699615 TCP
+11-07 09:48:35.045  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:35.167  1651  1962 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut bec7a2be-34b7-481e-8094-d2a82f1ecc06
+11-07 09:48:35.050  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:35.261  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:36.337  5372  5385 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:48:36.338  5372  5385 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:48:35.287  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:37.328  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|4242|null|10077,booleanState
+11-07 09:48:37.328  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:37.580  5372  6115 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:48:37.582  5372  6115 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:48:37.582  5372  6115 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:48:37.583  5372  6115 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:48:37.585  5372  6115 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:48:37.587  5372  6115 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:48:37.588  5372  6115 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:48:37.659  5372  6115 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:48:39.049  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1623130911|null|10077,booleanState
+11-07 09:48:39.172  1651  1959 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:48:39.182  5372  5384 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:48:39.182  5372  6672 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:48:39.183  5372  6672 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:48:39.192  5372  7628 D VPNAPP  : connect vpn638699615 -> up
+11-07 09:48:39.196  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:39.255  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:40.428  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:48:45.012  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState
+11-07 09:48:47.807  1651  1651 D ZenLog  : disable_effects: 0|io.github.geniusdevam.vpnapp|1346787898|null|10077,booleanState

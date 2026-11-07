@@ -1,0 +1,1059 @@
+11-07 09:41:00.148   380   494 V installd: DexInv: --- END '/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.vpnapp-hoy4ig5mSH_tB9vWGDweSA==/base.apk' (success) ---
+11-07 09:41:00.259   475   513 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.google.android.packageinstaller/com.android.packageinstaller.PackageInstalledReceiver
+11-07 09:41:00.259   475   513 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.android.vending/com.google.android.finsky.packagemanager.impl.PackageMonitorReceiverImpl$RegisteredReceiver
+11-07 09:41:00.259   475   513 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.google.android.gms/.games.chimera.GamesSystemBroadcastReceiverProxy
+11-07 09:41:00.259   475   513 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.google.android.gms/.gass.chimera.PackageChangeBroadcastReceiver
+11-07 09:41:00.259   475   513 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver
+11-07 09:41:00.259   475   513 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:io.github.geniusdevam.vpnapp flg=0x4000010 (has extras) } to com.google.android.tv/com.android.tv.receiver.PackageIntentsReceiver
+11-07 09:41:00.261  1128  1128 I MediaProvider: Invalidating LocalCallingIdentity cache for package io.github.geniusdevam.vpnapp. Reason: package android.intent.action.PACKAGE_ADDED
+11-07 09:41:00.271   668   668 D AvrcpMediaPlayerList: Name of package changed: io.github.geniusdevam.vpnapp
+11-07 09:41:01.252   475  3265 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=io.github.geniusdevam.vpnapp/.MainActivity} from uid 2000
+11-07 09:41:01.321   475   514 I ActivityManager: Start proc 3337:io.github.geniusdevam.vpnapp/u0a76 for pre-top-activity {io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}
+11-07 09:41:01.501  3337  3337 D nativeloader: classloader namespace configured for unbundled vendor apk. library_path=/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.vpnapp-hoy4ig5mSH_tB9vWGDweSA==/lib/x86:/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.vpnapp-hoy4ig5mSH_tB9vWGDweSA==/base.apk!/lib/x86:/vendor/lib
+11-07 09:41:01.551   475   514 I ActivityManager: Start proc 3357:io.github.geniusdevam.vpnapp:openvpn/u0a76 for service {io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService}
+11-07 09:41:01.674  3357  3357 D nativeloader: classloader namespace configured for unbundled vendor apk. library_path=/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.vpnapp-hoy4ig5mSH_tB9vWGDweSA==/lib/x86:/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.vpnapp-hoy4ig5mSH_tB9vWGDweSA==/base.apk!/lib/x86:/vendor/lib
+11-07 09:41:02.060   475   512 D ArtManagerInternalImpl: /data/misc/iorapd/io.github.geniusdevam.vpnapp/1043/io.github.geniusdevam.vpnapp.[data].pb doesn't exist
+11-07 09:41:02.063   475   512 I ActivityTaskManager: Displayed io.github.geniusdevam.vpnapp/.MainActivity: +802ms
+11-07 09:41:07.586  3337  3483 D ProfileInstaller: Installing profile for io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:41:57.613  1150  4187 I katniss_interactor_UiActionExecutor: Foreground app = io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+11-07 09:41:57.950  1150  4187 I katniss_interactor_UiActionExecutor: Foreground app = io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:42:18.848   475  4247 I ActivityManager: Force stopping io.github.geniusdevam.vpnapp appid=10076 user=0: from pid 4814
+11-07 09:42:18.848   475  4247 I ActivityManager: Killing 3357:io.github.geniusdevam.vpnapp:openvpn/u0a76 (adj 100): stop io.github.geniusdevam.vpnapp due to from pid 4814
+11-07 09:42:18.849   475  4247 I ActivityManager: Killing 3337:io.github.geniusdevam.vpnapp/u0a76 (adj 0): stop io.github.geniusdevam.vpnapp due to from pid 4814
+11-07 09:42:18.851   475  4247 W ActivityTaskManager: Force removing ActivityRecord{c287210 u0 io.github.geniusdevam.vpnapp/.MainActivity t5 f}}: app died, no saved state
+11-07 09:42:21.042   475  1881 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=io.github.geniusdevam.vpnapp/.MainActivity} from uid 2000
+11-07 09:42:21.219   475   514 I ActivityManager: Start proc 4835:io.github.geniusdevam.vpnapp/u0a76 for pre-top-activity {io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}
+11-07 09:42:21.257  4835  4835 D nativeloader: classloader namespace configured for unbundled vendor apk. library_path=/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.vpnapp-hoy4ig5mSH_tB9vWGDweSA==/lib/x86:/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.vpnapp-hoy4ig5mSH_tB9vWGDweSA==/base.apk!/lib/x86:/vendor/lib
+11-07 09:42:21.353   475   514 I ActivityManager: Start proc 4853:io.github.geniusdevam.vpnapp:openvpn/u0a76 for service {io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService}
+11-07 09:42:21.444  4853  4853 D nativeloader: classloader namespace configured for unbundled vendor apk. library_path=/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.vpnapp-hoy4ig5mSH_tB9vWGDweSA==/lib/x86:/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.vpnapp-hoy4ig5mSH_tB9vWGDweSA==/base.apk!/lib/x86:/vendor/lib
+11-07 09:42:22.030   475   512 D ArtManagerInternalImpl: /data/misc/iorapd/io.github.geniusdevam.vpnapp/1043/io.github.geniusdevam.vpnapp.[data].pb doesn't exist
+11-07 09:42:22.032   475   512 I ActivityTaskManager: Displayed io.github.geniusdevam.vpnapp/.MainActivity: +986ms
+11-07 09:42:27.442  4835  5072 D ProfileInstaller: Skipping profile installation for io.github.geniusdevam.vpnapp
+11-07 09:42:28.814  4895  4931 I Finsky  : [321] AIM: AppInfoManager-Perf > OnDeviceAppInfo > cacheHitCount=0, cacheMissCount=90. Missed  in cache (limit 10) : [com.google.android.youtube.tv, com.android.printspooler, com.android.emulator.multidisplay, com.google.android.tv.bugreportsender, android.auto_generated_rro_vendor__, com.android.pacprocessor, com.google.android.backdrop, com.google.android.packageinstaller, io.github.geniusdevam.vpnapp, com.android.systemui.emulation.pixel_2_xl]
+11-07 09:42:28.952  4895  4931 I Finsky  : [321] ItemStore: Not cached: io.github.geniusdevam.vpnapp
+11-07 09:42:29.490  4895  4931 E Finsky  : [321] ItemStore: getItems RPC failed for item io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:42:42.457   475  1403 E AppOps  : java.lang.SecurityException: Specified package io.github.geniusdevam.vpnapp under uid 10027 but it is really 10076
+11-07 09:42:49.305   475  3509 I Vpn     : Switched from [Legacy VPN] to io.github.geniusdevam.vpnapp
+11-07 09:42:49.472  4835  4881 I TetheringManager: registerTetheringEventCallback:io.github.geniusdevam.vpnapp
+11-07 09:42:49.499  4835  4881 D VPNAPP  : phase LOADING_SERVERS 
+11-07 09:42:49.501  4835  4881 D VPNAPP  : phase SCANNING 49
+11-07 09:42:49.539   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|4242|null|10076: granting content://settings/system/notification_sound
+11-07 09:42:49.543   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|4242|null|10076: granting content://settings/system/notification_sound
+11-07 09:42:49.620  4835  4880 D VPNAPP  : probed 0/49
+11-07 09:42:50.138  4835  5412 D VPNAPP  : probed 0/49
+11-07 09:42:50.642  4835  5392 D VPNAPP  : probed 36/49
+11-07 09:42:51.048  4835  5401 D VPNAPP  : probed 38/49
+11-07 09:42:51.049  4835  5401 D VPNAPP  : phase CONNECTING 
+11-07 09:42:51.049  4835  5401 D VPNAPP  : connecting #1
+11-07 09:42:51.180  4835  5401 D VPNAPP  : connect vpn876249660 TCP
+11-07 09:42:51.195   475  3265 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 70ed1618-b7d8-453a-9467-b926888a933e
+11-07 09:42:51.203  5433  5433 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:42:51.208  4853  4853 I TetheringManager: registerTetheringEventCallback:io.github.geniusdevam.vpnapp
+11-07 09:42:51.234  4835  4868 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:42:51.234  4835  4868 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:42:52.232   475   545 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:52.233   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:42:52.233   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:42:52.234   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:52.365   475  3265 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:52.366   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:52.367   475   545 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:52.513   475   545 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:52.515   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:52.515   475  3265 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:52.594   475  3265 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:52.604   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:42:52.605   475  3265 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:52.636  4835  5436 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:42:52.636  4835  5436 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:42:52.636  4835  4849 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:42:52.636  4835  4849 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:42:52.638  4835  5436 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:42:52.638  4835  5436 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:42:52.638  4835  5435 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:42:52.914  4835  5435 D VPNAPP  : engine: Control Channel: TLSv1.2, cipher TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 256 bits ECprime256v1, peer signing digest/type: rsa_pkcs1_sha512 RSA, key agreement: secp256r1
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:42:54.146   475   545 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:54.150   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:54.151   475   545 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:54.156   475  3664 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:54.320   475  3664 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:54.321   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:54.323   475  3664 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:54.339   475   545 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:54.342   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:54.344   475   545 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:54.351   475   545 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:54.356   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:42:54.356   475   545 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:54.451   475  1166 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:42:54.452  4835  5388 D VPNAPP  : connect vpn876249660 -> up
+11-07 09:42:54.454   475  3705 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:54.455   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:42:54.471   475  3705 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:54.495  4835  4876 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:42:54.495  4835  4876 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:42:54.499  4835  4866 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:42:54.502   475  3509 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:56.501   475  3705 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:42:56.999   475  3664 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:42:56.999   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:42:57.030   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:42:57.031   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:42:58.094   475  3705 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:42:58.095   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:00.131   475  3705 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:00.132   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:43:02.707   475  3265 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:02.709   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:04.509   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:04.510   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:06.044   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:06.045   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:08.895   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:08.903   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:10.630   475  4247 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:10.633   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:12.293   475  2949 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:43:12.299   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:43:13.882   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:43:13.883   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:43:13.883   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:43:13.886   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:43:13.887   475  3705 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:43:13.887   475  3705 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:43:15.903   475  4247 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:43:55.186   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|4242|null|10076: granting content://settings/system/notification_sound
+11-07 09:43:55.186   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|4242|null|10076: granting content://settings/system/notification_sound
+11-07 09:43:55.293  4835  5388 D VPNAPP  : phase LOADING_SERVERS 
+11-07 09:43:56.957  4835  5388 D VPNAPP  : phase SCANNING 98
+11-07 09:43:57.062  4835  6011 D VPNAPP  : probed 0/98
+11-07 09:43:57.568  4835  6009 D VPNAPP  : probed 17/98
+11-07 09:43:58.073  4835  6004 D VPNAPP  : probed 52/98
+11-07 09:43:58.576  4835  5996 D VPNAPP  : probed 76/98
+11-07 09:43:59.079  4835  5998 D VPNAPP  : probed 80/98
+11-07 09:43:59.582  4835  5990 D VPNAPP  : probed 81/98
+11-07 09:44:00.084  4835  5974 D VPNAPP  : probed 81/98
+11-07 09:44:00.587  4835  5997 D VPNAPP  : probed 84/98
+11-07 09:44:01.090  4835  5988 D VPNAPP  : probed 97/98
+11-07 09:44:01.393  4835  5990 D VPNAPP  : probed 98/98
+11-07 09:44:01.393  4835  5990 D VPNAPP  : phase SCANNING refine 48
+11-07 09:44:01.501  4835  5980 D VPNAPP  : probed 0/48
+11-07 09:44:02.004  4835  6003 D VPNAPP  : probed 0/48
+11-07 09:44:02.508  4835  6007 D VPNAPP  : probed 48/48
+11-07 09:44:02.509  4835  6007 D VPNAPP  : probed 48/48
+11-07 09:44:02.510  4835  6007 D VPNAPP  : phase SPEED_TESTING 
+11-07 09:44:02.516  4835  6007 D VPNAPP  : connect vpn559198341 UDP
+11-07 09:44:02.625   475  1166 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 6df8cb40-1a20-4dc4-9ce7-5beab6eee381
+11-07 09:44:02.629  6017  6017 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:44:02.662  4835  6019 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:02.662  4835  6019 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:44:03.643   475  3264 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:03.645   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:03.645   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:03.646   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:03.767   475  3264 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:03.768   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:03.769   475  1166 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:03.772   475   503 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:03.902  4835  6018 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:03.902  4835  6018 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:03.902  4835  6018 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:03.902  4835  6018 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:03.902  4835  6018 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:03.902  4835  6018 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:03.902  4835  6018 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:04.028  4835  4849 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:44:05.232   475  3264 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:05.233   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:05.234   475  3264 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:05.239   475  1166 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:05.985   475  3580 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:05.987   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:05.987   475   503 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:06.001   475  1495 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:06.003   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:06.016   475  1495 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:06.045   475   503 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:06.053   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:44:06.053   475   503 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:06.083   475   503 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:44:06.086   475  3264 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:06.088   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:06.089  4835  4866 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:44:06.089   475   503 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:06.089  4835  4866 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:44:06.089  4835  4866 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:44:06.090  4835  6007 D VPNAPP  : connect vpn559198341 -> up
+11-07 09:44:06.095   475  3264 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:06.095   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:06.095   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:06.100   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:06.133   475   789 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:08.086   475   789 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:08.087   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:08.136   475   789 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:10.002   475  1495 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:10.003   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:12.011   475  1495 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:12.012   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:14.042   475  3480 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:14.043   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:15.745  4835  6007 D VPNAPP  : leaderboard tested=1/10
+11-07 09:44:15.753  4835  6007 D VPNAPP  : connect vpn876249660 TCP
+11-07 09:44:15.780   475   503 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:15.782   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:15.887   475   503 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 0d0e5609-36e5-48a2-91c6-c3bd067cc4d0
+11-07 09:44:15.915   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:15.916   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:15.917   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:15.917   475   503 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:15.917   475   503 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:15.917   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:16.892  6138  6138 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:44:16.911  4835  4866 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:16.911  4835  4866 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:44:17.910   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:17.911   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:17.912   475  1881 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:17.919   475  3735 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:18.036   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:18.037   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:18.038   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:18.064   475  1881 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:18.164   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:18.167   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:18.168   475  1881 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:18.219   475  1881 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:18.281  4835  5457 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:18.281  4835  5457 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:18.281  4835  5457 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:18.281  4835  5457 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:18.281  4835  5457 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:18.281  4835  5457 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:18.281  4835  5457 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:18.532  4835  4849 D VPNAPP  : engine: Control Channel: TLSv1.2, cipher TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 256 bits ECprime256v1, peer signing digest/type: rsa_pkcs1_sha512 RSA, key agreement: secp256r1
+11-07 09:44:19.761   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:19.762   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:19.764   475  1881 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:19.769   475  3735 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:19.882   475  1463 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:19.883   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:19.885   475  1463 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:19.886   475  3735 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:19.887   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:19.887   475   513 E NotificationService: Package enqueue rate is 5.2778325. Shedding 0|io.github.geniusdevam.vpnapp|1623130911|null|10076. package=io.github.geniusdevam.vpnapp
+11-07 09:44:19.888   475  1463 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:19.889   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:19.913   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:44:19.913   475  3735 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:19.974   475  1463 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:44:19.982  4835  4849 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:44:19.983  4835  6021 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:44:19.983  4835  6021 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:44:19.983  4835  5981 D VPNAPP  : connect vpn876249660 -> up
+11-07 09:44:19.986   475  1463 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:19.987   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:19.988   475  1463 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:20.015   475  1881 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:20.145   475  4247 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:20.146   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:20.146   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:20.163   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:21.993   475  1881 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:22.006   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:22.019   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:24.003   475  3735 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:24.006   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:26.081   475  3735 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:26.082   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:28.007   475  4247 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:28.009   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:28.767  4835  5981 D VPNAPP  : leaderboard tested=2/10
+11-07 09:44:28.776  4835  5981 D VPNAPP  : connect vpn258000289 TCP
+11-07 09:44:28.788   475  4247 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:28.789   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:28.894   475  3735 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 28089607-7ddc-41df-8d90-29a4014f3a4c
+11-07 09:44:28.922   475  4247 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:28.923   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:28.923   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:28.924   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:28.935   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:28.935   475  3735 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:29.897  6251  6251 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:44:29.917  4835  4867 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:29.917  4835  4867 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:30.910   475   925 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:30.911   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:30.912   475  3410 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:30.918   475  4753 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:31.011   475  4753 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:31.011   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:31.011   475   925 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:31.018   475  3410 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:31.094   475  3410 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:31.097   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:31.097   475  3410 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:31.156   475  3924 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:31.170  4835  4850 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:31.170  4835  4850 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:31.171  4835  4850 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:31.171  4835  4850 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:31.171  4835  4850 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:31.171  4835  4850 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:31.171  4835  4850 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:31.268  4835  4849 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:44:32.482   475  3924 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:32.482   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:32.485   475  3924 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:32.498   475   925 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:32.596   475   925 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:32.600   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:32.601   475  4247 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:32.604   475  3573 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:32.605   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:32.605   475   513 E NotificationService: Package enqueue rate is 5.9851165. Shedding 0|io.github.geniusdevam.vpnapp|1623130911|null|10076. package=io.github.geniusdevam.vpnapp
+11-07 09:44:32.606   475  3573 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:32.606   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:32.612   475  4247 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:32.636  4835  5981 D VPNAPP  : connect vpn258000289 -> AUTH
+11-07 09:44:32.644   475  1041 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:32.647  4835  5981 D VPNAPP  : connect vpn805562199 UDP
+11-07 09:44:32.687   475  3573 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:32.687   475  4247 W ActivityManager: Bringing down service while still waiting for start foreground: ServiceRecord{40c0def u0 io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNService}
+11-07 09:44:32.689   475  1041 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:32.696  4853  4853 E AndroidRuntime: FATAL EXCEPTION: main
+11-07 09:44:32.696  4853  4853 E AndroidRuntime: Process: io.github.geniusdevam.vpnapp:openvpn, PID: 4853
+11-07 09:44:32.696  4853  4853 E AndroidRuntime: android.app.RemoteServiceException: Context.startForegroundService() did not then call Service.startForeground(): ServiceRecord{40c0def u0 io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNService}
+11-07 09:44:32.697   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:44:32.697   475  3573 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:32.715   475  1898 I ActivityManager: Process io.github.geniusdevam.vpnapp:openvpn (pid 4853) has died: vis BTOP
+11-07 09:44:32.715   475  1898 W ActivityManager: Scheduling restart of crashed service io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService in 1000ms for connection
+11-07 09:44:33.722   475   514 I ActivityManager: Start proc 6265:io.github.geniusdevam.vpnapp:openvpn/u0a76 for service {io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService}
+11-07 09:44:33.732  6265  6265 D nativeloader: classloader namespace configured for unbundled vendor apk. library_path=/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.vpnapp-hoy4ig5mSH_tB9vWGDweSA==/lib/x86:/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.vpnapp-hoy4ig5mSH_tB9vWGDweSA==/base.apk!/lib/x86:/vendor/lib
+11-07 09:44:33.758  4835  4868 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:33.758  4835  4868 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:44:33.759  4835  4868 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:33.759  4835  4868 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:33.759  4835  4868 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:33.760  4835  6021 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:33.760  4835  6021 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:33.760  4835  6021 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:33.760  4835  6021 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:33.760  4835  5457 D VPNAPP  : engine: Control Channel: TLSv1.2, cipher TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 256 bits ECprime256v1, peer signing digest/type: rsa_pkcs1_sha512 RSA, key agreement: secp256r1
+11-07 09:44:33.762  4835  6021 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:44:33.762  4835  6021 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:44:33.763  4835  4868 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:44:33.773  4835  4866 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:33.773  4835  4866 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:44:33.774  4835  4866 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:33.774  4835  4866 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:33.774  4835  4866 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:33.774  4835  4866 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:33.774  4835  4866 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:33.774  4835  4866 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:33.774  4835  4866 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:33.774  4835  6139 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:44:33.776  4835  6139 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:44:33.777  4835  6139 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:44:33.777  4835  6139 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:44:33.786  4835  6139 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:33.786  4835  6139 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:44:33.787  4835  5457 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:33.787  4835  5457 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:33.787  4835  5457 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:33.787  4835  5457 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:33.787  4835  5457 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:33.787  4835  5457 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:33.787  4835  5457 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:33.787  4835  5457 D VPNAPP  : engine: Control Channel: TLSv1.2, cipher TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 256 bits ECprime256v1, peer signing digest/type: rsa_pkcs1_sha512 RSA, key agreement: secp256r1
+11-07 09:44:33.789  4835  6139 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:44:33.789  4835  6139 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:44:33.789  4835  6139 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:44:33.804  4835  4866 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:33.804  4835  4866 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:44:33.805  4835  4866 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:33.805  4835  4866 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:33.805  4835  4866 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:33.805  4835  4866 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:33.806  4835  6021 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:33.806  4835  6021 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:33.806  4835  6021 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:33.806  4835  6021 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:44:34.702   475  3810 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:34.705   688   688 W ToastPresenter: Error calling back io.github.geniusdevam.vpnapp to notify onToastHide()
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:47.692  4835  5981 D VPNAPP  : connect vpn805562199 -> timeout after 15000ms
+11-07 09:44:47.697  4835  5981 D VPNAPP  : connect vpn600796684 TCP
+11-07 09:44:47.710   475   502 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut d4166027-ed5c-4ee8-88f9-6ece9ac3407e
+11-07 09:44:47.727  6375  6375 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:44:47.730  6265  6265 I TetheringManager: registerTetheringEventCallback:io.github.geniusdevam.vpnapp
+11-07 09:44:47.808  4835  4876 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:44:47.808  4835  4876 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:44:48.881   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:48.882   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:48.882   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:48.887   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:49.091   475  1403 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:49.093   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:49.094   475   502 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:49.098   475  3810 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:49.205   475  1403 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:49.216   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:49.230   475   502 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:49.278   475  4247 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:49.396  4835  4849 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:44:49.396  4835  4849 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:44:49.396  4835  4849 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:44:49.396  4835  4849 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:44:49.396  4835  4849 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:44:49.396  4835  4849 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:44:49.396  4835  4849 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:44:49.538  4835  4868 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:44:50.580   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:50.582   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:50.583   475  3810 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:50.598   475   502 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:50.697   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:50.699   475  3810 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:50.704   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:50.705   475  3810 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:50.709   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:50.733   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:50.902   475  3810 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:50.916   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:44:50.916   475  4247 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:50.951   475   502 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:44:50.986  4835  5981 D VPNAPP  : connect vpn600796684 -> up
+11-07 09:44:50.988   475  4247 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:51.037   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:44:51.040   475  1041 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:51.045   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:51.045   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:51.045   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:44:51.048   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:51.050  4835  6252 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:44:51.050  4835  6252 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:44:51.050  4835  6252 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:44:51.184   475  1881 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:53.019   475  3580 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:53.020   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:53.075   475  3580 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:44:55.046   475  1331 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:55.047   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:44:57.003   475  2949 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:57.006   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:59.002   475  3265 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:44:59.003   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:01.017   475  1331 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:01.040   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:01.272  4835  5986 D VPNAPP  : leaderboard tested=3/10
+11-07 09:45:01.300  4835  5986 D VPNAPP  : connect vpn986036793 TCP
+11-07 09:45:01.324   475  1331 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:01.339   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:01.443   475  1331 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 4c2dfedf-b3c9-43b3-ae24-792840ebfb01
+11-07 09:45:01.471   475  2949 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:01.472   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:01.472   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:01.474   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:01.475   475  1331 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:01.475   475  1331 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:02.459  6575  6575 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:45:02.482  4835  6140 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:45:02.482  4835  6140 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:03.478   475  3580 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:03.480   475  1041 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:03.481   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:03.482   475  1041 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:03.482   475  1041 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:03.605   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:03.616   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:03.618   475  3664 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:03.646   475  3664 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:03.725   475  1434 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:03.733   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:03.735   475  3810 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:03.780   475  1434 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:03.858  4835  5436 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:45:03.858  4835  5436 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:45:03.865  4835  4867 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:45:03.865  4835  4867 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:45:03.866  4835  4867 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:45:03.866  4835  4867 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:45:03.866  4835  4867 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:45:03.997  4835  4850 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:45:05.177   475  1434 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:05.179   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:05.179   475  3810 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:05.182   475  1434 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:05.317   475  1434 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:05.318   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:05.319   475  3580 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:05.321   475  1331 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:05.322   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:05.322   475   513 E NotificationService: Package enqueue rate is 5.730664. Shedding 0|io.github.geniusdevam.vpnapp|1623130911|null|10076. package=io.github.geniusdevam.vpnapp
+11-07 09:45:05.336   475  1434 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:05.402   475  3580 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:05.420   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:45:05.420   475  3810 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:05.450   475  3810 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:45:05.454  4835  5436 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:45:05.454  4835  5436 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:45:05.454  4835  5436 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:45:05.455  4835  5987 D VPNAPP  : connect vpn986036793 -> up
+11-07 09:45:05.480   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:05.482   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:05.484   475  3810 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:05.521   475  3580 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:07.078   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:07.079   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:07.079   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:07.080   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:07.526   475  1881 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:09.003   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:09.009   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:11.018   475  3664 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:11.026   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:13.004   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:13.004   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:14.185  4835  5969 D VPNAPP  : leaderboard tested=4/10
+11-07 09:45:14.239  4835  5969 D VPNAPP  : connect vpn662821307 TCP
+11-07 09:45:14.247   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:14.249   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:14.353   475  3580 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut fe49bee4-6868-4838-9706-328a66c01809
+11-07 09:45:14.378   475  3580 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:14.378   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:14.378   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:14.380   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:14.382   475  3580 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:14.382   475  3580 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:15.380  6717  6717 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:45:15.498  4835  6139 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:45:15.498  4835  6139 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:45:16.386   475  3735 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:16.471   475  3735 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:16.472   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:16.473   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:16.473   475  3735 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:16.619   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:16.619   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:16.620   475   502 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:16.635   475   502 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:16.745   475  3735 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:16.746   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:16.746   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:16.756   475   502 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:16.873  4835  5435 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:45:16.873  4835  5435 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:45:16.873  4835  5435 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:45:16.874  4835  5435 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:45:16.874  4835  5435 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:45:16.874  4835  5435 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:45:16.874  4835  5435 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:45:17.009  4835  4867 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:18.029   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:18.030   475   502 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:18.030   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:18.035   475   502 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:18.166   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:18.167   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:18.167   475   502 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:18.171   475  3735 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:18.173   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:18.173   475   513 E NotificationService: Package enqueue rate is 5.8851447. Shedding 0|io.github.geniusdevam.vpnapp|1623130911|null|10076. package=io.github.geniusdevam.vpnapp
+11-07 09:45:18.173   475  1041 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:18.185   475  1041 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:18.217   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:45:18.218   475  1041 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:18.297   475  3580 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:45:18.299  4835  5457 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:45:18.299  4835  5457 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:45:18.299  4835  5457 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:45:18.299  4835  5969 D VPNAPP  : connect vpn662821307 -> up
+11-07 09:45:18.302   475   545 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:18.303   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:18.303   475   545 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:18.321   475   502 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:19.032   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:19.033   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:19.033   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:19.035   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:20.348   475   545 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:21.161   475   545 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:21.162   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:23.086   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:23.087   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:25.004   475   545 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:25.005   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:27.005   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:27.006   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:29.018   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:29.019   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:31.040   475   545 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:31.043   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:31.802  4835  5999 D VPNAPP  : leaderboard tested=5/10
+11-07 09:45:31.811  4835  5999 D VPNAPP  : connect vpn902405240 TCP
+11-07 09:45:31.824   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:31.827   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:31.951   475  3810 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut b834c382-4e3f-4776-b555-5c017d93a3cd
+11-07 09:45:32.020   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:32.020   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:32.020   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:32.022   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:32.025   475  1881 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:32.025   475  1881 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:32.967  6830  6830 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:45:33.041  4835  6140 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:45:33.041  4835  6140 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:45:34.083   475   502 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:34.097   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:34.103   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:34.105   475   502 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:34.105   475   502 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:34.262   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:34.267   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:34.268   475  1041 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:34.304   475   502 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:34.404   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:34.405   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:34.412   475   502 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:34.456   475   502 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:34.539  4835  4849 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:45:34.539  4835  4849 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:45:34.546  4835  6140 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:45:34.547  4835  6140 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:45:34.547  4835  6140 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:45:34.547  4835  6140 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:45:34.547  4835  6140 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:45:34.681  4835  4849 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:45:35.893   475  3735 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:35.894   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:35.896   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:35.901   475  2949 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:36.027   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:36.032   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:36.032   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:36.037   475  3735 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:36.038   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:36.043   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:36.043   475   513 E NotificationService: Package enqueue rate is 5.3936386. Shedding 0|io.github.geniusdevam.vpnapp|1623130911|null|10076. package=io.github.geniusdevam.vpnapp
+11-07 09:45:36.093   475  3735 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:45:36.134  4835  5435 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:45:36.134  4835  5435 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:45:36.134  4835  5435 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:45:36.135  4835  5969 D VPNAPP  : connect vpn902405240 -> up
+11-07 09:45:36.137   475  3735 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:36.138   475  1331 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:36.164   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:36.165   475  1331 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:36.166   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:45:36.166   475  3735 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:36.168   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:45:36.168   475  3735 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:37.158   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:37.159   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:37.159   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:37.161   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:38.173   475  1041 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:39.031   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:39.032   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:41.137   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:41.138   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:43.045   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:43.046   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:45.003   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:45.016   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:47.003   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:47.005   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:49.101   475   502 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:49.107   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:49.748  4835  6002 D VPNAPP  : leaderboard tested=6/10
+11-07 09:45:49.751  4835  6002 D VPNAPP  : phase CONFIRMING 
+11-07 09:45:49.773  4835  6002 D VPNAPP  : connect vpn876249660 TCP
+11-07 09:45:49.805   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:49.805   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:49.918   475   502 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 96ac1009-a1df-4d3b-acf4-6ef62fb1bac7
+11-07 09:45:50.023   475  3735 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:50.024   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:50.024   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:50.036   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:50.038   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:50.038   475  3735 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:50.932  6941  6941 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:45:51.042  4835  4866 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:45:51.042  4835  4866 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:45:51.103   475  3480 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:51.106   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:51.110   475  3509 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:51.169   475  3509 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:51.289   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:51.290   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:51.304   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:51.402   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:51.403   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:51.403   475   513 E NotificationService: Package enqueue rate is 5.819499. Shedding 0|io.github.geniusdevam.vpnapp|1623130911|null|10076. package=io.github.geniusdevam.vpnapp
+11-07 09:45:51.403   475  1881 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:51.407   475  1881 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:51.423   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:45:51.424   475  1881 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:51.520  4835  6252 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:45:51.520  4835  6252 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:45:51.520  4835  6252 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:45:51.520  4835  6252 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:45:51.521  4835  6252 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:45:51.521  4835  6252 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:45:51.521  4835  6252 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:45:51.783  4835  5435 D VPNAPP  : engine: Control Channel: TLSv1.2, cipher TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 256 bits ECprime256v1, peer signing digest/type: rsa_pkcs1_sha512 RSA, key agreement: secp256r1
+11-07 09:45:52.936   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:52.938   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:52.939   475  1434 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:52.942   475  1881 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:53.057   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:53.059   475  1881 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:53.062   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:53.065   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:53.065   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:53.070   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:53.104   475  1881 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:53.111   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:45:53.111   475  1434 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:53.172   475  1434 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:45:53.178  4835  5435 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:45:53.178  4835  6141 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:45:53.178  4835  6141 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:45:53.182   475  1881 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:53.182   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:45:53.183   475  1881 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:53.184  4835  5986 D VPNAPP  : connect vpn876249660 -> up
+11-07 09:45:53.188   475  3480 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:54.086   475  3810 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:54.086   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:54.086   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:45:54.087   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:45:55.199   475  1041 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:45:56.045   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:56.046   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:58.313   475  1537 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:45:58.314   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:00.117   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:00.118   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:02.003   475  1537 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:02.007   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:04.030   475  1537 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:04.031   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:06.014   475  1537 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:06.018   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:06.031  4835  5964 D VPNAPP  : connect vpn902405240 TCP
+11-07 09:46:06.042   475  1537 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:06.043   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:06.175   475  1537 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut e1505315-211a-41fe-a783-f96de4536a11
+11-07 09:46:06.258   475  3480 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:06.259   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:06.260   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:46:06.260   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:46:06.264   475  3735 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:06.264   475  3735 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:07.244  7110  7110 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:46:07.318  4835  4868 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:46:07.318  4835  4868 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:46:08.336   475  1537 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:08.341   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:08.342   475  1537 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:08.342   475  1537 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:08.360   475  3480 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:08.476   475  1537 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:08.477   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:08.477   475  1537 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:08.502   475  3480 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:08.619   475  3664 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:08.623   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:08.625   475  3480 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:08.651   475  3480 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:08.753  4835  6141 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:46:08.754  4835  6141 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:46:08.756  4835  6141 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:46:08.765  4835  6141 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:46:08.765  4835  6141 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:46:08.765  4835  6141 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:46:08.765  4835  6141 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:46:08.902  4835  6141 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:46:09.948   475  3664 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:09.949   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:09.950   475  3664 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:09.955   475  3480 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:10.077   475  1537 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:10.078   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:10.080   475  1537 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:10.081   475  3664 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:10.082   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:10.082   475   513 E NotificationService: Package enqueue rate is 5.8002234. Shedding 0|io.github.geniusdevam.vpnapp|1623130911|null|10076. package=io.github.geniusdevam.vpnapp
+11-07 09:46:10.085   475   614 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:10.087   475  1537 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:10.093   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:46:10.094   475   614 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:10.153   475  1537 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:46:10.154  4835  4876 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:46:10.154  4835  4850 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:46:10.154  4835  4850 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:46:10.154  4835  6007 D VPNAPP  : connect vpn902405240 -> up
+11-07 09:46:10.219   475  1537 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:10.223   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:10.224   475  1537 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:10.226   475  3664 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:11.037   475   545 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:11.038   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:46:11.038   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:46:11.039   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:12.230   475   545 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:13.006   475   545 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:13.007   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:15.003   475   545 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:15.007   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:17.002   475  1434 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:17.004   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:19.004   475  4247 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:19.005   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:20.034  4835  5986 D VPNAPP  : connect vpn662821307 TCP
+11-07 09:46:20.038   475  4247 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:20.040   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:20.152   475  4247 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 332e69ec-ee66-4ab8-a853-b275997ce9c9
+11-07 09:46:20.169   475  4247 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:20.170   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:46:20.170   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:46:20.171   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:20.171   475  1166 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:20.171   475  1166 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:21.155  7297  7297 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:46:21.174  4835  6141 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:46:21.174  4835  6141 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:22.181   475  3664 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:22.182   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:22.183   475  3664 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:22.188   475  1331 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:22.308   475  3664 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:22.309   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:22.309   475  3664 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:22.353   475  3664 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:22.440   475  3664 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:22.442   475  3664 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:22.446   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:22.498   475  3664 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:22.573  4835  4868 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:46:22.573  4835  4868 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:46:22.573  4835  4868 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:46:22.573  4835  4868 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:46:22.573  4835  4868 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:46:22.573  4835  4868 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:46:22.573  4835  4868 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:46:22.712  4835  6139 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-07 09:46:23.966   475  1537 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:23.966   475  1537 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:23.967   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:23.971   475  1434 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:24.104   475  3664 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:24.118   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:24.124   475  1537 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:24.126   475  1331 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:24.126   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:24.174   475  1434 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:24.186   475  1537 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:24.204   475  1434 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:24.221   475  1434 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:46:24.223  4835  6007 D VPNAPP  : connect vpn662821307 -> up
+11-07 09:46:24.225   475  1331 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:24.225   475  1331 E NotificationService: Package enqueue rate is 5.8241005. Shedding 0|io.github.geniusdevam.vpnapp|1623130911|null|10076. package=io.github.geniusdevam.vpnapp
+11-07 09:46:24.229   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:24.236   475  1331 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:24.241  4835  6139 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:46:24.241  4835  6139 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:46:24.241  4835  6139 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:46:24.311   475  1434 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:25.022   475  1463 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:25.023   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:25.024   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:46:25.024   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:26.244   475  4753 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:27.075   475  1331 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:27.099   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:29.002   475  3410 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:29.003   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:31.017   475   925 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:31.026   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:33.015   475   925 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:33.017   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:34.094  4835  5973 D VPNAPP  : leaderboard tested=6/10
+11-07 09:46:34.095  4835  5973 D VPNAPP  : phase CONNECTING 
+11-07 09:46:34.095  4835  5973 D VPNAPP  : connecting #1
+11-07 09:46:34.124  4835  5973 D VPNAPP  : connect vpn876249660 TCP
+11-07 09:46:34.151   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:34.153   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:34.257   475   925 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 103b4872-fea7-4f7c-8b6d-5f981c5660b2
+11-07 09:46:34.335   475  1041 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:34.340   475   925 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:34.340   475   925 W NotificationService: Toast already cancelled. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:34.344   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:34.345   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:46:34.345   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1623130911|null|10076: granting content://settings/system/notification_sound
+11-07 09:46:35.261  7440  7440 W linker  : Warning: "/data/app/~~8wSPGMU6ibSidzwFlwQ7Sw==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-07 09:46:35.279  4835  6140 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov  7 2026
+11-07 09:46:35.279  4835  6140 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-07 09:46:36.286   475   789 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:36.287   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:36.287   475   789 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:36.324   475   925 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:36.408   475  4865 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:36.409   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:36.410   475  4865 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:36.414   475  1331 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:36.524   475   789 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:36.525   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:36.525   475   925 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:36.528   475  4865 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:36.645  4835  4868 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-07 09:46:36.647  4835  4868 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-07 09:46:36.648  4835  4868 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-07 09:46:36.648  4835  4868 D VPNAPP  : engine: VERIFY KU OK
+11-07 09:46:36.648  4835  4868 D VPNAPP  : engine: VERIFY EKU OK
+11-07 09:46:36.648  4835  4868 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-07 09:46:36.649  4835  4868 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-07 09:46:36.889  4835  4868 D VPNAPP  : engine: Control Channel: TLSv1.2, cipher TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 256 bits ECprime256v1, peer signing digest/type: rsa_pkcs1_sha512 RSA, key agreement: secp256r1
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:37.943   475   789 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:37.944   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:37.945   475  4865 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:37.947   475  4865 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:38.074   475   925 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:38.088   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:38.095   475  1495 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:38.100   475   925 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:38.100   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:38.101   475   925 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:38.198   475   925 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:38.199   688   688 W ToastPresenter: Error while attempting to show toast from io.github.geniusdevam.vpnapp
+11-07 09:46:38.199   475   925 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:38.226   475   925 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-07 09:46:38.232  4835  6019 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-07 09:46:38.232  4835  6019 D VPNAPP  : engine: Initialization Sequence Completed
+11-07 09:46:38.232  4835  6019 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-07 09:46:38.233  4835  5967 D VPNAPP  : connect vpn876249660 -> up
+11-07 09:46:38.236   475  3580 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:38.236   475  3580 E NotificationService: Package enqueue rate is 5.951783. Shedding 0|io.github.geniusdevam.vpnapp|1623130911|null|10076. package=io.github.geniusdevam.vpnapp
+11-07 09:46:38.237   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10076 added an invalid shortcut
+11-07 09:46:38.237   475  4753 I NotificationService: cancelToast pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:38.303   475  4753 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:39.003   475  4753 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:39.006   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:46:39.006   475   475 D NotificationService: 0|io.github.geniusdevam.vpnapp|1346787898|null|10076: granting content://settings/system/notification_sound
+11-07 09:46:39.008   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:40.254   475   614 W NotificationService: Toast already killed. pkg=io.github.geniusdevam.vpnapp token=[masked]
+11-07 09:46:41.062   475  3410 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:41.063   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:43.237   475  3410 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:43.238   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-07 09:46:45.129   475  3509 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:45.131   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:47.093   475  4753 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:47.094   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:49.004   475  3573 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:49.005   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:51.572   475  3573 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:51.574   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:53.093   475  3573 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:53.094   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:55.063   475  3573 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:55.065   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:57.802   475  3573 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:57.806   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:59.137   475  3573 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:46:59.141   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:47:01.976   475   614 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+11-07 09:47:01.977   475   513 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10076 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
