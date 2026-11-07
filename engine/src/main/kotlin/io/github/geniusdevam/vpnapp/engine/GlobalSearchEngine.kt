@@ -344,7 +344,7 @@ class GlobalSearchEngine(
         val top = ArrayList<Ranked>()
         for (r in fresh) {
             if (top.size >= topSlots) break
-            val n = perCountry.getOrDefault(r.server.countryCode, 0)
+            val n = (perCountry[r.server.countryCode] ?: 0)
             if (n >= cfg.maxPerCountryInShortlist) continue
             perCountry[r.server.countryCode] = n + 1
             top.add(r)

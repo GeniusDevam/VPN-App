@@ -1,0 +1,76 @@
+name: speedrun
+# Performance speed runs for docs/PERFORMANCE.md, on demand, against the universal APK of an earlier 'build' run (no rebuild).
+# Live VPN Gate volunteers, so numbers vary from run to run; the report says so.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "ID of an earlier 'build' run that has the apk-universal artifact"
+        required: true
+      quick_runs:
+        description: "Quick Connect repetitions per device"
+        required: false
+        default: "6"
+
+permissions:
+  contents: read
+
+jobs:
+  speedrun:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    permissions:
+      contents: read
+      actions: read     # downloads the apk artifact of the earlier run
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: "Android 16 phone", slug: api36-phone, api: 36, profile: pixel_6 }
+          - { name: "Android 6.0 phone", slug: api23-phone, api: 23, profile: pixel_2 }
+    name: speedrun (${{ matrix.name }})
+    env:
+      QUICK_RUNS: ${{ inputs.quick_runs }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: apk-universal
+          path: out
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+      - name: Enable KVM and emulator runtime libraries
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq libpulse0 libnss3 libxcomposite1 libxcursor1 libxi6 libxtst6 || true
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - name: Speed runs on ${{ matrix.name }}
+        uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2
+        with:
+          api-level: ${{ matrix.api }}
+          target: google_apis
+          arch: x86_64
+          profile: ${{ matrix.profile }}
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -noaudio -no-boot-anim -camera-back none -camera-front none
+          script: OUT=speed-out bash tools/speedrun.sh out/VPN-App.apk
+      - name: Report
+        if: always()
+        run: cat speed-out/speedrun.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "no report" >> "$GITHUB_STEP_SUMMARY"
+      - name: Redact results
+        if: always()
+        run: |
+          python3 -I tools/redact-results.py speed-out speed-public
+          python3 -I - <<'PY'
+          import re, os
+          V4 = re.compile(r"\b(\d{1,3})\.(\d{1,3})\.\d{1,3}\.\d{1,3}\b")
+          for f in ("speedrun.txt", "speedrun.md", "runs.log"):
+              p = os.path.join("speed-out", f)
+              if os.path.exists(p):
+                  with open(p, errors="replace") as i, open(os.path.join("speed-public", f), "w") as o:
+                      o.write(V4.sub(lambda m: f"{m.group(1)}.{m.group(2)}.x.x", i.read()))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with: { name: "speedrun-${{ matrix.slug }}", path: speed-public, if-no-files-found: warn, retention-days: 30 }

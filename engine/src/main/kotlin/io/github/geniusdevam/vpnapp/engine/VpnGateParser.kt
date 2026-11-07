@@ -1,6 +1,5 @@
 package io.github.geniusdevam.vpnapp.engine
 
-import java.util.Base64
 import java.util.Locale
 
 /** Why a directory row was not accepted. Counted in [DirectoryReport] so the app can show real numbers. */
@@ -98,7 +97,7 @@ object VpnGateParser {
         if (b64.isEmpty()) return Row.Bad(RowReject.MALFORMED_ROW)
         if (b64.length > MAX_CONFIG_BYTES * 2) return Row.Bad(RowReject.OVERSIZE)
         val config = try {
-            String(Base64.getMimeDecoder().decode(b64), Charsets.UTF_8)
+            String(Base64Codec.decodeMime(b64), Charsets.UTF_8)
         } catch (_: IllegalArgumentException) {
             return Row.Bad(RowReject.BAD_ENCODING)
         }

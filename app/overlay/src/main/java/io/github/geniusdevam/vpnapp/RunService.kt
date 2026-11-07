@@ -1,15 +1,17 @@
 package io.github.geniusdevam.vpnapp
 
 import android.app.Notification
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
-import android.graphics.drawable.Icon
 import android.os.IBinder
+import androidx.core.app.NotificationChannelCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import de.blinkt.openvpn.R
 import io.github.geniusdevam.vpnapp.engine.PhaseId
 import kotlinx.coroutines.CoroutineScope
@@ -34,7 +36,8 @@ class RunService : Service() {
             return START_NOT_STICKY
         }
         ensureChannel()
-        if (android.os.Build.VERSION.SDK_INT >= 29) {
+        // The "special use" foreground-service type exists from Android 14; older versions take the plain call.
+        if (android.os.Build.VERSION.SDK_INT >= 34) {
             startForeground(NOTIF_ID, build("Starting…"), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
         } else {
             startForeground(NOTIF_ID, build("Starting…"))
@@ -93,10 +96,10 @@ class RunService : Service() {
     }
 
     private fun ensureChannel() {
-        val nm = getSystemService(NotificationManager::class.java)
-        if (nm.getNotificationChannel(CHANNEL) == null) {
-            nm.createNotificationChannel(NotificationChannel(CHANNEL, "Connection progress", NotificationManager.IMPORTANCE_LOW))
-        }
+        // Channels exist from Android 8.0; the compat call does nothing on older versions.
+        NotificationManagerCompat.from(this).createNotificationChannel(
+            NotificationChannelCompat.Builder(CHANNEL, NotificationManagerCompat.IMPORTANCE_LOW).setName("Connection progress").build(),
+        )
     }
 
     private fun build(text: String): Notification {
@@ -104,15 +107,16 @@ class RunService : Service() {
         val cancel = PendingIntent.getService(
             this, 1, Intent(this, RunService::class.java).setAction(ACTION_CANCEL), PendingIntent.FLAG_IMMUTABLE,
         )
-        return Notification.Builder(this, CHANNEL)
+        return NotificationCompat.Builder(this, CHANNEL)
             .setSmallIcon(R.drawable.vpnapp_ic_tile)
             .setContentTitle("VPN App")
             .setContentText(text)
             .setOngoing(true)
             .setOnlyAlertOnce(true)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
             .setProgress(0, 0, true)
             .setContentIntent(open)
-            .addAction(Notification.Action.Builder(Icon.createWithResource(this, R.drawable.vpnapp_ic_tile), "Cancel", cancel).build())
+            .addAction(R.drawable.vpnapp_ic_tile, "Cancel", cancel)
             .build()
     }
 
@@ -122,7 +126,7 @@ class RunService : Service() {
         private const val ACTION_CANCEL = "io.github.geniusdevam.vpnapp.CANCEL"
 
         fun start(context: Context) {
-            context.startForegroundService(Intent(context, RunService::class.java))
+            ContextCompat.startForegroundService(context, Intent(context, RunService::class.java))
         }
     }
 }

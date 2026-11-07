@@ -30,3 +30,10 @@ tasks.register<JavaExec>("probeCli") {
     classpath = sourceSets["test"].runtimeClasspath
     mainClass.set("io.github.geniusdevam.vpnapp.engine.ProbeCliKt")
 }
+
+// Engine micro-benchmarks for docs/PERFORMANCE.md (see Bench.kt). Not part of `test`.
+tasks.register<JavaExec>("benchCli") {
+    classpath = sourceSets["test"].runtimeClasspath
+    mainClass.set("io.github.geniusdevam.vpnapp.engine.BenchKt")
+    jvmArgs("-Xmx2g")
+}

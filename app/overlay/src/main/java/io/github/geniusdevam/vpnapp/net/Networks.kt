@@ -35,6 +35,7 @@ object Networks {
     fun directEgressIp(ctx: Context, base: String = "https://speed.cloudflare.com"): String? = try {
         val n = physicalNetwork(ctx) ?: throw IllegalStateException()
         val c = n.openConnection(java.net.URL("$base/cdn-cgi/trace")) as java.net.HttpURLConnection
+        LegacyTls.apply(c)
         c.connectTimeout = 4_000; c.readTimeout = 4_000
         try {
             if (c.responseCode != 200) null

@@ -10,10 +10,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import io.github.geniusdevam.vpnapp.data.Repo
 import io.github.geniusdevam.vpnapp.ui.AppRoot
 import io.github.geniusdevam.vpnapp.ui.VpnTheme
 
+@OptIn(ExperimentalComposeUiApi::class)
 class MainActivity : ComponentActivity() {
     private var pendingAction: (() -> Unit)? = null
 
@@ -29,10 +36,13 @@ class MainActivity : ComponentActivity() {
         Session.init(application)
         setContent {
             VpnTheme {
-                AppRoot(
-                    withVpnPermission = ::withVpnPermission,
-                    askNotifications = ::askNotifications,
-                )
+                // Stable ids for UI automation (the CI emulator tests find controls by id on every screen size); no visible change.
+                Box(Modifier.fillMaxSize().semantics { testTagsAsResourceId = true }) {
+                    AppRoot(
+                        withVpnPermission = ::withVpnPermission,
+                        askNotifications = ::askNotifications,
+                    )
+                }
             }
         }
         handleIntent(intent)
