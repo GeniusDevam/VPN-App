@@ -44,6 +44,11 @@ jobs:
       - name: Engine unit tests (35-second guarantee, disconnect races, sanitizer fuzz, retention rules)
         working-directory: engine
         run: gradle test --console=plain
+      - name: Engine benchmarks (report only; see docs/PERFORMANCE.md)
+        working-directory: engine
+        run: |
+          gradle -q --console=plain benchCli --args="1500 5" | tee bench.txt
+          { echo "### Engine benchmarks (CI runner JVM)"; echo; echo '```'; cat bench.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
 
   # A real OpenVPN client against real OpenVPN servers presenting good and impersonating certificates (finding B2).
   cert-policy:
@@ -65,15 +70,11 @@ jobs:
         run: sudo -E env "PATH=$PATH" "JAVA_HOME=$JAVA_HOME" bash tools/probe-test.sh
 
   # Secrets are not available to forks. This job only reports whether a release signing key is configured.
+  # One build for every CPU architecture: a universal APK (what users install and what the emulators test) plus one smaller APK per
+  # architecture (arm64-v8a, armeabi-v7a, x86_64, x86), all from the same compile.
   apk:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
-    # The x86_64 build exists only for the emulator test; it must never block the real (arm64) release.
-    continue-on-error: ${{ matrix.abi == 'x86_64' }}
-    strategy:
-      fail-fast: false
-      matrix:
-        abi: [arm64-v8a, x86_64]   # arm64 is the real app; x86_64 only exists for the emulator test
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with: { persist-credentials: false }
@@ -106,21 +107,30 @@ jobs:
           } >> "$GITHUB_ENV"
 
       - name: Prepare build tree
-        run: tools/prepare.sh
+        run: |
+          tools/prepare.sh
+          echo "--- upstream build settings that interact with ours (min SDK, ABIs, splits, desugaring)"
+          grep -nE "minSdk|targetSdk|abiFilters|splits|isUniversalApk|universalApk|coreLibraryDesugaring|isCoreLibraryDesugaringEnabled" build-tree/main/build.gradle.kts | head -40 || true
 
-      - name: Build signed APK (OpenVPN 2.x)
+      - name: Build signed APKs (OpenVPN 2.x, all architectures)
         working-directory: build-tree
         run: |
           ./gradlew --no-daemon --stacktrace :main:assembleSkeletonOvpn2Release \
-            -PvpnappVersionCode=$((1000 + GITHUB_RUN_NUMBER)) \
-            -PvpnappAbi=${{ matrix.abi }}
+            -PvpnappVersionCode=$((1000 + GITHUB_RUN_NUMBER))
 
-      - name: Collect APK
+      - name: Collect APKs
         run: |
+          set -eu
           mkdir -p out
-          apk=$(find build-tree/main/build/outputs/apk -name '*.apk' | head -1)
-          echo "APK: $apk"; ls -la "$apk"
-          cp "$apk" out/VPN-App.apk
+          find build-tree/main/build/outputs/apk -name '*.apk' | sort | tee apks.txt
+          u=$(grep -m1 universal apks.txt) || { echo "::error::no universal APK was built"; exit 1; }
+          cp "$u" out/VPN-App.apk
+          for abi in arm64-v8a armeabi-v7a x86_64 x86; do
+            f=$(grep -m1 -- "-$abi-" apks.txt) || { echo "::error::no $abi APK was built"; exit 1; }
+            cp "$f" "out/VPN-App-$abi.apk"
+          done
+          { echo "### APK sizes"; echo; echo '| file | size |'; echo '|---|---|'
+            for f in out/*.apk; do echo "| $(basename "$f") | $(du -k "$f" | cut -f1) KiB |"; done; } | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Verify the build signature (throw-away key)
         run: |
@@ -138,7 +148,8 @@ jobs:
         continue-on-error: true
         run: |
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1); echo "build-tools: $BT"
-          "$BT/aapt2" dump badging out/VPN-App.apk | grep -E "^package:|^sdkVersion|^targetSdkVersion|^application-label:|launchable-activity|^native-code|uses-permission: name" || true
+          "$BT/aapt2" dump badging out/VPN-App.apk | grep -E "^package:|^sdkVersion|^targetSdkVersion|^application-label:|launchable-activity|leanback-launchable|^native-code|uses-permission: name|uses-feature|supports-screens" || true
+          for f in out/VPN-App-*.apk; do echo "$(basename "$f"): $("$BT/aapt2" dump badging "$f" | grep -m1 '^native-code')"; done
           echo "--- zipalign 16 KB check"; "$BT/zipalign" -c -P 16 -v 4 out/VPN-App.apk | tail -3 || true
           echo "--- components reachable by other apps (merged manifest)"
           "$BT/aapt2" dump xmltree out/VPN-App.apk --file AndroidManifest.xml | python3 -I tools/manifest-exports.py
@@ -163,21 +174,58 @@ jobs:
 
       # Proves, on every build and with a SECOND throw-away key, the exact script the release job uses: the APK is re-signed without
       # rebuilding, nothing from the first signer survives, and every code entry is byte-identical.
-      - name: Dry run of the release re-signing script (throw-away key)
-        if: matrix.abi == 'arm64-v8a'
+      - name: Dry run of the release re-signing script on every APK (throw-away key)
         run: |
           set -euo pipefail
           K="$RUNNER_TEMP/dryrun.p12"; PW="$(openssl rand -hex 24)"; echo "::add-mask::$PW"
           keytool -genkeypair -keystore "$K" -storetype PKCS12 -storepass "$PW" -keypass "$PW" -alias dry -keyalg RSA -keysize 3072 -validity 3 \
             -dname "CN=dry run, O=not a release" >/dev/null
           FIRST=$(grep -m1 "certificate SHA-256 digest" sig.txt | awk '{print $NF}' | tr -d ': ' | tr A-F a-f)
-          KS_FILE="$K" KS_PASS="$PW" KEY_ALIAS=dry KEY_PASS="$PW" tools/resign-apk.sh out/VPN-App.apk "$RUNNER_TEMP/resigned.apk" | tee dry.log
-          SECOND=$(sed -n 's/^CERT_SHA256=//p' dry.log)
-          [ -n "$SECOND" ] && [ "$SECOND" != "$FIRST" ] || { echo "re-signing did not change the signer"; exit 1; }
-          rm -f "$K" "$RUNNER_TEMP/resigned.apk"
+          for f in out/*.apk; do
+            KS_FILE="$K" KS_PASS="$PW" KEY_ALIAS=dry KEY_PASS="$PW" tools/resign-apk.sh "$f" "$RUNNER_TEMP/resigned.apk" | tee dry.log
+            SECOND=$(sed -n 's/^CERT_SHA256=//p' dry.log)
+            [ -n "$SECOND" ] && [ "$SECOND" != "$FIRST" ] || { echo "re-signing $(basename "$f") did not change the signer"; exit 1; }
+            rm -f "$RUNNER_TEMP/resigned.apk"
+          done
+          rm -f "$K"
           echo "re-signing dry run OK (signer changed, contents identical)" | tee -a "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with: { name: "apk-${{ matrix.abi }}", path: out/VPN-App.apk, if-no-files-found: error, retention-days: 14 }
+        with: { name: apk-universal, path: out/VPN-App.apk, if-no-files-found: error, retention-days: 14 }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with: { name: apk-splits, path: "out/VPN-App-*.apk", if-no-files-found: error, retention-days: 14 }
+
+  # Android Lint's NewApi check over the whole app: calling an API newer than the minimum supported Android version (6.0) without a
+  # version check would crash on older phones at runtime. Runs beside the APK build.
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with: { distribution: temurin, java-version: '21' }
+      - name: Install SDK pieces and swig
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq swig
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;30.0.16248370" "platforms;android-37.0" "cmake;3.22.1" || true
+      - name: Create a throw-away signing key
+        run: |
+          set -eu
+          KS="$RUNNER_TEMP/signing.p12"; SPW="$(openssl rand -hex 24)"; echo "::add-mask::$SPW"
+          keytool -genkeypair -keystore "$KS" -storetype PKCS12 -storepass "$SPW" -keypass "$SPW" -alias ci \
+            -keyalg RSA -keysize 3072 -validity 3 -dname "CN=VPN App CI ephemeral key, O=not a release" >/dev/null
+          { echo "ORG_GRADLE_PROJECT_keystoreO2File=$KS"; echo "ORG_GRADLE_PROJECT_keystoreO2Password=$SPW"
+            echo "ORG_GRADLE_PROJECT_keystoreO2AliasPassword=$SPW"; echo "ORG_GRADLE_PROJECT_keystoreO2Alias=ci"; } >> "$GITHUB_ENV"
+      - name: Prepare build tree
+        run: tools/prepare.sh
+      - name: Lint NewApi (no API newer than Android 6.0 is called without a version check)
+        working-directory: build-tree
+        run: |
+          set -o pipefail
+          rc=0; ./gradlew --no-daemon :main:lintSkeletonOvpn2Release -PvpnappAbi=x86_64 || rc=$?
+          for r in main/build/reports/lint-results*.txt; do [ -f "$r" ] && { echo "--- $r"; head -150 "$r"; }; done
+          exit $rc
 
   # ---------------------------------------------------------------------------------------------------------------------------
   # RELEASE: version tags only, three jobs with three trust levels.
@@ -188,7 +236,7 @@ jobs:
   # Setup instructions for the GitHub side: docs/RELEASE_SIGNING.md.
   # ---------------------------------------------------------------------------------------------------------------------------
   release-gate:
-    needs: [workflow-security, engine, cert-policy, apk, emulator]
+    needs: [workflow-security, engine, cert-policy, apk, lint, emulator]
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -224,8 +272,10 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with: { persist-credentials: false }
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
-        with: { name: apk-arm64-v8a, path: in }
-      - name: Re-sign the tested APK with the release key
+        with: { name: apk-universal, path: in }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with: { name: apk-splits, path: in }
+      - name: Re-sign the tested APKs with the release key
         id: sign
         env:
           RELEASE_KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
@@ -244,17 +294,23 @@ jobs:
           trap 'rm -f "$KS"' EXIT
           printf '%s' "$RELEASE_KEYSTORE_B64" | base64 -d > "$KS"
           mkdir -p out
-          KS_FILE="$KS" KS_PASS="$RELEASE_KEYSTORE_PASSWORD" KEY_ALIAS="$RELEASE_KEY_ALIAS" KEY_PASS="$RELEASE_KEY_PASSWORD" \
-            tools/resign-apk.sh in/VPN-App.apk out/VPN-App.apk | tee sign.log
-          CERT=$(sed -n 's/^CERT_SHA256=//p' sign.log)
+          [ -f in/VPN-App.apk ] && [ "$(ls in/*.apk | wc -l)" -eq 5 ] || { echo "::error::expected the universal APK and four per-architecture APKs"; exit 1; }
           EXPECT=$(echo "$EXPECTED_CERT_SHA256" | tr -d ': ' | tr A-F a-f)
           # The certificate of the key that was published in this repository's history. It must never sign a release again.
           LEAKED=e73acd75265ca67ef3fb295538c49a8a81be0b122bacf72006f46691fe0efae4
+          : > sign.log
+          for f in in/*.apk; do
+            KS_FILE="$KS" KS_PASS="$RELEASE_KEYSTORE_PASSWORD" KEY_ALIAS="$RELEASE_KEY_ALIAS" KEY_PASS="$RELEASE_KEY_PASSWORD" \
+              tools/resign-apk.sh "$f" "out/$(basename "$f")" | tee -a sign.log
+          done
+          CERTS=$(sed -n 's/^CERT_SHA256=//p' sign.log | sort -u)
+          [ "$(echo "$CERTS" | wc -l)" -eq 1 ] || { echo "::error::the APKs ended up with different signing certificates"; exit 1; }
+          CERT="$CERTS"
           [ "$CERT" != "$LEAKED" ] || { echo "::error::the release key is the compromised one that was published in this repository"; exit 1; }
           [ "$CERT" = "$EXPECT" ] || { echo "::error::signing certificate $CERT does not match RELEASE_CERT_SHA256"; exit 1; }
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
           VERSION=$("$BT/aapt2" dump badging out/VPN-App.apk | sed -n "s/^package:.* versionName='\([^']*\)'.*/\1/p")
-          (cd out && sha256sum VPN-App.apk > VPN-App.apk.sha256)
+          (cd out && sha256sum *.apk > SHA256SUMS && sha256sum VPN-App.apk > VPN-App.apk.sha256)
           { echo "cert=$CERT"; echo "version=$VERSION"; } >> "$GITHUB_OUTPUT"
           echo "signed by certificate $CERT (matches the pinned RELEASE_CERT_SHA256), version $VERSION" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Make sure no key material is left on the runner
@@ -281,13 +337,15 @@ jobs:
           EXPECTED_CERT: ${{ needs.sign.outputs.cert }}
         run: |
           set -euo pipefail
-          (cd out && sha256sum -c VPN-App.apk.sha256)
+          (cd out && sha256sum -c SHA256SUMS)
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
-          CERT=$("$BT/apksigner" verify --min-sdk-version 26 --print-certs out/VPN-App.apk | grep -m1 "certificate SHA-256 digest" | awk '{print $NF}' | tr -d ': ' | tr A-F a-f)
-          [ "$CERT" = "$EXPECTED_CERT" ] || { echo "::error::signed APK certificate differs from the one the sign job reported"; exit 1; }
+          for f in out/*.apk; do
+            CERT=$("$BT/apksigner" verify --min-sdk-version 23 --print-certs "$f" | grep -m1 "certificate SHA-256 digest" | awk '{print $NF}' | tr -d ': ' | tr A-F a-f)
+            [ "$CERT" = "$EXPECTED_CERT" ] || { echo "::error::$(basename "$f") certificate differs from the one the sign job reported"; exit 1; }
+          done
       # Not pinned by SHA (see tools/check-workflow-security.py): GitHub-owned, and this job holds no signing secrets.
       - uses: actions/attest-build-provenance@v2
-        with: { subject-path: out/VPN-App.apk }
+        with: { subject-path: "out/*.apk" }
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -301,15 +359,17 @@ jobs:
           set -eu
           SHA=$(cut -d' ' -f1 out/VPN-App.apk.sha256)
           cat > notes.md <<NOTES
-          Install: open this page on your phone, tap **VPN-App.apk**, then tap Open/Install.
+          Install: open this page on your phone, tablet, Chromebook or TV, tap **VPN-App.apk**, then tap Open/Install. It works on Android 6.0 and later and on every processor type.
+
+          - Smaller downloads for one processor type: \`VPN-App-arm64-v8a.apk\` (almost every phone and tablet since about 2017), \`VPN-App-armeabi-v7a.apk\` (older and budget 32-bit phones, many TVs), \`VPN-App-x86_64.apk\` (Intel/AMD Chromebooks), \`VPN-App-x86.apk\` (rare 32-bit Intel devices). If unsure, use VPN-App.apk.
 
           - Live emulator check on x86_64 Android 16: **${EMULATOR_VERDICT}** (PASS = Quick Connect really connected inside the chosen country and every assertion held; INCONCLUSIVE = live volunteer servers or the server list were unreachable in that run, so connection success is NOT shown for this build; a FAIL would have blocked this release). The emulator is not a phone: real-device behaviour is untested.
           - App version $VERSION, built from commit \`${COMMIT}\` with OpenVPN for Android at \`$(tr -d '[:space:]' < tools/ICS_OPENVPN_REF)\`. The released APK is the one that was built and tested in this run, re-signed (code unchanged).
-          - APK SHA-256: \`$SHA\`
+          - SHA-256 of every file: see \`SHA256SUMS\` (VPN-App.apk: \`$SHA\`)
           - Signing certificate SHA-256: \`$CERT\` (must match the value published in the README; a different value means do not install)
           - Verify the build origin: \`gh attestation verify VPN-App.apk -R $REPO\`
           NOTES
-          gh release create "$TAG" out/VPN-App.apk out/VPN-App.apk.sha256 --repo "$REPO" \
+          gh release create "$TAG" out/*.apk out/SHA256SUMS out/VPN-App.apk.sha256 --repo "$REPO" \
             --title "VPN App $TAG" --notes-file notes.md --verify-tag --latest
           # The old mutable "latest" release carried an APK signed with the key that was published in this repository.
           # Remove it only now that a replacement exists.
@@ -329,7 +389,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with: { persist-credentials: false }
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
-        with: { name: apk-x86_64, path: out }
+        with: { name: apk-universal, path: out }
       - name: Enable KVM and emulator runtime libraries
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq libpulse0 libnss3 libxcomposite1 libxcursor1 libxi6 libxtst6 || true
@@ -373,3 +433,59 @@ jobs:
           cd emu-public && git init -q && git checkout -q -b emulator-results && git add -A
           git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "emulator run ${GITHUB_RUN_NUMBER} (${GITHUB_SHA::7}), redacted"
           git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" emulator-results
+
+  # The same live assertions on other Android versions and form factors (finding: support every Android version and device type).
+  # Reported per device in the run summary. Not release-blocking yet: older emulator images are less stable on CI runners, so a red
+  # entry here is investigated by hand rather than allowed to stop a release on an emulator fault.
+  compat:
+    needs: [apk]
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    continue-on-error: true
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: "Android 6.0 phone", slug: api23-phone, api: 23, target: google_apis, arch: x86_64, profile: pixel_2, font: "1.0" }
+          - { name: "Android 8.0 phone", slug: api26-phone, api: 26, target: google_apis, arch: x86_64, profile: pixel_2, font: "1.0" }
+          - { name: "Android 10 small phone (320 dp), 200% font", slug: api29-small-bigfont, api: 29, target: google_apis, arch: x86_64, profile: "Nexus S", font: "2.0" }
+          - { name: "Android 13 tablet", slug: api33-tablet, api: 33, target: google_apis, arch: x86_64, profile: pixel_tablet, font: "1.0" }
+          - { name: "Android 16 foldable (unfolded)", slug: api36-foldable, api: 36, target: google_apis, arch: x86_64, profile: pixel_fold, font: "1.0" }
+          - { name: "Android TV 11 (32-bit x86)", slug: api30-tv, api: 30, target: android-tv, arch: x86, profile: tv_1080p, font: "1.0" }
+    name: compat (${{ matrix.name }})
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with: { name: apk-universal, path: out }
+      - name: Enable KVM and emulator runtime libraries
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq libpulse0 libnss3 libxcomposite1 libxcursor1 libxi6 libxtst6 || true
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - name: Run the app on ${{ matrix.name }}
+        uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2
+        with:
+          api-level: ${{ matrix.api }}
+          target: ${{ matrix.target }}
+          arch: ${{ matrix.arch }}
+          profile: ${{ matrix.profile }}
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -noaudio -no-boot-anim -camera-back none -camera-front none
+          script: FONT_SCALE=${{ matrix.font }} OUT=emu-out bash tools/emulator-test.sh out/VPN-App.apk || echo $? > emu-exit
+      - name: Verdict
+        env:
+          DEVICE: ${{ matrix.name }}
+        run: |
+          code=$(cat emu-exit 2>/dev/null || echo 0); [ -f emu-out/result.txt ] || code=1
+          case "$code" in 0) v=PASS ;; 3) v=INCONCLUSIVE ;; *) v=FAIL ;; esac
+          { echo "### $DEVICE: $v"; echo; sed -n '/^device=/p;/^quick/p;/^status=/,$p' emu-out/result.txt 2>/dev/null | sed 's/^/    /'; } >> "$GITHUB_STEP_SUMMARY"
+          [ "$v" != FAIL ]
+      - name: Redact results
+        if: always()
+        run: python3 -I tools/redact-results.py emu-out emu-public
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with: { name: "compat-${{ matrix.slug }}", path: emu-public, if-no-files-found: warn, retention-days: 14 }

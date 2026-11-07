@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream
 import java.security.MessageDigest
 import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
-import java.util.Base64
 
 /** Answers "is this root certificate one the device (or this app) already trusts?" by SHA-256 fingerprint (lower-case hex). */
 fun interface RootStore {
@@ -75,7 +74,7 @@ object CertInspector {
             val e = pem.indexOf(END, b)
             if (e < 0) return CaVerdict.Bad("unterminated certificate in <ca>")
             val body = pem.substring(b + BEGIN.length, e)
-            val der = try { Base64.getMimeDecoder().decode(body.trim()) } catch (_: IllegalArgumentException) {
+            val der = try { Base64Codec.decodeMime(body.trim()) } catch (_: IllegalArgumentException) {
                 return CaVerdict.Bad("certificate in <ca> is not valid base64")
             }
             if (der.isEmpty() || der.size > MAX_DER_BYTES) return CaVerdict.Bad("certificate in <ca> has an unreasonable size")

@@ -4,9 +4,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
-import java.nio.file.AtomicMoveNotSupportedException
-import java.nio.file.Files
-import java.nio.file.StandardCopyOption
 
 /**
  * Crash-safe file replacement (finding C7).
@@ -30,12 +27,9 @@ object AtomicFiles {
             out.fd.sync()
         }
         beforeCommit?.invoke()
-        try {
-            Files.move(tmp.toPath(), target.toPath(), StandardCopyOption.ATOMIC_MOVE)
-        } catch (_: AtomicMoveNotSupportedException) {
-            // Still never delete first: REPLACE_EXISTING swaps the entry rather than removing the old file up front.
-            Files.move(tmp.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING)
-        }
+        // File.renameTo is rename(2) on Android and Linux: it atomically replaces an existing target on the same filesystem, and works
+        // on every Android version (java.nio.file needs Android 8.0). If it fails, the old file is still intact: never delete first.
+        if (!tmp.renameTo(target)) throw java.io.IOException("could not replace ${target.name}; the previous version is kept")
     }
 }
 

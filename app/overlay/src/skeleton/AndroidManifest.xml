@@ -15,6 +15,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:node="remove" />
     <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" tools:node="remove" />
+    <!-- Runs on phones, tablets, foldables, Chromebooks and Android TV: none of these hardware features is required.
+         (A touchscreen is optional so Chromebooks without one and TVs can install it; leanback is optional so phones can.) -->
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <uses-feature android:name="android.software.leanback" android:required="false" />
+
     <queries>
         <intent>
             <action android:name="android.intent.action.MAIN" />
@@ -28,7 +33,10 @@
         android:allowBackup="false"
         android:dataExtractionRules="@xml/vpnapp_data_extraction"
         android:networkSecurityConfig="@xml/vpnapp_network_security"
-        tools:replace="android:label,android:theme,android:allowBackup"
+        android:usesCleartextTraffic="false"
+        android:resizeableActivity="true"
+        android:banner="@drawable/vpnapp_banner"
+        tools:replace="android:label,android:theme,android:allowBackup,android:usesCleartextTraffic,android:resizeableActivity,android:banner"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity
@@ -39,6 +47,11 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Android TV home screen -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
 

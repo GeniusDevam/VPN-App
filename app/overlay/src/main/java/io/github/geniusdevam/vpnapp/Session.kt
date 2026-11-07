@@ -127,6 +127,7 @@ object Session {
         if (inited) return
         inited = true
         app = application
+        io.github.geniusdevam.vpnapp.net.LegacyTls.init(app)
         Repo.init(app)
         tunnel = TunnelManager(app, settings = { Repo.settings.value })
         tunnel.onSessionEnded = { server, durationMs, unexpected ->

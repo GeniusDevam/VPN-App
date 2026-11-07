@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -16,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -23,7 +26,8 @@ import androidx.compose.ui.unit.dp
 fun Onboarding(onContinue: () -> Unit) {
     Surface(Modifier.fillMaxSize()) {
         Column(
-            Modifier.safeDrawingPadding().verticalScroll(rememberScrollState()).padding(20.dp),
+            Modifier.safeDrawingPadding().verticalScroll(rememberScrollState())
+                .fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally).widthIn(max = 640.dp).padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             Text("🛡️", style = MaterialTheme.typography.displayMedium)

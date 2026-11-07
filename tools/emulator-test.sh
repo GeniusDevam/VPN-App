@@ -150,47 +150,114 @@ PY
   echo "================ VPNAPP debug log"; grep -E " VPNAPP *:" "$OUT/logcat.txt" 2>/dev/null | sed -E 's/^[0-9-]+ //' | cut -c1-300 | head -300
   echo "================ crashes"; grep -E "FATAL EXCEPTION|AndroidRuntime: *(at|Caused|java|kotlin)" "$OUT/logcat.txt" 2>/dev/null | head -40
 }
-# Waits (<= $1 s) for the Quick Connect outcome. Prints connected | failed-infra | failed-app | hung.
+# ---- screen-size aware helpers (phones from 320 dp, tablets, foldables, TVs; any font scale) -------------------------------
+W=1080; H=2400
+swipe_up()   { adb shell input swipe $((W/2)) $((H*7/10)) $((W/2)) $((H*3/10)) 250; sleep 1; }   # reveals content further down
+scroll_top() { for _ in 1 2 3 4; do adb shell input swipe $((W/2)) $((H*3/10)) $((W/2)) $((H*8/10)) 120; done; sleep 1; }
+# "x y" of the node whose resource-id is $1 (Compose test tags are exposed as resource ids)
+find_id() {
+  python3 - "$1" "$OUT/ui.xml" <<'PY'
+import sys,re,xml.etree.ElementTree as ET
+want=sys.argv[1]
+try: root=ET.parse(sys.argv[2]).getroot()
+except Exception: sys.exit(0)
+for n in root.iter('node'):
+    rid=n.get('resource-id') or ''
+    if rid==want or rid.endswith('/'+want) or rid.endswith(':id/'+want):
+        m=re.findall(r'\d+',n.get('bounds') or '')
+        if len(m)==4: print((int(m[0])+int(m[2]))//2,(int(m[1])+int(m[3]))//2)
+        break
+PY
+}
+# all text under the node whose resource-id is $1
+text_id() {
+  python3 - "$1" "$OUT/ui.xml" <<'PY'
+import sys,xml.etree.ElementTree as ET
+want=sys.argv[1]
+try: root=ET.parse(sys.argv[2]).getroot()
+except Exception: sys.exit(0)
+for n in root.iter('node'):
+    rid=n.get('resource-id') or ''
+    if rid==want or rid.endswith('/'+want):
+        t=' '.join(x for x in ((c.get('text') or c.get('content-desc') or '').strip() for c in n.iter('node')) if x)
+        print(t); break
+PY
+}
+# tap_scrolling id <tag> | tap_scrolling re <regex>: from the top, scroll down until visible, then tap
+tap_scrolling() {
+  scroll_top
+  for _ in $(seq 1 8); do
+    dump
+    if [ "$1" = id ]; then xy=$(find_id "$2"); else xy=$(find_nth "$2" 1); fi
+    if [ -n "$xy" ]; then log "tap $1 '$2' at $xy"; adb shell input tap $xy; return 0; fi
+    swipe_up
+  done
+  log "could not find $1 '$2' even after scrolling"; return 1
+}
+# text_scrolling id <tag>: from the top, scroll down until visible, print its text
+text_scrolling() {
+  scroll_top
+  for _ in $(seq 1 8); do dump; t=$(text_id "$1"); [ -n "$t" ] && { echo "$t"; return 0; }; swipe_up; done
+  return 1
+}
+seen_scrolling() { scroll_top; for _ in $(seq 1 8); do dump; has_text "$1" && return 0; swipe_up; done; return 1; }
+strip_chip() { sed -E 's/\s*▾\s*$//'; }
+
+# Waits (<= $1 s) for the Quick Connect outcome. Prints connected | failed-infra | failed-app | hung (logs go to stderr).
 quick_outcome() {
   local limit=$1 t0; t0=$(date +%s)
   while [ $(( $(date +%s) - t0 )) -lt "$limit" ]; do
-    sleep 4; dump
+    sleep 3; dump
+    # Slow (old) emulators can show the one-time VPN consent dialog late: accept it whenever it appears.
+    if has_text "Connection request|wants to set up a VPN"; then log "VPN consent dialog" >&2; shot 03b-consent; tap_text "OK" >&2; continue; fi
+    scroll_top; dump
     if has_text "^.{0,2}\s?Connected$"; then echo connected; return; fi
     if has_text "went wrong"; then echo failed-app; return; fi
     if has_text "could not be loaded|no usable servers|No server in|Could not connect|none fit your settings|Could not connect within"; then echo failed-infra; return; fi
   done
   echo hung
 }
+# Total PSS of a process in KB (first TOTAL figure of dumpsys meminfo), or empty.
+pss_kb() { adb shell dumpsys meminfo "$1" 2>/dev/null | tr -d '\r' | python3 -c 'import sys,re; m=re.search(r"TOTAL(?: PSS)?:?\s+(\d+)", sys.stdin.read()); print(m.group(1) if m else "")'; }
+
+# tools/speedrun.sh reuses the helpers above without running the test itself.
+if [ "${EMU_LIB_ONLY:-}" = 1 ]; then return 0 2>/dev/null || exit 0; fi
 
 log "install"; adb install -r "$APK" || { hard "APK did not install"; finish; }
 adb shell pm grant $PKG android.permission.POST_NOTIFICATIONS 2>/dev/null || true
-adb shell dumpsys package $PKG | grep -E "versionName|versionCode|targetSdk" | head -3 | tee "$OUT/package.txt"
+adb shell dumpsys package $PKG | grep -E "versionName|versionCode|targetSdk|minSdk" | head -4 | tee "$OUT/package.txt"
+read -r W H <<< "$(adb shell wm size | tr -d '\r' | awk -F'[: x]+' '/size/{w=$(NF-1); h=$NF} END{print w, h}')"
+case "${W:-}${H:-}" in ''|*[!0-9]*) W=1080; H=2400 ;; esac
+if [ "${FONT_SCALE:-1.0}" != "1.0" ]; then adb shell settings put system font_scale "$FONT_SCALE"; fi
+DENS=$(adb shell wm density | tr -d '\r' | awk '{v=$NF} END{print v+0}'); [ "${DENS:-0}" -gt 0 ] 2>/dev/null || DENS=160
+SDK=$(adb shell getprop ro.build.version.sdk | tr -d '\r'); REL=$(adb shell getprop ro.build.version.release | tr -d '\r'); ABI=$(adb shell getprop ro.product.cpu.abi | tr -d '\r')
 adb shell setprop log.tag.VPNAPP DEBUG
 adb logcat -c
 adb shell am start -n $PKG/.MainActivity >/dev/null; sleep 8
 shot 01-onboarding
 echo "started=$(date -u +%FT%TZ)" > "$OUT/result.txt"
+echo "device=Android $REL (API $SDK), $ABI, ${W}x${H} px = $((W*160/DENS))x$((H*160/DENS)) dp, font scale ${FONT_SCALE:-1.0}" | tee -a "$OUT/result.txt"
 
 # The privacy copy is longer than one screen: scroll until the button is on screen, like a real user.
 onboard_done=""
-for i in $(seq 1 8); do
+for i in $(seq 1 10); do
   dump; xy=$(find_xy "I understand, continue")
   if [ -n "$xy" ]; then log "tap 'I understand, continue' at $xy"; adb shell input tap $xy; onboard_done=yes; break; fi
-  adb shell input swipe 540 1900 540 700 300; sleep 1
+  swipe_up
 done
 [ -n "$onboard_done" ] || { shot 02-fail; hard "onboarding screen never offered 'I understand, continue', even after scrolling"; finish; }
 sleep 4; shot 02-home; dump
-if has_text "Quick Connect" && has_text "Best Connect"; then ok "home screen shows both modes"; else hard "home screen missing Quick/Best Connect"; finish; fi
+if has_text "Quick Connect" && seen_scrolling "^Best Connect$"; then ok "home screen shows both modes"; else hard "home screen missing Quick/Best Connect"; finish; fi
 
 # ---- split-tunnel app picker without QUERY_ALL_PACKAGES (manifest audit, finding B10) -------------------------------------
 # The permission was removed and replaced by a narrow launcher <queries> entry. Prove the picker still lists apps.
 log "split-tunnel app picker"
 tap_text "Settings" || true; sleep 2
 found=""
-for i in $(seq 1 10); do        # the button is below the fold on the long Settings screen: scroll like a user
+for i in $(seq 1 12); do        # the button is below the fold on the long Settings screen: scroll like a user
   dump; xy=$(find_nth "^Apps that skip the VPN \\(" 1)
   if [ -n "$xy" ]; then log "tap app-picker button at $xy"; adb shell input tap $xy; found=yes; break; fi
-  adb shell input swipe 540 1900 540 700 300; sleep 1
+  swipe_up
 done
 if [ -n "$found" ]; then
   n=""
@@ -210,7 +277,7 @@ has_text "Quick Connect" || { adb shell am start -n $PKG/.MainActivity >/dev/nul
 # ---- A2/D3: the real country picker, in the real UI ----------------------------------------------------------------
 log "country picker"
 CHOSEN=""
-if tap_nth "$CHIP" 1; then
+if tap_scrolling id quick_chip; then
   sleep 2; dump
   if has_text "Choose a country"; then ok "Quick country picker opens"; else hard "tapping the Quick country chip did not open the picker"; fi
   state=""
@@ -228,9 +295,12 @@ if tap_nth "$CHIP" 1; then
       if [ -n "$big" ] && { adb shell input tap $big; true; }; then
         sleep 2; dump; shot 02c-picked
         if has_text "Choose a country"; then hard "picker did not close after choosing a country"; fi
-        n=$(count_text "Any country.*$CHIP")
-        if [ "$n" = "1" ]; then ok "choosing a country changed Quick only; Best stayed on its own choice"; else hard "country choice leaked between modes or was not applied (Any-country chips left: $n, expected 1)"; fi
-        CHOSEN=$(text_nth "$CHIP" 1 | sed -E 's/\s*▾\s*$//'); log "Quick country now: $CHOSEN"
+        q=$(text_scrolling quick_chip | strip_chip); b=$(text_scrolling best_chip | strip_chip)
+        log "Quick chip: '$q'  Best chip: '$b'"
+        if [ -n "$q" ] && ! echo "$q" | grep -q "Any country" && echo "$b" | grep -q "Any country"; then
+          ok "choosing a country changed Quick only; Best stayed on its own choice"
+        else hard "country choice leaked between modes or was not applied (Quick '$q', Best '$b')"; fi
+        CHOSEN="$q"; log "Quick country now: $CHOSEN"
       else hard "no selectable country rows in the picker although the list is loaded"; fi ;;
     unavailable) infra "server list could not be loaded, so the picker has no countries to test"; adb shell input keyevent KEYCODE_BACK ;;
     *) infra "server list still loading after 2 minutes"; adb shell input keyevent KEYCODE_BACK ;;
@@ -239,16 +309,17 @@ else hard "no country chip on the home screen"; fi
 
 if [ -n "$CHOSEN" ]; then
   log "restart the app process; the choice must survive"
-  adb shell am force-stop $PKG; sleep 2; adb shell am start -n $PKG/.MainActivity >/dev/null; sleep 10; dump
-  after=$(text_nth "$CHIP" 1 | sed -E 's/\s*▾\s*$//')
+  adb shell am force-stop $PKG; sleep 2
+  cold=$(adb shell am start -W -n $PKG/.MainActivity | tr -d '\r' | sed -n 's/^TotalTime: *//p'); echo "cold_start_ms=${cold:-?}" >> "$OUT/result.txt"
+  sleep 8
+  after=$(text_scrolling quick_chip | strip_chip)
   if [ "$after" = "$CHOSEN" ]; then ok "country choice persisted across process death (encrypted settings readable)"; else hard "country choice lost across restart (was '$CHOSEN', now '$after')"; fi
 fi
 
 # ---- Quick Connect (country-bound when a country was chosen) --------------------------------------------------------
 log "Quick Connect (${CHOSEN:-Any country})"
 t0=$(date +%s)
-tap_text "Connect"; sleep 3; dump
-if has_text "Connection request|wants to set up a VPN"; then log "VPN consent dialog"; shot 03b-consent; tap_text "OK"; fi
+tap_scrolling id quick_connect || hard "no Quick Connect button"
 result=$(quick_outcome 150); secs=$(( $(date +%s) - t0 ))
 log "Quick Connect: $result after ${secs}s"; shot 05-quick-result; dump; cp "$OUT/ui.xml" "$OUT/ui-quick-result.xml"
 echo "quick_scope=${CHOSEN:-Any country}" >> "$OUT/result.txt"; echo "quick=$result" >> "$OUT/result.txt"; echo "quick_seconds=$secs" >> "$OUT/result.txt"
@@ -274,11 +345,10 @@ esac
 if [ "$result" = "failed-infra" ] && [ -n "$CHOSEN" ]; then
   log "retry Quick Connect with Any country"
   tap_text "OK" || true; sleep 1
-  if tap_nth "$CHIP" 1; then
+  if tap_scrolling id quick_chip; then
     sleep 2; dump
     xy=$(find_nth "Any country \(sample" 1); [ -n "$xy" ] && adb shell input tap $xy; sleep 2
-    t0=$(date +%s); tap_text "Connect"; sleep 3; dump
-    if has_text "Connection request|wants to set up a VPN"; then tap_text "OK"; fi
+    t0=$(date +%s); tap_scrolling id quick_connect
     result=$(quick_outcome 150); secs=$(( $(date +%s) - t0 ))
     log "Quick Connect (Any country): $result after ${secs}s"; shot 05b-quick-any-result; dump; cp "$OUT/ui.xml" "$OUT/ui-quick-result.xml"
     echo "quick_any=$result" >> "$OUT/result.txt"; echo "quick_any_seconds=$secs" >> "$OUT/result.txt"
@@ -290,13 +360,20 @@ if [ "$result" = "failed-infra" ] && [ -n "$CHOSEN" ]; then
   fi
 fi
 
+if [ "$result" = "connected" ]; then
+  sleep 5
+  echo "mem_app_pss_kb=$(pss_kb $PKG)" >> "$OUT/result.txt"
+  echo "mem_vpn_pss_kb=$(pss_kb $PKG:openvpn)" >> "$OUT/result.txt"
+fi
+
 # ---- explicit disconnect must stay disconnected (B5, live) ----------------------------------------------------------
 if [ "$result" = "connected" ]; then
   log "explicit disconnect"
+  scroll_top
   tap_text "Disconnect" || hard "no Disconnect button while connected"
-  sleep 3; dump
+  sleep 3; scroll_top; dump
   if has_text "Not connected"; then
-    sleep 20; dump
+    sleep 20; scroll_top; dump
     if has_text "Not connected"; then ok "explicit disconnect stayed disconnected for 20 s"; else hard "VPN came back after an explicit disconnect"; fi
   else hard "UI did not show 'Not connected' after Disconnect"; fi
 fi
@@ -304,17 +381,19 @@ fi
 # ---- Best Connect: its own country choice (Any) ---------------------------------------------------------------------
 if [ "$result" = "connected" ]; then
   log "Best Connect (Any country)"
-  tap_text "Find the best"; sleep 3
+  tb=$(date +%s)
+  tap_scrolling id best_connect || hard "no Best Connect button"
+  sleep 3
   bres="timeout"
   for i in $(seq 1 60); do
-    sleep 10; dump
+    sleep 10; scroll_top; dump
     if has_text "Best server:"; then bres="done"; break; fi
     if has_text "went wrong"; then bres="failed-app"; break; fi
     if has_text "could not be loaded|no usable servers|No server in|none fit your settings"; then bres="failed-infra"; break; fi
     [ $((i % 3)) -eq 0 ] && shot "06-best-progress-$i"
   done
   log "Best Connect result: $bres"; shot 07-best-result; cp "$OUT/ui.xml" "$OUT/ui-best-result.xml"
-  echo "best=$bres" >> "$OUT/result.txt"
+  echo "best=$bres" >> "$OUT/result.txt"; echo "best_seconds=$(( $(date +%s) - tb ))" >> "$OUT/result.txt"
   case "$bres" in
     done) ok "Best Connect finished with a named winner" ;;
     failed-app) hard "Best Connect ended in an unhandled-exception banner" ;;

@@ -204,6 +204,7 @@ class HttpThroughputTester(
 
     private fun open(url: String): HttpURLConnection {
         val c = URL(url).openConnection() as HttpURLConnection
+        io.github.geniusdevam.vpnapp.net.LegacyTls.apply(c)
         c.connectTimeout = 5_000
         c.readTimeout = 5_000
         c.useCaches = false

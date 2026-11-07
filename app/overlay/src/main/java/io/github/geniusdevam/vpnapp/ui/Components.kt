@@ -43,8 +43,8 @@ fun rememberNow(intervalMs: Long = 250) = produceState(System.currentTimeMillis(
 }
 
 @Composable
-fun CountryChip(scope: Scope, enabled: Boolean, onClick: () -> Unit) {
-    AssistChip(onClick = onClick, enabled = enabled, label = { Text(scopeLabel(scope) + "  ▾") })
+fun CountryChip(scope: Scope, enabled: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    AssistChip(onClick = onClick, enabled = enabled, label = { Text(scopeLabel(scope) + "  ▾") }, modifier = modifier)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
