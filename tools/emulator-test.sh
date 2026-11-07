@@ -89,21 +89,28 @@ for n in root.iter('node'):
         if k==want: print(t); break
 PY
 }
-# "x y" of the country row with the MOST servers (skips the first match, the 'Any country' row): live volunteers are flaky,
-# so test with the country that has the best chance of a working relay.
+# "x y" of the visible country row with the MOST servers. Live volunteers are flaky, so test with the country that has the best
+# chance of a working relay. The 'Any country' row also shows a count; it is recognised by its title on the same line, not by
+# position, because after scrolling the sheet it may be off-screen.
 find_biggest_country() {
-  python3 - "$OUT/ui.xml" <<'PY'
+  python3 - "$OUT/ui.xml" <<'PY2'
 import sys,re,xml.etree.ElementTree as ET
 try: root=ET.parse(sys.argv[1]).getroot()
 except Exception: sys.exit(0)
+def box(n):
+    b=[int(v) for v in re.findall(r'\d+',n.get('bounds') or '')]
+    return b if len(b)==4 else None
+nodes=[(((n.get('text') or n.get('content-desc') or '').strip()),box(n)) for n in root.iter('node')]
+anys=[b for t,b in nodes if b and 'Any country' in t]
 rows=[]
-for n in root.iter('node'):
-    t=(n.get('text') or n.get('content-desc') or '').strip()
+for t,b in nodes:
     m=re.fullmatch(r'(\d+) servers?',t)
-    b=re.findall(r'\d+',n.get('bounds') or '')
-    if m and len(b)==4: rows.append((int(m.group(1)),(int(b[0])+int(b[2]))//2,(int(b[1])+int(b[3]))//2))
-for cnt,x,y in sorted(rows[1:],key=lambda r:-r[0])[:1]: print(x,y)
-PY
+    if not (m and b): continue
+    cy=(b[1]+b[3])//2
+    if any(a[1]<=cy<=a[3] for a in anys): continue
+    rows.append((int(m.group(1)),(b[0]+b[2])//2,cy))
+for cnt,x,y in sorted(rows,key=lambda r:-r[0])[:1]: print(x,y)
+PY2
 }
 count_text() {
   python3 - "$1" "$OUT/ui.xml" <<'PY'
@@ -204,7 +211,8 @@ text_scrolling() {
 seen_scrolling() { scroll_top; for _ in $(seq 1 8); do dump; has_text "$1" && return 0; swipe_up; done; return 1; }
 strip_chip() { sed -E 's/\s*▾\s*$//'; }
 
-# Waits (<= $1 s) for the Quick Connect outcome. Prints connected | failed-infra | failed-app | hung (logs go to stderr).
+# Waits (<= $1 s) for the Quick Connect outcome. Prints connected | connected-dropped | failed-infra | failed-app | hung
+# (logs go to stderr).
 quick_outcome() {
   local limit=$1 t0; t0=$(date +%s)
   while [ $(( $(date +%s) - t0 )) -lt "$limit" ]; do
@@ -213,6 +221,9 @@ quick_outcome() {
     if has_text "Connection request|wants to set up a VPN"; then log "VPN consent dialog" >&2; shot 03b-consent; tap_text "OK" >&2; continue; fi
     scroll_top; dump
     if has_text "^.{0,2}\s?Connected$"; then echo connected; return; fi
+    # The banner is set the moment Quick Connect succeeds and stays. With it but no "Connected" headline, the tunnel came up and
+    # was then lost (the volunteer closed it or the network dropped) and OpenVPN is reconnecting.
+    if has_text "^Connected to .* in [0-9]+ s"; then echo connected-dropped; return; fi
     if has_text "went wrong"; then echo failed-app; return; fi
     if has_text "could not be loaded|no usable servers|No server in|Could not connect|none fit your settings|Could not connect within"; then echo failed-infra; return; fi
   done
@@ -298,6 +309,11 @@ if tap_scrolling id quick_chip; then
     loaded)
       ok "picker reports a loaded server list"
       dump; big=$(find_biggest_country)
+      for _ in 1 2 3 4; do   # large fonts on short screens leave only the header and 'Any country' visible: scroll the list
+        [ -n "$big" ] && break
+        log "no country row on screen yet: scroll the picker"
+        adb shell input swipe $((W/2)) $((H*8/10)) $((W/2)) $((H*5/10)) 400; sleep 1; dump; big=$(find_biggest_country)
+      done
       if [ -n "$big" ] && { adb shell input tap $big; true; }; then
         sleep 2; dump; shot 02c-picked
         if has_text "Choose a country"; then hard "picker did not close after choosing a country"; fi
@@ -336,6 +352,9 @@ case "$result" in
       name=$(echo "$CHOSEN" | sed -E 's/^[^ ]+ //')
       if has_text "· $name"; then ok "connected server is in the chosen country ($name)"; else hard "connected, but the status card does not show the chosen country '$name' (scope not enforced?)"; fi
     fi ;;
+  connected-dropped)
+    ok "Quick Connect connected (the app reported success: $(text_nth '^Connected to .* in [0-9]+ s' 1 | cut -c1-60))"
+    infra "the tunnel dropped after connecting and OpenVPN is reconnecting ($(text_id status_headline)); see app-log.txt for the server's reason" ;;
   failed-app) hard "Quick Connect ended in an unhandled-exception banner" ;;
   hung)       hard "Quick Connect never reached a connected or failed state within 150 s: the bounded-attempt promise is broken" ;;
   failed-infra)
@@ -360,6 +379,7 @@ if [ "$result" = "failed-infra" ] && [ -n "$CHOSEN" ]; then
     echo "quick_any=$result" >> "$OUT/result.txt"; echo "quick_any_seconds=$secs" >> "$OUT/result.txt"
     case "$result" in
       connected) ok "Quick Connect connected with Any country in ${secs}s (the chosen country had no working relay)" ;;
+      connected-dropped) ok "Quick Connect (Any) connected"; infra "the tunnel dropped after connecting and OpenVPN is reconnecting" ;;
       failed-app) hard "Quick Connect (Any) ended in an unhandled-exception banner" ;;
       hung) hard "Quick Connect (Any) never reached a terminal state within 150 s" ;;
     esac
