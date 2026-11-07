@@ -89,6 +89,7 @@ class VpnGateCatalog : Catalog {
         val url = URL(URL_HTTPS)
         require(url.protocol == "https")
         val c = url.openConnection() as HttpsURLConnection
+        io.github.geniusdevam.vpnapp.net.LegacyTls.apply(c)
         try {
             c.connectTimeout = timeoutMs
             c.readTimeout = timeoutMs

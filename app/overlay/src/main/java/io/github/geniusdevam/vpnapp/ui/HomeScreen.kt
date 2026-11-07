@@ -29,6 +29,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.ui.unit.dp
 import io.github.geniusdevam.vpnapp.ConnState
 import io.github.geniusdevam.vpnapp.RunMode
@@ -48,8 +52,8 @@ fun HomeScreen(withVpnPermission: (() -> Unit) -> Unit) {
     val settings by Repo.settings.collectAsState()
     val servers by Repo.servers.collectAsState()
     val now by rememberNow()
-    var picker by remember { mutableStateOf<RunMode?>(null) }
-    var showReport by remember { mutableStateOf(false) }
+    var picker by rememberSaveable { mutableStateOf<RunMode?>(null) }
+    var showReport by rememberSaveable { mutableStateOf(false) }
     val options = remember(servers) { servers.filter { !Repo.reputation.isBlocked(it.id) }.countryOptions() }
     val directoryDiag by Repo.directory.collectAsState()
     val directoryState = directoryDiag.state(servers.size)
@@ -77,6 +81,7 @@ fun HomeScreen(withVpnPermission: (() -> Unit) -> Unit) {
         }
         item {
             ModeCard(
+                tag = "quick",
                 title = "Quick Connect",
                 subtitle = "Connects to a fast server in 35 seconds or less. It compares response times of a sample of servers, so the pick is an estimate; it does not measure speed.",
                 scopeText = settings.quickScope,
@@ -89,6 +94,7 @@ fun HomeScreen(withVpnPermission: (() -> Unit) -> Unit) {
         }
         item {
             ModeCard(
+                tag = "best",
                 title = "Best Connect",
                 subtitle = "Takes its time: probes every server in the chosen country, speed-tests the best ones, and connects to the fastest it measured.",
                 scopeText = settings.bestScope,
@@ -141,7 +147,7 @@ private fun StatusCard(ui: SessionUi, now: Long, onDisconnect: () -> Unit) {
                 v.status == ConnState.CONNECTING -> "Connecting…"
                 else -> "🔓 Not connected"
             }
-            Text(headline, style = MaterialTheme.typography.headlineSmall)
+            Text(headline, style = MaterialTheme.typography.headlineSmall, modifier = Modifier.testTag("status_headline"))
             if (working) {
                 Text(
                     if (ui.run?.mode == RunMode.BEST || ui.run?.mode == RunMode.WORLDWIDE) "Testing servers. The VPN reconnects to each candidate in turn, so your traffic may go outside the VPN, or through test servers, until it finishes."
@@ -163,7 +169,7 @@ private fun StatusCard(ui: SessionUi, now: Long, onDisconnect: () -> Unit) {
                     "Run by a volunteer: avoid logging in to banking or other sensitive accounts.",
                     style = MaterialTheme.typography.bodySmall,
                 )
-                OutlinedButton(onClick = onDisconnect) { Text("Disconnect") }
+                OutlinedButton(onClick = onDisconnect, modifier = Modifier.testTag("disconnect")) { Text("Disconnect") }
             } else {
                 Text(
                     if (v.status == ConnState.CONNECTING) v.stateName else "Choose Quick Connect or Best Connect below.",
@@ -175,8 +181,10 @@ private fun StatusCard(ui: SessionUi, now: Long, onDisconnect: () -> Unit) {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ModeCard(
+    tag: String,
     title: String,
     subtitle: String,
     scopeText: io.github.geniusdevam.vpnapp.engine.Scope,
@@ -193,10 +201,15 @@ private fun ModeCard(
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(title, style = MaterialTheme.typography.titleLarge)
             Text(subtitle, style = MaterialTheme.typography.bodyMedium)
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                CountryChip(scopeText, enabled = !busy, onClick = onPickCountry)
-                if (tonal) FilledTonalButton(onClick = onStart, enabled = !busy) { Text(actionLabel) }
-                else Button(onClick = onStart, enabled = !busy) { Text(actionLabel) }
+            // Wraps onto two lines on narrow screens or at very large font sizes instead of squeezing the button off-screen.
+            FlowRow(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                CountryChip(scopeText, enabled = !busy, onClick = onPickCountry, modifier = Modifier.testTag("${tag}_chip"))
+                if (tonal) FilledTonalButton(onClick = onStart, enabled = !busy, modifier = Modifier.testTag("${tag}_connect")) { Text(actionLabel) }
+                else Button(onClick = onStart, enabled = !busy, modifier = Modifier.testTag("${tag}_connect")) { Text(actionLabel) }
             }
             if (running && run != null) progress(run)
         }

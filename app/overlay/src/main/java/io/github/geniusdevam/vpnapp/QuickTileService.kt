@@ -14,7 +14,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-/** Quick Settings tile: tap to Quick Connect (opens the app for the VPN permission), tap again to disconnect. */
+/**
+ * Quick Settings tile: tap to Quick Connect (opens the app for the VPN permission), tap again to disconnect.
+ * Quick Settings tiles exist from Android 7.0; on Android 6.0 the system never binds this service.
+ */
+@androidx.annotation.RequiresApi(24)
 class QuickTileService : TileService() {
     private var scope: CoroutineScope? = null
 

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       run_id:
-        description: "ID of an earlier 'build' run that has the apk-x86_64 artifact"
+        description: "ID of an earlier 'build' run that has the apk-universal artifact"
         required: true
 
 permissions:
@@ -22,7 +22,7 @@ jobs:
         with: { persist-credentials: false }
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: apk-x86_64
+          name: apk-universal
           path: out
           run-id: ${{ inputs.run_id }}
           github-token: ${{ github.token }}

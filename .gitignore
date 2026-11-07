@@ -14,3 +14,6 @@ out/
 *.pfx
 *.pem
 !engine/src/test/**
+# Public CA root certificates (Let's Encrypt ISRG Root X1/X2) bundled for Android 6.0-7.0; NOT keys. Pinned by SHA-256 in ServerAuth.kt.
+!app/overlay/src/main/res/raw/vpnapp_isrg_root_x1.pem
+!app/overlay/src/main/res/raw/vpnapp_isrg_root_x2.pem
