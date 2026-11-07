@@ -49,8 +49,8 @@ fun CountryChip(scope: Scope, enabled: Boolean, onClick: () -> Unit, modifier: M
 
 /**
  * The country picker. A dialog, not a bottom sheet: Material 3's ModalBottomSheet crashed on Android 6.0 the moment it opened
- * ("The offset was read before being initialized", compat run 39), while dialogs work on every supported version, on TV with a
- * D-pad, and on tablets. The list scrolls inside the dialog, so it also works at 200% font on a 320 dp phone.
+ * ("The offset was read before being initialized", compat run 39), while dialogs work on every supported version, on TV and
+ * on tablets. The list scrolls inside the dialog, so it also works at 200% font on a 320 dp phone.
  */
 @Composable
 fun CountryPickerSheet(

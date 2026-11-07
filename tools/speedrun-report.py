@@ -56,7 +56,7 @@ for k, label in (("mem_idle_app_pss_kb", "memory idle, app process (PSS)"), ("me
     print(f"| {label} | {int(v) / 1024:.0f} MB |" if v.isdigit() else f"| {label} | ? |")
 
 print(f"\n### Quick Connect x{len([k for k in kv if re.fullmatch(r'quick_\d+', k)])}: {num('quick_success')} connected and stayed up{', ' + num('quick_dropped') + ' connected then dropped by the server' if kv.get('quick_dropped', '0') not in ('0', '') else ''}, median {num('quick_ms_median')} ms (tap to 'Connected' on screen)\n")
-print("| run | result (screen) | list ready | probing done / first attempt | handshakes (s, result) | up at | server | encryption |\n|---|---|---|---|---|---|---|---|")
+print("| run | result (screen) | list ready | probing done / first attempt | handshakes (s, result) | up at | server | encryption | app banner |\n|---|---|---|---|---|---|---|---|---|")
 qruns = [r for r in runs if r["name"].startswith("quick run")]
 for i, k in enumerate(sorted((k for k in kv if re.fullmatch(r"quick_\d+", k)), key=lambda x: int(x.split("_")[1]))):
     parts = [p.strip() for p in kv[k].split("|")]
@@ -65,9 +65,9 @@ for i, k in enumerate(sorted((k for k in kv if re.fullmatch(r"quick_\d+", k)), k
         out, att = tl
         first_attempt = next((t for t, m in [((e[0] - qruns[i]["events"][0][0]) / 1000, e[1]) for e in qruns[i]["events"]] if m.startswith("connecting #1")), None)
         hs = ", ".join(f"{d:.1f} {r}" for d, r in att) or "-"
-        print(f"| {k.split('_')[1]} | {parts[0]} | {out.get('probing', '-')} s | {first_attempt if first_attempt is not None else '-'} s | {hs} | {out.get('up', '-')} s | {parts[1] if len(parts) > 1 else '?'} | {parts[2] if len(parts) > 2 else '?'} |")
+        print(f"| {k.split('_')[1]} | {parts[0]} | {out.get('probing', '-')} s | {first_attempt if first_attempt is not None else '-'} s | {hs} | {out.get('up', '-')} s | {parts[1] if len(parts) > 1 else '?'} | {parts[2] if len(parts) > 2 else '?'} | {parts[3] if len(parts) > 3 else '-'} |")
     else:
-        print(f"| {k.split('_')[1]} | {parts[0]} | - | - | - | - | {parts[1] if len(parts) > 1 else '?'} | {parts[2] if len(parts) > 2 else '?'} |")
+        print(f"| {k.split('_')[1]} | {parts[0]} | - | - | - | - | {parts[1] if len(parts) > 1 else '?'} | {parts[2] if len(parts) > 2 else '?'} | {parts[3] if len(parts) > 3 else '-'} |")
 print("\n(list ready / probing / up: seconds after the app started the run, from its own log; handshakes: each OpenVPN connect attempt in order.)")
 
 print(f"\n### Best Connect: {num('best')}\n")
