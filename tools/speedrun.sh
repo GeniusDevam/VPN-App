@@ -40,7 +40,7 @@ kv warm_start_ms_all "$(echo $warm)"; kv warm_start_ms_median "$(echo $warm | me
 sleep 5; kv mem_idle_app_pss_kb "$(pss_kb $PKG)"
 
 # ---- Quick Connect x N --------------------------------------------------------------------------------------------------
-ok_n=0; times=""
+ok_n=0; dropped_n=0; times=""
 for run in $(seq 1 "$QUICK_RUNS"); do
   adb logcat -c 2>/dev/null; echo "--- quick run $run" >> "$OUT/runs.log"
   t0=$(ms); tap_scrolling id quick_connect >/dev/null || { kv "quick_${run}" "no-button"; continue; }
@@ -49,6 +49,8 @@ for run in $(seq 1 "$QUICK_RUNS"); do
     dump
     if has_text "Connection request|wants to set up a VPN"; then tap_text "OK" >/dev/null; continue; fi
     if has_text "^.{0,2}\s?Connected$"; then res=connected; break; fi
+    # success banner without a "Connected" headline: the tunnel came up and the server then dropped it (see emulator-test.sh)
+    if has_text "^Connected to .* in [0-9]+ s"; then res=dropped; break; fi
     if has_text "went wrong|could not be loaded|no usable servers|No server in|Could not connect"; then res=failed; break; fi
     sleep 0.5
   done
@@ -60,12 +62,14 @@ for run in $(seq 1 "$QUICK_RUNS"); do
     ok_n=$((ok_n+1)); times="$times $dt"
     if [ "$ok_n" = 1 ]; then sleep 4; kv mem_connected_app_pss_kb "$(pss_kb $PKG)"; kv mem_connected_vpn_pss_kb "$(pss_kb $PKG:openvpn)"; fi
     tap_text "Disconnect" >/dev/null; sleep 4
+  elif [ "$res" = dropped ]; then
+    dropped_n=$((dropped_n+1)); tap_text "Stop" >/dev/null || tap_text "Disconnect" >/dev/null || true; sleep 4
   else
     tap_text "OK" >/dev/null || true
   fi
   sleep 6
 done
-kv quick_success "$ok_n/$QUICK_RUNS"; kv quick_ms_median "$(echo $times | median)"; kv quick_ms_all "$(echo $times)"
+kv quick_success "$ok_n/$QUICK_RUNS"; kv quick_dropped "$dropped_n"; kv quick_ms_median "$(echo $times | median)"; kv quick_ms_all "$(echo $times)"
 
 # ---- Best Connect x1 ----------------------------------------------------------------------------------------------------
 adb logcat -c 2>/dev/null; echo "--- best run" >> "$OUT/runs.log"

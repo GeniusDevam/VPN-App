@@ -14,14 +14,23 @@ H = r"[0-9A-Fa-f]{1,4}"
 # full form, compressed (::) form, leading :: form. Plain hh:mm:ss timestamps contain no "::" and do not match.
 V6 = re.compile(rf"(?<![\w:])(?:(?:{H}:){{7}}{H}|(?:{H}:){{1,7}}:(?:{H}(?::{H}){{0,6}})?|::{H}(?::{H}){{0,6}})(?![\w:])")
 B64 = re.compile(r"[A-Za-z0-9+/=_-]{40,}")
-KEY = re.compile(r"PRIVATE KEY|BEGIN CERTIFICATE|BEGIN OpenVPN|password|passwd|secret|token", re.I)
+HEX = re.compile(r"\b[0-9A-Fa-f]{16,}\b")
+# Lines that can carry a key, certificate or credential are dropped whole.
+KEY = re.compile(r"PRIVATE KEY|-----BEGIN|BEGIN OpenVPN|auth-token|auth-user-pass|password|passwd|secret", re.I)
+# uiautomator marks every node password="false"/"true" (a field type, not a value: Android already masks password text).
+UI_FLAG = re.compile(r'\s(?:password)="(?:true|false)"')
+# "token" also names harmless system handles (window/activity tokens). Keep the line, mask the value.
+TOKEN = re.compile(r"((?:token|Token)\s*[=:{]\s*)[^\s,}]+")
 
 def scrub(line: str) -> str:
+    line = UI_FLAG.sub("", line)
     if KEY.search(line):
         return "[line removed: may contain key material or credentials]"
+    line = TOKEN.sub(lambda m: m.group(1) + "[masked]", line)
     line = V4.sub(lambda m: f"{m.group(1)}.{m.group(2)}.x.x", line)
     line = V6.sub("[ipv6]", line)
-    return B64.sub("[data]", line)
+    line = HEX.sub("[hex]", line)
+    return B64.sub(lambda m: m.group(0) if set(m.group(0)) <= set("-=_") else "[data]", line)   # keep Markdown rules
 
 def copy_scrubbed(src, dst, keep=lambda l: True):
     if not os.path.exists(src): return
@@ -29,7 +38,7 @@ def copy_scrubbed(src, dst, keep=lambda l: True):
         for line in f:
             if keep(line): o.write(scrub(line.rstrip("\n")) + "\n")
 
-for name in ("result.txt", "package.txt"):
+for name in ("result.txt", "package.txt", "speedrun.txt", "speedrun.md", "runs.log"):
     copy_scrubbed(os.path.join(raw, name), os.path.join(pub, name))
 for name in ("ui-quick-result.xml", "ui-best-result.xml"):
     copy_scrubbed(os.path.join(raw, name), os.path.join(pub, name))
