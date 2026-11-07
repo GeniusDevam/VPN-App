@@ -122,7 +122,8 @@ CHIP='▾\s*$'   # the two country chips (Quick first, Best second) are the only
 
 finish() {
   adb logcat -d > "$OUT/logcat.txt" 2>/dev/null; adb logcat -d -s AndroidRuntime:E > "$OUT/crashes.txt" 2>/dev/null
-  if grep -q "FATAL EXCEPTION" "$OUT/logcat.txt" 2>/dev/null; then hard "the app crashed (FATAL EXCEPTION in logcat)"; fi
+  # Only the app's own processes count (old emulator images also log crashes of their own uiautomator/input tools).
+  if grep -A3 "FATAL EXCEPTION" "$OUT/logcat.txt" 2>/dev/null | grep -q "Process: $PKG"; then hard "the app crashed (FATAL EXCEPTION in an app process)"; fi
   status=PASS; code=0
   [ -n "$INFRA" ] && { status=INCONCLUSIVE; code=3; }
   [ -n "$HARD" ] && { status=FAIL; code=1; }
@@ -223,6 +224,11 @@ pss_kb() { adb shell dumpsys meminfo "$1" 2>/dev/null | tr -d '\r' | python3 -c 
 # tools/speedrun.sh reuses the helpers above without running the test itself.
 if [ "${EMU_LIB_ONLY:-}" = 1 ]; then return 0 2>/dev/null || exit 0; fi
 
+# Old emulator images report "booted" before their UI services are up; uiautomator and input then crash. Wait until they work.
+for i in $(seq 1 60); do
+  adb shell uiautomator dump /sdcard/ready.xml 2>&1 | grep -q "dumped" && break
+  sleep 3
+done
 log "install"; adb install -r "$APK" || { hard "APK did not install"; finish; }
 adb shell pm grant $PKG android.permission.POST_NOTIFICATIONS 2>/dev/null || true
 adb shell dumpsys package $PKG | grep -E "versionName|versionCode|targetSdk|minSdk" | head -4 | tee "$OUT/package.txt"

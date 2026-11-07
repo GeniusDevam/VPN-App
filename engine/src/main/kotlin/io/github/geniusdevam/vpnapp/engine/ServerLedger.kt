@@ -160,8 +160,9 @@ class ServerLedger(private val wall: WallClock = WallClock { System.currentTimeM
 
     /** "Clear history": removes measurements and counters but keeps the absence bookkeeping so retention keeps working. */
     @Synchronized fun clearMeasurements() {
-        records.replaceAll { _, r ->
-            ServerRecord(r.id, r.firstSeenAt, r.lastSeenInDirectoryAt, r.absentObservedMs, r.endpoint, r.country)
+        for (e in records.entries) {
+            val r = e.value
+            e.setValue(ServerRecord(r.id, r.firstSeenAt, r.lastSeenInDirectoryAt, r.absentObservedMs, r.endpoint, r.country))
         }
     }
 
