@@ -6,19 +6,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AssistChip
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -49,7 +47,11 @@ fun CountryChip(scope: Scope, enabled: Boolean, onClick: () -> Unit, modifier: M
     AssistChip(onClick = onClick, enabled = enabled, label = { Text(scopeLabel(scope) + "  ▾") }, modifier = modifier)
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * The country picker. A dialog, not a bottom sheet: Material 3's ModalBottomSheet crashed on Android 6.0 the moment it opened
+ * ("The offset was read before being initialized", compat run 39), while dialogs work on every supported version, on TV with a
+ * D-pad, and on tablets. The list scrolls inside the dialog, so it also works at 200% font on a 320 dp phone.
+ */
 @Composable
 fun CountryPickerSheet(
     options: List<CountryOption>,
@@ -59,7 +61,6 @@ fun CountryPickerSheet(
     onSelect: (Scope) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val state = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var query by remember { mutableStateOf("") }
     val filtered = remember(options, query) {
         val q = query.trim().lowercase()
@@ -67,9 +68,11 @@ fun CountryPickerSheet(
     }
     // A country chosen earlier may have no server in the current list. Show it (selected) instead of hiding the user's own choice.
     val missingCurrent = (current as? Scope.Country)?.takeIf { c -> options.none { it.iso == c.iso } }
-    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = state) {
-        Column(Modifier.navigationBarsPadding().padding(horizontal = 16.dp)) {
-            Text("Choose a country", style = MaterialTheme.typography.titleLarge)
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Choose a country") },
+        text = {
+          Column {
             Text(
                 when (directory) {
                     DirectoryState.LOADING -> "Loading the server list…"
@@ -79,13 +82,13 @@ fun CountryPickerSheet(
                     DirectoryState.FRESH -> "Only countries with servers in the current list are shown."
                 },
                 style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(top = 2.dp, bottom = 8.dp),
+                modifier = Modifier.padding(bottom = 8.dp),
             )
             OutlinedTextField(
                 value = query, onValueChange = { query = it }, singleLine = true,
                 label = { Text("Search") }, modifier = Modifier.fillMaxWidth(),
             )
-            LazyColumn(Modifier.weightedFill()) {
+            LazyColumn(Modifier.fillMaxWidth()) {
                 item {
                     PickerRow(
                         "\uD83C\uDF10  Any country (sample of all countries)",
@@ -105,11 +108,11 @@ fun CountryPickerSheet(
                 }
                 if (filtered.isEmpty() && options.isNotEmpty()) item { Text("No matching country.", Modifier.padding(16.dp)) }
             }
-        }
-    }
+          }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text("Cancel") } },
+    )
 }
-
-private fun Modifier.weightedFill(): Modifier = this.fillMaxWidth()
 
 @Composable
 private fun PickerRow(title: String, sub: String, selected: Boolean, onClick: () -> Unit) {

@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -59,7 +60,7 @@ fun Onboarding(onContinue: () -> Unit) {
                 }
             }
             Spacer(Modifier.height(4.dp))
-            Button(onClick = onContinue, modifier = Modifier.fillMaxWidth()) { Text("I understand, continue") }
+            Button(onClick = onContinue, modifier = Modifier.fillMaxWidth().testTag("onboarding_continue")) { Text("I understand, continue") }
         }
     }
 }
