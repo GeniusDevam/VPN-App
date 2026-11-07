@@ -14,7 +14,24 @@ ms() { date +%s%3N; }
 median() { tr ' ' '\n' | grep -E '^[0-9]+$' | sort -n | awk '{a[NR]=$1} END{if(NR){print (NR%2)?a[(NR+1)/2]:int((a[NR/2]+a[NR/2+1])/2)} else print "?"}'; }
 
 kv apk_kib "$(du -k "$APK" | cut -f1)"
+# Where the download size goes (compressed bytes inside the APK), for the size findings in docs/PERFORMANCE.md.
+python3 -I - "$APK" <<'PY' | while read -r k v; do kv "$k" "$v"; done
+import sys, zipfile, collections
+z = zipfile.ZipFile(sys.argv[1]); c = collections.Counter()
+for i in z.infolist():
+    n = i.filename
+    k = ("apk_part_dex" if n.endswith(".dex") else f"apk_part_lib_{n.split('/')[1]}" if n.startswith("lib/") and n.count("/") >= 2
+         else "apk_part_res" if n.startswith("res/") or n == "resources.arsc" else "apk_part_assets" if n.startswith("assets/")
+         else "apk_part_other")
+    c[k] += i.compress_size
+for k, v in sorted(c.items()): print(k, v // 1024)
+PY
 adb install -r "$APK" >/dev/null || { kv error "install failed"; exit 0; }
+# Installed footprint: the APK plus native libraries extracted next to it (upstream needs them extracted: it runs the OpenVPN
+# binary from the library folder). Needs a root-capable emulator image; "?" otherwise.
+adb root >/dev/null 2>&1; sleep 2; adb wait-for-device
+CODE=$(adb shell dumpsys package $PKG | tr -d '\r' | sed -n 's/^ *codePath=//p' | head -1)
+kv installed_kib "$(adb shell du -sk "$CODE" 2>/dev/null | tr -d '\r' | awk '{print $1}' | grep -E '^[0-9]+$' || echo '?')"
 adb shell pm grant $PKG android.permission.POST_NOTIFICATIONS 2>/dev/null || true
 read -r W H <<< "$(adb shell wm size | tr -d '\r' | awk -F'[: x]+' '/size/{w=$(NF-1); h=$NF} END{print w, h}')"
 case "${W:-}${H:-}" in ''|*[!0-9]*) W=1080; H=2400 ;; esac

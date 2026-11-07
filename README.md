@@ -21,7 +21,11 @@ Updates: open the same link again and install over the top; your settings are ke
 
 **Verify before installing.** Each release lists the APK's SHA-256 and the signing certificate's SHA-256 (published below once the owner has created the new release key), and carries a build-provenance attestation: `gh attestation verify VPN-App.apk -R GeniusDevam/VPN-App`. Earlier builds were signed with a key that was published in this repository and must be treated as untrusted; see [docs/RELEASE_SIGNING.md](docs/RELEASE_SIGNING.md) to migrate.
 
-Requires Android 8.0 or newer and a 64-bit phone (any phone from the last several years).
+**Works on Android 6.0 or newer** (about 99% of Android devices in use), on every kind of processor (64- and 32-bit ARM, 64- and
+32-bit x86) and on phones, small phones with large text, tablets, foldables, Chromebooks and Android TV. `VPN-App.apk` is the one
+to download: it contains all four processor types. Each release also lists four smaller files, one per processor type
+(`VPN-App-arm64-v8a.apk` fits nearly every phone from the last eight years). Which devices were actually tested, and how: see
+[Device support](#device-support).
 
 ## Privacy: what encryption does and doesn't do
 
@@ -42,6 +46,20 @@ Requires Android 8.0 or newer and a 64-bit phone (any phone from the last severa
 - **Speed tests** use Cloudflare's public speed-test endpoints and use data (about 30 MB per server tested on Wi-Fi; far less on mobile data; figures are estimates). Their availability and terms can change.
 - **Not included yet:** home-screen widget, app shortcuts, automatic failover while connected, Always-on action, Tor mode, VPN Gate mirror support. See `PLAN.md`.
 - **Android layer is verified by CI only** (the Android SDK is not available in the authoring sandbox). The engine has 129 unit tests plus real-OpenVPN tests for the certificate policy and the tls-auth probe. One earlier commit did not compile and was reported as working; builds are only meaningful if their Actions run is green.
+
+## Device support
+
+| | |
+|---|---|
+| Android versions | 6.0 (API 23) to 16 (API 36); the app targets the newest. Lint fails the build if code calls an API newer than 6.0 without a version check. On 6.0 and 7.0, which predate the Let's Encrypt roots, the app adds the two roots itself (pinned by fingerprint) for its own HTTPS requests. |
+| Processors | arm64-v8a, armeabi-v7a, x86_64, x86. One build produces the universal APK and one APK per processor type; all are re-signed and published together. |
+| Screens | Bottom navigation on phones; a side navigation rail and centred, width-limited content at 600 dp and wider (tablets, unfolded foldables, Chromebook windows, TV). Rotating, folding and resizing keep the current tab and open dialogs. Text up to 200% is supported on 320 dp phones. |
+| TV | Appears in the TV launcher (leanback banner); touchscreen not required; works with a D-pad. |
+
+Tested in CI emulators against live VPN Gate servers, on every build: Android 6.0, 7.0, 8.0 phones, a 320 dp Android 10 phone at 200%
+font, an Android 13 tablet, an Android 16 foldable, Android TV 11 (32-bit x86) and the Android 16 phone that gates releases.
+Results per device, with screenshots: the `compat-results` branch. Speed and memory figures: [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
+Emulators are not phones; see "Known risks".
 
 ## How it works
 
