@@ -35,4 +35,18 @@ fi
 if ! grep -q "org.gradle.jvmargs" "$BUILD/gradle.properties"; then
   printf '\norg.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g\nkotlin.daemon.jvmargs=-Xmx2g\n' >> "$BUILD/gradle.properties"
 fi
+# 4. Two upstream helpers call Android 11/13 APIs and are only ever called behind a matching version check, but Lint does not
+#    follow a check into a private method, so it reports them as NewApi errors. Annotating them with @RequiresApi states that
+#    invariant, and Lint then verifies every caller instead of skipping the check. (Both files already import RequiresApi.)
+annotate() { # file, exact method signature line, annotation
+  local f="$BUILD/main/src/main/java/de/blinkt/openvpn/core/$1"
+  if ! grep -qF -- "$3" "$f"; then
+    grep -qxF -- "$2" "$f" || { echo "prepare.sh: upstream changed, '$2' not found in $1" >&2; exit 1; }
+    python3 -I -c 'import sys; f,sig,ann=sys.argv[1:]; s=open(f).read(); open(f,"w").write(s.replace(sig+"\n", ann+"\n"+sig+"\n", 1))' "$f" "$2" "$3"
+  fi
+}
+annotate OpenVPNService.java "    private void installRoutesExcluded(Builder builder, NetworkSpace routes)" \
+  "    @RequiresApi(Build.VERSION_CODES.TIRAMISU) // vpnapp: both callers are inside SDK_INT >= TIRAMISU"
+annotate StatusListener.java "    private void logExitNotification(ApplicationExitInfo aei, String s) {" \
+  "    @RequiresApi(Build.VERSION_CODES.R) // vpnapp: only called from the @RequiresApi(R) method above"
 echo "build tree ready: $BUILD @ $REF"
