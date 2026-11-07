@@ -28,6 +28,8 @@ jobs:
         run: python3 -I tools/check-workflow-security.py .github/workflows
       - name: The checker itself still rejects every way the key could leak (mutation tests)
         run: python3 -I tools/test-check-workflow-security.py
+      - name: Published emulator results drop secrets but keep diagnostic lines
+        run: python3 -I tools/test-redact-results.py
       - name: The manifest audit tool still understands real aapt2 output
         run: |
           python3 -I tools/manifest-exports.py --policy tools/testdata/manifest-policy-test.json < tools/testdata/manifest-sample.txt && exit 1 || test $? -eq 1

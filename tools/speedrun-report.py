@@ -51,7 +51,7 @@ for k, label in (("mem_idle_app_pss_kb", "memory idle, app process (PSS)"), ("me
     v = kv.get(k, "")
     print(f"| {label} | {int(v) / 1024:.0f} MB |" if v.isdigit() else f"| {label} | ? |")
 
-print(f"\n### Quick Connect x{len([k for k in kv if re.fullmatch(r'quick_\d+', k)])}: {num('quick_success')} connected, median {num('quick_ms_median')} ms (tap to 'Connected' on screen)\n")
+print(f"\n### Quick Connect x{len([k for k in kv if re.fullmatch(r'quick_\d+', k)])}: {num('quick_success')} connected and stayed up{', ' + num('quick_dropped') + ' connected then dropped by the server' if kv.get('quick_dropped', '0') not in ('0', '') else ''}, median {num('quick_ms_median')} ms (tap to 'Connected' on screen)\n")
 print("| run | result (screen) | list ready | probing done / first attempt | handshakes (s, result) | up at | server | encryption |\n|---|---|---|---|---|---|---|---|")
 qruns = [r for r in runs if r["name"].startswith("quick run")]
 for i, k in enumerate(sorted((k for k in kv if re.fullmatch(r"quick_\d+", k)), key=lambda x: int(x.split("_")[1]))):

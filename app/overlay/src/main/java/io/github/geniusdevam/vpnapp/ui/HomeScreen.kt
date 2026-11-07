@@ -172,7 +172,7 @@ private fun StatusCard(ui: SessionUi, now: Long, onDisconnect: () -> Unit) {
                 OutlinedButton(onClick = onDisconnect, modifier = Modifier.testTag("disconnect")) { Text("Disconnect") }
             } else {
                 Text(
-                    if (v.status == ConnState.CONNECTING) v.stateName else "Choose Quick Connect or Best Connect below.",
+                    if (v.status == ConnState.CONNECTING) connectingText(v.stateName) else "Choose Quick Connect or Best Connect below.",
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 if (v.status == ConnState.CONNECTING && ui.run == null) OutlinedButton(onClick = onDisconnect) { Text("Stop") }
@@ -309,4 +309,15 @@ private fun ReportDialog(r: BestReport, onDismiss: () -> Unit) {
             }
         },
     )
+}
+
+/** OpenVPN's state names (upstream VpnStatus) in plain words. Unknown ones are shown as they are. */
+internal fun connectingText(state: String): String = when (state) {
+    "CONNECTRETRY", "RECONNECTING" -> "Connection to the server was lost. Reconnecting…"
+    "NONETWORK" -> "No network. Waiting for one…"
+    "RESOLVE", "TCP_CONNECT", "WAIT", "VPN_GENERATE_CONFIG", "" -> "Reaching the server…"
+    "AUTH", "AUTH_PENDING" -> "Signing in to the server…"
+    "GET_CONFIG", "ASSIGN_IP", "ADD_ROUTES" -> "Setting up the tunnel…"
+    "USER_VPN_PERMISSION" -> "Waiting for your permission to start the VPN…"
+    else -> state
 }
