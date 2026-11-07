@@ -42,7 +42,7 @@ adb logcat -c
 # ---- launch performance -----------------------------------------------------------------------------------------------
 kv first_launch_ms "$(adb shell am start -W -n $PKG/.MainActivity | tr -d '\r' | sed -n 's/^TotalTime: *//p')"
 sleep 6
-for i in $(seq 1 10); do dump; xy=$(find_xy "I understand, continue"); [ -n "$xy" ] && { adb shell input tap $xy; break; }; swipe_up; done
+for i in $(seq 1 30); do dump; xy=$(find_id onboarding_continue); [ -n "$xy" ] && { adb shell input tap $xy; break; }; swipe_up; done
 sleep 8   # let the first server-list download finish before measuring starts
 cold=""; for i in 1 2 3 4 5; do
   adb shell am force-stop $PKG; sleep 2
