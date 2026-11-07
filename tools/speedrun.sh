@@ -80,7 +80,7 @@ for run in $(seq 1 "$QUICK_RUNS"); do
   if [ "$res" = connected ]; then
     ok_n=$((ok_n+1)); times="$times $dt"
     if [ "$ok_n" = 1 ]; then sleep 4; kv mem_connected_app_pss_kb "$(pss_kb $PKG)"; kv mem_connected_vpn_pss_kb "$(pss_kb $PKG:openvpn)"; fi
-    tap_text "Disconnect" >/dev/null; sleep 4
+    tap_scrolling id disconnect >/dev/null; sleep 4
   elif [ "$res" = dropped ]; then
     dropped_n=$((dropped_n+1)); tap_text "Stop" >/dev/null || tap_text "Disconnect" >/dev/null || true; sleep 4
   else

@@ -161,6 +161,8 @@ private fun StatusCard(ui: SessionUi, now: Long, onDisconnect: () -> Unit) {
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 Text("↓ ${rate(v.rxRate)}   ↑ ${rate(v.txRate)}", style = MaterialTheme.typography.bodyMedium)
+                // The action before the small print: at 200% font on a small phone the two notes below fill a whole screen.
+                OutlinedButton(onClick = onDisconnect, modifier = Modifier.testTag("disconnect")) { Text("Disconnect") }
                 Text(
                     "Leak protection: this app keeps the VPN interface up while it reconnects, but only Android's “Block connections without VPN” guarantees nothing leaks if the VPN drops (Settings > Kill switch).",
                     style = MaterialTheme.typography.bodySmall,
@@ -169,7 +171,6 @@ private fun StatusCard(ui: SessionUi, now: Long, onDisconnect: () -> Unit) {
                     "Run by a volunteer: avoid logging in to banking or other sensitive accounts.",
                     style = MaterialTheme.typography.bodySmall,
                 )
-                OutlinedButton(onClick = onDisconnect, modifier = Modifier.testTag("disconnect")) { Text("Disconnect") }
             } else {
                 Text(
                     if (v.status == ConnState.CONNECTING) connectingText(v.stateName) else "Choose Quick Connect or Best Connect below.",
