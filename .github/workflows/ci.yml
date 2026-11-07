@@ -462,7 +462,9 @@ jobs:
           - { name: "Android 6.0 phone", slug: api23-phone, api: 23, target: default, arch: x86_64, profile: pixel_2, font: "1.0", apk: apk-universal-resigned-dryrun }
           - { name: "Android 7.0 phone", slug: api24-phone, api: 24, target: google_apis, arch: x86_64, profile: pixel_2, font: "1.0" }
           - { name: "Android 8.0 phone", slug: api26-phone, api: 26, target: google_apis, arch: x86_64, profile: pixel_2, font: "1.0" }
-          - { name: "Android 10 small phone (320 dp), 200% font", slug: api29-small-bigfont, api: 29, target: google_apis, arch: x86_64, profile: "Nexus S", font: "2.0" }
+          # The Nexus S profile defines ~343 MB of RAM; Android 10 with Google APIs then crashes its own system server (run 41).
+          # The test is about the 320 dp screen and the font scale, so give it ordinary RAM.
+          - { name: "Android 10 small phone (320 dp), 200% font", slug: api29-small-bigfont, api: 29, target: google_apis, arch: x86_64, profile: "Nexus S", font: "2.0", ram: 2048M }
           - { name: "Android 13 tablet", slug: api33-tablet, api: 33, target: google_apis, arch: x86_64, profile: pixel_tablet, font: "1.0" }
           - { name: "Android 16 foldable (unfolded)", slug: api36-foldable, api: 36, target: google_apis, arch: x86_64, profile: pixel_fold, font: "1.0" }
           - { name: "Android TV 11 (32-bit x86)", slug: api30-tv, api: 30, target: android-tv, arch: x86, profile: tv_1080p, font: "1.0" }
@@ -484,6 +486,7 @@ jobs:
           target: ${{ matrix.target }}
           arch: ${{ matrix.arch }}
           profile: ${{ matrix.profile }}
+          ram-size: ${{ matrix.ram || '' }}
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -noaudio -no-boot-anim -camera-back none -camera-front none
           script: FONT_SCALE=${{ matrix.font }} OUT=emu-out bash tools/emulator-test.sh out/VPN-App.apk || echo $? > emu-exit

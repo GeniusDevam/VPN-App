@@ -309,6 +309,8 @@ if tap_scrolling id quick_chip; then
   case "$state" in
     loaded)
       ok "picker reports a loaded server list"
+      # A system permission prompt (e.g. an emulator keyboard asking for contacts) would swallow the tap: dismiss it and say so.
+      dump; if has_text "^Allow .* to access"; then log "system permission prompt over the picker: deny it"; tap_text "DENY|Deny" || true; sleep 1; fi
       dump; big=$(find_biggest_country)
       for _ in 1 2 3 4; do   # large fonts on short screens leave only the header and 'Any country' visible: scroll the list
         [ -n "$big" ] && break
