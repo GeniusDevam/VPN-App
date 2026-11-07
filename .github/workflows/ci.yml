@@ -225,6 +225,9 @@ jobs:
           set -o pipefail
           rc=0; ./gradlew --no-daemon :main:lintSkeletonOvpn2Release -PvpnappAbi=x86_64 || rc=$?
           for r in main/build/reports/lint-results*.txt; do [ -f "$r" ] && { echo "--- $r"; head -150 "$r"; }; done
+          # For findings in upstream ics-openvpn code, print the surrounding source so the runtime version guard can be checked by hand.
+          grep -hE "^/[^:]*de/blinkt/[^:]*:[0-9]+: Error" main/build/reports/lint-results*.txt 2>/dev/null | sed -E 's/^([^:]+):([0-9]+):.*/\1 \2/' | sort -u |
+            while read -r f l; do echo "=== upstream context $f:$l"; sed -n "$((l>25?l-25:1)),$((l+3))p" "$f" | cat -n; done
           exit $rc
 
   # ---------------------------------------------------------------------------------------------------------------------------
@@ -489,3 +492,31 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with: { name: "compat-${{ matrix.slug }}", path: emu-public, if-no-files-found: warn, retention-days: 14 }
+
+  # Collects every compatibility device's redacted results (summary, screenshots, on-screen text; never raw logs) onto the public
+  # compat-results branch in one push, so layouts on tablets, foldables, small screens and TV can be reviewed.
+  compat-report:
+    needs: [compat]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with: { pattern: "compat-*", path: compat }
+      - name: Publish redacted compatibility results to the compat-results branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -eu
+          [ -d compat ] || { echo "no compatibility results"; exit 0; }
+          cd compat
+          { echo "# Compatibility run ${GITHUB_RUN_NUMBER} (${GITHUB_SHA::7})"
+            for d in */; do echo; echo "## ${d%/}"; echo '```'; sed -n '/^device=/p;/^quick/p;/^cold_start/p;/^mem_/p;/^best/p;/^status=/,$p' "$d/result.txt" 2>/dev/null; echo '```'; done
+          } > README.md
+          cat README.md >> "$GITHUB_STEP_SUMMARY"
+          git init -q && git checkout -q -b compat-results && git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "compat run ${GITHUB_RUN_NUMBER} (${GITHUB_SHA::7}), redacted"
+          git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" compat-results

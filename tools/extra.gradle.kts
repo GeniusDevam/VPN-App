@@ -30,6 +30,9 @@ android {
             isUniversalApk = true
         }
     }
+    // Upstream ics-openvpn calls java.util.Base64 (Android 8.0+) in OpenVpnManagementThread. Core library desugaring makes that and
+    // other Java 8+ library APIs work on Android 6.0/7.x instead of crashing with NoSuchMethodError.
+    compileOptions { isCoreLibraryDesugaringEnabled = true }
     lint {
         // Calling an API that does not exist on the oldest supported Android version crashes there at runtime. Fail instead.
         checkOnly += "NewApi"
@@ -46,5 +49,6 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.13.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 }
 // VPNAPP_EXTRA_END

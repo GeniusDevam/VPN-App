@@ -49,7 +49,7 @@ class RunService : Service() {
             Session.ui.collect { s ->
                 val r = s.run
                 if (r == null) {
-                    stopForeground(STOP_FOREGROUND_REMOVE)
+                    androidx.core.app.ServiceCompat.stopForeground(this@RunService, androidx.core.app.ServiceCompat.STOP_FOREGROUND_REMOVE)
                     stopSelf()
                     sc.cancel()
                 } else {

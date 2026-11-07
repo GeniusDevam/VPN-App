@@ -40,7 +40,7 @@ object DirectoryProcessor {
         for (s in report.servers) {
             when (val r = ConfigSanitizer.sanitize(s.config, EncryptionMode.COMPATIBLE, s.ip, auth)) {
                 is SanitizeResult.Ok -> usable.add(s)
-                is SanitizeResult.Rejected -> rejected.merge("policy_" + r.code.name.lowercase(), 1, Int::plus)
+                is SanitizeResult.Rejected -> "policy_${r.code.name.lowercase()}".let { k -> rejected[k] = (rejected[k] ?: 0) + 1 }
             }
         }
         val stats = ListingStats(
