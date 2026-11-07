@@ -18,6 +18,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
@@ -25,6 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
@@ -51,6 +54,10 @@ fun CountryChip(scope: Scope, enabled: Boolean, onClick: () -> Unit, modifier: M
  * The country picker. A dialog, not a bottom sheet: Material 3's ModalBottomSheet crashed on Android 6.0 the moment it opened
  * ("The offset was read before being initialized", compat run 39), while dialogs work on every supported version, on TV and
  * on tablets. The list scrolls inside the dialog, so it also works at 200% font on a 320 dp phone.
+ *
+ * The search field appears only after "Search countries" is tapped. Before Android 9 a new window gives focus to its first
+ * focusable control even in touch mode; when that was the text field, the keyboard opened over half the list every time the
+ * picker opened (compat run 41, Android 6.0 and 7.0). A button taking that focus opens nothing.
  */
 @Composable
 fun CountryPickerSheet(
@@ -62,6 +69,8 @@ fun CountryPickerSheet(
     onDismiss: () -> Unit,
 ) {
     var query by remember { mutableStateOf("") }
+    var searching by remember { mutableStateOf(false) }
+    val searchFocus = remember { FocusRequester() }
     val filtered = remember(options, query) {
         val q = query.trim().lowercase()
         if (q.isEmpty()) options else options.filter { it.name.lowercase().contains(q) || it.iso.lowercase() == q }
@@ -84,10 +93,15 @@ fun CountryPickerSheet(
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(bottom = 8.dp),
             )
-            OutlinedTextField(
-                value = query, onValueChange = { query = it }, singleLine = true,
-                label = { Text("Search") }, modifier = Modifier.fillMaxWidth(),
-            )
+            if (searching) {
+                OutlinedTextField(
+                    value = query, onValueChange = { query = it }, singleLine = true,
+                    label = { Text("Search") }, modifier = Modifier.fillMaxWidth().focusRequester(searchFocus),
+                )
+                LaunchedEffect(Unit) { searchFocus.requestFocus() }
+            } else if (options.size > 1) {
+                TextButton(onClick = { searching = true }) { Text("\uD83D\uDD0D  Search countries") }
+            }
             LazyColumn(Modifier.fillMaxWidth()) {
                 item {
                     PickerRow(
