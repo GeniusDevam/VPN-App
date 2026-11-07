@@ -23,7 +23,7 @@ Release flow (`.github/workflows/ci.yml`), tags only:
    immutable release, and deletes the old mutable `latest` release (which carries the leaked-key APK).
 
 `tools/resign-apk.sh` is run on **every** build with a second throw-away key (step "Dry run of the release re-signing script"), and
-proves: exactly one signer, v2 and v3 signatures verify for minSdk 26, no signature from the previous signer survives, every non-META-INF
+proves: exactly one signer, v1, v2 and v3 signatures verify for minSdk 23 (Android 6.0 checks only v1, so the release must carry it), no signature from the previous signer survives, every non-META-INF
 entry is byte-identical, 16 KB alignment intact. So the release step is exercised before there is a real key.
 
 Other facts: with no secrets configured, **no release is produced** (the `sign` job stops with an explanation). The workflow-wide token
