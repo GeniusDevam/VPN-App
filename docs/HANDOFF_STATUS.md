@@ -19,6 +19,9 @@ Branch `ccr-49f3cc12-faye7c`. Audit baseline `fcfba9e`. This file separates **co
 | "Emulator job green" | The emulator script ended in `exit 0` after any Quick/Best failure and the job was `continue-on-error`, so run 19's emulator (which could not get past the onboarding screen because the longer privacy text pushed the button off-screen) was reported green. Now assertions decide the status (section 4). |
 | "tls-auth probe feasible but not built" | Built and verified (C3), but see section 3: **0 of 96 live relays currently use tls-auth/crypt**, so it helps nothing today. |
 | "Unused permission: safe to remove" (my own, this session) | `RECEIVE_BOOT_COMPLETED` looked unused, but upstream's persisted keep-alive job needs it. Removing it crashed the VPN process on every connect (emulator run 27 FAIL, `IllegalArgumentException: Requested job cannot be persisted without holding RECEIVE_BOOT_COMPLETED`). Restored; the emulator test is what caught it. |
+| "The release path is ready" (my own, earlier this session) | `tools/resign-apk.sh` signed releases **without a v1 signature** and checked them only for Android 8.0+. When support was widened to Android 6.0, which accepts only v1, a real release would have been refused there (or stopped by the publish job's own minSdk-23 check). The APKs CI tested were build-signed with v1, which hid it. Fixed in `18edcce`: v1+v2+v3, all verified for minSdk 23, and the Android 6.0 test device now installs the re-signed APK. |
+| "Android 10 small phone: Quick Connect hung" (compat run 35) | Two different things. A real layout bug (at 200% font the country rows were squeezed off the picker) and a harness misreading: Quick Connect **had connected** in 23 s (its banner said so), then the volunteer dropped the tunnel and OpenVPN was reconnecting; the harness only looked for "Connected" and reported a hang. Layout fixed; the harness now reports "connected, then dropped" separately (INCONCLUSIVE, not PASS). |
+| "Published logs are redacted" | They were, too aggressively: every line containing "token" and every UI dump (uiautomator marks each node `password="false"`) was dropped, which hid the reason above. Now only lines that can carry keys or credentials are dropped; a CI test checks both directions. |
 | "Emulator FAIL means the app broke" | Two FAILs were my own test steps: the onboarding button below the fold (run 19), and the app-picker button below the fold, which left the test stranded on Settings (run 30). Both now scroll like a user and return Home. A FAIL must be read, not assumed. |
 
 ## 2. Findings matrix
@@ -31,6 +34,7 @@ Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated;
 | A2 fastest in a chosen country | **Built; verified in the real UI and with a live connection.** | Emulator runs 21-22: picker opened with real counts (Japan 53, South Korea 31, ...), the choice applied to Quick only (Best stayed on Any) and persisted across process death. **Run 22: Quick Connect inside the chosen country (Austria) connected in 25 s, and run 23 inside Japan in 26 s; the status card showed that country both times.** Run 21: India (1 server) failed honestly in 32 s with a message naming India. Scope is enforced in `PoolSelection`; tests prove no other country is ever probed or connected. Note "fastest" here is a latency estimate for Quick and a measured throughput for Best; most countries have 1 server, so there is nothing to rank. |
 | A3 optional global search | **Built and engine-tested; not exercised live.** | `GlobalSearchEngine` tests (batching, budgets, pause/finish/cancel, resume). Consent dialog, foreground service, metered/battery guards exist. No emulator or device run of the worldwide search; background survival under Doze/process kill is **NOT TESTED**. |
 | A4 history + 7-day absence | **Fixed.** | `LedgerAndDirectoryTest` (absence counted only on usable listings, 36 h cap per listing, failed fetch never advances it, old measurements never deleted). New per-server history lines (`RecordSummary`, 7 tests). Encrypted at rest; clear-history in Settings. |
+| A5 every Android version and device type (2026-11-07) | **Built; verified on an emulator matrix, not on phones.** | `minSdk 23` (Android 6.0); universal APK plus one per processor type (arm64-v8a, armeabi-v7a, x86_64, x86); navigation rail and width-limited content at 600 dp and wider; picker usable at 200% font on a 320 dp phone; Android TV launcher entry, no touchscreen requirement. Lint NewApi is a hard gate (two upstream helpers annotated so Lint verifies their callers). Android 6.0/7.0: Let's Encrypt roots added in code for the app's own HTTPS, upstream `java.util.Base64` desugared, portable engine code. Per-device verdicts: section 4b. Speed and memory: `docs/PERFORMANCE.md`. |
 
 ### B. Security
 | Item | Status | Evidence / caveat |
@@ -91,6 +95,9 @@ Widget, shortcuts, auto-failover, easier Always-on setup, optional Tor, backgrou
 (Run numbers in the `emulator-results` branch are GitHub's run numbers, so they differ from the labels I used in conversation.)
 
 Two PASS and one INCONCLUSIVE out of three runs with real assertions is **not** a reliability figure; live volunteers vary from run to run, and the one INCONCLUSIVE used a country with a single relay.
+
+## 4b. Compatibility matrix (CI emulators, live VPN Gate)
+<!-- COMPAT-MATRIX -->
 
 ## 5. Test matrix
 * Engine unit tests (JVM): **129**, all passing locally and in CI. New this session: persistence 7, pool/failure reasons 8+5, record summary 7, tls-auth probe 6.
