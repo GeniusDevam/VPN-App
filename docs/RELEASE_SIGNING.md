@@ -65,7 +65,7 @@ deployment of environment `release` when GitHub asks, and check the release note
   (GitHub-owned, used in `publish`, which holds no signing secrets; pin it once its commit has been verified).
 
 ## To do (needs you; I cannot and should not create or hold your key)
-0. **Delete the public `latest` release (build #17) now.** It is still downloadable, it carries an APK signed with the leaked key, and the README's install link points at it. Nothing available to the authoring work can delete a release. (GitHub > Releases > `latest` > Delete.)
+0. **Delete the public `latest` release (build #17) now.** It is still downloadable, it carries an APK signed with the leaked key, and the README's install link points at it. CI has no permission to delete a release. (GitHub > Releases > `latest` > Delete.)
 1. Complete the GitHub setup above (steps 1-6).
 2. On your own machine run `tools/generate-release-key.sh` (it prints the public fingerprint and the exact `gh` commands).
 3. Back the key up offline. Losing it means you can never ship an update Android will accept for installs signed with it.

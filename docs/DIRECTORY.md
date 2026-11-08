@@ -1,14 +1,14 @@
 # Server directory, history and selection (A1 to A4)
 
 ## A1. How many relays can we legitimately see?
-**Facts established this session**
+**Facts established during development (2026-11-05)**
 * The app reads one endpoint, `https://www.vpngate.net/api/iphone/` (the website's "CSV" link points at the same place). It returns
   only rows that carry an embedded OpenVPN profile; the app parses and counts exactly those.
 * **Measured live on 2026-11-05** (CI runner, workflow `vpngate-check`): one download held **96 OpenVPN profiles** (90 TCP, 6 UDP), all
   `AES-128-CBC`, all with an embedded certificate, **none** with tls-auth/tls-crypt. In the emulator the app's pooled view (union of
   recent downloads) showed **98 usable** servers; Japan 53, South Korea 31, Thailand 4, United States 4, and one each in India, Mexico,
   Romania, Russia, Taiwan and Vietnam (the emulator also once showed Austria). Before this work the figure was about 100, so **coverage
-  did not increase**: the union added only about 2. No mirror was probed (vpngate.net is unreachable from the authoring sandbox, which
+  did not increase**: the union added only about 2. No mirror was probed (vpngate.net is unreachable from the development machine, which
   only has CI access to it), so no comparison with the website's advertised total (thousands, mostly SoftEther/L2TP-only) is possible.
 * VPN Gate states that the public list is deliberately partial. **No complete or documented "full API" is known, and none is used.**
   Nothing in the app bypasses a limit: one polite request at a time, at most every 10 minutes, exponential back-off up to 1 hour,

@@ -1,10 +1,10 @@
 # VPN App — Implementation Plan
 
-> **Audience:** the agent that will implement this app.
-> **Owner's device:** Android 16 smartphone. The app is sideloaded first; Google Play later is optional.
-> **Status:** the plan has been implemented; this file is the original design plus dated notes where the build differs. **The code and `docs/HANDOFF_STATUS.md` win over any statement here.** Last updated 2026-11-07.
+> **Audience:** anyone building or reviewing this app.
+> **Target device:** Android 16 smartphone. The app is sideloaded first; Google Play later is optional.
+> **Status:** the plan has been implemented; this file is the original design plus dated notes where the build differs. **The code and `docs/STATUS.md` win over any statement here.** Last updated 2026-11-07.
 
-The owner asked for "the best VPN app available" with two connection modes:
+The goal is "the best VPN app available", with two connection modes:
 
 1. **Quick Connect.** Connects to the fastest server it can find, and is connected within **35 seconds** of the tap.
 2. **Best Connect.** Takes as long as it needs to find the fastest server *it can measure* (it reports how much it covered and how confident it is; it never claims a proven global winner), then connects.
@@ -32,8 +32,8 @@ The app was built from this plan. Where the build differs, the code wins:
 | On-device verification (§19) | **Partly done; no physical device was used.** Every push is built and run in an Android 16 (API 36, x86_64) emulator against live VPN Gate servers. Runs 22 and 23 passed every assertion: the country picker, a country-bound Quick Connect (25 s in Austria, 26 s in Japan, each inside the chosen country), a disconnect that stayed down for 20 s, and a Best Connect with a named winner. Run 21 was INCONCLUSIVE because the chosen country (India) had a single volunteer relay that did not answer. **Not done:** a real phone, mobile data, Always-on lockdown, long sessions, switching networks, the worldwide search, process kill while connected. Live directory (2026-11-05): 96 OpenVPN profiles in one download (90 TCP, 6 UDP), all `AES-128-CBC` ("Strong only" matches none), none using tls-auth/tls-crypt; 15/24 sampled relays connected with and without the identity policy. |
 | `minSdk 26`, 64-bit phones (§1, §14) | **`minSdk 23` (Android 6.0)**, every processor type (arm64-v8a, armeabi-v7a, x86_64, x86; universal APK plus one APK per type), adaptive layout for tablets/foldables/Chromebooks/TV, TV launcher entry. Lint NewApi is a build gate; Android 6.0/7.0 get the Let's Encrypt roots in code; release APKs carry a v1 signature for Android 6.0. Tested on an emulator matrix (README, *Device support*). Measurements: `docs/PERFORMANCE.md`. (2026-11-07) |
 
-### Owner decisions (already made)
-- **Servers:** free volunteer servers from the **VPN Gate** network (University of Tsukuba academic project). There are no paid subscriptions and no owner-run servers.
+### Decisions (already made)
+- **Servers:** free volunteer servers from the **VPN Gate** network (University of Tsukuba academic project). There are no paid subscriptions and no self-hosted servers.
 - **Encryption and privacy:** a top priority. Every link and every stored byte the app controls is encrypted, and the user is told honestly what cannot be protected (§3, §13).
 
 ---
@@ -82,7 +82,7 @@ The app was built from this plan. Where the build differs, the code wins:
 
 ## 3. Privacy reality of free volunteer servers (must be shown to the user)
 
-Free volunteer servers are the owner's choice, and the app must be **honest** about what encryption can and cannot do with them:
+Free volunteer servers are a deliberate choice, and the app must be **honest** about what encryption can and cannot do with them:
 
 - **Protected by the app's encryption:**
   - Everything between the phone and the VPN server. Public Wi-Fi snoopers, the mobile carrier and the ISP cannot read the traffic and only see that a VPN is being used.
@@ -679,7 +679,7 @@ tools/openvpn-test/              # scripts for the probe integration test
 docs/verification.md             # on-device findings
 ```
 
-- `applicationId`: `io.github.geniusdevam.vpnapp`. The working title is "VPN App"; the owner can rename it.
+- `applicationId`: `io.github.geniusdevam.vpnapp`. The working title is "VPN App"; it can be renamed.
 - Use the latest **stable** AGP, Kotlin, Compose BOM, Hilt, Room, OkHttp, SQLCipher and Tink, pinned in the version catalog. Use JDK 17 or later, NDK r28 or later, and CMake from the SDK.
 - `versionCode` = CI run number.
 
@@ -698,14 +698,14 @@ docs/verification.md             # on-device findings
   - Read the release keystore from secrets: `SIGNING_KEYSTORE_BASE64`, `SIGNING_STORE_PASSWORD`, `SIGNING_KEY_ALIAS`, `SIGNING_KEY_PASSWORD`.
   - If the secrets are missing, use a committed, clearly labelled **dev** keystore so updates install over each other. Switch to real secrets before sharing.
   - > **Superseded (security finding B1):** a committed keystore with its passwords in the workflow made the signing identity public and compromised. It was removed, and the secrets are no longer repository-wide: they exist only as environment secrets of the protected environment `release` (`RELEASE_KEYSTORE_B64`, `RELEASE_KEYSTORE_PASSWORD`, `RELEASE_KEY_ALIAS`, `RELEASE_KEY_PASSWORD`, plus the public variable `RELEASE_CERT_SHA256`), readable only by the `sign` job, which runs for `vX.Y.Z` tags after a reviewer approves. With no secrets nothing is published. The owner must still configure the environment, create the key (`tools/generate-release-key.sh`) and delete the old public release. See `docs/RELEASE_SIGNING.md`.
-- **Cloud environment note:** the implementing agent's container may lack the Android SDK and NDK. Try installing them. If the network blocks it, rely on GitHub Actions, and read the job logs through the GitHub MCP actions tools. A milestone is not done until CI is green.
+- **Build environment note:** a development machine may lack the Android SDK and NDK. If they cannot be installed, rely on GitHub Actions and its job logs. A milestone is not done until CI is green.
 
-### 15.3 Installing on the owner's Android 16 phone
+### 15.3 Installing on an Android 16 phone
 1. Open the repo's **Releases** page on the phone and download the APK.
 2. Allow "Install unknown apps" for the browser, then install.
 3. **Developer verification:** since 30 Sep 2026, certified devices in Brazil, Indonesia, Singapore and Thailand require apps from verified developers. Global rollout is planned for 2027.
    - Unverified apps need Android's "advanced flow" (a one-time setup with a 24 h wait) or ADB.
-   - Check the current rules for the owner's country at implementation time.
+   - Check the current rules for your country before installing.
 
 ---
 
@@ -732,7 +732,7 @@ docs/verification.md             # on-device findings
   - > **Built** (`tools/emulator-test.sh`, live VPN Gate, UI driven through uiautomator; the consent dialog is tapped rather than pre-granted). Asserts: both modes shown; the country picker opens and reports a loaded list; choosing a country changes Quick only; the choice survives process death; Quick Connect connects inside the chosen country (or fails with a message that names it); an explicit disconnect stays disconnected for 20 s; Best Connect names a winner; no crash. Exit 0 = PASS, 1 = FAIL (the app misbehaved), 3 = INCONCLUSIVE (live servers unreachable). Not covered: the worldwide search, the Quick Settings tile, notification actions, network switching, process kill while connected.
   - Engine test count: 129 (including persistence ordering, pool/failure reasons, tls-auth probe, history text, disconnect races, 600-seed sanitizer fuzz).
 
-### 16.2 Manual QA on the owner's phone (each release)
+### 16.2 Manual QA on a real phone (each release)
 - Onboarding, including the privacy disclosure.
 - Quick Connect with Any and with specific countries, on Wi-Fi and on mobile data. Time it: the median should be ≤ 12 s, never over 35 s.
 - Quick Connect while already connected.
@@ -757,12 +757,12 @@ docs/verification.md             # on-device findings
 
 ## 17. Milestones (implement in order)
 
-> **Milestone status (2026-11-05):** M0-M4 are built and CI-verified as described in `docs/HANDOFF_STATUS.md`; M2/M3/M4 acceptance on a *physical device* is **not done**. From M5: the Quick Settings tile, split tunneling, onboarding and kill-switch guidance exist; auto-failover, widget, shortcuts and an Always-on action do **not**. The `docs/verification.md` this plan asks for was never created; `docs/HANDOFF_STATUS.md`, `docs/DIRECTORY.md` and `docs/SECURITY.md` hold those findings.
+> **Milestone status (2026-11-05):** M0-M4 are built and CI-verified as described in `docs/STATUS.md`; M2/M3/M4 acceptance on a *physical device* is **not done**. From M5: the Quick Settings tile, split tunneling, onboarding and kill-switch guidance exist; auto-failover, widget, shortcuts and an Always-on action do **not**. The `docs/verification.md` this plan asks for was never created; `docs/STATUS.md`, `docs/DIRECTORY.md` and `docs/SECURITY.md` hold those findings.
 
 **M0: Scaffold and delivery pipeline**
 - Gradle multi-module skeleton, theme, navigation shell.
 - The ics-openvpn submodule building in CI (NDK r28+), signing, a Release on tag, `LICENSE`.
-- *Done when:* the owner installs a "hello" APK that contains the OpenVPN engine from a Release.
+- *Done when:* a phone installs a "hello" APK that contains the OpenVPN engine from a Release.
 
 **M1: Tunnel core and VPN Gate list**
 - List fetch and parsing, config sanitizer, encrypted storage (SQLCipher, Tink, Keystore).
@@ -847,5 +847,5 @@ For each milestone:
 6. The switch gap during replace-connection, and the self-exclusion behaviour under Always-on lockdown.
 7. The `Notification.ProgressStyle` and Live Update promotion requirements.
 8. The default speed-test endpoint terms of use.
-9. The Android developer verification rules for the owner's country.
+9. The Android developer verification rules for the target country.
 10. The latest stable AGP, Kotlin, Compose, NDK, SQLCipher and Tink versions compatible with `compileSdk 36`.

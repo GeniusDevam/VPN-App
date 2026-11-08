@@ -1,30 +1,30 @@
-# Status against the development handoff
+# Project status
 
-Branch `ccr-49f3cc12-faye7c`. Audit baseline `fcfba9e`. This file separates **confirmed fixes**, **tested behaviour**, **open issues** and
+Audit baseline `fcfba9e`. This file separates **confirmed fixes**, **tested behaviour**, **open issues** and
 **unverified risks**. "Verified" means demonstrated by a test or CI run that actually executed; evidence is named for each row.
 
-## 0. What needs you (owner actions)
+## 0. Maintainer actions
 1. **Delete the public `latest` release now.** It is build #17 (the audit baseline) and is signed with the leaked key. The pipeline would
-   remove it only after a new signed release exists, and no tool available to this work could delete it. Until it is gone, anyone can
+   remove it only after a new signed release exists, and CI has no permission to delete it. Until it is gone, anyone can
    download an APK that carries the compromised identity.
 2. **Create the real release key** (`tools/generate-release-key.sh`, then the `gh secret set` commands it prints). Until then CI
    publishes nothing. This is the only way B1 can close; it cannot be done from the repository. Migration limits: `docs/RELEASE_SIGNING.md`.
 3. `git push origin --delete emulator-results`, then let the next run recreate it (old commits on it hold unredacted logs).
 4. Run the physical-device checks in section 6. **No physical device was used. Everything below is emulator, JVM or CI.**
 
-## 1. Corrections to earlier claims (found this session)
+## 1. Corrections to earlier claims (found during development)
 | Earlier claim | Reality |
 |---|---|
 | "Android layer CI-compiled" at `e46cac1` | **False.** CI run 18 on that commit failed to compile on both ABIs (`Session.kt:131`: a trailing lambda bound to the new `authPolicy` parameter). Fixed in `d06b27a`; run 19 built. |
 | "Emulator job green" | The emulator script ended in `exit 0` after any Quick/Best failure and the job was `continue-on-error`, so run 19's emulator (which could not get past the onboarding screen because the longer privacy text pushed the button off-screen) was reported green. Now assertions decide the status (section 4). |
 | "tls-auth probe feasible but not built" | Built and verified (C3), but see section 3: **0 of 96 live relays currently use tls-auth/crypt**, so it helps nothing today. |
-| "Unused permission: safe to remove" (my own, this session) | `RECEIVE_BOOT_COMPLETED` looked unused, but upstream's persisted keep-alive job needs it. Removing it crashed the VPN process on every connect (emulator run 27 FAIL, `IllegalArgumentException: Requested job cannot be persisted without holding RECEIVE_BOOT_COMPLETED`). Restored; the emulator test is what caught it. |
-| "The release path is ready" (my own, earlier this session) | `tools/resign-apk.sh` signed releases **without a v1 signature** and checked them only for Android 8.0+. When support was widened to Android 6.0, which accepts only v1, a real release would have been refused there (or stopped by the publish job's own minSdk-23 check). The APKs CI tested were build-signed with v1, which hid it. Fixed in `18edcce`: v1+v2+v3, all verified for minSdk 23, and the Android 6.0 test device now installs the re-signed APK. |
+| "Unused permission: safe to remove" (an earlier change) | `RECEIVE_BOOT_COMPLETED` looked unused, but upstream's persisted keep-alive job needs it. Removing it crashed the VPN process on every connect (emulator run 27 FAIL, `IllegalArgumentException: Requested job cannot be persisted without holding RECEIVE_BOOT_COMPLETED`). Restored; the emulator test is what caught it. |
+| "The release path is ready" (an earlier claim) | `tools/resign-apk.sh` signed releases **without a v1 signature** and checked them only for Android 8.0+. When support was widened to Android 6.0, which accepts only v1, a real release would have been refused there (or stopped by the publish job's own minSdk-23 check). The APKs CI tested were build-signed with v1, which hid it. Fixed in `18edcce`: v1+v2+v3, all verified for minSdk 23, and the Android 6.0 test device now installs the re-signed APK. |
 | "Android 10 small phone: Quick Connect hung" (compat run 35) | Two different things. A real layout bug (at 200% font the country rows were squeezed off the picker) and a harness misreading: Quick Connect **had connected** in 23 s (its banner said so), then the volunteer dropped the tunnel and OpenVPN was reconnecting; the harness only looked for "Connected" and reported a hang. Layout fixed; the harness now reports "connected, then dropped" separately (INCONCLUSIVE, not PASS). |
 | "Android 6.0 supported" after the first matrix runs | Run 39 found a **crash on Android 6.0** the moment the country picker opened (Material 3 `ModalBottomSheet`: "offset read before being initialized"). My first fix, a dialog, then made the **keyboard pop up over the list on Android 6.0-8.1** (pre-Android 9 windows focus their first control, which was the search field); run 41 caught that too. Fixed in `c6dd291` and `198669d`. Everything else on Android 6.0 (list download over HTTPS with the bundled roots, Quick Connect 6/6, Best Connect) already worked in the 6.0 speed run. |
 | "Small phone at 200% font fails" (run 41) | Not the app: the emulator's system server died 15 s after launch (the Nexus S profile has ~343 MB RAM). The device now runs with 2 GB. |
 | "Published logs are redacted" | They were, too aggressively: every line containing "token" and every UI dump (uiautomator marks each node `password="false"`) was dropped, which hid the reason above. Now only lines that can carry keys or credentials are dropped; a CI test checks both directions. |
-| "Emulator FAIL means the app broke" | Two FAILs were my own test steps: the onboarding button below the fold (run 19), and the app-picker button below the fold, which left the test stranded on Settings (run 30). Both now scroll like a user and return Home. A FAIL must be read, not assumed. |
+| "Emulator FAIL means the app broke" | Two FAILs were bugs in the test steps: the onboarding button below the fold (run 19), and the app-picker button below the fold, which left the test stranded on Settings (run 30). Both now scroll like a user and return Home. A FAIL must be read, not assumed. |
 
 ## 2. Findings matrix
 Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated; **Open**; **Unverified** = no evidence either way.
@@ -45,7 +45,7 @@ Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated;
 | B2 server identity | **Fixed, live-checked** | Real OpenVPN: genuine cert connects; wrong name / wrong EKU / untrusted CA rejected; control without policy accepts the wrong name (CI, 7/7, OpenVPN 2.7.0). **Live relays: 15/24 connected with the policy and 15/24 without; every relay that reached TLS presented `CN=opengw.net`.** Residual: authenticates VPN Gate's software, not an individual volunteer. |
 | B3 HTTP fallback | **Fixed** | HTTPS only; cleartext disabled app-wide. |
 | B4 leak protection | **Not guaranteed by an app; documented.** | `persist-tun`, IPv6 blocking, forced DNS. Always-on + "Block connections without VPN" were **not tested** (no device). Probe sockets bypass the tunnel by design. |
-| B5 disconnect vs restore | **Fixed** | `RunCoordinator` + epoch guard; deterministic and 500-seed tests. This session closed two remaining paths (Quick watchdog timeout, generic exception). **Runs 22 and 23 (emulator): after an explicit Disconnect the VPN stayed down for 20 s.** |
+| B5 disconnect vs restore | **Fixed** | `RunCoordinator` + epoch guard; deterministic and 500-seed tests. Two remaining paths were closed later (Quick watchdog timeout, generic exception). **Runs 22 and 23 (emulator): after an explicit Disconnect the VPN stayed down for 20 s.** |
 | B6 cipher policy | **Fixed** | One gate for every path; declared cipher never reported as verified. Added a bounded wait for the negotiated-cipher log line so a good tunnel is not shown as unverified. Live: every connection negotiated AES-128-CBC/SHA1. |
 | B7 compression | **Fixed** (removed) | Source reading plus real-OpenVPN acceptance. |
 | B8 validation | **Fixed** | Address matrix, 600-seed sanitizer fuzz, CSV fuzz. |
@@ -90,11 +90,11 @@ Widget, shortcuts, auto-failover, easier Always-on setup, optional Tor, backgrou
 | 22 (`9334d79`) | **PASS** (9 assertions, 0 failed, 0 inconclusive) | The above, plus: Quick Connect connected in 25 s, the connected server was in the chosen country (Austria), an explicit disconnect stayed down for 20 s, and Best Connect finished with a named winner. (This run's overall CI status was still red because of the probe-test harness bug fixed in `28193da`; the emulator job itself passed.) |
 | 23 (`28193da`) | **PASS** (9 assertions, 0 failed, 0 inconclusive); the whole CI run was green | First run with the fixed probe step and the "largest country" script. Quick Connect inside **Japan** (53 servers) connected in 26 s and the status card showed Japan; disconnect stayed down for 20 s; Best Connect named a winner. |
 | 24, 25 (docs-only commits) | not read | Same code as run 23; their emulator results were not inspected. |
-| 27 (`a06079d`, label "run 27") | **FAIL** (genuine app bug) | VPN process crashed on connect after I removed `RECEIVE_BOOT_COMPLETED` (see corrections). |
+| 27 (`a06079d`, label "run 27") | **FAIL** (genuine app bug) | VPN process crashed on connect after `RECEIVE_BOOT_COMPLETED` was removed (see corrections). |
 | 30 (`c40531a`) | **FAIL** (harness bug, no crash) | The new app-picker step did not scroll and stranded the test on Settings. |
 | 31 (`0f15fca`) | **PASS** (10 assertions, 0 failed); the whole CI run was green | Includes: app picker lists 18 apps without `QUERY_ALL_PACKAGES`; Quick Connect inside **Japan** in 22 s; disconnect stayed down 20 s; Best Connect named a winner; no crash. First PASS on the cleaned manifest (5 reachable components). |
 
-(Run numbers in the `emulator-results` branch are GitHub's run numbers, so they differ from the labels I used in conversation.)
+(Run numbers in the `emulator-results` branch are GitHub's run numbers, so they can differ from the labels used in older notes.)
 
 Two PASS and one INCONCLUSIVE out of three runs with real assertions is **not** a reliability figure; live volunteers vary from run to run, and the one INCONCLUSIVE used a country with a single relay.
 
@@ -102,7 +102,7 @@ Two PASS and one INCONCLUSIVE out of three runs with real assertions is **not** 
 <!-- COMPAT-MATRIX -->
 
 ## 5. Test matrix
-* Engine unit tests (JVM): **129**, all passing locally and in CI. New this session: persistence 7, pool/failure reasons 8+5, record summary 7, tls-auth probe 6.
+* Engine unit tests (JVM): **129**, all passing locally and in CI. Added during hardening: persistence 7, pool/failure reasons 8+5, record summary 7, tls-auth probe 6.
 * Real OpenVPN in CI: relay-identity 7/7 (OpenVPN 2.7.0, runs 19-23). tls-auth probe: 4/4 locally on 2.6.19 and **passed in CI (run 23, OpenVPN 2.7.0)** after its first CI run failed for a harness reason (the step ran Gradle as a different user than the previous root-owned step, and hid the error; fixed in `28193da`).
 * Live OpenVPN against VPN Gate (workflow `vpngate-check`): see section 3.
 * Emulator UI assertions: section 4.

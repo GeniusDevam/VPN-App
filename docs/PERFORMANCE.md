@@ -1,6 +1,6 @@
 # Performance review
 
-Measured 2026-11-07 on branch `ccr-49f3cc12-faye7c`. **No physical phone was used.** Every figure below comes from one of three
+Measured 2026-11-07. **No physical phone was used.** Every figure below comes from one of three
 sources, named in each table:
 
 | Source | What it measures | How to repeat it |
@@ -42,7 +42,7 @@ installs the APK **as re-signed by the release script** (v1 signature), so the r
 | Android 7.0 phone | PASS | 1.08 s | 18 s, inside Japan | 2:58 | 60 / 12 MB |
 | Android 6.0 phone | PASS | 1.23 s | 21 s, inside Japan | 2:23 | 65 / 10 MB |
 
-Getting here took four matrix runs; each found something real (details in `docs/HANDOFF_STATUS.md`): a crash on Android 6.0 when the
+Getting here took four matrix runs; each found something real (details in `docs/STATUS.md`): a crash on Android 6.0 when the
 country picker opened, then the keyboard covering the picker on Android 6.0-8.1, then the Disconnect button off-screen at 200% font,
 plus emulator and test-script problems that were not the app.
 
