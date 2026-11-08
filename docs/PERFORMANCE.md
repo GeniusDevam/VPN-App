@@ -27,7 +27,7 @@ devices and code versions with each other, and for finding where time goes.
 * **Size is the weakest point:** the universal APK is 38.5 MB and takes 85-123 MB once installed. About 8 MB of it is code that is
   not shrunk at all, because the upstream engine turns R8 off. The per-processor APKs are about 16 MB each. See recommendations.
 
-## Compatibility matrix and device timings (CI run 42, commit `198669d`)
+## Compatibility matrix and device timings (CI run 42, commit `53c6c99`)
 Live VPN Gate volunteers, so a country with one relay can fail on any run; that is INCONCLUSIVE, never PASS. The Android 6.0 device
 installs the APK **as re-signed by the release script** (v1 signature), so the release path itself is tested there.
 
