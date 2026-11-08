@@ -19,7 +19,7 @@ Servers are the free, volunteer-run relays of the [VPN Gate](https://www.vpngate
 
 Updates: open the same link again and install over the top; your settings are kept when the signing key is unchanged.
 
-**Verify before installing.** Each release lists the APK's SHA-256 and the signing certificate's SHA-256 (published below once the owner has created the new release key), and carries a build-provenance attestation: `gh attestation verify VPN-App.apk -R GeniusDevam/VPN-App`. Earlier builds were signed with a key that was published in this repository and must be treated as untrusted; see [docs/RELEASE_SIGNING.md](docs/RELEASE_SIGNING.md) to migrate.
+**Verify before installing.** Each release lists the APK's SHA-256 and the signing certificate's SHA-256 (published below once the new release key has been created), and carries a build-provenance attestation: `gh attestation verify VPN-App.apk -R GeniusDevam/VPN-App`. Earlier builds were signed with a key that was published in this repository and must be treated as untrusted; see [docs/RELEASE_SIGNING.md](docs/RELEASE_SIGNING.md) to migrate.
 
 **Works on Android 6.0 or newer** (about 99% of Android devices in use), on every kind of processor (64- and 32-bit ARM, 64- and
 32-bit x86) and on phones, small phones with large text, tablets, foldables, Chromebooks and Android TV. `VPN-App.apk` is the one
@@ -78,7 +78,7 @@ Build locally: `tools/prepare.sh && cd build-tree && ./gradlew :main:assembleSke
 Release builds are signed only by a protected CI job. The release key lives only as secrets of the protected GitHub environment `release` (required reviewer, version tags only); every ordinary build, on any branch, is signed with a throw-away key and cannot read it. The released APK is the one that was built and tested, re-signed. **The key that used to be committed here (`tools/release.jks`) is public and compromised; ignore any APK signed with it** (fingerprint `E7:3A:CD:75:...:FA:E4`; CI refuses to sign with it). CI publishes nothing until the owner has created the new key (`tools/generate-release-key.sh`) and configured the environment. The current release certificate SHA-256 will be listed here: *(not yet published: the new key has not been created)*. Setup, design and limits: [docs/RELEASE_SIGNING.md](docs/RELEASE_SIGNING.md).
 
 ## More documentation
-[docs/STATUS.md](docs/STATUS.md) (status of every review finding, live measurements, owner actions, what is NOT tested), [docs/SECURITY.md](docs/SECURITY.md) (what is enforced and what is not, per finding), [docs/DIRECTORY.md](docs/DIRECTORY.md) (server list coverage, history and the 7-day rule, selection, measurement), [docs/AUDIT.md](docs/AUDIT.md) (dependencies and licences).
+[docs/STATUS.md](docs/STATUS.md) (status of every review finding, live measurements, maintainer actions, what is NOT tested), [docs/PERFORMANCE.md](docs/PERFORMANCE.md) (speed, memory and size measurements), [docs/SECURITY.md](docs/SECURITY.md) (what is enforced and what is not, per finding), [docs/DIRECTORY.md](docs/DIRECTORY.md) (server list coverage, history and the 7-day rule, selection, measurement), [docs/AUDIT.md](docs/AUDIT.md) (dependencies and licences).
 
 ## License
 

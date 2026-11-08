@@ -33,7 +33,7 @@ The app was built from this plan. Where the build differs, the code wins:
 | `minSdk 26`, 64-bit phones (§1, §14) | **`minSdk 23` (Android 6.0)**, every processor type (arm64-v8a, armeabi-v7a, x86_64, x86; universal APK plus one APK per type), adaptive layout for tablets/foldables/Chromebooks/TV, TV launcher entry. Lint NewApi is a build gate; Android 6.0/7.0 get the Let's Encrypt roots in code; release APKs carry a v1 signature for Android 6.0. Tested on an emulator matrix (README, *Device support*). Measurements: `docs/PERFORMANCE.md`. (2026-11-07) |
 
 ### Decisions (already made)
-- **Servers:** free volunteer servers from the **VPN Gate** network (University of Tsukuba academic project). There are no paid subscriptions and no owner-run servers.
+- **Servers:** free volunteer servers from the **VPN Gate** network (University of Tsukuba academic project). There are no paid subscriptions and no self-hosted servers.
 - **Encryption and privacy:** a top priority. Every link and every stored byte the app controls is encrypted, and the user is told honestly what cannot be protected (§3, §13).
 
 ---
@@ -82,7 +82,7 @@ The app was built from this plan. Where the build differs, the code wins:
 
 ## 3. Privacy reality of free volunteer servers (must be shown to the user)
 
-Free volunteer servers are the owner's choice, and the app must be **honest** about what encryption can and cannot do with them:
+Free volunteer servers are a deliberate choice, and the app must be **honest** about what encryption can and cannot do with them:
 
 - **Protected by the app's encryption:**
   - Everything between the phone and the VPN server. Public Wi-Fi snoopers, the mobile carrier and the ISP cannot read the traffic and only see that a VPN is being used.
@@ -679,7 +679,7 @@ tools/openvpn-test/              # scripts for the probe integration test
 docs/verification.md             # on-device findings
 ```
 
-- `applicationId`: `io.github.geniusdevam.vpnapp`. The working title is "VPN App"; the owner can rename it.
+- `applicationId`: `io.github.geniusdevam.vpnapp`. The working title is "VPN App"; it can be renamed.
 - Use the latest **stable** AGP, Kotlin, Compose BOM, Hilt, Room, OkHttp, SQLCipher and Tink, pinned in the version catalog. Use JDK 17 or later, NDK r28 or later, and CMake from the SDK.
 - `versionCode` = CI run number.
 
@@ -700,12 +700,12 @@ docs/verification.md             # on-device findings
   - > **Superseded (security finding B1):** a committed keystore with its passwords in the workflow made the signing identity public and compromised. It was removed, and the secrets are no longer repository-wide: they exist only as environment secrets of the protected environment `release` (`RELEASE_KEYSTORE_B64`, `RELEASE_KEYSTORE_PASSWORD`, `RELEASE_KEY_ALIAS`, `RELEASE_KEY_PASSWORD`, plus the public variable `RELEASE_CERT_SHA256`), readable only by the `sign` job, which runs for `vX.Y.Z` tags after a reviewer approves. With no secrets nothing is published. The owner must still configure the environment, create the key (`tools/generate-release-key.sh`) and delete the old public release. See `docs/RELEASE_SIGNING.md`.
 - **Build environment note:** a development machine may lack the Android SDK and NDK. If they cannot be installed, rely on GitHub Actions and its job logs. A milestone is not done until CI is green.
 
-### 15.3 Installing on the owner's Android 16 phone
+### 15.3 Installing on an Android 16 phone
 1. Open the repo's **Releases** page on the phone and download the APK.
 2. Allow "Install unknown apps" for the browser, then install.
 3. **Developer verification:** since 30 Sep 2026, certified devices in Brazil, Indonesia, Singapore and Thailand require apps from verified developers. Global rollout is planned for 2027.
    - Unverified apps need Android's "advanced flow" (a one-time setup with a 24 h wait) or ADB.
-   - Check the current rules for the owner's country at implementation time.
+   - Check the current rules for your country before installing.
 
 ---
 
@@ -732,7 +732,7 @@ docs/verification.md             # on-device findings
   - > **Built** (`tools/emulator-test.sh`, live VPN Gate, UI driven through uiautomator; the consent dialog is tapped rather than pre-granted). Asserts: both modes shown; the country picker opens and reports a loaded list; choosing a country changes Quick only; the choice survives process death; Quick Connect connects inside the chosen country (or fails with a message that names it); an explicit disconnect stays disconnected for 20 s; Best Connect names a winner; no crash. Exit 0 = PASS, 1 = FAIL (the app misbehaved), 3 = INCONCLUSIVE (live servers unreachable). Not covered: the worldwide search, the Quick Settings tile, notification actions, network switching, process kill while connected.
   - Engine test count: 129 (including persistence ordering, pool/failure reasons, tls-auth probe, history text, disconnect races, 600-seed sanitizer fuzz).
 
-### 16.2 Manual QA on the owner's phone (each release)
+### 16.2 Manual QA on a real phone (each release)
 - Onboarding, including the privacy disclosure.
 - Quick Connect with Any and with specific countries, on Wi-Fi and on mobile data. Time it: the median should be ≤ 12 s, never over 35 s.
 - Quick Connect while already connected.
@@ -762,7 +762,7 @@ docs/verification.md             # on-device findings
 **M0: Scaffold and delivery pipeline**
 - Gradle multi-module skeleton, theme, navigation shell.
 - The ics-openvpn submodule building in CI (NDK r28+), signing, a Release on tag, `LICENSE`.
-- *Done when:* the owner installs a "hello" APK that contains the OpenVPN engine from a Release.
+- *Done when:* a phone installs a "hello" APK that contains the OpenVPN engine from a Release.
 
 **M1: Tunnel core and VPN Gate list**
 - List fetch and parsing, config sanitizer, encrypted storage (SQLCipher, Tink, Keystore).
@@ -847,5 +847,5 @@ For each milestone:
 6. The switch gap during replace-connection, and the self-exclusion behaviour under Always-on lockdown.
 7. The `Notification.ProgressStyle` and Live Update promotion requirements.
 8. The default speed-test endpoint terms of use.
-9. The Android developer verification rules for the owner's country.
+9. The Android developer verification rules for the target country.
 10. The latest stable AGP, Kotlin, Compose, NDK, SQLCipher and Tink versions compatible with `compileSdk 36`.

@@ -83,7 +83,7 @@ data class LedgerSnapshot(
 /**
  * The permanent local record of how every relay has performed for this user.
  *
- * Retention (the owner's rule): a relay's saved data is removed once it has been ABSENT from successfully
+ * Retention (product rule): a relay's saved data is removed once it has been ABSENT from successfully
  * obtained, usable directory listings for seven days of observed time. Precisely, in [observeDirectory]:
  *  - nothing happens for a listing that is not usable (download failed, offline, invalid, or suspiciously small),
  *    so source failures can never age anything;
