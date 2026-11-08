@@ -1,0 +1,7 @@
+started=2026-11-08T08:27:00Z
+device=Android 16 (API 36), x86_64, 1080x2400 px = 411x914 dp, font scale 1.0
+status=FAIL
+passed:
+inconclusive:
+failed:
+home screen missing Quick/Best Connect
