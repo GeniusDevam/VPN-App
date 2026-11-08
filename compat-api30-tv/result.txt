@@ -1,0 +1,24 @@
+started=2026-11-08T08:26:25Z
+device=Android 11 (API 30), x86, 1920x1080 px = 960x540 dp, font scale 1.0
+cold_start_ms=890
+quick_scope=🇯🇵 Japan
+quick=connected
+quick_seconds=25
+mem_app_pss_kb=68653
+mem_vpn_pss_kb=18957
+best=done
+best_seconds=370
+status=PASS
+passed:
+home screen shows both modes
+app picker lists 4 apps without QUERY_ALL_PACKAGES
+Quick country picker opens
+picker reports a loaded server list
+choosing a country changed Quick only; Best stayed on its own choice
+country choice persisted across process death (encrypted settings readable)
+Quick Connect connected in 25s
+connected server is in the chosen country (Japan)
+explicit disconnect stayed disconnected for 20 s
+Best Connect finished with a named winner
+inconclusive:
+failed:

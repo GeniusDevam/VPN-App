@@ -1,0 +1,2 @@
+    versionCode=1044 targetSdk=37
+    versionName=1.0.1044-o2
