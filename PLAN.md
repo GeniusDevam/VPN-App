@@ -835,7 +835,7 @@ For each milestone:
 
 ---
 
-## 19. Verify at implementation time (not confirmed while planning)
+## 19. Open questions (check against the live services)
 
 > **Answers so far (2026-11-05, live CI against VPN Gate):** (1) HTTPS works; the CSV parses (96 rows in one download). (2) 90 TCP / 6 UDP; **0 of 96** use tls-auth/tls-crypt; the UDP hard-reset probe against SoftEther relays was not measured separately (UDP connects succeeded). (3) **0 of 96** negotiate AEAD (all `AES-128-CBC`); `remote-cert-tls server` plus `verify-x509-name opengw.net` is compatible: every relay that reached TLS presented `CN=opengw.net`, and 15/24 connected both with and without it. (4) The `vpn`/`vpn` login is supplied by the app and works (the configs carry no `auth-user-pass`). (5) ics-openvpn pinned by commit in `tools/ICS_OPENVPN_REF`. **Still unanswered:** 6 (switch gap, lockdown self-exclusion: needs a device), 7, 8 (speed-test endpoint terms), 9, and the version question in 10 beyond what `docs/AUDIT.md` records.
 

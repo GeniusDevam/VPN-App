@@ -78,7 +78,7 @@ old key to vouch for the new one.
 
 * **Recommended: uninstall and reinstall once** from a release signed with the new key. Cost: local app data is lost (settings and
   history; all of it is encrypted with a Keystore key that dies with the app anyway). Benefit: the install stops trusting the old key.
-* **Rotation (Android 9+ only; the app supports Android 8, where it is impossible)** keeps data, but it cannot undo the exposure:
+* **Rotation (Android 9+ only; impossible on the Android 6.0-8.1 devices the app also supports)** keeps data, but it cannot undo the exposure:
   because the old key is public, *anyone* can also create a rotation lineage from it to a key of their own. An install is only
   safe once it has actually updated to your new key. Until then it will accept an attacker's APK signed with the old key. If you
   choose rotation, do it quickly, do not let the old key stay trusted any longer than needed, and tell users to reinstall if unsure.

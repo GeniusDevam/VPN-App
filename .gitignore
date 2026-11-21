@@ -6,6 +6,8 @@ local.properties
 out/
 .idea/
 .kotlin/
+__pycache__/
+*.pyc
 
 # Signing material must never be committed (see docs/RELEASE_SIGNING.md)
 *.jks
