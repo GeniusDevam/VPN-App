@@ -1,0 +1,313 @@
+11-25 18:38:11.497  1564  1753 I ActivityManager: START u0 {flg=0x10000000 cmp=io.github.geniusdevam.vpnapp/.MainActivity} from uid 0 on display 0
+11-25 18:38:11.557  1564  2063 I ActivityManager: Start proc 2723:io.github.geniusdevam.vpnapp/u0a55 for activity io.github.geniusdevam.vpnapp/.MainActivity
+11-25 18:38:11.623  1564  2292 I ActivityManager: Start proc 2736:io.github.geniusdevam.vpnapp:openvpn/u0a55 for service io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService
+11-25 18:38:12.870  1564  1583 I ActivityManager: Displayed io.github.geniusdevam.vpnapp/.MainActivity: +1s324ms
+11-25 18:39:23.343  1564  1754 I ActivityManager: Force stopping io.github.geniusdevam.vpnapp appid=10055 user=0: from pid 3235
+11-25 18:39:23.343  1564  1754 I ActivityManager: Killing 2736:io.github.geniusdevam.vpnapp:openvpn/u0a55 (adj 1): stop io.github.geniusdevam.vpnapp
+11-25 18:39:23.386  1564  1754 W ActivityManager: Scheduling restart of crashed service io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService in 1000ms
+11-25 18:39:23.386  1564  1754 I ActivityManager: Killing 2723:io.github.geniusdevam.vpnapp/u0a55 (adj 0): stop io.github.geniusdevam.vpnapp
+11-25 18:39:23.391  1564  1610 W InputDispatcher: channel 'afb1190 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity (server)' ~ Consumer closed input channel or an error occurred.  events=0x9
+11-25 18:39:23.391  1564  1610 E InputDispatcher: channel 'afb1190 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+11-25 18:39:23.392  1564  1755 I WindowState: WIN DEATH: Window{afb1190 u0 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}
+11-25 18:39:23.392  1564  1755 W InputDispatcher: Attempted to unregister already unregistered input channel 'afb1190 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity (server)'
+11-25 18:39:23.428  1564  1754 W ActivityManager: Force removing ActivityRecord{bcc03a9 u0 io.github.geniusdevam.vpnapp/.MainActivity t4}: app died, no saved state
+11-25 18:39:23.437  1564  2292 W ActivityManager: Spurious death for ProcessRecord{10c69ea 0:io.github.geniusdevam.vpnapp:openvpn/u0a55}, curProc for 2736: null
+11-25 18:39:23.441  1564  1576 W ActivityManager: Spurious death for ProcessRecord{f9bfc63 0:io.github.geniusdevam.vpnapp/u0a55}, curProc for 2723: null
+11-25 18:39:25.804  1564  1575 I ActivityManager: START u0 {flg=0x10000000 cmp=io.github.geniusdevam.vpnapp/.MainActivity} from uid 0 on display 0
+11-25 18:39:25.825  1564  2063 I ActivityManager: Start proc 3258:io.github.geniusdevam.vpnapp/u0a55 for activity io.github.geniusdevam.vpnapp/.MainActivity
+11-25 18:39:25.910  1564  3246 I ActivityManager: Start proc 3272:io.github.geniusdevam.vpnapp:openvpn/u0a55 for service io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService
+11-25 18:39:27.277  1564  1583 I ActivityManager: Displayed io.github.geniusdevam.vpnapp/.MainActivity: +1s463ms
+11-25 18:39:45.488  1564  1754 W AppOps  : Bad call: specified package io.github.geniusdevam.vpnapp under uid 10015 but it is really 10055
+11-25 18:39:51.868  1564  2292 I Vpn     : Switched from [Legacy VPN] to io.github.geniusdevam.vpnapp
+11-25 18:39:51.957  3258  3292 D VPNAPP  : phase LOADING_SERVERS 
+11-25 18:39:51.960  3258  3292 D VPNAPP  : phase SCANNING 53
+11-25 18:39:52.072  3258  3480 D VPNAPP  : probed 0/53
+11-25 18:39:52.591  3258  3496 D VPNAPP  : probed 0/53
+11-25 18:39:53.096  3258  3480 D VPNAPP  : probed 39/53
+11-25 18:39:53.506  3258  3472 D VPNAPP  : probed 39/53
+11-25 18:39:53.509  3258  3472 D VPNAPP  : phase CONNECTING 
+11-25 18:39:53.510  3258  3472 D VPNAPP  : connecting #1
+11-25 18:39:53.524  3258  3472 D VPNAPP  : connect vpn618163192 UDP
+11-25 18:39:53.594  3504  3504 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:39:53.705  3258  3270 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:39:53.705  3258  3269 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:39:54.915  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:39:54.916  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:39:54.916  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:39:54.917  3258  3270 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:39:54.917  3258  3271 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:39:54.918  3258  3270 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:39:54.919  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:39:55.037  3258  3270 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:39:57.056  1564  3246 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:39:57.074  3258  3464 D VPNAPP  : connect vpn618163192 -> up
+11-25 18:39:57.177  3258  3269 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:39:57.181  3258  3269 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:39:57.182  3258  3269 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:40:52.118  3258  3475 D VPNAPP  : phase LOADING_SERVERS 
+11-25 18:40:56.747  3258  3480 D VPNAPP  : phase SCANNING 98
+11-25 18:40:56.913  3258  3870 D VPNAPP  : probed 0/98
+11-25 18:40:57.471  3258  3899 D VPNAPP  : probed 14/98
+11-25 18:40:57.978  3258  3870 D VPNAPP  : probed 45/98
+11-25 18:40:58.484  3258  3475 D VPNAPP  : probed 61/98
+11-25 18:40:58.991  3258  3887 D VPNAPP  : probed 65/98
+11-25 18:40:59.497  3258  3897 D VPNAPP  : probed 65/98
+11-25 18:41:00.004  3258  3886 D VPNAPP  : probed 65/98
+11-25 18:41:00.511  3258  3886 D VPNAPP  : probed 71/98
+11-25 18:41:01.018  3258  3886 D VPNAPP  : probed 93/98
+11-25 18:41:01.426  3258  3886 D VPNAPP  : probed 98/98
+11-25 18:41:01.426  3258  3886 D VPNAPP  : phase SCANNING refine 48
+11-25 18:41:01.549  3258  3881 D VPNAPP  : probed 0/48
+11-25 18:41:02.055  3258  3860 D VPNAPP  : probed 0/48
+11-25 18:41:02.563  3258  3896 D VPNAPP  : probed 48/48
+11-25 18:41:02.568  3258  3896 D VPNAPP  : probed 48/48
+11-25 18:41:02.577  3258  3896 D VPNAPP  : phase SPEED_TESTING 
+11-25 18:41:02.589  3258  3896 D VPNAPP  : connect vpn618163192 UDP
+11-25 18:41:02.759  3910  3910 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:41:02.873  3258  3271 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:41:02.873  3258  3269 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:41:04.036  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:41:04.036  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:41:04.037  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:41:04.037  3258  3270 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:41:04.038  3258  3270 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:41:04.039  3258  3271 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:41:04.039  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:41:04.159  3258  3270 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:41:05.498  1564  1725 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:41:05.502  3258  3271 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:41:05.502  3258  3271 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:41:05.502  3258  3271 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:41:05.511  3258  3878 D VPNAPP  : connect vpn618163192 -> up
+11-25 18:41:14.617  3258  3878 D VPNAPP  : leaderboard tested=1/10
+11-25 18:41:14.625  3258  3878 D VPNAPP  : connect vpn209596033 TCP
+11-25 18:41:15.840  4030  4030 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:41:15.970  3258  3269 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:41:15.971  3258  3271 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:41:17.298  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:41:17.299  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:41:17.299  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:41:17.300  3258  3271 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:41:17.301  3258  3271 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:41:17.301  3258  3270 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:41:17.302  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:41:17.431  3258  3271 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:41:18.891  1564  2063 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:41:18.895  3258  3270 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:41:18.895  3258  3270 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:41:18.895  3258  3270 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:41:18.904  3258  3896 D VPNAPP  : connect vpn209596033 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:41:31.096  3258  3864 D VPNAPP  : leaderboard tested=2/10
+11-25 18:41:31.104  3258  3864 D VPNAPP  : connect vpn218452249 TCP
+11-25 18:41:32.362  4148  4148 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:41:32.458  3258  3269 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:41:32.458  3258  3271 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:41:33.861  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:41:33.861  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:41:33.861  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:41:33.862  3258  3269 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:41:33.863  3258  3271 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:41:33.863  3258  3271 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:41:33.863  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:41:34.008  3258  3269 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:41:35.399  1564  2292 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:41:35.407  3258  3271 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:41:35.408  3258  3271 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:41:35.408  3258  3271 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:41:35.412  3258  3864 D VPNAPP  : connect vpn218452249 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:41:48.138  3258  3905 D VPNAPP  : leaderboard tested=3/10
+11-25 18:41:48.144  3258  3905 D VPNAPP  : connect vpn888920959 TCP
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:41:49.469  4335  4335 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:41:49.560  3258  3269 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:41:49.560  3258  3270 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:41:51.002  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:41:51.004  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:41:51.004  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:41:51.006  3258  3270 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:41:51.007  3258  3269 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:41:51.007  3258  3269 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:41:51.007  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:41:51.154  3258  3269 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:41:52.542  1564  1575 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:41:52.544  3258  3270 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:41:52.545  3258  3269 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:41:52.546  3258  3270 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:41:52.553  3258  3875 D VPNAPP  : connect vpn888920959 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:06.350  3258  3872 D VPNAPP  : leaderboard tested=4/10
+11-25 18:42:06.367  3258  3872 D VPNAPP  : connect vpn479781942 TCP
+11-25 18:42:07.634  4530  4530 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:42:07.750  3258  3269 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:42:07.750  3258  3271 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:09.173  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:42:09.173  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:42:09.174  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:42:09.174  3258  3270 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:42:09.178  3258  3269 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:42:09.178  3258  3271 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:42:09.178  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:42:09.315  3258  3271 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:42:10.814  1564  1754 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:42:10.818  3258  3269 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:42:10.819  3258  3271 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:42:10.819  3258  3270 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:42:10.838  3258  3878 D VPNAPP  : connect vpn479781942 -> up
+11-25 18:42:24.163  3258  3865 D VPNAPP  : leaderboard tested=5/10
+11-25 18:42:24.173  3258  3865 D VPNAPP  : connect public-vpn-133 TCP
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:25.432  4665  4665 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:42:25.561  3258  3269 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:42:25.561  3258  3270 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:42:26.868  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:42:26.868  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:42:26.868  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:42:26.868  3258  3271 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:42:26.870  3258  3271 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:42:26.870  3258  3270 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:42:26.871  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:42:26.983  3258  3271 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:42:29.223  1564  1575 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:42:29.229  3258  3269 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:42:29.229  3258  3269 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:42:29.229  3258  3269 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:42:29.240  3258  3865 D VPNAPP  : connect public-vpn-133 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:44.600  3258  3875 D VPNAPP  : leaderboard tested=6/10
+11-25 18:42:44.608  3258  3875 D VPNAPP  : connect public-vpn-43 TCP
+11-25 18:42:45.866  4787  4787 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:42:45.978  3258  3270 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:42:45.978  3258  3269 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:42:47.287  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:42:47.287  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:42:47.288  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:42:47.288  3258  3270 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:42:47.288  3258  3269 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:42:47.289  3258  3270 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:42:47.289  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:42:47.403  3258  3271 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:42:49.892  1564  1575 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:42:49.894  3258  3269 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:42:49.896  3258  3270 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:42:49.896  3258  3270 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:42:49.905  3258  3875 D VPNAPP  : connect public-vpn-43 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:06.171  3258  3870 D VPNAPP  : leaderboard tested=7/10
+11-25 18:43:06.180  3258  3870 D VPNAPP  : connect public-vpn-153 TCP
+11-25 18:43:07.401  4994  4994 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:43:07.524  3258  3269 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:43:07.524  3258  3270 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:08.867  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:43:08.871  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:43:08.872  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:43:08.872  3258  3270 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:43:08.872  3258  3270 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:43:08.876  3258  3269 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:43:08.877  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:43:08.990  3258  3271 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:11.023  1564  3246 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:43:11.028  3258  3269 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:43:11.029  3258  3270 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:43:11.031  3258  3269 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:43:11.034  3258  3865 D VPNAPP  : connect public-vpn-153 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:27.854  3258  3886 D VPNAPP  : leaderboard tested=8/10
+11-25 18:43:27.855  3258  3886 D VPNAPP  : phase CONFIRMING 
+11-25 18:43:27.867  3258  3886 D VPNAPP  : connect vpn888920959 TCP
+11-25 18:43:29.121  5183  5183 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:43:29.264  3258  3271 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:43:29.265  3258  3269 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:43:30.605  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:43:30.605  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:43:30.605  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:43:30.607  3258  3270 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:43:30.607  3258  3269 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:43:30.607  3258  3269 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:43:30.608  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:43:30.746  3258  3271 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:43:32.286  1564  1576 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:43:32.291  3258  3269 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:43:32.292  3258  3269 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:43:32.292  3258  3269 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:43:32.298  3258  3886 D VPNAPP  : connect vpn888920959 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:41.138  3258  3896 D VPNAPP  : connect vpn218452249 TCP
+11-25 18:43:42.439  5300  5300 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:43:42.522  3258  3271 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:43:42.536  3258  3270 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:43:43.939  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:43:43.944  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:43:43.944  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:43:43.945  3258  3270 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:43:43.946  3258  3269 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:43:43.946  3258  3269 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:43:43.946  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:43:44.087  3258  3270 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:43:45.406  1564  1725 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:43:45.409  3258  3271 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:43:45.409  3258  3271 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:43:45.409  3258  3271 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:43:45.418  3258  3896 D VPNAPP  : connect vpn218452249 -> up
+11-25 18:43:50.518  3258  3870 D VPNAPP  : leaderboard tested=8/10
+11-25 18:43:50.518  3258  3870 D VPNAPP  : phase CONNECTING 
+11-25 18:43:50.518  3258  3870 D VPNAPP  : connecting #1
+11-25 18:43:50.523  3258  3870 D VPNAPP  : connect public-vpn-153 TCP
+11-25 18:43:51.756  5385  5385 W linker  : /data/user/0/io.github.geniusdevam.vpnapp/cache/c_pie_openvpn.x86_64: unsupported flags DT_FLAGS_1=0x8000001
+11-25 18:43:51.868  3258  3271 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:43:51.869  3258  3271 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:43:53.212  3258  3271 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:43:53.213  3258  3269 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:43:53.215  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:43:53.218  3258  3271 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:43:53.220  3258  3271 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:43:53.221  3258  3269 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:43:53.222  3258  3270 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:43:53.339  3258  3271 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:43:55.701  1564  3245 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:43:55.706  3258  3270 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:43:55.706  3258  3270 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:43:55.706  3258  3270 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:55.713  3258  3872 D VPNAPP  : connect public-vpn-153 -> up
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]

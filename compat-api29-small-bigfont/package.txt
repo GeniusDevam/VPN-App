@@ -1,0 +1,2 @@
+    versionCode=1049 minSdk=23 targetSdk=37
+    versionName=1.0.1049-o2

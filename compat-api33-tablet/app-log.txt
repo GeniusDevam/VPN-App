@@ -1,0 +1,945 @@
+11-25 18:38:20.673   487   892 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=io.github.geniusdevam.vpnapp/.MainActivity} from uid 2000
+11-25 18:38:20.861   487   523 I ActivityManager: Start proc 3468:io.github.geniusdevam.vpnapp/u0a174 for next-top-activity {io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}
+11-25 18:38:20.923   487  2992 D CoreBackPreview: Window{e935b99 u0 Splash Screen io.github.geniusdevam.vpnapp}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@62d470c, mPriority=0}
+11-25 18:38:21.350  3468  3468 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=37, uses_libraries=ALL, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:38:21.355  3468  3468 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=37, uses_libraries=ALL, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:38:21.375  3468  3468 D nativeloader: Configuring classloader-namespace for other apk /data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk. target_sdk_version=37, uses_libraries=, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:38:21.515  3468  3468 V GraphicsEnvironment: ANGLE Developer option for 'io.github.geniusdevam.vpnapp' set to: 'default'
+11-25 18:38:21.526  3468  3468 V GraphicsEnvironment: ANGLE GameManagerService for io.github.geniusdevam.vpnapp: false
+11-25 18:38:21.894   487   523 I ActivityManager: Start proc 3499:io.github.geniusdevam.vpnapp:openvpn/u0a174 for service {io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService}
+11-25 18:38:21.960   487  3007 D CoreBackPreview: Window{52fe6fd u0 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@218f5f9, mPriority=0}
+11-25 18:38:22.117  3499  3499 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=37, uses_libraries=ALL, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:38:22.119  3499  3499 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=37, uses_libraries=ALL, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:38:22.122  3499  3499 D nativeloader: Configuring classloader-namespace for other apk /data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk. target_sdk_version=37, uses_libraries=, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:38:22.133  3499  3499 V GraphicsEnvironment: ANGLE Developer option for 'io.github.geniusdevam.vpnapp' set to: 'default'
+11-25 18:38:22.133  3499  3499 V GraphicsEnvironment: ANGLE GameManagerService for io.github.geniusdevam.vpnapp: false
+11-25 18:38:23.202   487   511 I ActivityTaskManager: Displayed io.github.geniusdevam.vpnapp/.MainActivity: +2s526ms
+11-25 18:38:23.250   487  1575 D CoreBackPreview: Window{e935b99 u0 Splash Screen io.github.geniusdevam.vpnapp EXITING}: Setting back callback null
+11-25 18:38:23.252   487   763 W InputManager-JNI: Input channel object 'e935b99 Splash Screen io.github.geniusdevam.vpnapp (client)' was disposed without first being removed with the input manager!
+11-25 18:38:23.480  1514  1514 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=io.github.geniusdevam.vpnapp fieldId=-1 fieldName=null extras=null}, false)
+11-25 18:38:25.717  1333  3224 I BlockstoreStorage: Clearing Blockstore Data for package io.github.geniusdevam.vpnapp [CONTEXT service_id=258 ]
+11-25 18:38:27.657  3468  3837 D ProfileInstaller: Installing profile for io.github.geniusdevam.vpnapp
+11-25 18:38:32.549  1655  1655 I AiAiEcho: EchoSearch: AppFetcherImpl is initialized with [19] apps [time=5, reason=io.github.geniusdevam.vpnapp is added]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:38:45.136  4882  4882 I HibernationPolicy: gle.android.partnersetup=Thu Jan 01 00:00:00 UTC 1970, com.android.cameraextensions=Thu Jan 01 00:00:00 UTC 1970, com.google.android.apps.wallpaper.nexus=Thu Jan 01 00:00:00 UTC 1970, com.android.localtransport=Wed Nov 25 18:38:07 UTC 2026, com.google.android.apps.nexuslauncher=Wed Nov 25 18:38:23 UTC 2026, com.google.android.nearby.halfsheet=Thu Jan 01 00:00:00 UTC 1970, com.android.carrierdefaultapp=Thu Jan 01 00:00:00 UTC 1970, com.android.theme.font.notoserifsource=Thu Jan 01 00:00:00 UTC 1970, com.android.proxyhandler=Thu Jan 01 00:00:00 UTC 1970, com.google.android.safetycenter.resources=Thu Jan 01 00:00:00 UTC 1970, com.android.internal.display.cutout.emulation.waterfall=Thu Jan 01 00:00:00 UTC 1970, com.android.intentresolver=Thu Jan 01 00:00:00 UTC 1970, com.google.android.connectivity.resources=Thu Jan 01 00:00:00 UTC 1970, com.android.providers.contacts.auto_generated_rro_product__=Thu Jan 01 00:00:00 UTC 1970, com.google.android.feedback=Thu Jan 01 00:00:00 UTC 1970, com.google.android.printservice.recommendation=Thu Jan 01 00:00:00 UTC 1970, com.android.managedprovisioning=Wed Nov 25 18:38:04 UTC 2026, com.android.soundpicker=Thu Jan 01 00:00:00 UTC 1970, com.google.android.documentsui=Wed Nov 25 18:38:30 UTC 2026, com.android.systemui.emulation.pixel_3a_xl=Thu Jan 01 00:00:00 UTC 1970, com.android.systemui.emulation.pixel_6_pro=Thu Jan 01 00:00:00 UTC 1970, com.android.systemui.emulation.pixel_7_pro=Thu Jan 01 00:00:00 UTC 1970, com.google.mainline.telemetry=Thu Jan 01 00:00:00 UTC 1970, com.google.android.systemui.gxoverlay=Thu Jan 01 00:00:00 UTC 1970, com.android.carrierconfig.auto_generated_rro_product__=Thu Jan 01 00:00:00 UTC 1970, com.android.emulator.multidisplay=Wed Nov 25 18:38:30 UTC 2026, com.android.providers.partnerbookmarks=Thu Jan 01 00:00:00 UTC 1970, com.android.wallpaper.livepicker=Thu Jan 01 00:00:00 UTC 1970, com.android.providers.telephony.auto_generated_rro_product__=Thu Jan 01 00:00:00 UTC 1970, com.android.phone.auto_generated_rro_vendor__=Thu Jan 01 00:00:00 UTC 1970, com.google.mainline.adservices=Thu Jan 01 00:00:00 UTC 1970, com.android.imsserviceentitlement=Thu Jan 01 00:00:00 UTC 1970, com.google.android.sdksetup=Wed Nov 25 18:38:07 UTC 2026, com.android.internal.emulation.pixel_2_xl=Thu Jan 01 00:00:00 UTC 1970, com.android.internal.emulation.pixel_3_xl=Thu Jan 01 00:00:00 UTC 1970, com.android.internal.emulation.pixel_4_xl=Thu Jan 01 00:00:00 UTC 1970, com.android.storagemanager=Thu Jan 01 00:00:00 UTC 1970, com.android.bookmarkprovider=Thu Jan 01 00:00:00 UTC 1970, com.google.android.overlay.pixelconfigcommon=Thu Jan 01 00:00:00 UTC 1970, com.android.settings=Wed Nov 25 18:38:30 UTC 2026, com.android.systemui.emulation.pixel_3a=Thu Jan 01 00:00:00 UTC 1970, com.android.systemui.emulation.pixel_4a=Thu Jan 01 00:00:00 UTC 1970, com.android.systemui.emulation.pixel_6a=Thu Jan 01 00:00:00 UTC 1970, com.google.android.settings.intelligence=Wed Nov 25 18:38:29 UTC 2026, io.github.geniusdevam.vpnapp=Wed Nov 25 18:38:20 UTC 2026, com.google.android.uwb.resources=Thu Jan 01 00:00:00 UTC 1970, com.android.cts.ctsshim=Thu Jan 01 00:00:00 UTC 1970, com.google.android.wifi.resources=Thu Jan 01 00:00:00 UTC 1970, com.android.remoteprovisioner=Wed Nov 25 18:38:39 UTC 2026, com.google.android.wifi.dialog=Thu Jan 01 00:00:00 UTC 1970, com.android.vpndialogs=Thu Jan 01 00:00:00 UTC 1970, com.google.android.apps.wallpaper=Wed Nov 25 18:38:12 UTC 2026, com.google.android.odad=Thu Jan 01 00:00:00 UTC 1970, com.android.phone=Wed Nov 25 18:37:54 UTC 2026, com.android.shell=Thu Jan 01 00:00:00 UTC 1970, com.android.wallpaperbackup=Thu Jan 01 00:00:00 UTC 1970, com.android.providers.blockednumber=Thu Jan 01 00:00:00 UTC 1970, com.android.settings.auto_generated_rro_product__=Thu Jan 01 00:00:00 UTC 1970, com.android.providers.userdictionary=Thu Jan 01 00:00:00 UTC 1970, com.android.emergency=Thu Jan 01 00:00:00 UTC 1970, com.android.internal.systemui.navbar.gestural=Thu Jan 01 00:00:00 UTC 1970, com.android.location.fuse
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:38:58.396   487  2435 D CoreBackPreview: Window{ad1191f u0 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@aae14b1, mPriority=0}
+11-25 18:38:58.634  1514  1514 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=io.github.geniusdevam.vpnapp fieldId=-1 fieldName=null extras=null}, false)
+11-25 18:39:05.321   487  3007 D CoreBackPreview: Window{ad1191f u0 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}: Setting back callback null
+11-25 18:39:05.336   487  2435 W InputManager-JNI: Input channel object 'ad1191f io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity (client)' was disposed without first being removed with the input manager!
+11-25 18:39:05.383  1514  1514 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=io.github.geniusdevam.vpnapp fieldId=-1 fieldName=null extras=null}, false)
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:39:17.016   487   762 D CoreBackPreview: Window{3f07194 u0 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@6d696df, mPriority=0}
+11-25 18:39:17.506  1514  1514 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=io.github.geniusdevam.vpnapp fieldId=-1 fieldName=null extras=null}, false)
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:39:28.107   487  2476 D CoreBackPreview: Window{3f07194 u0 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}: Setting back callback null
+11-25 18:39:28.114   487  2476 W InputManager-JNI: Input channel object '3f07194 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity (client)' was disposed without first being removed with the input manager!
+11-25 18:39:28.308  1514  1514 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=io.github.geniusdevam.vpnapp fieldId=-1 fieldName=null extras=null}, false)
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:39:41.424   487   931 I ActivityManager: Force stopping io.github.geniusdevam.vpnapp appid=10174 user=0: from pid 7147
+11-25 18:39:41.424   487   931 I ActivityManager: Killing 3499:io.github.geniusdevam.vpnapp:openvpn/u0a174 (adj 100): stop io.github.geniusdevam.vpnapp due to from pid 7147
+11-25 18:39:41.426   487   931 I ActivityManager: Killing 3468:io.github.geniusdevam.vpnapp/u0a174 (adj 0): stop io.github.geniusdevam.vpnapp due to from pid 7147
+11-25 18:39:41.438   487   931 W ActivityTaskManager: Force removing ActivityRecord{6a50cb9 u0 io.github.geniusdevam.vpnapp/.MainActivity} t9 f}}: app died, no saved state
+11-25 18:39:41.447   487   931 W InputManager-JNI: Input channel object '52fe6fd io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity (client)' was disposed without first being removed with the input manager!
+11-25 18:39:41.480   487   892 V ActivityManager: Got obituary of 3468:io.github.geniusdevam.vpnapp
+11-25 18:39:41.536   992   992 D CarrierSvcBindHelper: onHandleForceStop: [io.github.geniusdevam.vpnapp]
+11-25 18:39:41.540   487  3004 V ActivityManager: Got obituary of 3499:io.github.geniusdevam.vpnapp:openvpn
+11-25 18:39:43.507   487  3009 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=io.github.geniusdevam.vpnapp/.MainActivity} from uid 2000
+11-25 18:39:43.529   487   523 I ActivityManager: Start proc 7162:io.github.geniusdevam.vpnapp/u0a174 for next-top-activity {io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}
+11-25 18:39:43.553   487   763 D CoreBackPreview: Window{31a8140 u0 Splash Screen io.github.geniusdevam.vpnapp}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@5fb99be, mPriority=0}
+11-25 18:39:43.831  7162  7162 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=37, uses_libraries=ALL, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:39:43.832  7162  7162 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=37, uses_libraries=ALL, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:39:43.847  7162  7162 D nativeloader: Configuring classloader-namespace for other apk /data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk. target_sdk_version=37, uses_libraries=, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:39:43.857  7162  7162 V GraphicsEnvironment: ANGLE Developer option for 'io.github.geniusdevam.vpnapp' set to: 'default'
+11-25 18:39:43.857  7162  7162 V GraphicsEnvironment: ANGLE GameManagerService for io.github.geniusdevam.vpnapp: false
+11-25 18:39:43.900   487   523 I ActivityManager: Start proc 7178:io.github.geniusdevam.vpnapp:openvpn/u0a174 for service {io.github.geniusdevam.vpnapp/de.blinkt.openvpn.core.OpenVPNStatusService}
+11-25 18:39:44.058  7178  7178 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=37, uses_libraries=ALL, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:39:44.067  7178  7178 D nativeloader: Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=37, uses_libraries=ALL, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:39:44.069  7178  7178 D nativeloader: Configuring classloader-namespace for other apk /data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk. target_sdk_version=37, uses_libraries=, library_path=/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data]:/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.vpnapp-NTM-yovXoOAfOCRYayk4SQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/io.github.geniusdevam.vpnapp
+11-25 18:39:44.077  7178  7178 V GraphicsEnvironment: ANGLE Developer option for 'io.github.geniusdevam.vpnapp' set to: 'default'
+11-25 18:39:44.077  7178  7178 V GraphicsEnvironment: ANGLE GameManagerService for io.github.geniusdevam.vpnapp: false
+11-25 18:39:44.172   487   763 D CoreBackPreview: Window{99befa9 u0 io.github.geniusdevam.vpnapp/io.github.geniusdevam.vpnapp.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@bc9b65c, mPriority=0}
+11-25 18:39:45.569   487   511 I ActivityTaskManager: Displayed io.github.geniusdevam.vpnapp/.MainActivity: +1s906ms
+11-25 18:39:45.570   487  3009 D CoreBackPreview: Window{31a8140 u0 Splash Screen io.github.geniusdevam.vpnapp}: Setting back callback null
+11-25 18:39:45.576   487  2880 W InputManager-JNI: Input channel object '31a8140 Splash Screen io.github.geniusdevam.vpnapp (client)' was disposed without first being removed with the input manager!
+11-25 18:39:45.760  1514  1514 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=io.github.geniusdevam.vpnapp fieldId=-1 fieldName=null extras=null}, false)
+11-25 18:39:49.312  7162  7252 D ProfileInstaller: Skipping profile installation for io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:40:02.618   487   835 E AppOps  : Bad call made by uid 10082. Package "io.github.geniusdevam.vpnapp" does not belong to uid 10082.
+11-25 18:40:02.618   487   835 E AppOps  : java.lang.SecurityException: Specified package "io.github.geniusdevam.vpnapp" under uid 10082 but it is not
+11-25 18:40:10.181   487  2435 I Vpn     : Switched from [Legacy VPN] to io.github.geniusdevam.vpnapp
+11-25 18:40:10.736  7162  7207 D VPNAPP  : phase LOADING_SERVERS 
+11-25 18:40:10.737  7162  7207 D VPNAPP  : phase SCANNING 47
+11-25 18:40:10.771  1514  1514 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=io.github.geniusdevam.vpnapp fieldId=-1 fieldName=null extras=null}, false)
+11-25 18:40:10.848  7162  7663 D VPNAPP  : probed 0/47
+11-25 18:40:11.479  7162  7206 D VPNAPP  : probed 0/47
+11-25 18:40:11.925  7162  7683 D VPNAPP  : probed 17/47
+11-25 18:40:12.332  7162  7207 D VPNAPP  : probed 37/47
+11-25 18:40:12.333  7162  7207 D VPNAPP  : phase CONNECTING 
+11-25 18:40:12.333  7162  7207 D VPNAPP  : connecting #1
+11-25 18:40:12.644  7162  7207 D VPNAPP  : connect vpn815094775 UDP
+11-25 18:40:12.681   487  1952 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 2ace9019-94ef-418a-84df-2e5f625278bf
+11-25 18:40:12.690  7716  7716 W linker  : Warning: "/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-25 18:40:12.686  7716  7716 W libovpnexec.so: type=1400 audit(0.0:47): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:40:12.698  7716  7716 W libovpnexec.so: type=1400 audit(0.0:48): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:40:12.698  7716  7716 W libovpnexec.so: type=1400 audit(0.0:49): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:40:12.698  7716  7716 W libovpnexec.so: type=1400 audit(0.0:50): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:40:12.779  7162  7176 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:40:12.779  7162  7719 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:40:13.793   487  3004 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:13.795   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:13.990   487  1501 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:13.991   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:14.165  7162  7173 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:40:14.166  7162  7173 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:40:14.167  7162  7173 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:40:14.167  7162  7173 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:40:14.167  7162  7173 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:40:14.167  7162  7173 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:40:14.168  7162  7173 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:40:14.379  7162  7173 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:40:15.543   487   508 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:15.548   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:16.394   487  1575 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:16.394   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:16.428   487  1575 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:16.441   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:16.611   487  1951 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:40:16.623  7162  7176 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:40:16.623  7162  7176 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:40:16.623  7162  7176 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:40:16.629  7162  7680 D VPNAPP  : connect vpn815094775 -> up
+11-25 18:40:16.658   487   576 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:16.682   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:16.991   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|2147483647|ranker_group|10174|ranker_group
+11-25 18:40:18.012   487  1654 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:18.014   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:40:20.110   487   509 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:20.111   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:40:22.354   487  1748 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:22.356   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:25.181   487  2880 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:25.181   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:27.031   487  1748 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:27.031   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:29.011   487  1748 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:29.012   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:31.235   487  2880 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:40:31.236   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:40:32.350   487  2880 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:32.351   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:40:32.551   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:40:32.551   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:41:07.721  7162  7680 D VPNAPP  : phase LOADING_SERVERS 
+11-25 18:41:10.306  7162  7668 D VPNAPP  : phase SCANNING 95
+11-25 18:41:10.422  7162  8308 D VPNAPP  : probed 0/95
+11-25 18:41:10.926  7162  7654 D VPNAPP  : probed 2/95
+11-25 18:41:11.431  7162  7670 D VPNAPP  : probed 40/95
+11-25 18:41:11.935  7162  8307 D VPNAPP  : probed 62/95
+11-25 18:41:12.440  7162  7673 D VPNAPP  : probed 68/95
+11-25 18:41:12.944  7162  7659 D VPNAPP  : probed 68/95
+11-25 18:41:13.448  7162  7668 D VPNAPP  : probed 68/95
+11-25 18:41:13.952  7162  7207 D VPNAPP  : probed 77/95
+11-25 18:41:14.456  7162  8301 D VPNAPP  : probed 93/95
+11-25 18:41:14.960  7162  7659 D VPNAPP  : probed 95/95
+11-25 18:41:14.961  7162  7659 D VPNAPP  : probed 95/95
+11-25 18:41:14.961  7162  7659 D VPNAPP  : phase SCANNING refine 48
+11-25 18:41:15.112  7162  7657 D VPNAPP  : probed 0/48
+11-25 18:41:15.617  7162  7660 D VPNAPP  : probed 0/48
+11-25 18:41:16.121  7162  7681 D VPNAPP  : probed 27/48
+11-25 18:41:16.223  7162  7665 D VPNAPP  : probed 48/48
+11-25 18:41:16.224  7162  7665 D VPNAPP  : phase SPEED_TESTING 
+11-25 18:41:16.228  7162  7665 D VPNAPP  : connect cetsssa TCP
+11-25 18:41:16.337   487  1634 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 93c0197a-ecf8-4cc2-b0cc-31479e7a9b06
+11-25 18:41:16.361  8316  8316 W linker  : Warning: "/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-25 18:41:16.358  8316  8316 W libovpnexec.so: type=1400 audit(0.0:54): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:41:16.358  8316  8316 W libovpnexec.so: type=1400 audit(0.0:55): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:41:16.358  8316  8316 W libovpnexec.so: type=1400 audit(0.0:56): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:41:16.412  7162  7719 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:41:16.412  7162  7719 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:41:16.358  8316  8316 W libovpnexec.so: type=1400 audit(0.0:57): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:41:17.418   487  1634 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:17.420   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:17.491   487  1634 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:17.492   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:17.991   487  1653 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:17.992   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:18.077  7162  8317 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:41:18.077  7162  8317 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:41:18.077  7162  8317 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:41:18.077  7162  8317 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:41:18.077  7162  8317 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:41:18.077  7162  8317 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:41:18.077  7162  8317 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:41:18.152  7162  8317 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:41:19.163   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:19.164   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:19.246   487  1653 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:19.247   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:19.250   487  1634 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:19.250   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:19.326   487   846 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:41:19.328  7162  7786 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:41:19.328  7162  7786 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:41:19.328  7162  7786 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:41:19.329  7162  7655 D VPNAPP  : connect cetsssa -> up
+11-25 18:41:19.330   487   762 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:19.332   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:19.363   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:19.365   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:19.447   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:19.448   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:19.450   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:19.450   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:20.029   487   846 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:20.030   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:22.008   487   846 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:22.009   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:41:24.007   487  1748 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:24.010   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:26.011   487  1748 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:26.012   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:28.007   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:28.008   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:29.245  7162  7670 D VPNAPP  : leaderboard tested=1/10
+11-25 18:41:29.248  7162  7670 D VPNAPP  : connect vpn421416087 TCP
+11-25 18:41:29.260   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:29.261   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:29.365   487  1748 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 80a351f2-2442-45f0-b0f6-6d8af179588a
+11-25 18:41:29.410   487  1748 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:29.410   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:29.461   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:41:29.461   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:41:30.369  8403  8403 W linker  : Warning: "/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-25 18:41:30.379   487  1748 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:30.366  8403  8403 W libovpnexec.so: type=1400 audit(0.0:59): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:41:30.380   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:30.366  8403  8403 W libovpnexec.so: type=1400 audit(0.0:60): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:41:30.392  7162  7719 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:41:30.392  7162  7719 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:41:30.366  8403  8403 W libovpnexec.so: type=1400 audit(0.0:61): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:41:30.366  8403  8403 W libovpnexec.so: type=1400 audit(0.0:62): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:41:31.385   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:31.386   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:31.490   487  1748 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:31.494   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:31.987   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:31.993   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:32.080  7162  8404 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:41:32.081  7162  8404 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:41:32.081  7162  8404 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:41:32.081  7162  8404 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:41:32.081  7162  7786 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:41:32.081  7162  7786 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:41:32.082  7162  7786 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:41:32.177  7162  8404 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:41:33.347   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:33.347   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:33.478   487  1654 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:33.479   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:33.487   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:33.492   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:41:33.530   487  2476 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:41:33.536  7162  7670 D VPNAPP  : connect vpn421416087 -> up
+11-25 18:41:33.540   487  1654 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:33.542  7162  7793 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:41:33.542  7162  7793 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:41:33.542  7162  7793 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:41:33.542   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:33.552   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:33.566   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:33.685   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:33.685   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:33.688   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:33.706   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:41:34.066   487   576 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:34.067   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:36.032   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:36.034   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:41:38.006   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:38.007   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:40.024   487  1653 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:40.025   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:42.010   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:42.010   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:44.044   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:44.045   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:46.040   487  1653 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:46.040   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:48.084   487   576 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:48.085   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:50.112   487  1653 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:50.113   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:41:52.174   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:52.175   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:54.093   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:54.094   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:41:56.007   487  1654 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:56.008   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:58.010   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:41:58.011   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:00.032   487  3009 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:00.033   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:00.858  7162  7656 D VPNAPP  : leaderboard tested=2/10
+11-25 18:42:00.863  7162  7656 D VPNAPP  : connect vpn778651854 UDP
+11-25 18:42:00.866   487  1575 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:00.867   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:00.970   487  1575 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 6340b5c5-e05a-4161-bf10-8c65f0708df9
+11-25 18:42:01.002   487   576 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:01.003   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:01.080   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:42:01.080   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:42:01.977  8613  8613 W linker  : Warning: "/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-25 18:42:01.974  8613  8613 W libovpnexec.so: type=1400 audit(0.0:66): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:42:01.974  8613  8613 W libovpnexec.so: type=1400 audit(0.0:67): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:42:02.000  7162  7334 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:42:02.000  7162  7334 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:42:01.974  8613  8613 W libovpnexec.so: type=1400 audit(0.0:68): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:42:01.974  8613  8613 W libovpnexec.so: type=1400 audit(0.0:69): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:03.014   487   835 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:03.015   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:03.166  7162  8614 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.166  7162  8614 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.167  7162  7786 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.167  7162  7786 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.167  7162  7786 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.168  7162  7786 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.168  7162  7786 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.168  7162  7786 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.168  7162  7786 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.168  7162  7786 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.168  7162  7786 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.169  7162  7786 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.169   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:03.170   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:03.332  7162  8405 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.332  7162  8405 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.332  7162  8405 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.332  7162  8405 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.333  7162  8405 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.333  7162  8405 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.337  7162  7719 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.337  7162  7719 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.346  7162  8614 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.346  7162  8614 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.347  7162  8614 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.347  7162  8614 D VPNAPP  : engine: TLS Error: unknown opcode received from [AF_INET]217.15.x.x:2741 op=24
+11-25 18:42:03.348  7162  8614 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:42:03.348  7162  8614 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:42:03.351  7162  8614 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:42:03.351  7162  7719 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:42:03.351  7162  7719 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:42:03.351  7162  7719 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:42:03.351  7162  7719 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:42:03.511  7162  8614 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:42:04.739   487   762 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:04.739   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:05.546   487  1949 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:05.547   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:05.548   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:05.549   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:05.582   487  3010 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:42:05.591  7162  7793 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:42:05.592  7162  7793 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:42:05.592  7162  7793 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:42:05.592  7162  7656 D VPNAPP  : connect vpn778651854 -> up
+11-25 18:42:05.601   487  3012 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:05.603   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:05.747   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:05.748   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:05.748   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:05.749   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:06.038   487  1654 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:06.039   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:08.155   487  1575 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:08.156   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:10.690   487   931 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:10.690   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:12.015   487   931 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:12.016   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:14.045   487   931 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:14.047   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:16.007   487  1575 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:16.008   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:18.006   487  2880 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:18.007   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:20.024   487  1653 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:20.029   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:22.060   487  3004 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:22.070   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:24.013   487  2989 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:24.014   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:24.194  7162  7653 D VPNAPP  : leaderboard tested=3/10
+11-25 18:42:24.200  7162  7653 D VPNAPP  : connect vpn241155902 UDP
+11-25 18:42:24.210   487  2989 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:24.212   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:24.318   487  3004 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut b0651be8-2753-4ddd-b96c-05867b886ef1
+11-25 18:42:24.374   487  2989 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:24.377   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:24.444   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:42:24.453   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:42:25.325  8818  8818 W linker  : Warning: "/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-25 18:42:25.322  8818  8818 W libovpnexec.so: type=1400 audit(0.0:71): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:42:25.322  8818  8818 W libovpnexec.so: type=1400 audit(0.0:72): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:42:25.322  8818  8818 W libovpnexec.so: type=1400 audit(0.0:73): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:42:25.322  8818  8818 W libovpnexec.so: type=1400 audit(0.0:74): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:42:25.369  7162  7174 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:42:25.369  7162  7174 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:42:26.347   487  3004 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:26.348   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:26.500   487  1575 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:26.501   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:26.665  7162  8404 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:42:26.666  7162  8404 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:42:26.666  7162  8404 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:42:26.666  7162  8404 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:42:26.667  7162  8404 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:42:26.667  7162  8404 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:42:26.667  7162  8404 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:42:26.822  7162  8404 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:42:28.051   487  3004 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:28.052   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:28.846   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:28.847   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:28.850   487  1501 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:28.850   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:28.912   487  3010 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:42:28.916  7162  7793 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:42:28.916  7162  7793 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:42:28.916  7162  7793 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:42:28.917  7162  7682 D VPNAPP  : connect vpn241155902 -> up
+11-25 18:42:28.923   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:28.928   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:29.046   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:29.048   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:29.051   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:29.052   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:30.024   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:30.024   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:32.255   487   508 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:32.256   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:34.523   487  1634 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:34.524   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:36.030   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:36.030   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:38.007   487  1575 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:38.009   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:40.010   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:40.016   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:42.143   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:42.144   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:44.023   487  3007 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:44.024   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:44.414  7162  7656 D VPNAPP  : leaderboard tested=4/10
+11-25 18:42:44.424  7162  7656 D VPNAPP  : connect vpn912610057 TCP
+11-25 18:42:44.516   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:44.528   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:44.634   487  1505 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut c9f276c2-2716-4902-9f0d-71c0c10875f3
+11-25 18:42:44.675   487  1634 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:44.676   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:44.728   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:42:44.732   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:42:45.638  8919  8919 W linker  : Warning: "/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-25 18:42:45.634  8919  8919 W libovpnexec.so: type=1400 audit(0.0:76): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:42:45.642  8919  8919 W libovpnexec.so: type=1400 audit(0.0:77): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:42:45.642  8919  8919 W libovpnexec.so: type=1400 audit(0.0:78): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:42:45.642  8919  8919 W libovpnexec.so: type=1400 audit(0.0:79): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:42:45.675  7162  7176 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:42:45.675  7162  7176 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:42:46.680   487  2880 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:46.681   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:46.833   487  3004 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:46.834   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:46.983   487  3004 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:46.984   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:47.140  7162  7176 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:42:47.140  7162  7176 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:42:47.140  7162  7176 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:42:47.140  7162  7176 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:42:47.140  7162  7176 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:42:47.141  7162  7176 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:42:47.141  7162  7176 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:42:47.295  7162  7176 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:42:48.579   487  2880 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:48.582   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:48.727   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:48.728   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:48.743   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:48.745   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:42:48.825   487  3010 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:42:48.827  7162  7173 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:42:48.827  7162  7173 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:42:48.827  7162  7173 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:42:48.835   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:48.839   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:48.857  7162  7662 D VPNAPP  : connect vpn912610057 -> up
+11-25 18:42:48.931   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:48.932   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:48.947   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:48.947   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:42:49.013   487  3004 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:49.015   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:42:51.005   487  1653 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:51.006   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:53.059   487  1654 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:53.060   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:55.742   487  1501 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:55.743   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:57.741   487  3012 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:57.741   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:59.816   487  3012 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:42:59.817   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:01.118   487  1501 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:01.118   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:03.166   487   931 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:03.167   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:06.000   487  2989 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:06.001   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:07.190   487  1501 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:07.192   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:09.018   487  1952 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:09.022   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:11.226   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:11.226   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:14.045   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:14.046   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:16.477   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:16.478   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:18.793   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:18.793   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:20.172   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:20.173   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:22.318   487   931 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:22.319   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:24.361   487  3007 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:24.362   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:26.178   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:26.179   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:28.008   487  3007 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:28.009   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:30.009   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:30.012   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:32.035   487  3006 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:32.038   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:34.010   487   931 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:34.011   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:36.098   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:36.099   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:38.120   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:38.121   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:38.125  7162  7677 D VPNAPP  : leaderboard tested=5/10
+11-25 18:43:38.129  7162  7677 D VPNAPP  : connect vpn648581557 TCP
+11-25 18:43:38.134   487  3007 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:38.134   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:38.237   487  3007 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut cfcc1ff3-c55c-4cc4-8891-f64a66758a77
+11-25 18:43:38.267   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:38.267   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:38.324   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:43:38.329   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:43:38.341   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:43:38.342   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:43:39.245  9286  9286 W linker  : Warning: "/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-25 18:43:39.242  9286  9286 W libovpnexec.so: type=1400 audit(0.0:81): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:43:39.242  9286  9286 W libovpnexec.so: type=1400 audit(0.0:82): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:43:39.242  9286  9286 W libovpnexec.so: type=1400 audit(0.0:83): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:43:39.273  7162  7786 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:43:39.273  7162  7786 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:43:39.242  9286  9286 W libovpnexec.so: type=1400 audit(0.0:84): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:43:40.280   487  1652 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:40.281   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:40.405   487  1652 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:40.406   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:40.910   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:40.912   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:41.042  7162  9287 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:43:41.042  7162  9287 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:43:41.043  7162  9288 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:43:41.043  7162  9288 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:43:41.043  7162  7786 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:43:41.043  7162  7786 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:43:41.043  7162  7786 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:43:41.169  7162  9287 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:43:42.376   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:42.377   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:45.722   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:45.722   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:45.725   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:45.726   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:43:45.760   487   763 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:43:45.766  7162  7718 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:43:45.766  7162  7718 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:43:45.766  7162  7718 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:43:45.767  7162  7683 D VPNAPP  : connect vpn648581557 -> up
+11-25 18:43:45.769   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:45.770   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:45.929   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:43:45.931   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:43:45.931   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:43:45.931   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:43:47.110   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:47.112   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:49.017   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:49.018   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:43:51.013   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:51.014   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:53.086   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:53.086   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:55.187   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:55.189   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:57.176   487  1951 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:57.177   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:59.144   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:43:59.146   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:00.244  7162  7674 D VPNAPP  : leaderboard tested=6/10
+11-25 18:44:00.246  7162  7674 D VPNAPP  : phase CONFIRMING 
+11-25 18:44:00.301  7162  7674 D VPNAPP  : connect cetsssa TCP
+11-25 18:44:00.337   487  2880 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:00.339   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:00.450   487  2989 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut dd2a265d-7c40-4f24-a367-5bf6daefb7bb
+11-25 18:44:00.638   487  2989 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:00.652   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:01.459  9392  9392 W linker  : Warning: "/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-25 18:44:01.454  9392  9392 W libovpnexec.so: type=1400 audit(0.0:86): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:01.454  9392  9392 W libovpnexec.so: type=1400 audit(0.0:87): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:01.454  9392  9392 W libovpnexec.so: type=1400 audit(0.0:88): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:01.454  9392  9392 W libovpnexec.so: type=1400 audit(0.0:89): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:01.494  7162  8318 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:44:01.494  7162  8318 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:44:02.501   487  2880 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:02.502   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:02.574   487  2880 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:02.575   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:03.071   487  2989 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:03.072   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:03.149  7162  7718 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:44:03.150  7162  7718 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:44:03.150  7162  7718 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:44:03.151  7162  7718 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:44:03.151  7162  7718 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:44:03.151  7162  7718 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:44:03.151  7162  7718 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:44:03.219  7162  7718 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:44:04.413   487  2880 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:04.414   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:04.549   487  2880 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:04.549   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:04.551   487  1952 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:04.552   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:04.586   487  2880 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:44:04.600  7162  9287 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:44:04.604  7162  9288 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:44:04.604  7162  9288 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:44:04.604  7162  7674 D VPNAPP  : connect cetsssa -> up
+11-25 18:44:04.622   487  2989 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:04.633   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:04.798   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:04.798   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:04.798   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:04.798   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:05.030   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:05.030   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:07.008   487   508 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:07.009   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:09.008   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:09.011   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:11.037   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:11.039   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:13.047   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:13.048   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:13.134  7162  7677 D VPNAPP  : connect vpn241155902 UDP
+11-25 18:44:13.138   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:13.140   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:13.243   487   892 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 57751322-084d-46a6-a0ac-d7e6eba3ce5a
+11-25 18:44:13.295   487  1951 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:13.295   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:13.341   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:44:13.341   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:44:14.263  9451  9451 W linker  : Warning: "/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-25 18:44:14.262  9451  9451 W libovpnexec.so: type=1400 audit(0.0:91): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:14.262  9451  9451 W libovpnexec.so: type=1400 audit(0.0:92): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:14.262  9451  9451 W libovpnexec.so: type=1400 audit(0.0:93): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:14.262  9451  9451 W libovpnexec.so: type=1400 audit(0.0:94): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:14.312  7162  7718 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:44:14.312  7162  7718 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:44:15.329   487  2435 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:15.340   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:15.483   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:15.484   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:15.646  7162  7793 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:44:15.646  7162  7793 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:44:15.646  7162  7793 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:44:15.646  7162  7793 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:44:15.646  7162  7793 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:44:15.646  7162  7793 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:44:15.646  7162  7793 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:44:15.792  7162  8318 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:44:16.857   487  1951 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:16.858   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:17.005   487  2435 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:17.006   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:17.008   487   892 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:17.009   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:17.042   487  2435 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:44:17.045  7162  7787 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:44:17.045  7162  7787 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:44:17.045  7162  7787 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:44:17.046  7162  7677 D VPNAPP  : connect vpn241155902 -> up
+11-25 18:44:17.087   487  2435 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:17.102   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:17.205   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:17.207   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:17.208   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:17.209   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:18.080   487  1634 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:18.081   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:44:20.014   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:20.016   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:22.094   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:22.095   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:44:24.062   487  1634 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:24.062   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:44:26.006   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:26.007   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:28.008   487  2435 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:28.009   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:44:30.009   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:30.010   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:32.014   487  1634 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:32.014   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:44:34.008   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:34.009   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:34.023  7162  7677 D VPNAPP  : connect vpn912610057 TCP
+11-25 18:44:34.031   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:34.033   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:34.136   487  1505 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut 5c34bc70-4080-445c-ae27-285827bb8ec3
+11-25 18:44:34.179   487  1951 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:34.180   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:34.232   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:44:34.232   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:44:34.233   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:44:34.234   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:44:35.141  9662  9662 W linker  : Warning: "/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-25 18:44:35.138  9662  9662 W libovpnexec.so: type=1400 audit(0.0:98): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:35.138  9662  9662 W libovpnexec.so: type=1400 audit(0.0:99): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:35.172  7162  8614 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:44:35.172  7162  8614 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:44:35.138  9662  9662 W libovpnexec.so: type=1400 audit(0.0:100): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:35.138  9662  9662 W libovpnexec.so: type=1400 audit(0.0:101): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:36.174   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:36.174   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:36.327   487   835 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:36.329   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:36.829   487   835 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:36.830   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:36.984  7162  7334 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:44:36.985  7162  7334 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:44:36.985  7162  7334 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:44:36.986  7162  8614 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:44:36.986  7162  8614 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:44:36.986  7162  8614 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:44:36.986  7162  8614 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:44:37.148  7162  7334 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:44:38.379   487   835 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:38.462   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:38.509   487   508 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:38.513   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:38.519   487   508 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:38.520   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:38.674   487  1952 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:44:38.679  7162  7718 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:44:38.680  7162  7718 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:44:38.680  7162  7718 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:44:38.680  7162  7677 D VPNAPP  : connect vpn912610057 -> up
+11-25 18:44:38.698   487   931 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:38.699   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:38.712   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:38.717   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:38.723   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:38.723   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:39.014   487  1952 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:39.016   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:44:41.123   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:41.124   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:43.015   487  3004 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:43.015   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:44:45.008   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:45.014   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:47.012   487  3010 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:47.013   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:44:49.008   487  1952 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:49.009   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:49.198  7162  7653 D VPNAPP  : leaderboard tested=6/10
+11-25 18:44:49.199  7162  7653 D VPNAPP  : phase CONNECTING 
+11-25 18:44:49.199  7162  7653 D VPNAPP  : connecting #1
+11-25 18:44:49.203  7162  7653 D VPNAPP  : connect cetsssa TCP
+11-25 18:44:49.214   487   931 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:49.215   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:49.317   487  3010 W ShortcutService: reportShortcutUsed: package io.github.geniusdevam.vpnapp doesn't have shortcut ad124434-e6f9-4cd2-8903-8deaa2685660
+11-25 18:44:49.382   487   835 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:49.383   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:49.416   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:44:49.418   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1346787898|null|10174
+11-25 18:44:50.326  9973  9973 W linker  : Warning: "/data/app/~~NRyzE0XBwf8rvUaN5Ul8VQ==/io.github.geniusdevam.[data].so" is not a directory (ignoring)
+11-25 18:44:50.322  9973  9973 W libovpnexec.so: type=1400 audit(0.0:103): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:50.339   487   931 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:50.343   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:50.322  9973  9973 W libovpnexec.so: type=1400 audit(0.0:104): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:50.322  9973  9973 W libovpnexec.so: type=1400 audit(0.0:105): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:50.351  7162  7787 D VPNAPP  : engine: OpenVPN 2.7-icsopenvpn [git:c29ee42] x86_64 [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on Nov 25 2026
+11-25 18:44:50.351  7162  7787 D VPNAPP  : engine: library versions: OpenSSL 4.1.0 23 Oct 2026, LZO 2.10
+11-25 18:44:50.322  9973  9973 W libovpnexec.so: type=1400 audit(0.0:106): avc: denied { search } for name="tests" dev="dm-34" ino=65540 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:shell_test_data_file:s0 tclass=dir permissive=0 app=io.github.geniusdevam.vpnapp
+11-25 18:44:51.358   487   835 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:51.359   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:51.431   487  1748 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:51.432   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:51.935   487   835 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:51.936   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:52.015  7162  8318 D VPNAPP  : engine: VERIFY OK: depth=3, C=US, O=Internet Security Research Group, CN=ISRG Root X1
+11-25 18:44:52.016  7162  8318 D VPNAPP  : engine: VERIFY OK: depth=2, C=US, O=ISRG, CN=Root YR
+11-25 18:44:52.016  7162  8318 D VPNAPP  : engine: VERIFY OK: depth=1, C=US, O=Let's Encrypt, CN=YR2
+11-25 18:44:52.017  7162  8318 D VPNAPP  : engine: VERIFY KU OK
+11-25 18:44:52.017  7162  8318 D VPNAPP  : engine: VERIFY EKU OK
+11-25 18:44:52.018  7162  8318 D VPNAPP  : engine: VERIFY X509NAME OK: CN=opengw.net
+11-25 18:44:52.018  7162  8318 D VPNAPP  : engine: VERIFY OK: depth=0, CN=opengw.net
+11-25 18:44:52.088  7162  8318 D VPNAPP  : engine: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 253 bits X25519, peer signing digest/type: rsa_pss_rsae_sha256 RSASSA-PSS, key agreement: x25519
+11-25 18:44:53.346   487  1748 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:53.347   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:53.595   487   931 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:53.596   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:53.597   487  1748 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:53.598   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1623130911|null|10174 added an invalid shortcut
+11-25 18:44:53.635   487  2476 I Vpn     : Established by io.github.geniusdevam.vpnapp on tun0
+11-25 18:44:53.638   487  2476 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:53.642  7162  9287 D VPNAPP  : engine: Outgoing Data Channel: Cipher 'AES-128-CBC' initialized with 128 bit key
+11-25 18:44:53.642  7162  9287 D VPNAPP  : engine: Initialization Sequence Completed
+11-25 18:44:53.642  7162  9287 D VPNAPP  : engine: Data Channel: cipher 'AES-128-CBC', auth 'SHA1'
+11-25 18:44:53.643  7162  7677 D VPNAPP  : connect cetsssa -> up
+11-25 18:44:53.654   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:53.797   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:53.798   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:53.800   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:53.800   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|1623130911|null|10174
+11-25 18:44:53.877   487   487 I NotificationService: Cannot find enqueued record for key: 0|io.github.geniusdevam.vpnapp|2147483647|ranker_group|10174|ranker_group
+11-25 18:44:54.027   487  1652 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:54.028   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:56.499   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:56.500   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:59.109   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:44:59.109   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:45:02.221   487   763 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:45:02.221   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+[line removed: may contain key material or credentials]
+[line removed: may contain key material or credentials]
+11-25 18:45:04.577   487  1505 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
+11-25 18:45:04.579   487   522 W NotificationService: notification 0|io.github.geniusdevam.vpnapp|1346787898|null|10174 added an invalid shortcut
