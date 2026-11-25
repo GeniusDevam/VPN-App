@@ -2,7 +2,7 @@
 
 > **Audience:** anyone building or reviewing this app.
 > **Target device:** Android 16 smartphone. The app is sideloaded first; Google Play later is optional.
-> **Status:** the plan has been implemented; this file is the original design plus dated notes where the build differs. **The code and `docs/STATUS.md` win over any statement here.** Last updated 2026-11-07.
+> **Status:** the plan has been implemented; this file is the original design plus dated notes where the build differs. **The code and `docs/STATUS.md` win over any statement here.** Last updated 2026-11-25: v1.0.0, the first release signed with the permanent key, is published; physical-device testing is pending (`docs/MANUAL_QA.md`).
 
 The goal is "the best VPN app available", with two connection modes:
 

@@ -3,14 +3,50 @@
 Audit baseline `c1bc238`. This file separates **confirmed fixes**, **tested behaviour**, **open issues** and
 **unverified risks**. "Verified" means demonstrated by a test or CI run that actually executed; evidence is named for each row.
 
+## Current state (25 November 2026), read this first
+
+**Released:** [v1.0.0](https://github.com/GeniusDevam/VPN-App/releases/tag/v1.0.0), the first release signed with the permanent key,
+built from commit `f95296a` on `main` (CI run [#48](https://github.com/GeniusDevam/VPN-App/actions/runs/45664646878), deployment
+approved by the key holder). Universal APK SHA-256 `57c68ef8...2649`; signing certificate SHA-256
+`0838262d4e4d35da8527a5555c90552221b07db3804d17966e273f2fe1e5998a`. These were checked independently against the published APK
+itself (`keytool -printcert -jarfile`, `jarsigner -verify`), the release notes, GitHub's asset digests, the `sign` job log and the README.
+
+**Done:** release-signing setup (protected environment `release` with required reviewer, no administrator bypass, `v*` tags only;
+tag ruleset; default-branch ruleset; read-only workflow token; outside-contributor approval), permanent key generated and backed up by
+the key holder and uploaded with `tools/upload-release-key.sh`, old leaked-key release deleted, default branch switched to `main`.
+**The signing setup needs no further work; never generate a replacement key unless the current one is lost or compromised**
+(`docs/RELEASE_SIGNING.md` has the recovery procedure).
+
+**Verified (by CI, not on real phones):** unit tests, real-OpenVPN tests, Android 6.0-16 emulator matrix including tablet, foldable,
+small phone at 200% font and Android TV, key tools on Linux, macOS and Windows. See sections 4 and 4b.
+
+**Pending:** physical-device testing, run by the maintainer: [docs/MANUAL_QA.md](MANUAL_QA.md). **Nothing has been tested on a real
+phone yet.** Do not describe the app as production-ready before that is done.
+
+**Open issues (details in [docs/CI.md](CI.md)):**
+1. Suspected Best Connect stall: one speed test has no time limit, and a stalled upload can block for many minutes (Android TV run in
+   #48, INCONCLUSIVE). Fix proposed, not implemented (needs approval and a new release). Manual test C7 checks it.
+2. Build #48 shows "failure" only because the macOS `keygen` job never got a runner within its 15-minute limit; the release path does
+   not depend on it. Workflow options proposed, not implemented.
+3. GitHub release immutability is off (`immutable: false`); recommended to enable in repository settings.
+4. C8 (below): after the app process is killed while the VPN stays up, the UI may show "Connected" without server and cipher.
+5. The old branch `ccr-49f3cc12-faye7c` (pre-cleanup history) still exists; deleting it is the maintainer's decision.
+
+**Document map:** `README.md` (users: install, verify, risks), `docs/RELEASE_SIGNING.md` (signing design, release procedure, recovery),
+`docs/MANUAL_QA.md` (device test plan and results), `docs/CI.md` (CI behaviour, findings, optimisation proposals),
+`docs/PERFORMANCE.md`, `docs/SECURITY.md`, `docs/DIRECTORY.md`, `docs/AUDIT.md`, `docs/FUTURE.md` (ideas only), `PLAN.md` (original
+design, annotated).
+
 ## 0. Maintainer actions
-1. **Delete the public `latest` release now.** It is build #17 (the audit baseline) and is signed with the leaked key. The pipeline would
-   remove it only after a new signed release exists, and CI has no permission to delete it. Until it is gone, anyone can
-   download an APK that carries the compromised identity.
-2. **Create the real release key** (`tools/generate-release-key.sh`, then `tools/upload-release-key.sh`; on Windows in Git Bash). Until then CI
-   publishes nothing. This is the only way B1 can close; it cannot be done from the repository. Migration limits: `docs/RELEASE_SIGNING.md`.
-3. `git push origin --delete emulator-results`, then let the next run recreate it (old commits on it hold unredacted logs).
-4. Run the physical-device checks in section 6. **No physical device was used. Everything below is emulator, JVM or CI.**
+Done (25 November 2026): delete the old `latest` release (build #17); GitHub environment and rulesets; create, back up and upload
+the release key; publish v1.0.0; switch the default branch to `main`. The `emulator-results` and `compat-results` branches are now
+replaced by a single redacted commit on every run, so the old unredacted commits are no longer reachable from them.
+
+Remaining:
+1. Run the physical-device tests in [docs/MANUAL_QA.md](MANUAL_QA.md) and report results.
+2. Decide on the proposals in [docs/CI.md](CI.md): the Best Connect stall fix, release-gate hardening, CI speed-ups.
+3. Enable release immutability (*Settings > General > Releases*).
+4. Decide whether to delete the branch `ccr-49f3cc12-faye7c`.
 
 ## 1. Problems found during testing
 | Problem | What happened and what changed |
@@ -41,7 +77,7 @@ Legend: **Fixed** = changed and tested; **Mitigated** = reduced, not eliminated;
 ### B. Security
 | Item | Status | Evidence / caveat |
 |---|---|---|
-| B1 signing key | **Open for the owner; repository side done and verified in CI** | The release key is readable only by the `sign` job (protected environment `release`, tag releases only, read-only token); every other build uses a throw-away key and no other job references a secret (checked on every build; 13 mutation tests re-create the leaks and require rejection). Releases re-sign the already-tested APK (`tools/resign-apk.sh`, exercised on every build with a throw-away key). The certificate is pinned and the leaked key is refused by fingerprint. **Not run with a real key yet.** Owner: GitHub environment setup, delete the old public `latest` release, create the key (docs/RELEASE_SIGNING.md). Old key remains in git history. |
+| B1 signing key | **Fixed (25 November 2026)** | Permanent key created by the key holder and stored only in the protected environment `release`; v1.0.0 signed with it and published (certificate `0838262d...998a`, checked against the published APK). The release key is readable only by the `sign` job (tag releases only, manual approval, read-only token); every other build uses a throw-away key and no other job references a secret (checked on every build; 13 mutation tests). Releases re-sign the already-tested APK; the certificate is pinned and the leaked key is refused by fingerprint. Old key remains in git history and must never be trusted (README). |
 | B2 server identity | **Fixed, live-checked** | Real OpenVPN: genuine cert connects; wrong name / wrong EKU / untrusted CA rejected; control without policy accepts the wrong name (CI, 7/7, OpenVPN 2.7.0). **Live relays: 15/24 connected with the policy and 15/24 without; every relay that reached TLS presented `CN=opengw.net`.** Residual: authenticates VPN Gate's software, not an individual volunteer. |
 | B3 HTTP fallback | **Fixed** | HTTPS only; cleartext disabled app-wide. |
 | B4 leak protection | **Not guaranteed by an app; documented.** | `persist-tun`, IPv6 blocking, forced DNS. Always-on + "Block connections without VPN" were **not tested** (no device). Probe sockets bypass the tunnel by design. |
@@ -99,7 +135,21 @@ Widget, shortcuts, auto-failover, easier Always-on setup, optional Tor, backgrou
 Two PASS and one INCONCLUSIVE out of three runs with real assertions is **not** a reliability figure; live volunteers vary from run to run, and the one INCONCLUSIVE used a country with a single relay.
 
 ## 4b. Compatibility matrix (CI emulators, live VPN Gate)
-<!-- COMPAT-MATRIX -->
+Release run #48 (`f95296a`, the v1.0.0 commit); full numbers and history in `docs/PERFORMANCE.md`, per-device screenshots on the
+`compat-results` branch.
+
+| Device | Verdict | Quick Connect | Best Connect |
+|---|---|---|---|
+| Android 16 phone (release gate) | PASS | connected (Japan) | done |
+| Android 16 foldable | PASS | 23 s (Japan) | 4:16 |
+| Android 13 tablet | PASS | 23 s (Japan) | 5:19 |
+| Android 10, 320 dp, 200% font | PASS | 19 s (Indonesia) | 3:07 |
+| Android 8.0 phone | PASS | 18 s (Japan) | 3:37 |
+| Android 7.0 phone | PASS | 17 s (Japan) | 2:32 |
+| Android 6.0 phone (installs the release-re-signed APK) | PASS | 19 s (Japan) | 3:56 |
+| Android TV 11 (32-bit x86) | **INCONCLUSIVE** | 25 s (Japan) | did not finish in 26 min: suspected stall, `docs/CI.md` section 3 |
+
+The job of an INCONCLUSIVE device still shows green in the Actions list; read the verdict, not the tick.
 
 ## 5. Test matrix
 * Engine unit tests (JVM): **129**, all passing locally and in CI. Added during hardening: persistence 7, pool/failure reasons 8+5, record summary 7, tls-auth probe 6.
@@ -109,14 +159,16 @@ Two PASS and one INCONCLUSIVE out of three runs with real assertions is **not** 
 * Documentation: README, PLAN.md (status table and dated notes on every superseded passage), SECURITY, DIRECTORY, AUDIT and RELEASE_SIGNING were updated to match; the plan's original text is kept and annotated.
 * Not covered: country picker with zero or stale directory in the UI (engine state logic is unit-tested, the screens are not), worldwide search, Quick Settings tile, notification actions, process recreation with the VPN up, network switching, screen-off, Doze, Always-on / lockdown, split tunnelling, IPv6/DNS leaks, updates, TalkBack.
 
-## 6. Physical-device checklist (all NOT TESTED)
-Wi-Fi and cellular; switch networks mid-session; screen off for 30+ minutes; background worldwide search and its notification; Always-on with and without "Block connections without VPN" (watch what happens during Best Connect candidate switching); split tunnelling; IPv6/DNS leak test while connected and while reconnecting; kill the app from recents while connected; reboot; Quick Settings tile; install over an older build.
+## 6. Physical-device testing
+The full plan, with procedures, pass criteria, evidence to collect and a results table, is [docs/MANUAL_QA.md](MANUAL_QA.md).
+**Status: not started (all NOT RUN).**
 
 ## 7. Deferred, by priority
-1. Reconstruct connection details after process death (C8), then device tests.
-2. Pin Actions by SHA; protect the default branch and gate the signing secrets behind an approval environment.
-3. Review the exported-component list printed by CI; remove anything the app does not need.
-4. tls-crypt-aware probe (no live relay uses it today, so low value).
+1. Physical-device testing (`docs/MANUAL_QA.md`), then fix what it finds.
+2. Best Connect per-test deadline (suspected stall; `docs/CI.md` section 3).
+3. Reconstruct connection details after process death (C8).
+4. Release-gate hardening and CI speed-ups (`docs/CI.md`), after approval.
 5. Dependency vulnerability scan (needs network access to advisory databases).
 6. In-app licence notices; mirror of upstream sources for GPL.
-7. Backlog E.
+7. tls-crypt-aware probe (no live relay uses it today, so low value).
+8. Backlog E. Future platforms are research notes only (`docs/FUTURE.md`).

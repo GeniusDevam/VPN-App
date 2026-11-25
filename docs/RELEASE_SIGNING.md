@@ -1,5 +1,19 @@
 # Release signing (finding B1)
 
+## Current status (25 November 2026)
+* **Done.** The permanent release key exists (RSA 4096, `CN=VPN App release, O=GeniusDevam`, valid until 2051) and lives only in the
+  protected environment `release` (four secrets, plus the public variable `RELEASE_CERT_SHA256`). The GitHub settings below are in
+  place, the old leaked-key release (build #17) is deleted, and the default branch is `main`.
+* **First release: [v1.0.0](https://github.com/GeniusDevam/VPN-App/releases/tag/v1.0.0)**, tag on commit `f95296a`, CI run
+  [#48](https://github.com/GeniusDevam/VPN-App/actions/runs/45664646878), deployment approved manually by the key holder.
+* **Certificate SHA-256 `0838262d4e4d35da8527a5555c90552221b07db3804d17966e273f2fe1e5998a`**, the same in all of: the pinned
+  environment variable (checked by the `sign` job, which logged "matches the pinned RELEASE_CERT_SHA256"), the release notes, the
+  README, and the published `VPN-App.apk` itself (downloaded and read back with `keytool -printcert -jarfile`; `jarsigner -verify`:
+  "jar verified"; one signer). The published APK's SHA-256 equals both the release notes and GitHub's own asset digest.
+* **Open:** GitHub "release immutability" is not enabled for this repository (the release API reports `immutable: false`), so a
+  user with write access could still replace release assets. Recommended: *Settings > General > Releases > Enable release
+  immutability* (applies to releases published after it is turned on). Not changed here: it is a repository setting.
+
 ## What happened
 `tools/release.jks` and its passwords were committed to this public repository, and CI used them. **That signing identity is
 compromised and must never be trusted again.** Deleting the file in a newer commit does not help: it stays in git history and
@@ -20,7 +34,8 @@ Release flow (`.github/workflows/ci.yml`), tags only:
    **re-signs it** with `tools/resign-apk.sh`. It does not build anything or run repository build scripts with the key. It then
    requires that the certificate equals the pinned `RELEASE_CERT_SHA256`, and refuses the old compromised key outright.
 4. `publish` (write token, **no secrets**): re-checks the checksum and certificate, records a build-provenance attestation, creates the
-   immutable release, and deletes the old mutable `latest` release (which carries the leaked-key APK).
+   release, and deletes an old mutable `latest` release if one still exists. (Releases are only immutable if the repository setting
+   is on; see "Current status".)
 
 `tools/resign-apk.sh` is run on **every** build with a second throw-away key (step "Dry run of the release re-signing script"), and
 proves: exactly one signer, v1, v2 and v3 signatures verify for minSdk 23 (Android 6.0 checks only v1, so the release must carry it), no signature from the previous signer survives, every non-META-INF
@@ -29,8 +44,9 @@ entry is byte-identical, 16 KB alignment intact. So the release step is exercise
 Other facts: with no secrets configured, **no release is produced** (the `sign` job stops with an explanation). The workflow-wide token
 is read-only. Actions are pinned to commit SHAs (one documented exception, see below).
 
-## One-time GitHub setup (do this BEFORE uploading the key)
-These settings live on GitHub; the repository cannot enforce them for you. In this order:
+## One-time GitHub setup (completed 25 November 2026; kept for reference and recovery)
+These settings live on GitHub; the repository cannot enforce them for you. They are all in place; repeat them only if the repository
+is recreated or a setting is found changed. `tools/upload-release-key.sh` re-checks steps 1-3 and 7 every time it runs.
 
 1. **Create the environment.** Repository *Settings > Environments > New environment*, name exactly **`release`**.
 2. **Required reviewers.** In that environment enable *Required reviewers* and add yourself. (If you are the only collaborator you can
@@ -50,7 +66,7 @@ These settings live on GitHub; the repository cannot enforce them for you. In th
 7. **Do not create repository-level secrets** with the `RELEASE_*` names. CI would ignore them and they would only widen who can read them.
 8. Only now: generate the key **on your own computer** and upload it with the two scripts below. Nothing needs to be sent to anyone.
 
-## Generating and uploading the key
+## Generating and uploading the key (done; needed again only to replace a lost or compromised key)
 Two scripts, run on your own computer (Windows in **Git Bash**, macOS or Linux in a terminal), from an up-to-date clone of the default
 branch:
 
@@ -98,12 +114,20 @@ deployment of environment `release` when GitHub asks, and check the release note
   default branch (review changes to those files; they are small), and the one unpinned action `actions/attest-build-provenance@v2`
   (GitHub-owned, used in `publish`, which holds no signing secrets; pin it once its commit has been verified).
 
-## Key holder checklist (only the key holder can do this)
-0. **Delete the public `latest` release (build #17) now.** It is still downloadable, it carries an APK signed with the leaked key, and the README's install link points at it. CI has no permission to delete a release. (GitHub > Releases > `latest` > Delete.)
-1. Complete the GitHub setup above (steps 1-6).
-2. On your own computer: `bash tools/generate-release-key.sh`, then `bash tools/upload-release-key.sh` (section above).
-3. Back the key up offline. Losing it means you can never ship an update Android will accept for installs signed with it.
-4. Publish the fingerprint (README, release notes). Users compare it before installing.
+## Cutting a release
+1. Merge to `main` and wait for its CI run to be green (all jobs; see `docs/CI.md` about the macOS job).
+2. Tag that commit with an annotated tag `vMAJOR.MINOR.PATCH` and push the tag (only the key holder can create `v*` tags).
+3. When GitHub asks, review and approve the pending deployment of environment `release`. The `sign` job then re-signs the APKs built
+   and tested in that run and refuses any certificate other than the pinned one; `publish` creates the release.
+4. Check the release notes show certificate SHA-256 `0838262d...998a` and that the assets are all present.
+
+## If the key is lost or compromised
+* **Lost** (both copies of `release.p12`/`password.txt` gone): no update can be shipped to existing installs. Create a new key
+  (section above; the generator refuses to overwrite an existing one), replace the secrets and `RELEASE_CERT_SHA256` with
+  `tools/upload-release-key.sh`, publish the new fingerprint in the README, and tell users to uninstall and reinstall.
+* **Compromised** (the files or the password may have been seen by someone else): do the same, and additionally add the leaked
+  certificate to the `sign` job's refusal list next to the old key, and warn users in the README and release notes.
+* Never reuse the old key from `tools/release.jks`; the `sign` job refuses it.
 
 ## Migrating existing installs
 Android binds an app's identity to its signing certificate. A different key cannot update an install signed with the old one
@@ -112,10 +136,10 @@ old key to vouch for the new one.
 
 * **Recommended: uninstall and reinstall once** from a release signed with the new key. Cost: local app data is lost (settings and
   history; all of it is encrypted with a Keystore key that dies with the app anyway). Benefit: the install stops trusting the old key.
-* **Rotation (Android 9+ only; impossible on the Android 6.0-8.1 devices the app also supports)** keeps data, but it cannot undo the exposure:
-  because the old key is public, *anyone* can also create a rotation lineage from it to a key of their own. An install is only
-  safe once it has actually updated to your new key. Until then it will accept an attacker's APK signed with the old key. If you
-  choose rotation, do it quickly, do not let the old key stay trusted any longer than needed, and tell users to reinstall if unsure.
+* **Rotation was not used, deliberately.** v1.0.0 is signed by the new key alone, with no rotation lineage from the old one, so no
+  install signed with the old key can be updated to it: users must uninstall first (the README says so). A lineage would have let
+  old installs update, but the old key is public, so anyone could equally create a lineage from it to a key of their own; rotation
+  is also unavailable on the Android 6.0-8.1 devices the app supports.
 * The old certificate fingerprint is in the git history (`git log --stat -- tools/release.jks`). Treat any APK carrying it as untrusted.
 * This only matters to people who installed a build. If you are the only user, reinstalling takes a minute.
 
