@@ -11,7 +11,7 @@ case "$(uname -s 2>/dev/null)" in MINGW*|MSYS*|CYGWIN*) RK_WINDOWS=1 ;; *) RK_WI
 STEP="starting"; STEP_HINT=""; TOOL_LOG=""; RK_SECRET=""
 
 say() { printf '%s\n' "$*" >&2; }
-step() { STEP="$1"; STEP_HINT="${2:-}"; say "[$1]"; }
+step() { STEP="$1"; STEP_HINT="${2:-}"; say "[$1]"; [ -z "$TOOL_LOG" ] || : > "$TOOL_LOG"; }   # a failure shows only its own step's output
 fail() { say "ERROR: $*"; exit 1; }
 
 # Removes the current secret and anything shaped like a key-sized hex value from tool output before it is shown.
