@@ -1,0 +1,4 @@
+# Shell scripts must keep LF line endings on every platform (Git for Windows otherwise checks them out with CRLF,
+# and bash then fails on the stray carriage returns).
+*.sh text eol=lf
+*.kts text eol=lf

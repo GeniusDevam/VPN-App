@@ -48,8 +48,42 @@ These settings live on GitHub; the repository cannot enforce them for you. In th
    *Fork pull request workflows* = require approval for all outside collaborators; if you restrict allowed actions, allow `actions/*`,
    `gradle/actions` and `reactivecircus/android-emulator-runner`.
 7. **Do not create repository-level secrets** with the `RELEASE_*` names. CI would ignore them and they would only widen who can read them.
-8. Only now: run `tools/generate-release-key.sh` **on your own machine**; it prints the commands that add the four secrets and the public
-   variable `RELEASE_CERT_SHA256` to the **environment** (`gh secret set ... --env release`). Nothing needs to be sent to anyone.
+8. Only now: generate the key **on your own computer** and upload it with the two scripts below. Nothing needs to be sent to anyone.
+
+## Generating and uploading the key
+Two scripts, run on your own computer (Windows in **Git Bash**, macOS or Linux in a terminal), from an up-to-date clone of the default
+branch:
+
+```bash
+bash tools/generate-release-key.sh            # creates ~/.vpnapp-signing/release.p12 and password.txt; prints the certificate SHA-256
+bash tools/upload-release-key.sh              # stores them in the protected environment "release", and nowhere else
+```
+
+`generate-release-key.sh` needs a JDK (`keytool`; Temurin 21 is tested) and either OpenSSL or `/dev/urandom` (Git Bash has both). It:
+* refuses to run if `release.p12` or `password.txt` already exists in the folder, or if the folder is inside a git repository;
+* creates a 64-character random password (256 bits; hex digits only, so no line ending or special character can end up in it) and
+  hands it to `keytool` through the environment, not the command line;
+* builds the RSA-4096 keystore in a private staging folder, opens it again with the saved `password.txt`, checks the certificate
+  fingerprint two independent ways, and only then moves **both** files into place; a failure at any step leaves neither file;
+* restricts the folder and both files to your account: mode 700/600 on Linux and macOS; on Windows an NTFS access list with
+  inheritance removed and a single entry for your account (Unix permissions mean nothing on NTFS, so `chmod` alone would not
+  protect anything there), and checks the result;
+* prints every step as `[n/7] ...`; if one fails it names the step and shows the tool's own error with passwords removed.
+
+`upload-release-key.sh` (needs `gh`, logged in as an administrator of the repository) checks before uploading that the keystore opens with
+`password.txt` and is not the compromised old key, that the environment `release` exists with a required reviewer, administrator bypass
+off and deployments limited to tags matching `v*` (no branch rules), and that no **repository-wide** secret with a release name exists. It
+then sets the four secrets with `gh secret set ... --env release` (values on standard input, never on a command line) and the public
+variable `RELEASE_CERT_SHA256`, and checks afterwards that they are in the environment and not repository-wide. Both scripts are tested in
+CI with disposable keys on Linux, macOS and Windows (job `keygen`), including failures and the refusal to overwrite.
+
+**Windows notes.** Use Git Bash (installed with Git for Windows), not PowerShell or `cmd`. The key folder is
+`C:\Users\<you>\.vpnapp-signing`. Do not put it in a OneDrive, Dropbox or other synced folder. An earlier version of the generator failed
+silently on Windows: OpenSSL there ends its output with a carriage return, which became part of the password, Java rejected it ("Password is
+not ASCII"), and the script hid that error. The current version cannot produce such a password, and shows every error.
+
+**Back up both files** (`release.p12` and `password.txt`) offline, for example on an encrypted USB drive. Losing them means users must
+uninstall and reinstall to get updates.
 
 First release: merge to the default branch, wait for CI to be green, create the tag (e.g. `v1.0.0`) on that commit, approve the pending
 deployment of environment `release` when GitHub asks, and check the release notes show the certificate fingerprint you expect.
@@ -67,7 +101,7 @@ deployment of environment `release` when GitHub asks, and check the release note
 ## Key holder checklist (only the key holder can do this)
 0. **Delete the public `latest` release (build #17) now.** It is still downloadable, it carries an APK signed with the leaked key, and the README's install link points at it. CI has no permission to delete a release. (GitHub > Releases > `latest` > Delete.)
 1. Complete the GitHub setup above (steps 1-6).
-2. On your own machine run `tools/generate-release-key.sh` (it prints the public fingerprint and the exact `gh` commands).
+2. On your own computer: `bash tools/generate-release-key.sh`, then `bash tools/upload-release-key.sh` (section above).
 3. Back the key up offline. Losing it means you can never ship an update Android will accept for installs signed with it.
 4. Publish the fingerprint (README, release notes). Users compare it before installing.
 

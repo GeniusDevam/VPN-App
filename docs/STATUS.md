@@ -7,7 +7,7 @@ Audit baseline `c1bc238`. This file separates **confirmed fixes**, **tested beha
 1. **Delete the public `latest` release now.** It is build #17 (the audit baseline) and is signed with the leaked key. The pipeline would
    remove it only after a new signed release exists, and CI has no permission to delete it. Until it is gone, anyone can
    download an APK that carries the compromised identity.
-2. **Create the real release key** (`tools/generate-release-key.sh`, then the `gh secret set` commands it prints). Until then CI
+2. **Create the real release key** (`tools/generate-release-key.sh`, then `tools/upload-release-key.sh`; on Windows in Git Bash). Until then CI
    publishes nothing. This is the only way B1 can close; it cannot be done from the repository. Migration limits: `docs/RELEASE_SIGNING.md`.
 3. `git push origin --delete emulator-results`, then let the next run recreate it (old commits on it hold unredacted logs).
 4. Run the physical-device checks in section 6. **No physical device was used. Everything below is emulator, JVM or CI.**
